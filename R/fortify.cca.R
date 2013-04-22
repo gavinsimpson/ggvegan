@@ -1,14 +1,19 @@
-##' .. content for \description{} (no empty lines) ..
+##' Fortifies an object of class \code{"cca"} to produce a data frame of
+##' the selected axis scores in long format, suitable for plotting with
+##' \code{\link[ggplot2]{ggplot}.
 ##'
 ##' .. content for \details{} ..
 ##' @title Fortify a \code{"cca"} object.
-##' @param model 
-##' @param data 
-##' @param display 
-##' @param ... 
-##' @return 
+##' @param model an object of class \code{"cca"}, the result of a call to
+##' \code{\link[vegan]{cca}}, \code{\link[vegan]{rda}}, or
+##' \code{\link[vegan]{capscale}}.
+##' @param data currently ignored.
+##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}}.
+##' @return A data frame in long format containing the ordination scores.
+##' The first to components are the axis scores.
 ##' @author Gavin
-`fortify.cca` <- function(model, data, display, ...) {
+##' @S3method fortify cca
+`fortify.cca` <- function(model, data, ...) {
     scrLen <- function(x) {
         obs <- nrow(x)
         if(is.null(obs))
@@ -17,7 +22,7 @@
     }
     if(missing(display))
         display <- c("sp", "wa", "lc", "bp", "cn")
-    scrs <- scores(model, display = display, ...)
+    scrs <- scores(model, ...)
     scrs <- lapply(scrs, function(x) {
         data.frame(x, Label = rownames(x))
     })
