@@ -2,7 +2,7 @@
 \alias{fortify.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-  fortify.cca(model, data, ...)
+  \method{fortify}{cca} (model, data, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"cca"}, the result
@@ -22,10 +22,10 @@
 \description{
   Fortifies an object of class \code{"cca"} to produce a
   data frame of the selected axis scores in long format,
-  suitable for plotting with \code{\link[ggplot2]{ggplot}.
+  suitable for plotting with \code{\link[ggplot2]{ggplot}}.
 }
 \details{
-  .. content for \details{} ..
+  TODO
 }
 \author{
   Gavin

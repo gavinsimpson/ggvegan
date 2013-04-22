@@ -1,9 +1,13 @@
+##' @title ggplot-based plot for objects of class \code{"cca"}
+##'
+##' @description
 ##' Produces a multi-layer ggplot object representing the output of
 ##' objects produced by \code{\link[vegan]{cca}}, \code{link[vegan]{rda}},
 ##' or \code{\link[vegan]{capscale}}.
 ##'
-##' .. content for \details{} ..
-##' @title ggplot-based plot for objects of class \code{"cca"}
+##' @details
+##' TODO
+##'
 ##' @param object an object of class \code{"cca"}, the result of a call
 ##' to \code{\link[vegan]{cca}}.
 ##' @param geom character; which geoms to use for the layers. Can be a
@@ -11,12 +15,20 @@
 ##' \emph{i}th element of \code{type} refers to the \emph{i}th element
 ##' of \code{display}.
 ##' @param layers character; which scores to plot as layers
+##' @param xlab character; label for the x-axis
+##' @param ylab character; label for the y-axis
 ##' @param const General scaling constant to \code{rda} scores. See
 ##' \code{\link[vegan]{plot.cca}} for details.
 ##' @param ... Additional arguments passed to \code{\link{fortify.cca}}.
 ##' @return Returns a ggplot object.
 ##' @author Gavin L. Simpson
+##'
 ##' @S3method autoplot cca
+##' @method autoplot cca
+##'
+##' @importFrom grid arrow unit
+##' @importFrom ggplot2 autoplot
+##'
 `autoplot.cca` <- function(object, geom = c("point","text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            ylab, xlab, const, ...) {

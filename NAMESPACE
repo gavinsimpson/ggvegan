@@ -1,2 +1,6 @@
+importFrom(ggplot2,autoplot)
+importFrom(ggplot2,fortify)
+importFrom(grid,arrow)
+importFrom(grid,unit)
 S3method(autoplot,cca)
 S3method(fortify,cca)

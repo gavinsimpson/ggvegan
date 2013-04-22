@@ -4,8 +4,10 @@ Title: ggplot2 plots for vegan functions
 Version: 0.0-1
 Date: 20 April 2013
 Depends:
-    ggplot2 (>= 0.9.0),
-    vegan
+    vegan,
+    ggplot2
+Imports:
+    grid
 Author: Gavin L. Simpson
 Maintainer: Gavin L. Simpson <gavin.simpson@uregina.ca>
 Description: Functions to produce ggplot2-based plots of objects produced by

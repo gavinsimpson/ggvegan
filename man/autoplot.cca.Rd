@@ -2,7 +2,8 @@
 \alias{autoplot.cca}
 \title{ggplot-based plot for objects of class \code{"cca"}}
 \usage{
-  autoplot.cca(object, geom = c("point", "text"),
+  \method{autoplot}{cca} (object,
+    geom = c("point", "text"),
     layers = c("species", "sites", "biplot", "centroids"),
     ylab, xlab, const, ...)
 }
@@ -17,6 +18,10 @@
   of \code{display}.}
 
   \item{layers}{character; which scores to plot as layers}
+
+  \item{xlab}{character; label for the x-axis}
+
+  \item{ylab}{character; label for the y-axis}
 
   \item{const}{General scaling constant to \code{rda}
   scores. See \code{\link[vegan]{plot.cca}} for details.}
@@ -34,7 +39,7 @@
   \code{\link[vegan]{capscale}}.
 }
 \details{
-  .. content for \details{} ..
+  TODO
 }
 \author{
   Gavin L. Simpson
