@@ -1,0 +1,2 @@
+S3method(autoplot,cca)
+S3method(fortify,cca)
