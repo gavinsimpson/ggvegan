@@ -1,4 +1,6 @@
-##' .. content for \description{} (no empty lines) ..
+##' Produces a multi-layer ggplot object representing the output of
+##' objects produced by \code{\link[vegan]{cca}}, \code{link[vegan]{rda}},
+##' or \code{\link[vegan]{capscale}}.
 ##'
 ##' .. content for \details{} ..
 ##' @title ggplot-based plot for objects of class \code{"cca"}
@@ -14,6 +16,7 @@
 ##' @param ... Additional arguments passed to \code{\link{fortify.cca}}.
 ##' @return Returns a ggplot object.
 ##' @author Gavin L. Simpson
+##' @S3method autoplot cca
 `autoplot.cca` <- function(object, geom = c("point","text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            ylab, xlab, const, ...) {
