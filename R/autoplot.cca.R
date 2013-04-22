@@ -34,26 +34,39 @@
         obj[["biplot"]] <- obj[["biplot"]][!bnam %in% cnam, , drop = FALSE]
     }
     ## add plot layers as required
-    if("species" %in% layers) {
+    if(all(c("species","sites") %in% layers)) {
+        dat <- do.call(rbind, obj[c("species","sites")])
         if (point) {
-            plt <- plt + geom_point(data = obj[["species"]],
-                                    aes(x = Dim1, y = Dim2),
-                                    shape = 2)
+            plt <- plt + geom_point(data = dat,
+                                    aes(x = Dim1, y = Dim2, shape = Score,
+                                        colour = Score))
         } else {
-            plt <- plt + geom_text(data = obj[["species"]],
-                                   aes(x = Dim1, y = Dim2,
-                                       label = Label))
+            plt <- plt + geom_text(data = dat,
+                                   aes(x = Dim1, y = Dim2, label = Label,
+                                       colour = Score))
         }
-    }
-    if("sites" %in% layers) {
-        if (point) {
-            plt <- plt + geom_point(data = obj[["sites"]],
-                                    aes(x = Dim1, y = Dim2),
-                                    shape = 1)
-        } else {
-            plt <- plt + geom_text(data = obj[["sites"]],
-                                   aes(x = Dim1, y = Dim2,
-                                       label = Label))
+    } else {
+        if("species" %in% layers) {
+            if (point) {
+                plt <- plt + geom_point(data = obj[["species"]],
+                                        aes(x = Dim1, y = Dim2),
+                                        shape = 2)
+            } else {
+                plt <- plt + geom_text(data = obj[["species"]],
+                                       aes(x = Dim1, y = Dim2,
+                                           label = Label))
+            }
+        }
+        if("sites" %in% layers) {
+            if (point) {
+                plt <- plt + geom_point(data = obj[["sites"]],
+                                        aes(x = Dim1, y = Dim2),
+                                        shape = 1)
+            } else {
+                plt <- plt + geom_text(data = obj[["sites"]],
+                                       aes(x = Dim1, y = Dim2,
+                                           label = Label))
+            }
         }
     }
     if("constraints" %in% layers) {
@@ -72,17 +85,21 @@
             obj[["biplot"]][, c("Dim1","Dim2")] <-
                 mul * obj[["biplot"]][, c("Dim1","Dim2")]
         }
+        col <- "navy"
         plt <- plt +
             geom_segment(data = obj[["biplot"]],
                          aes(x = 0, y = 0, xend = Dim1, yend = Dim2),
-                         arrow = arrow(length = unit(0.2, "cm")))
+                         arrow = arrow(length = unit(0.2, "cm")),
+                         colour = col)
         obj[["biplot"]][, c("Dim1","Dim2")] <-
             1.1 * obj[["biplot"]][, c("Dim1","Dim2")]
         plt <- plt + geom_text(data = obj[["biplot"]],
                                aes(x = Dim1, y = Dim2, label = Label))
     }
     if("centroids" %in% layers) {
-
+        plt <- plt + geom_text(data = obj[["centroids"]],
+                               aes(x = Dim1, y = Dim2, label = Label),
+                               colour = "navy")
     }
     if(missing(xlab))
         xlab <- dimlabels[2]
