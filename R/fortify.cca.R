@@ -14,8 +14,8 @@
 ##' @param data currently ignored.
 ##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}}.
 ##' @return A data frame in long format containing the ordination scores.
-##' The first to components are the axis scores.
-##' @author Gavin
+##' The first two components are the axis scores.
+##' @author Gavin L. Simpson
 ##'
 ##' @export
 ##' @method fortify cca

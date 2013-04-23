@@ -35,7 +35,7 @@
 \description{
   Produces a multi-layer ggplot object representing the
   output of objects produced by \code{\link[vegan]{cca}},
-  \code{link[vegan]{rda}}, or
+  \code{\link[vegan]{rda}}, or
   \code{\link[vegan]{capscale}}.
 }
 \details{

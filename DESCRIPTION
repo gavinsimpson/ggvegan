@@ -17,3 +17,4 @@ ByteCompile: true
 Collate:
     'autoplot.cca.R'
     'fortify.cca.R'
+    'fortify.metaMDS.R'

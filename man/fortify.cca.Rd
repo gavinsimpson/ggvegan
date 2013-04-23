@@ -17,7 +17,7 @@
 }
 \value{
   A data frame in long format containing the ordination
-  scores. The first to components are the axis scores.
+  scores. The first two components are the axis scores.
 }
 \description{
   Fortifies an object of class \code{"cca"} to produce a
@@ -28,6 +28,6 @@
   TODO
 }
 \author{
-  Gavin
+  Gavin L. Simpson
 }
 
