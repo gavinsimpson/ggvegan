@@ -17,7 +17,7 @@
 ##' The first to components are the axis scores.
 ##' @author Gavin
 ##'
-##' @S3method fortify cca
+##' @export
 ##' @method fortify cca
 ##'
 ##' @importFrom ggplot2 fortify

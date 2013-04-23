@@ -23,7 +23,7 @@
 ##' @return Returns a ggplot object.
 ##' @author Gavin L. Simpson
 ##'
-##' @S3method autoplot cca
+##' @export
 ##' @method autoplot cca
 ##'
 ##' @importFrom grid arrow unit
