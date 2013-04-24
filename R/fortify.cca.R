@@ -12,8 +12,6 @@
 ##' \code{\link[vegan]{cca}}, \code{\link[vegan]{rda}}, or
 ##' \code{\link[vegan]{capscale}}.
 ##' @param data currently ignored.
-##' @param display character; the sets of scores to return. See
-##' \code{\link[vegan]{scores.cca}}
 ##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}}.
 ##' @return A data frame in long format containing the ordination scores.
 ##' The first two components are the axis scores.
@@ -30,16 +28,15 @@
 ##'
 ##' sol <- cca(dune ~ A1 + Management, data = dune.env)
 ##' head(fortify(sol))
-`fortify.cca` <- function(model, data, display, ...) {
+`fortify.cca` <- function(model, data, ...) {
     scrLen <- function(x) {
         obs <- nrow(x)
         if(is.null(obs))
             obs <- 0
         obs
     }
-    if(missing(display))
-        display <- c("sp", "wa", "lc", "bp", "cn")
-    scrs <- scores(model, display = display, ...)
+    scrs <- scores(model, display = c("sp", "wa", "lc", "bp", "cn"),
+                   ...)
     rnam <- lapply(scrs, rownames)
     take <- !sapply(rnam, is.null)
     rnam <- unlist(rnam[take], use.names = FALSE)

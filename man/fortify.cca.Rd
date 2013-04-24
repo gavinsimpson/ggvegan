@@ -2,7 +2,7 @@
 \alias{fortify.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-  \method{fortify}{cca} (model, data, display, ...)
+  \method{fortify}{cca} (model, data, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"cca"}, the result
@@ -11,9 +11,6 @@
   \code{\link[vegan]{capscale}}.}
 
   \item{data}{currently ignored.}
-
-  \item{display}{character; the sets of scores to return.
-  See \code{\link[vegan]{scores.cca}}}
 
   \item{...}{additional arguments passed to
   \code{\link[vegan]{scores.cca}}.}
