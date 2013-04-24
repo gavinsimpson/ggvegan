@@ -26,6 +26,7 @@ where `fobj` is the object returned by `fortify`.
 The following `autoplot` methods are currently available
 
  1. `autoplot.cca` --- for objects of classes `"cca"`, `"rda"`, and `"capscale"`
+ 2. `autoplot.metaMDS` --- for objects of class `"metaMDS"`
 
 The following `fortify` method are currently available
 
