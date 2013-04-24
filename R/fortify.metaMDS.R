@@ -30,7 +30,7 @@
 ##' head(fortify(sol))
 `fortify.metaMDS` <- function(model, data, ...) {
     samp <- scores(model, display = "sites", ...)
-    spp <- try(scores(model, display = "species", ...))
+    spp <- try(scores(model, display = "species", ...), silent = TRUE)
     if (!is.null(spp) || !inherits(spp, "try-error")) {
         out <- rbind(samp, spp)
         out <- data.frame(out, Score = factor(rep(c("sites","species"),
