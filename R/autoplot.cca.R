@@ -29,90 +29,79 @@
 ##' @importFrom grid arrow unit
 ##' @importFrom ggplot2 autoplot
 ##'
+##' @examples
+##' data(dune)
+##' data(dune.env)
+##'
+##' sol <- cca(dune ~ A1 + Management, data = dune.env)
+##' autoplot(sol)
 `autoplot.cca` <- function(object, geom = c("point","text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            ylab, xlab, const, ...) {
     obj <- fortify(object, ...)
-    LAYERS <- levels(object$Score)
+    LAYERS <- levels(obj$Score)
     dimlabels <- attr(obj, "dimlabels")
-    obj <- split(obj, obj$Score)
-    ## skeleton layer
-    plt <- ggplot()
+    ## match the geom
     geom <- match.arg(geom)
     point <- TRUE
     if (isTRUE(all.equal(geom, "text")))
         point <- FALSE
-    ## remove biplot arrows for centroids if present
-    if("biplot" %in% layers && "centroids" %in% layers) {
-        bnam <- obj[["biplot"]][, "Label"]
-        cnam <- obj[["centroids"]][, "Label"]
-        obj[["biplot"]] <- obj[["biplot"]][!bnam %in% cnam, , drop = FALSE]
-    }
+    ## subset out the layers wanted
+    ### need something here first to match acceptable ones?
+    ### or just check that the layers selected would return a df with
+    ### at least 1 row.
+    obj <- obj[obj$Score %in% layers, , drop = FALSE]
+    ## skeleton layer
+    plt <- ggplot()
     ## add plot layers as required
-    if(all(c("species","sites") %in% layers)) {
-        dat <- do.call(rbind, obj[c("species","sites")])
-        if (point) {
-            plt <- plt + geom_point(data = dat,
-                                    aes(x = Dim1, y = Dim2, shape = Score,
-                                        colour = Score))
-        } else {
-            plt <- plt + geom_text(data = dat,
-                                   aes(x = Dim1, y = Dim2, label = Label,
-                                       colour = Score))
-        }
+    want <- obj$Score %in% c("species", "sites")
+    if (point) {
+        plt <- plt +
+            geom_point(data = obj[want, , drop = FALSE ],
+                       aes(x = Dim1, y = Dim2, shape = Score,
+                           colour = Score))
     } else {
-        if("species" %in% layers) {
-            if (point) {
-                plt <- plt + geom_point(data = obj[["species"]],
-                                        aes(x = Dim1, y = Dim2),
-                                        shape = 2)
-            } else {
-                plt <- plt + geom_text(data = obj[["species"]],
-                                       aes(x = Dim1, y = Dim2,
-                                           label = Label))
-            }
-        }
-        if("sites" %in% layers) {
-            if (point) {
-                plt <- plt + geom_point(data = obj[["sites"]],
-                                        aes(x = Dim1, y = Dim2),
-                                        shape = 1)
-            } else {
-                plt <- plt + geom_text(data = obj[["sites"]],
-                                       aes(x = Dim1, y = Dim2,
-                                           label = Label))
-            }
-        }
+        plt <- plt +
+            geom_text(data = obj[want, , drop = FALSE ],
+                      aes(x = Dim1, y = Dim2, label = Label,
+                          colour = Score))
     }
-    if("constraints" %in% layers) {
+    ## remove biplot arrows for centroids if present
+    if(all(c("biplot","centroids") %in% LAYERS)) {
+        want <- obj$Score == "biplot"
+        tmp <- obj[want, ]
+        obj <- obj[!want, ]
+        bnam <- tmp[, "Label"]
+        cnam <- obj[obj$Score == "centroids", "Label"]
+        obj <- rbind(obj, tmp[!bnam %in% cnam, , drop = FALSE])
+    }
+    if(any(want <- obj$Score == "constraints")) {
         if (point) {
-            plt <- plt + geom_point(data = obj[["constraints"]],
+            plt <- plt + geom_point(data = obj[want, , drop = FALSE ],
                                     aes(x = Dim1, y = Dim2))
         } else {
-            plt <- plt + geom_text(data = obj[["constraints"]],
+            plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
                                    aes(x = Dim1, y = Dim2,
                                        label = Label))
         }
     }
-    if("biplot" %in% layers) {
+    if(any(want <- obj$Score == "biplot")) {
         if (length(layers) > 1) {
-            mul <- vegan:::ordiArrowMul(obj[["biplot"]])
-            obj[["biplot"]][, c("Dim1","Dim2")] <-
-                mul * obj[["biplot"]][, c("Dim1","Dim2")]
+            mul <- vegan:::ordiArrowMul(obj[want, , drop = FALSE ])
+            obj[want, c("Dim1","Dim2")] <- mul * obj[want, c("Dim1","Dim2")]
         }
         col <- "navy"
         plt <- plt +
-            geom_segment(data = obj[["biplot"]],
+            geom_segment(data = obj[want, , drop = FALSE ],
                          aes(x = 0, y = 0, xend = Dim1, yend = Dim2),
                          arrow = arrow(length = unit(0.2, "cm")),
                          colour = col)
-        obj[["biplot"]][, c("Dim1","Dim2")] <-
-            1.1 * obj[["biplot"]][, c("Dim1","Dim2")]
-        plt <- plt + geom_text(data = obj[["biplot"]],
+        obj[want, c("Dim1","Dim2")] <- 1.1 * obj[want, c("Dim1","Dim2")]
+        plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
                                aes(x = Dim1, y = Dim2, label = Label))
     }
-    if("centroids" %in% layers) {
-        plt <- plt + geom_text(data = obj[["centroids"]],
+    if(any(want <- obj$Score == "centroids")) {
+        plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
                                aes(x = Dim1, y = Dim2, label = Label),
                                colour = "navy")
     }

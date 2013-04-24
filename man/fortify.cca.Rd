@@ -2,7 +2,7 @@
 \alias{fortify.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-  \method{fortify}{cca} (model, data, ...)
+  \method{fortify}{cca} (model, data, display, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"cca"}, the result
@@ -26,6 +26,13 @@
 }
 \details{
   TODO
+}
+\examples{
+data(dune)
+data(dune.env)
+
+sol <- cca(dune ~ A1 + Management, data = dune.env)
+head(fortify(sol))
 }
 \author{
   Gavin L. Simpson

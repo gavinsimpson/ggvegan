@@ -22,7 +22,13 @@
 ##'
 ##' @importFrom ggplot2 fortify
 ##'
-`fortify.cca` <- function(model, data, ...) {
+##' @examples
+##' data(dune)
+##' data(dune.env)
+##'
+##' sol <- cca(dune ~ A1 + Management, data = dune.env)
+##' head(fortify(sol))
+`fortify.cca` <- function(model, data, display, ...) {
     scrLen <- function(x) {
         obs <- nrow(x)
         if(is.null(obs))
@@ -31,15 +37,17 @@
     }
     if(missing(display))
         display <- c("sp", "wa", "lc", "bp", "cn")
-    scrs <- scores(model, ...)
-    scrs <- lapply(scrs, function(x) {
-        data.frame(x, Label = rownames(x))
-    })
-    fdf <- data.frame(do.call(rbind, scrs))
+    scrs <- scores(model, display = display, ...)
+    rnam <- lapply(scrs, rownames)
+    take <- !sapply(rnam, is.null)
+    rnam <- unlist(rnam[take], use.names = FALSE)
+    scrs <- scrs[take]
+    fdf <- do.call(rbind, scrs)
     rownames(fdf) <- NULL
+    fdf <- data.frame(fdf)
     lens <- sapply(scrs, scrLen)
-    fdf <- transform(fdf, Score = rep(c("species", "sites", "constraints",
-                          "biplot", "centroids"), times = lens))
+    fdf$Score <- factor(rep(names(lens), times = lens))
+    fdf$Label <- rnam
     attr(fdf, "dimlabels") <- names(fdf)[1:2]
     names(fdf)[1:2] <- paste0("Dim", 1:2)
     fdf

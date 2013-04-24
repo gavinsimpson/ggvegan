@@ -41,6 +41,13 @@
 \details{
   TODO
 }
+\examples{
+data(dune)
+data(dune.env)
+
+sol <- cca(dune ~ A1 + Management, data = dune.env)
+autoplot(sol)
+}
 \author{
   Gavin L. Simpson
 }
