@@ -36,6 +36,13 @@
 \details{
   TODO
 }
+\examples{
+## load example data
+data(dune)
+
+sol <- metaMDS(dune)
+autoplot(sol)
+}
 \author{
   Gavin L. Simpson
 }

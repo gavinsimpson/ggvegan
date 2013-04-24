@@ -22,6 +22,12 @@
 ##'
 ##' @importFrom ggplot2 fortify
 ##'
+##' @examples
+##' ## load example data
+##' data(dune)
+##'
+##' sol <- metaMDS(dune)
+##' head(fortify(sol))
 `fortify.metaMDS` <- function(model, data, ...) {
     samp <- scores(model, display = "sites", ...)
     spp <- try(scores(model, display = "species", ...))

@@ -26,6 +26,13 @@
 \details{
   TODO
 }
+\examples{
+## load example data
+data(dune)
+
+sol <- metaMDS(dune)
+head(fortify(sol))
+}
 \author{
   Gavin L. Simpson
 }

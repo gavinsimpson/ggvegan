@@ -28,6 +28,12 @@
 ##' @importFrom grid arrow unit
 ##' @importFrom ggplot2 autoplot
 ##'
+##' @examples
+##' ## load example data
+##' data(dune)
+##'
+##' sol <- metaMDS(dune)
+##' autoplot(sol)
 `autoplot.metaMDS` <- function(object, geom = c("point","text"),
                                layers = c("species", "sites"),
                                ylab, xlab, ...) {
