@@ -35,7 +35,7 @@
         out <- data.frame(samp, Score = factor(rep("sites", nrow(out))),
                           Label = rownames(samp))
     }
-    attr(out, "dimlabels") <- names(samp)[1:2]
+    attr(out, "dimlabels") <- names(out)[1:2]
     rownames(out) <- NULL
     names(out)[1:2] <- paste0("Dim", 1:2)
     out
