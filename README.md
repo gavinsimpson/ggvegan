@@ -22,7 +22,7 @@ The `autoplot` concept is somewhat poorly defined at the moment --- at least in 
 
 where `fobj` is the object returned by `fortify`.
 
-A further design decision is that ggvegan `fortify` methods for ordination objects will return all possible sets of scores and the set returned can not be chosen by the user. Instead, the sets of scores to be plotted shoudl be chosen at the `autoplot` stage.
+A further design decision is that ggvegan `fortify` methods for ordination objects will return all possible sets of scores and the set returned can not be chosen by the user. Instead, the sets of scores to be plotted should be chosen at the `autoplot` stage.
 
 ## Status
 The following `autoplot` methods are currently available
