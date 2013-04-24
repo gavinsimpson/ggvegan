@@ -12,6 +12,8 @@
 ##' \code{\link[vegan]{cca}}, \code{\link[vegan]{rda}}, or
 ##' \code{\link[vegan]{capscale}}.
 ##' @param data currently ignored.
+##' @param display character; the sets of scores to return. See
+##' \code{\link[vegan]{scores.cca}}
 ##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}}.
 ##' @return A data frame in long format containing the ordination scores.
 ##' The first two components are the axis scores.
