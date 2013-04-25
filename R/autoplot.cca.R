@@ -106,7 +106,7 @@
                                colour = "navy")
     }
     if(missing(xlab))
-        xlab <- dimlabels[2]
+        xlab <- dimlabels[1]
     if(missing(ylab))
         ylab <- dimlabels[2]
     plt <- plt + xlab(xlab) + ylab(ylab)
