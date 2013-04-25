@@ -52,7 +52,8 @@
                                     colour = Score))
     } else {
         plt <- plt + geom_text(data = obj,
-                               aes(x = Dim1, y = Dim2, colour = Score))
+                               aes(x = Dim1, y = Dim2, label = Label,
+                                   colour = Score))
     }
     if(missing(xlab))
         xlab <- dimlabels[1]
