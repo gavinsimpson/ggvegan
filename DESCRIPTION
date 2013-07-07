@@ -19,3 +19,4 @@ Collate:
     'fortify.cca.R'
     'fortify.metaMDS.R'
     'autoplot.metaMDS.R'
+    'fortify.prc.R'

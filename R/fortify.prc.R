@@ -22,6 +22,8 @@
 ##' \code{Label} are an indictor factor and a label for the rows for use
 ##' in plotting.
 ##' @author Gavin L. Simpson
+##'
+##' @importFrom reshape2 melt
 fortify.prc <- function(model, data, scaling = 3, axis = 1,
                         ...) {
     s <- summary(model, scaling = scaling, axis = axis)
