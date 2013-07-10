@@ -1,3 +1,5 @@
 # no backup files
 *~
 
+# history
+.Rhistory
