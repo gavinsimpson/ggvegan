@@ -32,6 +32,11 @@ fortify.prc <- function(model, data, scaling = 3, axis = 1,
     cs <- colnames(b)
     res <- melt(b)
     names(res) <- c("Time", "Treatment", "Response")
+
+    ## insure Treatment is a factor
+    res$Time <- factor(res$Time, levels = model$terminfo$xlev[[1]])
+    res$Treatment <- factor(res$Treatment, levels = model$terminfo$xlev[[2]])
+
     n <- length(s$sp)
     sampLab <- paste(res$Treatment, res$Time, sep = "-")
     res <- rbind(res, cbind(Time = rep(NA, n),
@@ -40,5 +45,7 @@ fortify.prc <- function(model, data, scaling = 3, axis = 1,
     res$Score <- factor(c(rep("Sample", prod(dim(b))),
                           rep("Species", n)))
     res$Label <- c(sampLab, names(s$sp))
+
+    ## return
     res
 }
