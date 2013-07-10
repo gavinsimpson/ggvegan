@@ -79,9 +79,9 @@
 
     ## add labels
     if(missing(xlab))
-        xlab <- dimlabels[1]
+        xlab <- "Time"
     if(missing(ylab))
-        ylab <- dimlabels[2]
+        ylab <- "Response"
     plt <- plt + xlab(xlab) + ylab(ylab)
 
     ## order for species linestack
