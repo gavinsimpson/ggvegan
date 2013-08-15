@@ -2,7 +2,8 @@
 \alias{autoplot.prc}
 \title{ggplot-based plot for objects of class \code{"prc"}}
 \usage{
-  \method{autoplot}{prc} (object, select, xlab, ylab)
+  \method{autoplot}{prc} (object, select, xlab, ylab,
+    leg.pos = "top", ...)
 }
 \arguments{
   \item{object}{an object inheriting from class
@@ -18,6 +19,10 @@
   \item{xlab}{character; label for the x-axis}
 
   \item{ylab}{character; label for the y-axis}
+
+  \item{leg.pos}{character; position for the legend grob.
+  See argument \code{legend.position} in function
+  \code{\link[ggplot2]{theme}}.}
 
   \item{...}{Additional arguments passed to
   \code{\link{fortify.prc}}.}
@@ -42,7 +47,7 @@ mod <- prc(pyrifos, dose, week)
 
 ## plot
 want <- colSums(pyrifos)
-autoplot(sol, select = want)
+autoplot(mod, select = want)
 }
 \author{
   Gavin L. Simpson

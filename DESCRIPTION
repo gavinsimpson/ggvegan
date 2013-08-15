@@ -7,7 +7,8 @@ Depends:
     vegan,
     ggplot2
 Imports:
-    grid
+    grid,
+    reshape2
 Author: Gavin L. Simpson
 Maintainer: Gavin L. Simpson <gavin.simpson@uregina.ca>
 Description: Functions to produce ggplot2-based plots of objects produced by
@@ -20,4 +21,4 @@ Collate:
     'fortify.metaMDS.R'
     'autoplot.metaMDS.R'
     'fortify.prc.R'
-    'ess-roxy17081rOM'
+    'autoplot.prc.R'

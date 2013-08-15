@@ -16,6 +16,8 @@
 ##' object.
 ##' @param xlab character; label for the x-axis
 ##' @param ylab character; label for the y-axis
+##' @param leg.pos character; position for the legend grob. See argument
+##' \code{legend.position} in function \code{\link[ggplot2]{theme}}.
 ##' @param ... Additional arguments passed to \code{\link{fortify.prc}}.
 ##'
 ##' @return Returns a ggplot object.
@@ -35,8 +37,8 @@
 ##'
 ##' ## plot
 ##' want <- colSums(pyrifos)
-##' autoplot(sol, select = want)
-`autoplot.prc` <- function(object, select, xlab, ylab) {
+##' autoplot(mod, select = want)
+`autoplot.prc` <- function(object, select, xlab, ylab, leg.pos = "top", ...) {
     ## fortify the model object
     fobj <- fortify(object, ...)
 
@@ -73,7 +75,7 @@
                  colour = NULL, linetype = NULL))
     ## add the coefficients
     plt <- plt + geom_line() +
-        theme(legend.position = "top") +
+        theme(legend.position = leg.pos) +
             scale_x_continuous(breaks = as.numeric(TimeLevs),
                                minor_breaks = NULL)
 
