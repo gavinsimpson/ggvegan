@@ -38,6 +38,17 @@
 ##' ## plot
 ##' want <- colSums(pyrifos)
 ##' autoplot(mod, select = want)
+
+## help codetools "find" variables - i.e. ignore the warnings in the
+## ggplot() calls below - doing this on per-function basis in case
+## R goes that way in the future. As ?globalVariables states, this
+## is really active at the package level
+if(getRversion() >= "2.15.1") {
+    utils::globalVariables(c("Time", "Response", "Treatment"))
+}
+## end help codetools
+
+
 `autoplot.prc` <- function(object, select, xlab, ylab, leg.pos = "top", ...) {
     ## fortify the model object
     fobj <- fortify(object, ...)
