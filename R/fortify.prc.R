@@ -23,8 +23,8 @@
 ##' in plotting.
 ##' @author Gavin L. Simpson
 ##'
-##' @method fortify metaMDS
-##' @S3method fortify metaMDS
+##' @method fortify prc
+##' @S3method fortify prc
 ##'
 ##' @importFrom ggplot2 fortify
 ##' @importFrom reshape2 melt

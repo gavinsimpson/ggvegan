@@ -2,7 +2,7 @@
 \alias{fortify.prc}
 \title{Fortify a \code{"prc"} object}
 \usage{
-\method{fortify}{metaMDS}(model, data, scaling = 3, axis = 1, ...)
+\method{fortify}{prc}(model, data, scaling = 3, axis = 1, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"prc"}, the result

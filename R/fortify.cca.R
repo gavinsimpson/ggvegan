@@ -18,7 +18,7 @@
 ##' @author Gavin L. Simpson
 ##'
 ##' @method fortify cca
-##' @S3method fortify metaMDS
+##' @S3method fortify cca
 ##'
 ##' @importFrom ggplot2 fortify
 ##' @importFrom vegan scores
