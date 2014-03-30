@@ -23,7 +23,12 @@
 ##' in plotting.
 ##' @author Gavin L. Simpson
 ##'
+##' @method fortify metaMDS
+##' @S3method fortify metaMDS
+##'
+##' @importFrom ggplot2 fortify
 ##' @importFrom reshape2 melt
+##' @importFrom vegan scores
 fortify.prc <- function(model, data, scaling = 3, axis = 1,
                         ...) {
     s <- summary(model, scaling = scaling, axis = axis)

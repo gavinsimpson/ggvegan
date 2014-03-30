@@ -1,7 +1,6 @@
 S3method(autoplot,cca)
 S3method(autoplot,metaMDS)
 S3method(autoplot,prc)
-S3method(fortify,cca)
 S3method(fortify,metaMDS)
 importFrom(ggplot2,autoplot)
 importFrom(ggplot2,fortify)
