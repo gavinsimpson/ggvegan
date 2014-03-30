@@ -1,5 +1,7 @@
 # ggvegan; ggplot2-based plots for vegan
 
+[![Build Status](https://travis-ci.org/gavinsimpson/ggvegan.svg?branch=master)](https://travis-ci.org/gavinsimpson/ggvegan)
+
 ## What is ggvegan?
 **ggvegan** is a package for the R statistical software and environment. It aims to implement **ggplot**-based versions of the plots produced by the **vegan** package. Initially, ggvegan will provide `fortify` and `autoplot` methods for objects created in vegan, with the aim of providing full replacement plots via `autoplot`. The `fortify` methods allow the data contained within objects created by vegan to be converted into a format suitable for use with `ggplot` directly.
 
