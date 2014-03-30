@@ -2,9 +2,8 @@
 \alias{autoplot.metaMDS}
 \title{ggplot-based plot for objects of class \code{"metaMDS"}}
 \usage{
-  \method{autoplot}{metaMDS} (object,
-    geom = c("point", "text"),
-    layers = c("species", "sites"), ylab, xlab, ...)
+\method{autoplot}{metaMDS}(object, geom = c("point", "text"),
+  layers = c("species", "sites"), ylab, xlab, ...)
 }
 \arguments{
   \item{object}{an object of class \code{"metaMDS"}, the
@@ -26,15 +25,14 @@
   \code{\link{fortify.metaMDS}}.}
 }
 \value{
-  Returns a ggplot object.
+Returns a ggplot object.
 }
 \description{
-  Produces a multi-layer ggplot object representing the
-  output of objects produced by
-  \code{\link[vegan]{metaMDS}}.
+Produces a multi-layer ggplot object representing the
+output of objects produced by \code{\link[vegan]{metaMDS}}.
 }
 \details{
-  TODO
+TODO
 }
 \examples{
 ## load example data
@@ -44,6 +42,6 @@ sol <- metaMDS(dune)
 autoplot(sol)
 }
 \author{
-  Gavin L. Simpson
+Gavin L. Simpson
 }
 

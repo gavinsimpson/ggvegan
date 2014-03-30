@@ -2,10 +2,9 @@
 \alias{autoplot.cca}
 \title{ggplot-based plot for objects of class \code{"cca"}}
 \usage{
-  \method{autoplot}{cca} (object,
-    geom = c("point", "text"),
-    layers = c("species", "sites", "biplot", "centroids"),
-    ylab, xlab, const, ...)
+\method{autoplot}{cca}(object, geom = c("point", "text"),
+  layers = c("species", "sites", "biplot", "centroids"), ylab, xlab, const,
+  ...)
 }
 \arguments{
   \item{object}{an object of class \code{"cca"}, the result
@@ -30,16 +29,15 @@
   \code{\link{fortify.cca}}.}
 }
 \value{
-  Returns a ggplot object.
+Returns a ggplot object.
 }
 \description{
-  Produces a multi-layer ggplot object representing the
-  output of objects produced by \code{\link[vegan]{cca}},
-  \code{\link[vegan]{rda}}, or
-  \code{\link[vegan]{capscale}}.
+Produces a multi-layer ggplot object representing the
+output of objects produced by \code{\link[vegan]{cca}},
+\code{\link[vegan]{rda}}, or \code{\link[vegan]{capscale}}.
 }
 \details{
-  TODO
+TODO
 }
 \examples{
 data(dune)
@@ -49,6 +47,6 @@ sol <- cca(dune ~ A1 + Management, data = dune.env)
 autoplot(sol)
 }
 \author{
-  Gavin L. Simpson
+Gavin L. Simpson
 }
 

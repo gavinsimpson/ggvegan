@@ -1,3 +1,12 @@
+## help codetools "find" variables - i.e. ignore the warnings in the
+## ggplot() calls below - doing this on per-function basis in case
+## R goes that way in the future. As ?globalVariables states, this
+## is really active at the package level
+if(getRversion() >= "2.15.1") {
+    utils::globalVariables(c("Dim1", "Dim2", "Score", "Label"))
+}
+## end help codetools
+
 ##' @title ggplot-based plot for objects of class \code{"metaMDS"}
 ##'
 ##' @description
@@ -34,16 +43,6 @@
 ##'
 ##' sol <- metaMDS(dune)
 ##' autoplot(sol)
-
-## help codetools "find" variables - i.e. ignore the warnings in the
-## ggplot() calls below - doing this on per-function basis in case
-## R goes that way in the future. As ?globalVariables states, this
-## is really active at the package level
-if(getRversion() >= "2.15.1") {
-    utils::globalVariables(c("Dim1", "Dim2", "Score", "Label"))
-}
-## end help codetools
-
 `autoplot.metaMDS` <- function(object, geom = c("point","text"),
                                layers = c("species", "sites"),
                                ylab, xlab, ...) {

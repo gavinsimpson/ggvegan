@@ -22,7 +22,6 @@
 ##'
 ##' @importFrom ggplot2 fortify
 ##' @importFrom vegan scores
-##' @importFrom vegan
 ##'
 ##' @examples
 ##' data(dune)

@@ -2,7 +2,7 @@
 \alias{fortify.prc}
 \title{Fortify a \code{"prc"} object}
 \usage{
-  fortify.prc(model, data, scaling = 3, axis = 1, ...)
+\method{fortify}{prc}(model, data, scaling = 3, axis = 1, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"prc"}, the result
@@ -20,22 +20,22 @@
   \item{...}{additional arguments currently ignored.}
 }
 \value{
-  A data frame in long format containing the ordination
-  scores. The first three components are the \code{Time},
-  \code{Treatment}, and associated \code{Response}. The
-  last two components, \code{Score} and \code{Label} are an
-  indictor factor and a label for the rows for use in
-  plotting.
+A data frame in long format containing the ordination
+scores. The first three components are the \code{Time},
+\code{Treatment}, and associated \code{Response}. The last
+two components, \code{Score} and \code{Label} are an
+indictor factor and a label for the rows for use in
+plotting.
 }
 \description{
-  Fortifies an object of class \code{"prc"} to produce a
-  data frame of the selected axis scores in long format,
-  suitable for plotting with \code{\link[ggplot2]{ggplot}}.
+Fortifies an object of class \code{"prc"} to produce a data
+frame of the selected axis scores in long format, suitable
+for plotting with \code{\link[ggplot2]{ggplot}}.
 }
 \details{
-  TODO
+TODO
 }
 \author{
-  Gavin L. Simpson
+Gavin L. Simpson
 }
 

@@ -2,8 +2,7 @@
 \alias{autoplot.prc}
 \title{ggplot-based plot for objects of class \code{"prc"}}
 \usage{
-  \method{autoplot}{prc} (object, select, xlab, ylab,
-    leg.pos = "top", ...)
+\method{autoplot}{prc}(object, select, xlab, ylab, leg.pos = "top", ...)
 }
 \arguments{
   \item{object}{an object inheriting from class
@@ -28,14 +27,14 @@
   \code{\link{fortify.prc}}.}
 }
 \value{
-  Returns a ggplot object.
+Returns a ggplot object.
 }
 \description{
-  Produces a multi-layer ggplot object representing the
-  output of objects produced by \code{\link[vegan]{prc}}.
+Produces a multi-layer ggplot object representing the
+output of objects produced by \code{\link[vegan]{prc}}.
 }
 \details{
-  TODO
+TODO
 }
 \examples{
 data(pyrifos)
@@ -50,6 +49,6 @@ want <- colSums(pyrifos)
 autoplot(mod, select = want)
 }
 \author{
-  Gavin L. Simpson
+Gavin L. Simpson
 }
 

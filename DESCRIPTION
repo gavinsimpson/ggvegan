@@ -15,10 +15,3 @@ Description: Functions to produce ggplot2-based plots of objects produced by
     functions in the vegan package.
 License: GPL-2
 ByteCompile: true
-Collate:
-    'autoplot.cca.R'
-    'fortify.cca.R'
-    'fortify.metaMDS.R'
-    'autoplot.metaMDS.R'
-    'fortify.prc.R'
-    'autoplot.prc.R'

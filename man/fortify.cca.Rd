@@ -2,7 +2,7 @@
 \alias{fortify.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-  \method{fortify}{cca} (model, data, ...)
+\method{fortify}{cca}(model, data, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"cca"}, the result
@@ -16,16 +16,16 @@
   \code{\link[vegan]{scores.cca}}.}
 }
 \value{
-  A data frame in long format containing the ordination
-  scores. The first two components are the axis scores.
+A data frame in long format containing the ordination
+scores. The first two components are the axis scores.
 }
 \description{
-  Fortifies an object of class \code{"cca"} to produce a
-  data frame of the selected axis scores in long format,
-  suitable for plotting with \code{\link[ggplot2]{ggplot}}.
+Fortifies an object of class \code{"cca"} to produce a data
+frame of the selected axis scores in long format, suitable
+for plotting with \code{\link[ggplot2]{ggplot}}.
 }
 \details{
-  TODO
+TODO
 }
 \examples{
 data(dune)
@@ -35,6 +35,6 @@ sol <- cca(dune ~ A1 + Management, data = dune.env)
 head(fortify(sol))
 }
 \author{
-  Gavin L. Simpson
+Gavin L. Simpson
 }
 

@@ -2,7 +2,7 @@
 \alias{fortify.metaMDS}
 \title{Fortify a \code{"mataMDS"} object.}
 \usage{
-  \method{fortify}{metaMDS} (model, data, ...)
+\method{fortify}{metaMDS}(model, data, ...)
 }
 \arguments{
   \item{model}{an object of class \code{"metaMDS"}, the
@@ -15,16 +15,16 @@
   \code{display}.}
 }
 \value{
-  A data frame in long format containing the ordination
-  scores. The first two components are the axis scores.
+A data frame in long format containing the ordination
+scores. The first two components are the axis scores.
 }
 \description{
-  Fortifies an object of class \code{"metaMDS"} to produce
-  a data frame of the selected axis scores in long format,
-  suitable for plotting with \code{\link[ggplot2]{ggplot}}.
+Fortifies an object of class \code{"metaMDS"} to produce a
+data frame of the selected axis scores in long format,
+suitable for plotting with \code{\link[ggplot2]{ggplot}}.
 }
 \details{
-  TODO
+TODO
 }
 \examples{
 ## load example data
@@ -34,6 +34,6 @@ sol <- metaMDS(dune)
 head(fortify(sol))
 }
 \author{
-  Gavin L. Simpson
+Gavin L. Simpson
 }
 
