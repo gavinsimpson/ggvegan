@@ -1,1 +1,8 @@
 ^\.travis\.yml$
+LICENSE
+\.Rproj$
+^\.Rproj\.user$
+Makefile
+appveyor.yml
+.gitattributes
+.gitignore
