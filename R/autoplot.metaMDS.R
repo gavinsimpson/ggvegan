@@ -34,7 +34,7 @@ if(getRversion() >= "2.15.1") {
 ##' @export
 ##'
 ##' @importFrom grid arrow unit
-##' @importFrom ggplot2 autoplot
+##' @importFrom ggplot2 autoplot ggplot geom_point geom_text xlab ylab coord_fixed
 ##'
 ##' @examples
 ##' ## load example data
