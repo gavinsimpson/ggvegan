@@ -33,8 +33,7 @@ if(getRversion() >= "2.15.1") {
 ##'
 ##' @author Gavin L. Simpson
 ##'
-##' @method autoplot prc
-##' @S3method autoplot prc
+##' @export
 ##'
 ##' @examples
 ##' data(pyrifos)

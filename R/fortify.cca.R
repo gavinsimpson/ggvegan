@@ -17,8 +17,7 @@
 ##' The first two components are the axis scores.
 ##' @author Gavin L. Simpson
 ##'
-##' @method fortify cca
-##' @S3method fortify cca
+##' @export
 ##'
 ##' @importFrom ggplot2 fortify
 ##' @importFrom vegan scores

@@ -17,8 +17,7 @@
 ##' The first two components are the axis scores.
 ##' @author Gavin L. Simpson
 ##'
-##' @method fortify metaMDS
-##' @S3method fortify metaMDS
+##' @export
 ##'
 ##' @importFrom ggplot2 fortify
 ##' @importFrom vegan scores

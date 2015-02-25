@@ -31,8 +31,7 @@ if(getRversion() >= "2.15.1") {
 ##'
 ##' @author Gavin L. Simpson
 ##'
-##' @method autoplot metaMDS
-##' @S3method autoplot metaMDS
+##' @export
 ##'
 ##' @importFrom grid arrow unit
 ##' @importFrom ggplot2 autoplot
