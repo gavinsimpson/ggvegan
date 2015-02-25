@@ -35,6 +35,8 @@ if(getRversion() >= "2.15.1") {
 ##'
 ##' @export
 ##'
+##' @importFrom ggplot2 fortify ggplot geom_hline geom_rug geom_line theme scale_x_continuous xlab ylab aes
+##'
 ##' @examples
 ##' data(pyrifos)
 ##' week <- gl(11, 12, labels=c(-4, -1, 0.1, 1, 2, 4, 8, 12, 15, 19, 24))
@@ -71,8 +73,8 @@ if(getRversion() >= "2.15.1") {
 
     ## base plot
     plt <- ggplot(data = samp,
-               aes(x = Time, y = Response, group = Treatment,
-                   colour = Treatment, linetype = Treatment))
+                  aes(x = Time, y = Response, group = Treatment,
+                      colour = Treatment, linetype = Treatment))
     ## add the control
     plt <- plt + geom_hline(yintercept = 0)
     ## add species rug
