@@ -55,4 +55,4 @@ Finally, if you use Hadley Wickham's **devtools** package then you can install g
 then run
 
     require("devtools")
-    install_github("ggvegan/gavinsimpson")
+    install_github("gavinsimpson/ggvegan")
