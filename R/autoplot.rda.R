@@ -30,6 +30,10 @@
 ##'
 ##' pca <- rda(dune)
 ##' autoplot(pca, arrows = TRUE)
+##'
+##' ## Just the species scores
+##' autoplot(pca, arrows = TRUE, display = "species")
+##'
 `autoplot.rda` <- function(object, geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            arrows = TRUE,
