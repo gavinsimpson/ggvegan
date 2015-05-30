@@ -96,7 +96,8 @@ if(getRversion() >= "2.15.1") {
     }
     if(any(want <- obj$Score == "biplot")) {
         if (length(layers) > 1) {
-            mul <- vegan:::ordiArrowMul(obj[want, , drop = FALSE ])
+            mul <- arrowMul(obj[want, c("Dim1","Dim2"), drop = FALSE],
+                            obj[!want, c("Dim1","Dim2"), drop = FALSE])
             obj[want, c("Dim1","Dim2")] <- mul * obj[want, c("Dim1","Dim2")]
         }
         col <- "navy"
