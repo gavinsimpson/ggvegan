@@ -11,15 +11,12 @@ if(getRversion() >= "2.15.1") {
 ##' @title ggplot-based plot for objects of class \code{"cca"}
 ##'
 ##' @description
-##' Produces a multi-layer ggplot object representing the output of
-##' objects produced by \code{\link[vegan]{cca}}, \code{\link[vegan]{rda}},
-##' or \code{\link[vegan]{capscale}}.
+##' Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{cca}}, or \code{\link[vegan]{capscale}}.
 ##'
 ##' @details
 ##' TODO
 ##'
-##' @param object an object of class \code{"cca"}, the result of a call
-##' to \code{\link[vegan]{cca}}.
+##' @param object an object of class \code{"cca"}, the result of a call to \code{\link[vegan]{cca}} or \code{\link[vegan]{capscale}}.
 ##' @param geom character; which geoms to use for the layers. Can be a
 ##' vector of length equal to \code{length(display)}, in which case the
 ##' \emph{i}th element of \code{type} refers to the \emph{i}th element
