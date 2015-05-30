@@ -38,6 +38,20 @@
         obs
     }
     scrs <- scores(model, display = display, ...)
+    ## handle case of only 1 set of scores
+    if (length(display) == 1L) {
+        scrs <- list(scrs)
+        nam <- switch(display,
+                      sp = "species",
+                      species = "species",
+                      wa = "sites",
+                      sites = "sites",
+                      lc = "constraints",
+                      bp = "biplot",
+                      cn = "centroids",
+                      stop("Unknown value for 'display'"))
+        names(scrs) <- nam
+    }
     rnam <- lapply(scrs, rownames)
     take <- !sapply(rnam, is.null)
     rnam <- unlist(rnam[take], use.names = FALSE)
