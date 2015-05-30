@@ -44,7 +44,7 @@ if(getRversion() >= "2.15.1") {
 ##'
 ##' sol <- cca(dune ~ A1 + Management, data = dune.env)
 ##' autoplot(sol)
-`autoplot.cca` <- function(object, geom = c("point","text"),
+`autoplot.cca` <- function(object, geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            ylab, xlab, const, ...) {
     obj <- fortify(object, ...)
