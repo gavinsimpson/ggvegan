@@ -21,7 +21,7 @@ of \code{display}.}
 
 \item{xlab}{character; label for the x-axis}
 
-\item{...}{Additional arguments passed to \code{\link{fortify.deocrana}}.}
+\item{...}{Additional arguments passed to \code{\link{fortify.decorana}}.}
 }
 \value{
 Returns a ggplot object.
