@@ -24,7 +24,7 @@
 ##' data(dune)
 ##'
 ##' sol <- decorana(dune)
-##' head(fortify.decorana(sol))
+##' head(fortify(sol))
 ##' head(fortify(sol, display = "species"))
 `fortify.decorana` <- function(model, data, display = c("sites", "species"),
                                choices = c(1,2), ...) {
