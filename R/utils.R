@@ -19,3 +19,19 @@
     u <- u[is.finite(u) & u > 0]
     fill * min(u)
 }
+
+##' @title Number of scores
+##' @description Returns the number of scores returns in object \code{x}.
+##'
+##' @param x The object whose number of scores is required.
+##'
+##' @return a numeric vector of length 1 with the number of scores.
+##'
+##' @author Gavin L. Simpson
+`scoresLength` <- function(x) {
+        obs <- NROW(x)
+        if (is.null(obs))
+            obs <- 0
+        obs
+
+}
