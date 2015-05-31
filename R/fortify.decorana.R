@@ -24,20 +24,16 @@
 ##' data(dune)
 ##'
 ##' sol <- decorana(dune)
-##' head(fortify(sol))
+##' head(fortify.decorana(sol))
 ##' head(fortify(sol, display = "species"))
 `fortify.decorana` <- function(model, data, display = c("sites", "species"),
                                choices = c(1,2), ...) {
-    scrs <- scores(model, display = display, choices = choices, ...)
-    ## handle case of only 1 set of scores
-    if (length(display) == 1L) {
-        scrs <- list(scrs)
-        nam <- switch(display,
-                      species = "species",
-                      sites = "sites",
-                      stop("Unknown value for 'display'"))
-        names(scrs) <- nam
-    }
+    ## need to work around the fact that scores.decorana handles only one type of scores
+    ## at a time
+    scrs <- lapply(display,
+                   function(display, x, ...) scores(x, display = display, ...),
+                   x = model, choices = choices, ...)
+    names(scrs) <- display
     rnam <- lapply(scrs, rownames)
     take <- !sapply(rnam, is.null)
     rnam <- unlist(rnam[take], use.names = FALSE)
