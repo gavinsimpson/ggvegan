@@ -10,7 +10,7 @@
 **ggvegan** is a package for the R statistical software and environment. It aims to implement **ggplot**-based versions of the plots produced by the **vegan** package. Initially, ggvegan will provide `fortify` and `autoplot` methods for objects created in vegan, with the aim of providing full replacement plots via `autoplot`. The `fortify` methods allow the data contained within objects created by vegan to be converted into a format suitable for use with `ggplot` directly.
 
 ## Licence
-ggvegan is released under the [GNU General Public Licence, version 2](http://www.gnu.org/licenses/gpl-2.0.html).
+ggvegan is released under the [GNU General Public Licence, version 2](http://www.r-project.org/Licenses/GPL-2).
 
 ## Development & contributions
 ggvegan uses the **roxygen2** system to document package functions alongside the code itself.
