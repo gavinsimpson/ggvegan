@@ -39,9 +39,10 @@ The components returned for more specialised objects will invariably *not* be `D
 ## Status
 The following `autoplot` methods are currently available
 
- 1. `autoplot.cca` --- for objects of classes `"cca"`, `"rda"`, and `"capscale"`
- 2. `autoplot.metaMDS` --- for objects of class `"metaMDS"`
- 3. `autoplot.prc` --- for objects of class `"prc"`
+ 1. `autoplot.cca` --- for objects of classes `"cca"` and `"capscale"`
+ 2. `autoplot.rda` --- for objects of class `"rda"`
+ 3. `autoplot.metaMDS` --- for objects of class `"metaMDS"`
+ 4. `autoplot.prc` --- for objects of class `"prc"`
 
 The following `fortify` method are currently available
 
