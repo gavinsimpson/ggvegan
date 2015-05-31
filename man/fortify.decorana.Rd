@@ -32,7 +32,7 @@ TODO
 data(dune)
 
 sol <- decorana(dune)
-head(fortify(sol))
+head(fortify.decorana(sol))
 head(fortify(sol, display = "species"))
 }
 \author{
