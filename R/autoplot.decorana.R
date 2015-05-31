@@ -14,7 +14,7 @@
 ##' @param layers character; which scores to plot as layers
 ##' @param xlab character; label for the x-axis
 ##' @param ylab character; label for the y-axis
-##' @param ... Additional arguments passed to \code{\link{fortify.deocrana}}.
+##' @param ... Additional arguments passed to \code{\link{fortify.decorana}}.
 ##' @return Returns a ggplot object.
 ##' @author Gavin L. Simpson
 ##'
