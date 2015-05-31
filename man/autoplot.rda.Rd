@@ -39,6 +39,9 @@ data(dune)
 
 pca <- rda(dune)
 autoplot(pca, arrows = TRUE)
+
+## Just the species scores
+autoplot(pca, arrows = TRUE, display = "species")
 }
 \author{
 Gavin L. Simpson
