@@ -84,7 +84,7 @@
                          colour = col)
         pdat[, c("Dim1", "Dim2")] <- 1.1 * pdat[, c("Dim1", "Dim2"), drop = FALSE]
         plt <- plt + geom_text(data = pdat,
-                               aes(x = Dim1, y = Dim2, label = Label))
+                               aes(x = Dim1, y = Dim2, label = Label), size = 4)
     }
     ## remove biplot arrows for centroids if present
     if(all(c("biplot","centroids") %in% LAYERS)) {
