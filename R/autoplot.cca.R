@@ -120,7 +120,7 @@ if(getRversion() >= "2.15.1") {
         ylab <- dimlabels[2]
     plt <- plt + xlab(xlab) + ylab(ylab)
     ## add equal scaling
-    plt <- plt + coord_fixed()
+    plt <- plt + coord_fixed(ratio = 1)
     ## do we want a legend
     plt <- plt + theme(legend.position = legend.position)
     plt
