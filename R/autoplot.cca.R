@@ -22,6 +22,7 @@ if(getRversion() >= "2.15.1") {
 ##' \emph{i}th element of \code{type} refers to the \emph{i}th element
 ##' of \code{display}.
 ##' @param layers character; which scores to plot as layers
+##' @param legend.position character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.
 ##' @param xlab character; label for the x-axis
 ##' @param ylab character; label for the y-axis
 ##' @param const General scaling constant to \code{rda} scores. See
@@ -43,6 +44,7 @@ if(getRversion() >= "2.15.1") {
 ##' autoplot(sol)
 `autoplot.cca` <- function(object, geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
+                           legend.position = "right",
                            ylab, xlab, const, ...) {
     obj <- fortify(object, ...)
     LAYERS <- levels(obj$Score)
@@ -119,5 +121,7 @@ if(getRversion() >= "2.15.1") {
     plt <- plt + xlab(xlab) + ylab(ylab)
     ## add equal scaling
     plt <- plt + coord_fixed()
+    ## do we want a legend
+    plt <- plt + theme(legend.position = legend.position)
     plt
 }

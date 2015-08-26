@@ -5,8 +5,8 @@
 \title{ggplot-based plot for objects of class \code{"cca"}}
 \usage{
 \method{autoplot}{cca}(object, geom = c("point", "text"),
-  layers = c("species", "sites", "biplot", "centroids"), ylab, xlab, const,
-  ...)
+  layers = c("species", "sites", "biplot", "centroids"),
+  legend.position = "right", ylab, xlab, const, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"cca"}, the result of a call to \code{\link[vegan]{cca}} or \code{\link[vegan]{capscale}}.}
@@ -17,6 +17,8 @@ vector of length equal to \code{length(display)}, in which case the
 of \code{display}.}
 
 \item{layers}{character; which scores to plot as layers}
+
+\item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
 
 \item{ylab}{character; label for the y-axis}
 
