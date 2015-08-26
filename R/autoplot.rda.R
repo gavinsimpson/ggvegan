@@ -69,7 +69,7 @@
         plt <- plt +
             geom_text(data = obj[want, , drop = FALSE ],
                       aes(x = Dim1, y = Dim2, label = Label,
-                          colour = Score))
+                          colour = Score), size = 3)
     }
     ## Draw species (variables) as arrows?
     if (isTRUE(arrows)) {
