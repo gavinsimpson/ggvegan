@@ -6,7 +6,7 @@
 \usage{
 \method{autoplot}{rda}(object, geom = c("point", "text"),
   layers = c("species", "sites", "biplot", "centroids"), arrows = TRUE,
-  ylab, xlab, const, ...)
+  legend.position = "right", ylab, xlab, const, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"rda"}, the result of a call to \code{\link[vegan]{rda}}}
@@ -16,6 +16,8 @@
 \item{layers}{character; which scores to plot as layers}
 
 \item{arrows}{logical; represent species (variables) using vectors?}
+
+\item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
 
 \item{ylab}{character; label for the y-axis}
 

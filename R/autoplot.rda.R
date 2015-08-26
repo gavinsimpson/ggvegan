@@ -10,6 +10,7 @@
 ##' @param geom character; which geoms to use for the layers. Can be a vector of length equal to \code{length(display)}, in which case the \emph{i}th element of \code{type} refers to the \emph{i}th element of \code{display}.
 ##' @param layers character; which scores to plot as layers
 ##' @param arrows logical; represent species (variables) using vectors?
+##' @param legend.position character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.
 ##' @param xlab character; label for the x-axis
 ##' @param ylab character; label for the y-axis
 ##' @param const General scaling constant to \code{rda} scores. See \code{\link[vegan]{plot.cca}} for details.
@@ -36,7 +37,7 @@
 ##'
 `autoplot.rda` <- function(object, geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
-                           arrows = TRUE,
+                           arrows = TRUE, legend.position = "right",
                            ylab, xlab, const, ...) {
     obj <- fortify(object, ...)
     LAYERS <- levels(obj$Score)
@@ -133,5 +134,7 @@
     plt <- plt + xlab(xlab) + ylab(ylab)
     ## add equal scaling
     plt <- plt + coord_fixed()
+    ## do we want a legend
+    plt <- plt + theme(legend.position = legend.position)
     plt
 }
