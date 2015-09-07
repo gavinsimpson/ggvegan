@@ -43,14 +43,14 @@ The following `autoplot` methods are currently available
  2. `autoplot.rda` --- for objects of class `"rda"`
  3. `autoplot.metaMDS` --- for objects of class `"metaMDS"`
  4. `autoplot.prc` --- for objects of class `"prc"`
- 4. `autoplot.decorana` --- for objects of class `"deocrana"` (AKA DCA)
+ 4. `autoplot.decorana` --- for objects of class `"decorana"` (AKA DCA)
 
 The following `fortify` method are currently available
 
  1. `fortify.cca` --- for objects of classes `"cca"`, `"rda"`, and `"capscale"`
  2. `fortify.metaMDS` --- for objects of class `"metaMDS"`
  3. `fortify.prc` --- for objects of class `"prc"`
- 4. `fortify.decorana` --- for objects of class `"deocrana"` (AKA DCA)
+ 4. `fortify.decorana` --- for objects of class `"decorana"` (AKA DCA)
 
 ## Installation
 No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github. Once I work out how to link git with svn I'll start a project on [R-forge](http://r-forge.r-project.org) which will host binary packages of ggvegan.
