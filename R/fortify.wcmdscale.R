@@ -15,7 +15,7 @@
 ##' 
 ##' @return A data frame in long format containing the ordination scores.
 ##' 
-##' @author Eduard Szöcs eduardszoecs@gmail.com
+##' @author Eduard Szoecs eduardszoecs@gmail.com
 ##'
 ##' @export
 ##'

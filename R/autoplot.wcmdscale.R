@@ -25,7 +25,7 @@ if(getRversion() >= "2.15.1") {
 ##'
 ##' @return Returns a ggplot object.
 ##'
-##' @author Eduard Szöcs eduardszoecs@@gmail.com
+##' @author Eduard Szoecs eduardszoecs@@gmail.com
 ##'
 ##' @export
 ##'
