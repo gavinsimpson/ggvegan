@@ -25,6 +25,7 @@
 ##'
 ##' @export
 ##'
+##' @importFrom stats coef
 ##' @importFrom ggplot2 fortify
 ##' @importFrom reshape2 melt
 ##' @importFrom vegan scores
