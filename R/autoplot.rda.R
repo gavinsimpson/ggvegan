@@ -69,12 +69,12 @@
         plt <- plt +
             geom_point(data = obj[want, , drop = FALSE ],
                        aes_string(x = vars[1], y = vars[2], shape = 'Score',
-                           colour = 'Score'))
+                                  colour = 'Score'))
     } else {
         plt <- plt +
             geom_text(data = obj[want, , drop = FALSE ],
                       aes_string(x = vars[1], y = vars[2], label = 'Label',
-                          colour = 'Score'), size = 3)
+                                 colour = 'Score'), size = 3)
     }
     ## Draw species (variables) as arrows?
     if (isTRUE(arrows)) {
@@ -107,7 +107,7 @@
         } else {
             plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
                                    aes_string(x = vars[1], y = vars[2],
-                                       label = 'Label'))
+                                              label = 'Label'))
         }
     }
     if(any(want <- obj$Score == "biplot")) {
@@ -119,7 +119,7 @@
         col <- "navy"
         plt <- plt +
             geom_segment(data = obj[want, , drop = FALSE ],
-                         aes(x = 0, y = 0, xend = Dim1, yend = Dim2),
+                         aes_string(x = 0, y = 0, xend = vars[1], yend = vars[2]),
                          arrow = arrow(length = unit(0.2, "cm")),
                          colour = col)
         obj[want, vars] <- 1.1 * obj[want, vars]
