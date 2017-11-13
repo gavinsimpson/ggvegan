@@ -25,16 +25,12 @@ The `autoplot` concept is somewhat poorly defined at the moment --- at least in 
 `fortify` methods are supposed to return a data frame but this is not necessarily the most convenient representation for vegan's ordination objects where several data frames representing the various sets of ordination scores would be more natural. Currently, ggvegan follows the existing `fortify` convention of returning a single data frame so returns the ordination scores in long format with variables `Score` indicating the type of score and `Label` the label/rowname for each score.
 
 #### Standard ordination methods
-The first two components of the returned data frame are **always** named `Dim1` and `Dim2`; to which ordination axes/dimensions these refer is recorded in an attribute `dimlabels`, which can be accessed via
-
-    attr(fobj, "dimlabels")
-
-where `fobj` is the object returned by `fortify`.
+From version 0.0-9, I changed the representation of *fortified* ordination objects. The first two columns will now be `Score` and `Label`. The remaining columns will be the requested ordination dimensions, named as per the `scores` method from **vegan**. For example, a PCA will have columns named `'PC1'`, `'PC2'`, etc. How many and their numbering depending on the `axes` argument; the default is `1:6`. Consequently, the `'dimLables'` attribute is no longer necessary.
 
 A further design decision is that ggvegan `fortify` methods for ordination objects will return all possible sets of scores and the set returned can not be chosen by the user. Instead, the sets of scores to be plotted should be chosen at the `autoplot` stage.
 
 #### More specialised objects
-The components returned for more specialised objects will invariably *not* be `Dim1` and `Dim2`. Such `fortify()` methods will return suitable components. For example, `fortify.prc()` returns components `Time`, `Treatment`, and `Response` corresponding to the two-way factors defining the experiment and the regression coefficients on RDA axis 1 respectively.
+The components returned for more specialised objects will typically vary as needed for a sensible, tidy data representation. Such `fortify()` methods will return suitable components. For example, `fortify.prc()` returns components `Time`, `Treatment`, and `Response` corresponding to the two-way factors defining the experiment and the regression coefficients on RDA axis 1 respectively.
 
 ## Status
 The following `autoplot` methods are currently available
@@ -53,7 +49,7 @@ The following `fortify` method are currently available
  4. `fortify.decorana` --- for objects of class `"decorana"` (AKA DCA)
 
 ## Installation
-No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github. Once I work out how to link git with svn I'll start a project on [R-forge](http://r-forge.r-project.org) which will host binary packages of ggvegan.
+No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.
 
 Finally, if you use Hadley Wickham's **devtools** package then you can install ggvegan directly from github using functions that devtools provides. To do this, install **devtools** from CRAN via
 
