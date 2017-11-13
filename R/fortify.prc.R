@@ -27,30 +27,31 @@
 ##'
 ##' @importFrom stats coef
 ##' @importFrom ggplot2 fortify
-##' @importFrom reshape2 melt
+##' @importFrom tidyr gather
 ##' @importFrom vegan scores
-fortify.prc <- function(model, data, scaling = 3, axis = 1,
-                        ...) {
+fortify.prc <- function(model, data, scaling = 3, axis = 1, ...) {
     s <- summary(model, scaling = scaling, axis = axis)
-    b <- t(coef(s))
+    b <- as.data.frame(t(coef(s)))
+    dimb <- dim(b)
     rs <- rownames(b)
     cs <- colnames(b)
-    res <- melt(b)
-    names(res) <- c("Time", "Treatment", "Response")
+    b <- cbind(Time = as.numeric(rs), b)
+    res <- gather(b, 'Treatment', 'Response', - 'Time')
+    ##names(res) <- c("Time", "Treatment", "Response")
 
     ## insure Treatment is a factor
-    res$Time <- factor(res$Time, levels = model$terminfo$xlev[[1]])
-    res$Treatment <- factor(res$Treatment, levels = model$terminfo$xlev[[2]])
+    res[['Time']] <- factor(res[['Time']], levels = model$terminfo$xlev[[1]])
+    res[['Treatment']] <- factor(res[['Treatment']], levels = model$terminfo$xlev[[2]])
 
     n <- length(s$sp)
-    sampLab <- paste(res$Treatment, res$Time, sep = "-")
+    sampLab <- paste(res$Treatment, res$Time, sep = "|")
     res <- rbind(res, cbind(Time = rep(NA, n),
                             Treatment = rep(NA, n),
                             Response = s$sp))
-    res$Score <- factor(c(rep("Sample", prod(dim(b))),
-                          rep("Species", n)))
-    res$Label <- c(sampLab, names(s$sp))
-
+    res <- cbind(Score = factor(c(rep("Sample", prod(dimb)),
+                                  rep("Species", n))),
+                 Label = c(sampLab, names(s$sp)),
+                 res)
     ## return
     res
 }
