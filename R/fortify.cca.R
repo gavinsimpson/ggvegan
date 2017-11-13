@@ -12,6 +12,7 @@
 ##' \code{\link[vegan]{cca}}, \code{\link[vegan]{rda}}, or
 ##' \code{\link[vegan]{capscale}}.
 ##' @param data currently ignored.
+##' @param axes numeric; which axes to extract scores for.
 ##' @param display numeric; the scores to extract in the fortified object.
 ##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}}.
 ##' @return A data frame in long format containing the ordination scores.
@@ -29,15 +30,10 @@
 ##'
 ##' sol <- cca(dune ~ A1 + Management, data = dune.env)
 ##' head(fortify(sol))
-`fortify.cca` <- function(model, data,
+`fortify.cca` <- function(model, data, axes = 1:6,
                           display = c("sp", "wa", "lc", "bp", "cn"), ...) {
-    scrLen <- function(x) {
-        obs <- nrow(x)
-        if(is.null(obs))
-            obs <- 0
-        obs
-    }
-    scrs <- scores(model, display = display, ...)
+    ## extract scores
+    scrs <- scores(model, choices = axes, display = display, ...)
     ## handle case of only 1 set of scores
     if (length(display) == 1L) {
         scrs <- list(scrs)
@@ -52,17 +48,15 @@
                       stop("Unknown value for 'display'"))
         names(scrs) <- nam
     }
-    rnam <- lapply(scrs, rownames)
-    take <- !sapply(rnam, is.null)
-    rnam <- unlist(rnam[take], use.names = FALSE)
-    scrs <- scrs[take]
-    fdf <- do.call(rbind, scrs)
-    rownames(fdf) <- NULL
-    fdf <- data.frame(fdf)
-    lens <- sapply(scrs, scrLen)
-    fdf$Score <- factor(rep(names(lens), times = lens))
-    fdf$Label <- rnam
-    attr(fdf, "dimlabels") <- names(fdf)[1:2]
-    names(fdf)[1:2] <- paste0("Dim", 1:2)
-    fdf
+    miss <- vapply(scrs, function(x ) all(is.na(x)), logical(1L))
+    scrs <- scrs[!miss]
+    nams <- names(scrs)
+    nr <- vapply(scrs, FUN = NROW, FUN.VALUE = integer(1))
+    df <- do.call('rbind', scrs)
+    rownames(df) <- NULL
+    df <- as.data.frame(df)
+    df <- cbind(Score = factor(rep(nams, times = nr)),
+                Label = unlist(lapply(scrs, rownames), use.names = FALSE),
+                df)
+    df
 }
