@@ -43,7 +43,7 @@
     obj <- fortify(object, axes = axes, ...)
     obj <- obj[obj$Score %in% layers, ]
     ## sort out x, y aesthetics
-    vars <- names(obj)[-c(1,2)]
+    vars <- getDimensionNames(obj)
     ## skeleton layer
     plt <- ggplot()
     geom <- match.arg(geom)
