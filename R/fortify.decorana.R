@@ -8,8 +8,8 @@
 ##' @param model an object of class \code{"decorana"}, the result of a call to
 ##' \code{\link[vegan]{decorana}}.
 ##' @param data currently ignored.
+##' @param axes numeric; which axis scores are required?
 ##' @param display character; the scores to extract in the fortified object.
-##' @param choices numeric; which axis scores are required?
 ##' @param ... additional arguments passed to \code{\link[vegan]{scores.decorana}}.
 ##' @return A data frame in long format containing the ordination scores. The first two components are the axis scores.
 ##'
@@ -26,25 +26,21 @@
 ##' sol <- decorana(dune)
 ##' head(fortify(sol))
 ##' head(fortify(sol, display = "species"))
-`fortify.decorana` <- function(model, data, display = c("sites", "species"),
-                               choices = c(1,2), ...) {
+`fortify.decorana` <- function(model, data, axes = 1:4,
+                               display = c("sites", "species"), ...) {
     ## need to work around the fact that scores.decorana handles only one type of scores
     ## at a time
     scrs <- lapply(display,
                    function(display, x, ...) scores(x, display = display, ...),
-                   x = model, choices = choices, ...)
-    names(scrs) <- display
-    rnam <- lapply(scrs, rownames)
-    take <- !sapply(rnam, is.null)
-    rnam <- unlist(rnam[take], use.names = FALSE)
-    scrs <- scrs[take]
-    fdf <- do.call(rbind, scrs)
-    rownames(fdf) <- NULL
-    fdf <- data.frame(fdf)
-    lens <- sapply(scrs, scoresLength)
-    fdf$Score <- factor(rep(names(lens), times = lens))
-    fdf$Label <- rnam
-    attr(fdf, "dimlabels") <- names(fdf)[1:2]
-    names(fdf)[1:2] <- paste0("Dim", 1:2)
-    fdf
+                   x = model, choices = axes, ...)
+    miss <- vapply(scrs, function(x ) all(is.na(x)), logical(1L))
+    scrs <- scrs[!miss]
+    nr <- vapply(scrs, FUN = NROW, FUN.VALUE = integer(1))
+    df <- do.call('rbind', scrs)
+    rownames(df) <- NULL
+    df <- as.data.frame(df)
+    df <- cbind(Score = factor(rep(display, times = nr)),
+                Label = unlist(lapply(scrs, rownames), use.names = FALSE),
+                df)
+    df
 }

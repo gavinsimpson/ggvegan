@@ -1,13 +1,3 @@
-## help codetools "find" variables - i.e. ignore the warnings in the
-## ggplot() calls below - doing this on per-function basis in case
-## R goes that way in the future. As ?globalVariables states, this
-## is really active at the package level
-if(getRversion() >= "2.15.1") {
-    utils::globalVariables(c("Dim1", "Dim2", "Score", "Label"))
-}
-## end help codetools
-
-
 ##' @title ggplot-based plot for objects of class \code{"cca"}
 ##'
 ##' @description
@@ -17,6 +7,7 @@ if(getRversion() >= "2.15.1") {
 ##' TODO
 ##'
 ##' @param object an object of class \code{"cca"}, the result of a call to \code{\link[vegan]{cca}} or \code{\link[vegan]{capscale}}.
+##' @param axes numeric; which axes to plot, given as a vector of length 2.
 ##' @param geom character; which geoms to use for the layers. Can be a
 ##' vector of length equal to \code{length(display)}, in which case the
 ##' \emph{i}th element of \code{type} refers to the \emph{i}th element
@@ -34,7 +25,7 @@ if(getRversion() >= "2.15.1") {
 ##' @export
 ##'
 ##' @importFrom grid arrow unit
-##' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment xlab ylab coord_fixed aes
+##' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment labs coord_fixed aes_string
 ##'
 ##' @examples
 ##' data(dune)
@@ -42,18 +33,21 @@ if(getRversion() >= "2.15.1") {
 ##'
 ##' sol <- cca(dune ~ A1 + Management, data = dune.env)
 ##' autoplot(sol)
-`autoplot.cca` <- function(object, geom = c("point", "text"),
+`autoplot.cca` <- function(object, axes = c(1,2), geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            legend.position = "right",
                            ylab, xlab, const, ...) {
-    obj <- fortify(object, ...)
+    axes <- rep(axes, length.out = 2L)
+    obj <- fortify(object, axes = axes, ...)
     LAYERS <- levels(obj$Score)
-    dimlabels <- attr(obj, "dimlabels")
+    ## sort out x, y aesthetics
+    vars <- getDimensionNames(obj)
     ## match the geom
     geom <- match.arg(geom)
     point <- TRUE
-    if (isTRUE(all.equal(geom, "text")))
+    if (isTRUE(all.equal(geom, "text"))) {
         point <- FALSE
+    }
     ## subset out the layers wanted
     ### need something here first to match acceptable ones?
     ### or just check that the layers selected would return a df with
@@ -66,13 +60,13 @@ if(getRversion() >= "2.15.1") {
     if (point) {
         plt <- plt +
             geom_point(data = obj[want, , drop = FALSE ],
-                       aes(x = Dim1, y = Dim2, shape = Score,
-                           colour = Score))
+                       aes_string(x = vars[1], y = vars[2], shape = 'Score',
+                           colour = 'Score'))
     } else {
         plt <- plt +
             geom_text(data = obj[want, , drop = FALSE ],
-                      aes(x = Dim1, y = Dim2, label = Label,
-                          colour = Score))
+                      aes_string(x = vars[1], y = vars[2], label = 'Label',
+                          colour = 'Score'))
     }
     ## remove biplot arrows for centroids if present
     if(all(c("biplot","centroids") %in% LAYERS)) {
@@ -86,42 +80,46 @@ if(getRversion() >= "2.15.1") {
     if(any(want <- obj$Score == "constraints")) {
         if (point) {
             plt <- plt + geom_point(data = obj[want, , drop = FALSE ],
-                                    aes(x = Dim1, y = Dim2))
+                                    aes_string(x = vars[1], y = vars[2]))
         } else {
             plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                                   aes(x = Dim1, y = Dim2,
-                                       label = Label))
+                                   aes_string(x = vars[1], y = vars[2],
+                                       label = 'Label'))
         }
     }
     if(any(want <- obj$Score == "biplot")) {
         if (length(layers) > 1) {
-            mul <- arrowMul(obj[want, c("Dim1","Dim2"), drop = FALSE],
-                            obj[!want, c("Dim1","Dim2"), drop = FALSE])
-            obj[want, c("Dim1","Dim2")] <- mul * obj[want, c("Dim1","Dim2")]
+            mul <- arrowMul(obj[want, vars, drop = FALSE],
+                            obj[!want, vars, drop = FALSE])
+            obj[want, vars] <- mul * obj[want, vars]
         }
         col <- "navy"
         plt <- plt +
             geom_segment(data = obj[want, , drop = FALSE ],
-                         aes(x = 0, y = 0, xend = Dim1, yend = Dim2),
+                         aes_string(x = 0, y = 0, xend = vars[1], yend = vars[2]),
                          arrow = arrow(length = unit(0.2, "cm")),
                          colour = col)
-        obj[want, c("Dim1","Dim2")] <- 1.1 * obj[want, c("Dim1","Dim2")]
+        obj[want, vars] <- 1.1 * obj[want, vars]
         plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                               aes(x = Dim1, y = Dim2, label = Label))
+                               aes_string(x = vars[1], y = vars[2], label = 'Label'))
     }
     if(any(want <- obj$Score == "centroids")) {
         plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                               aes(x = Dim1, y = Dim2, label = Label),
+                               aes_string(x = vars[1], y = vars[2], label = 'Label'),
                                colour = "navy")
     }
-    if(missing(xlab))
-        xlab <- dimlabels[1]
-    if(missing(ylab))
-        ylab <- dimlabels[2]
-    plt <- plt + xlab(xlab) + ylab(ylab)
+    if(missing(xlab)) {
+        xlab <- vars[1]
+    }
+    if(missing(ylab)) {
+        ylab <- vars[2]
+    }
+    plt <- plt + labs(x = xlab, y = ylab)
     ## add equal scaling
     plt <- plt + coord_fixed(ratio = 1)
     ## do we want a legend
     plt <- plt + theme(legend.position = legend.position)
     plt
 }
+
+## `aplot.cca` <- `autoplot.cca`

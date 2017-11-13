@@ -4,7 +4,8 @@
 \alias{autoplot.prc}
 \title{ggplot-based plot for objects of class \code{"prc"}}
 \usage{
-\method{autoplot}{prc}(object, select, xlab, ylab, leg.pos = "top", ...)
+\method{autoplot}{prc}(object, select, xlab, ylab, legend.position = "top",
+  ...)
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"prc"}, the
@@ -20,7 +21,7 @@ object.}
 
 \item{ylab}{character; label for the y-axis}
 
-\item{leg.pos}{character; position for the legend grob. See argument
+\item{legend.position}{character; position for the legend grob. See argument
 \code{legend.position} in function \code{\link[ggplot2]{theme}}.}
 
 \item{...}{Additional arguments passed to \code{\link{fortify.prc}}.}

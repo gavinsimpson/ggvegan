@@ -4,12 +4,14 @@
 \alias{autoplot.cca}
 \title{ggplot-based plot for objects of class \code{"cca"}}
 \usage{
-\method{autoplot}{cca}(object, geom = c("point", "text"),
+\method{autoplot}{cca}(object, axes = c(1, 2), geom = c("point", "text"),
   layers = c("species", "sites", "biplot", "centroids"),
   legend.position = "right", ylab, xlab, const, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"cca"}, the result of a call to \code{\link[vegan]{cca}} or \code{\link[vegan]{capscale}}.}
+
+\item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
 \item{geom}{character; which geoms to use for the layers. Can be a
 vector of length equal to \code{length(display)}, in which case the

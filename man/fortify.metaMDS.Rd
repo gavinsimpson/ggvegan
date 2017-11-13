@@ -31,8 +31,8 @@ TODO
 ## load example data
 data(dune)
 
-sol <- metaMDS(dune)
-head(fortify(sol))
+ord <- metaMDS(dune)
+head(fortify(ord))
 }
 \author{
 Gavin L. Simpson
