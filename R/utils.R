@@ -35,3 +35,13 @@
         obs
 
 }
+
+##' @title Extract the names of the dimensions to plot as a character vector
+##'
+##' @description Find the character vector of names for the two dimensions of data to be plotted.
+##' @param object a fortified ordination object.
+##' @return A length 2 character vector of dimension names.
+##' @author Gavin L. Simpson
+`getDimensionNames` <- function(object) {
+    names(object)[-c(1,2)]
+}
