@@ -26,23 +26,24 @@
 ##' ## load example data
 ##' data(dune)
 ##'
-##' sol <- metaMDS(dune)
-##' head(fortify(sol))
+##' ord <- metaMDS(dune)
+##' head(fortify(ord))
 `fortify.metaMDS` <- function(model, data, ...) {
     samp <- scores(model, display = "sites", ...)
-    spp <- try(scores(model, display = "species", ...), silent = TRUE)
-    if (!is.null(spp) && !inherits(spp, "try-error")) {
-        out <- rbind(samp, spp)
-        out <- data.frame(out, Score = factor(rep(c("sites","species"),
-                               c(nrow(samp), nrow(spp)))),
-                          Label = c(rownames(samp), rownames(spp)))
+    spp <- tryCatch(scores(model, display = "species", ...),
+                    error = function(c) {NULL})
+    if (!is.null(spp)) {
+        df <- rbind(samp, spp)
+        df <- as.data.frame(df)
+        df <- cbind(Score = factor(rep(c("sites","species"),
+                                        c(nrow(samp), nrow(spp)))),
+                    Label = c(rownames(samp), rownames(spp)),
+                    df)
     } else {
-        out <- samp
-        out <- data.frame(samp, Score = factor(rep("sites", nrow(out))),
-                          Label = rownames(samp))
+        df <- data.frame(Score = factor(rep("sites", nrow(df))),
+                         Label = rownames(samp),
+                         samp)
     }
-    attr(out, "dimlabels") <- names(out)[1:2]
-    rownames(out) <- NULL
-    names(out)[1:2] <- paste0("Dim", 1:2)
-    out
+    rownames(df) <- NULL
+    df
 }
