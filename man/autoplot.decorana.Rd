@@ -4,11 +4,14 @@
 \alias{autoplot.decorana}
 \title{ggplot-based plot for objects of class \code{"decorana"}}
 \usage{
-\method{autoplot}{decorana}(object, geom = c("point", "text"),
-  layers = c("species", "sites"), ylab, xlab, ...)
+\method{autoplot}{decorana}(object, axes = c(1, 2), geom = c("point",
+  "text"), layers = c("species", "sites"), legend.position = "right", ylab,
+  xlab, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"decorana"}, the result of a call to \code{\link[vegan]{decorana}}.}
+
+\item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
 \item{geom}{character; which geoms to use for the layers. Can be a
 vector of length equal to \code{length(display)}, in which case the
@@ -16,6 +19,8 @@ vector of length equal to \code{length(display)}, in which case the
 of \code{display}.}
 
 \item{layers}{character; which scores to plot as layers}
+
+\item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
 
 \item{ylab}{character; label for the y-axis}
 

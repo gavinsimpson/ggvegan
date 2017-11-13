@@ -4,8 +4,8 @@
 \alias{fortify.decorana}
 \title{Fortify a \code{"decorana"} object.}
 \usage{
-\method{fortify}{decorana}(model, data, display = c("sites", "species"),
-  choices = c(1, 2), ...)
+\method{fortify}{decorana}(model, data, axes = 1:4, display = c("sites",
+  "species"), ...)
 }
 \arguments{
 \item{model}{an object of class \code{"decorana"}, the result of a call to
@@ -13,9 +13,9 @@
 
 \item{data}{currently ignored.}
 
-\item{display}{character; the scores to extract in the fortified object.}
+\item{axes}{numeric; which axis scores are required?}
 
-\item{choices}{numeric; which axis scores are required?}
+\item{display}{character; the scores to extract in the fortified object.}
 
 \item{...}{additional arguments passed to \code{\link[vegan]{scores.decorana}}.}
 }
