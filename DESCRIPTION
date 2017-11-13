@@ -1,8 +1,8 @@
 Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
-Version: 0.0-8
-Date: 2015-08-26
+Version: 0.0-9
+Date: 2017-11-12
 Depends:
     vegan (>= 2.3-0),
     ggplot2
