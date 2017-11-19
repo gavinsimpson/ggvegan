@@ -39,7 +39,9 @@ The following `autoplot` methods are currently available
  2. `autoplot.rda` --- for objects of class `"rda"`
  3. `autoplot.metaMDS` --- for objects of class `"metaMDS"`
  4. `autoplot.prc` --- for objects of class `"prc"`
- 4. `autoplot.decorana` --- for objects of class `"decorana"` (AKA DCA)
+ 5. `autoplot.decorana` --- for objects of class `"decorana"` (AKA DCA)
+ 6. `autoplot.prestonfit` --- for objects of class `"prestonfit"`
+ 7. `autoplot.fisherfit` --- for objects of class `"fisherfit"`
 
 The following `fortify` method are currently available
 
@@ -47,6 +49,9 @@ The following `fortify` method are currently available
  2. `fortify.metaMDS` --- for objects of class `"metaMDS"`
  3. `fortify.prc` --- for objects of class `"prc"`
  4. `fortify.decorana` --- for objects of class `"decorana"` (AKA DCA)
+ 5. `autoplot.prestonfit` --- for objects of class `"prestonfit"`
+ 6. `autoplot.fisherfit` --- for objects of class `"fisherfit"`
+
 
 ## Installation
 No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.
