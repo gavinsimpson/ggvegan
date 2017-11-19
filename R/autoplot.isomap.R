@@ -1,7 +1,7 @@
 ##' @title ggplot-based plot for objects of class \code{"isomap"}
 ##'
 ##' @description
-##' Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{cca}}, or \code{\link[vegan]{capscale}}.
+##' Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{isomap}}.
 ##'
 ##' @param object an object of class \code{"isomap"}, the result of a call to \code{\link[vegan]{isomap}}.
 ##' @param axes numeric; which axes to plot, given as a vector of length 2.

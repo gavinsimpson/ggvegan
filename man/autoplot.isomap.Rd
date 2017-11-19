@@ -33,7 +33,7 @@
 A ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{cca}}, or \code{\link[vegan]{capscale}}.
+Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{isomap}}.
 }
 \examples{
 
