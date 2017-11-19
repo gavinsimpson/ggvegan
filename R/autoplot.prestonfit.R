@@ -17,7 +17,7 @@
 ##'
 ##' @export
 ##'
-##' @importFrom ggplot2 ggplot autoplot geom_bar stat_function aes_string labs fortify
+##' @importFrom ggplot2 ggplot autoplot geom_bar geom_segment scale_x_continuous stat_function aes_string labs fortify
 ##'
 ##' @examples
 ##'
