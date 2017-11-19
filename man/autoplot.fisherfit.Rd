@@ -4,15 +4,20 @@
 \alias{autoplot.fisherfit}
 \title{Plot Fisher's log-series}
 \usage{
-\method{autoplot}{fisherfit}(object, xlab = "Rank", ylab = "Abundance",
+\method{autoplot}{fisherfit}(object, show.fitted = TRUE, xlab = "Abundance",
+  ylab = "Number of Species", title = "Fisher's log-series distribution",
   bar.col = NA, bar.fill = "grey35", line.col = "red", size = 1, ...)
 }
 \arguments{
 \item{object}{an object of class \code{\link{fisherfit}}.}
 
+\item{show.fitted}{logical; should the estimated distribution also be plotted?}
+
 \item{xlab}{character; label for the x axis.}
 
 \item{ylab}{character; label for the y axis.}
+
+\item{title}{character; title for the plot.}
 
 \item{bar.col}{colour for the bar outlines. The default, \code{NA}, does not draw outlines around bars.}
 
