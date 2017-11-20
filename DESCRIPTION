@@ -8,7 +8,8 @@ Depends:
     ggplot2
 Imports:
     grid,
-    tidyr
+    tidyr,
+    ggrepel
 Author: Gavin L. Simpson
 Maintainer: Gavin L. Simpson <gavin.simpson@uregina.ca>
 Description: Functions to produce ggplot2-based plots of objects produced by
