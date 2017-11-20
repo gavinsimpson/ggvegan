@@ -45,3 +45,44 @@
 `getDimensionNames` <- function(object) {
     names(object)[-c(1,2)]
 }
+
+##' @title Adds a label layer using one of a set of common geoms
+##'
+##' @description Adds labels to a plot using one of \code{geom_label}, \code{geom_text}, \code{geom_label_repel} or \code{geom_text_repel}.
+##'
+##' @param data data frame; data set to use for the label layer. Must contain a variable \code{Label} containing the strings to use as labels.
+##' @param geom character; which geom to use for labelling.
+##' @param vars character; vector of names of variables to ass to the \code{x} and \code{y} aesthetics of the chosen geom.
+##'
+##' @author Gavin L. Simpson
+##'
+##' @importFrom ggplot2 geom_text geom_label aes_string
+##' @importFrom ggrepel geom_text_repel geom_label_repel
+##'
+`label_fun` <- function(data,
+                        geom = c("label", "text", "label_repel", "text_repel"),
+                        vars) {
+    ll <- switch(geom,
+                 label =
+                     geom_label(data = data,
+                                mapping = aes_string(x = vars[1],
+                                                     y = vars[2],
+                                                     label = 'Label')),
+                 text =
+                     geom_text(data = data,
+                               mapping = aes_string(x = vars[1],
+                                                    y = vars[2],
+                                                    label = 'Label')),
+                 label_repel =
+                     geom_label_repel(data = data,
+                                      mapping = aes_string(x = vars[1],
+                                                           y = vars[2],
+                                                          label = 'Label')),
+                 text_repel =
+                     geom_text_repel(data = data,
+                                    mapping = aes_string(x = vars[1],
+                                                         y = vars[2],
+                                                         label = 'Label'))
+                 )
+    ll
+}
