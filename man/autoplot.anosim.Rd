@@ -5,7 +5,9 @@
 \title{ggplot-based plot for objects of class \code{"anosim"}}
 \usage{
 \method{autoplot}{anosim}(object, notch = TRUE, varwidth = TRUE,
-  subtitle = TRUE, xlab = NULL, ylab = NULL, ...)
+  show.stats = TRUE, xlab = NULL, ylab = NULL,
+  title = "Results of analysis of similarities", caption = NULL,
+  subtitle = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"anosim"}, the result of a call to \code{\link[vegan]{anosim}}.}
@@ -14,11 +16,17 @@
 
 \item{varwidth}{logical; make box width proportional to to the square-roots of the number of observations in the groups (default) or standart box plot?}
 
-\item{subtitle}{logical; should subtitle with R and p values be added.}
+\item{show.stats}{logical; should R and p values be added to the plot.}
 
 \item{xlab}{character; label for the x-axis.}
 
 \item{ylab}{character; label for the y-axis.}
+
+\item{title}{character; title for the plot}
+
+\item{caption}{character; caption for the plot}
+
+\item{subtitle}{character; subtitle for the plot}
 
 \item{...}{additional arguments passed to other methods.}
 }
@@ -33,8 +41,7 @@ Produces a multi-layer ggplot object representing the output of objects produced
 data(dune)
 data(dune.env)
 dune.dist <- vegdist(dune)
-attach(dune.env)
-dune.ano <- anosim(dune.dist, Management)
+dune.ano <- with(dune.env, anosim(dune.dist, Management))
 
 autoplot(dune.ano)
 }

@@ -4,40 +4,33 @@
 \alias{fortify.anosim}
 \title{Fortify analysis of similarities (ANOSIM) results}
 \usage{
-\method{fortify}{anosim}(model, data, what = c("ranks", "stats"), ...)
+\method{fortify}{anosim}(model, data, ...)
 }
 \arguments{
 \item{model}{an object of class \code{\link[vegan]{anosim}}.}
 
 \item{data}{original data set. Currently ignored.}
 
-\item{what}{character; what aspect of the results should be fortified? \code{"ranks"} returns ranks of dissimilarity entries and names of classies. \code{"stats"} returns significance from permutation  and the value of ANOSIM statistic R.}
-
 \item{...}{additional arguments for other methods. Currently ignored.}
 }
 \value{
-A data frame. For \code{what = "ranks"}, the data frame contains columns \code{'Rank'} and \code{'Class'} with ranks of dissimilarity. For \code{what = "stats"}, the data frame contains columns \code{'Parameter'} and \code{'Value'} with values permutation test and R statistic.
+A data frame with columns \code{'Rank'} and \code{'Class'} with ranks of dissimilarity.
 }
 \description{
 Prepares fortified versions of results from \code{\link[vegan]{anosim}} objects.
-}
-\details{
-TODO
 }
 \examples{
 data(dune)
 data(dune.env)
 dune.dist <- vegdist(dune)
-attach(dune.env)
-dune.ano <- anosim(dune.dist, Management)
+dune.ano <- with(dune.env, anosim(dune.dist, Management))
 
-df <- fortify(dune.ano, what = "ranks")
-df.title <- fortify(dune.ano, what = "stats")
+df <- fortify(dune.ano)
 
 ggplot(df, aes(x = Class, y = Rank)) +
       geom_boxplot(notch = TRUE, varwidth = TRUE) + 
-      labs(subtitle = paste("R = ", df.title$Value[2], ", ", "P = ", df.title$Value[1])) +
       theme(axis.title = element_blank())
+      
 }
 \author{
 Didzis Elferts
