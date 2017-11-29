@@ -4,7 +4,8 @@
 \alias{autoplot.anosim}
 \title{ggplot-based plot for objects of class \code{"anosim"}}
 \usage{
-\method{autoplot}{anosim}(object, notch = TRUE, varwidth = TRUE, ...)
+\method{autoplot}{anosim}(object, notch = TRUE, varwidth = TRUE,
+  subtitle = TRUE, xlab = NULL, ylab = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"anosim"}, the result of a call to \code{\link[vegan]{anosim}}.}
@@ -12,6 +13,12 @@
 \item{notch}{logical; make notched (default) or standard box plot?}
 
 \item{varwidth}{logical; make box width proportional to to the square-roots of the number of observations in the groups (default) or standart box plot?}
+
+\item{subtitle}{logical; should subtitle with R and p values be added.}
+
+\item{xlab}{character; label for the x-axis.}
+
+\item{ylab}{character; label for the y-axis.}
 
 \item{...}{additional arguments passed to other methods.}
 }
