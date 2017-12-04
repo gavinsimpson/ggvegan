@@ -9,7 +9,8 @@ Depends:
 Imports:
     grid,
     tidyr,
-    ggrepel
+    ggrepel,
+    scales
 Author: Gavin L. Simpson
 Maintainer: Gavin L. Simpson <gavin.simpson@uregina.ca>
 Description: Functions to produce ggplot2-based plots of objects produced by
