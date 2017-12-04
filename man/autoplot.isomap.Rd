@@ -6,7 +6,8 @@
 \usage{
 \method{autoplot}{isomap}(object, axes = c(1, 2), geom = c("point", "text"),
   network = TRUE, line.col = "grey85", size = 0.7, xlab = NULL,
-  ylab = NULL, title = "Isometric feature mapping", ...)
+  ylab = NULL, title = "Isometric feature mapping", subtitle = NULL,
+  caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"isomap"}, the result of a call to \code{\link[vegan]{isomap}}.}
@@ -25,7 +26,11 @@
 
 \item{ylab}{character; label for the y-axis.}
 
-\item{title}{character; title for the plot.}
+\item{title}{character; subtitle for the plot.}
+
+\item{subtitle}{character; subtitle for the plot.}
+
+\item{caption}{character; caption for the plot.}
 
 \item{...}{additional arguments passed to other methods.}
 }

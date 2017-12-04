@@ -8,9 +8,9 @@
 ##' @param varwidth logical; make box width proportional to the square-root of the number of observations in the group (default)?
 ##' @param xlab character; label for the x-axis.
 ##' @param ylab character; label for the y-axis.
-##' @param title character; title for the plot
-##' @param subtitle character; subtitle for the plot
-##' @param caption character; caption for the plot
+##' @param title character; title for the plot.
+##' @param subtitle character; subtitle for the plot.
+##' @param caption character; caption for the plot.
 ##' @param ... additional arguments passed to other methods.
 ##' @return A ggplot object.
 ##' @author Didzis Elferts. Modifications by Gavin L. Simpson.

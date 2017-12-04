@@ -14,6 +14,9 @@
 ##' @param legend.position character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.
 ##' @param xlab character; label for the x-axis
 ##' @param ylab character; label for the y-axis
+##' @param title character; subtitle for the plot
+##' @param subtitle character; subtitle for the plot
+##' @param caption character; caption for the plot
 ##' @param const General scaling constant to \code{rda} scores. See \code{\link[vegan]{plot.cca}} for details.
 ##' @param ... Additional arguments passed to \code{\link{fortify.cca}}.
 ##'
@@ -39,6 +42,7 @@
 `autoplot.rda` <- function(object, axes = c(1,2), geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            arrows = TRUE, legend.position = "right",
+                           title = NULL, subtitle = NULL, caption = NULL,
                            ylab, xlab, const, ...) {
     axes <- rep(axes, length.out = 2L)
     obj <- fortify(object, axes = axes, ...)
@@ -137,7 +141,8 @@
     if(missing(ylab)) {
         ylab <- vars[2]
     }
-    plt <- plt + labs(x = xlab, y = ylab)
+    plt <- plt + labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
+                      caption = caption)
     ## add equal scaling
     plt <- plt + coord_fixed(ratio = 1)
     ## do we want a legend

@@ -11,7 +11,9 @@
 ##' @param size numeric; size aesthetic for the log-series curve.
 ##' @param xlab character; label for the x-axis.
 ##' @param ylab character; label for the y-axis.
-##' @param title character; title for the plot.
+##' @param title character; subtitle for the plot.
+##' @param subtitle character; subtitle for the plot.
+##' @param caption character; caption for the plot.
 ##' @param ... additional arguments passed to other methods.
 ##' @return A ggplot object.
 ##' @author Gavin L. Simpson
@@ -35,6 +37,7 @@
                               line.col = "grey85", size = 0.7,
                               xlab = NULL, ylab = NULL,
                               title = "Isometric feature mapping",
+                              subtitle = NULL, caption = NULL,
                               ...) {
     pts <- fortify(object, axes = axes)
     net <- fortify(object, axes = axes, what = "network")
@@ -72,7 +75,8 @@
         ylab = vars[2]
     }
 
-    plt <- plt + labs(x = xlab, y = ylab, title = title) +
+    plt <- plt + labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
+                      caption = caption) +
         coord_fixed()
 
     plt

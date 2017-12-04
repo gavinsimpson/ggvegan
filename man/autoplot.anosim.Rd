@@ -19,11 +19,11 @@
 
 \item{ylab}{character; label for the y-axis.}
 
-\item{title}{character; title for the plot}
+\item{title}{character; title for the plot.}
 
-\item{subtitle}{character; subtitle for the plot}
+\item{subtitle}{character; subtitle for the plot.}
 
-\item{caption}{character; caption for the plot}
+\item{caption}{character; caption for the plot.}
 
 \item{...}{additional arguments passed to other methods.}
 }
