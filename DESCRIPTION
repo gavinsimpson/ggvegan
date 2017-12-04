@@ -10,8 +10,10 @@ Imports:
     grid,
     tidyr,
     ggrepel
-Author: Gavin L. Simpson
-Maintainer: Gavin L. Simpson <gavin.simpson@uregina.ca>
+Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
+                    email = "ucfagls@gmail.com"),
+             person("Jari", "Oksanen", role = "ctb"),
+	     person("Didzis", "Elferts", role = "ctb"))
 Description: Functions to produce ggplot2-based plots of objects produced by
     functions in the vegan package.
 License: GPL-2
