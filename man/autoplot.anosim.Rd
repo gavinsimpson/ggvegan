@@ -5,18 +5,15 @@
 \title{ggplot-based plot for objects of class \code{"anosim"}}
 \usage{
 \method{autoplot}{anosim}(object, notch = TRUE, varwidth = TRUE,
-  show.stats = TRUE, xlab = NULL, ylab = NULL,
-  title = "Results of analysis of similarities", caption = NULL,
-  subtitle = NULL, ...)
+  xlab = NULL, ylab = NULL, title = "Analysis of similarities",
+  subtitle = NULL, caption = bquote(R == .(R) * "," ~ P == .(P)), ...)
 }
 \arguments{
 \item{object}{an object of class \code{"anosim"}, the result of a call to \code{\link[vegan]{anosim}}.}
 
 \item{notch}{logical; make notched (default) or standard box plot?}
 
-\item{varwidth}{logical; make box width proportional to to the square-roots of the number of observations in the groups (default) or standart box plot?}
-
-\item{show.stats}{logical; should R and p values be added to the plot.}
+\item{varwidth}{logical; make box width proportional to the square-root of the number of observations in the group (default)?}
 
 \item{xlab}{character; label for the x-axis.}
 
@@ -24,9 +21,9 @@
 
 \item{title}{character; title for the plot}
 
-\item{caption}{character; caption for the plot}
-
 \item{subtitle}{character; subtitle for the plot}
+
+\item{caption}{character; caption for the plot}
 
 \item{...}{additional arguments passed to other methods.}
 }
@@ -43,8 +40,8 @@ data(dune.env)
 dune.dist <- vegdist(dune)
 dune.ano <- with(dune.env, anosim(dune.dist, Management))
 
-autoplot(dune.ano)
+autoplot(dune.ano, notch = FALSE)
 }
 \author{
-Didzis Elferts
+Didzis Elferts. Modifications by Gavin L. Simpson.
 }
