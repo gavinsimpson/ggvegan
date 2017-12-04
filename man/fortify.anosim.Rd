@@ -14,23 +14,21 @@
 \item{...}{additional arguments for other methods. Currently ignored.}
 }
 \value{
-A data frame with columns \code{'Rank'} and \code{'Class'} with ranks of dissimilarity.
+A data frame with columns \code{Rank} and \code{Class} with ranks of dissimilarity.
 }
 \description{
 Prepares fortified versions of results from \code{\link[vegan]{anosim}} objects.
 }
 \examples{
-data(dune)
-data(dune.env)
+data(dune, dune.env)
 dune.dist <- vegdist(dune)
 dune.ano <- with(dune.env, anosim(dune.dist, Management))
 
 df <- fortify(dune.ano)
 
 ggplot(df, aes(x = Class, y = Rank)) +
-      geom_boxplot(notch = TRUE, varwidth = TRUE) + 
-      theme(axis.title = element_blank())
-      
+      geom_boxplot(notch = FALSE, varwidth = TRUE)
+
 }
 \author{
 Didzis Elferts
