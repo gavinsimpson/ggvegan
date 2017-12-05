@@ -14,7 +14,7 @@
 \item{...}{additional arguments for other methods. Currently ignored.}
 }
 \value{
-A data frame with columns \code{Scale}, \code{Diversity}, \code{Sites} and \code{Parameter}, showing divesity values at different scales for different number of sites. Column \code{Parameter} contains type of diversity value - mean, standart deviation, minimal, maximal, 2.5% and 97.5% quantiles.
+A data frame with columns \code{Sites}, \code{Scale}, \code{Lower}, \code{Max}, \code{Mean}, \code{Min}, \code{St.dev} and \code{Upper}, showing divesity values at different scales for different number of sites.
 }
 \description{
 Prepares a fortified version from \code{\link[vegan]{renyiaccum}} objects.
@@ -25,10 +25,8 @@ i <- sample(nrow(BCI), 12)
 mod <- renyiaccum(BCI[i,])
 df <- fortify(mod)
 
-ggplot() +
-  geom_line(data = df[df$Parameter == "mean",], aes(Sites, Diversity), color = "red") +
-  geom_line(data = df[df$Parameter == "Qnt 0.025",], aes(Sites, Diversity), color = "blue") +
-  geom_line(data = df[df$Parameter == "Qnt 0.975",], aes(Sites, Diversity), color = "blue") +
+ggplot(df, aes(Sites, Mean)) +
+  geom_line() + 
   facet_wrap(~ Scale, nrow = 2)  
    
 }

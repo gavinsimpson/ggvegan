@@ -25,7 +25,7 @@
 `fortify.renyi` <- function(model,data,...){
   if(is.data.frame(model)){
     df <- model
-    df$Site <- rownames(df)
+    df$Site <- factor(rownames(df))
     df <- gather(df,"Scale","Diversity", -"Site")
     df$Scale <- factor(df$Scale, levels = colnames(model))
   } else {

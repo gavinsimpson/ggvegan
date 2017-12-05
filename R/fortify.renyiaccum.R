@@ -3,12 +3,12 @@
 ##' @param model an object of class \code{\link[vegan]{renyiaccum}}.
 ##' @param data original data set. Currently ignored.
 ##' @param ... additional arguments for other methods. Currently ignored.
-##' @return A data frame with columns \code{Scale}, \code{Diversity}, \code{Sites} and \code{Parameter}, showing divesity values at different scales for different number of sites. Column \code{Parameter} contains type of diversity value - mean, standart deviation, minimal, maximal, 2.5% and 97.5% quantiles.
+##' @return A data frame with columns \code{Sites}, \code{Scale}, \code{Lower}, \code{Max}, \code{Mean}, \code{Min}, \code{St.dev} and \code{Upper}, showing divesity values at different scales for different number of sites.
 ##'
 ##' @export
 ##'
 ##' @importFrom ggplot2 fortify
-##' @importFrom tidyr gather
+##' @importFrom tidyr gather spread
 ##'
 ##' @author Didzis Elferts
 ##'
@@ -18,10 +18,8 @@
 ##' mod <- renyiaccum(BCI[i,])
 ##' df <- fortify(mod)
 ##' 
-##' ggplot() +
-##'   geom_line(data = df[df$Parameter == "mean",], aes(Sites, Diversity), color = "red") +
-##'   geom_line(data = df[df$Parameter == "Qnt 0.025",], aes(Sites, Diversity), color = "blue") +
-##'   geom_line(data = df[df$Parameter == "Qnt 0.975",], aes(Sites, Diversity), color = "blue") +
+##' ggplot(df, aes(Sites, Mean)) +
+##'   geom_line() + 
 ##'   facet_wrap(~ Scale, nrow = 2)  
 ##'    
 `fortify.renyiaccum` <- function(model,data,...){
@@ -35,6 +33,8 @@
   })
   
   df <- do.call("rbind",mod_list)
-  df$Parameter <- rep(c("mean","stdev","min","max","Qnt 0.025","Qnt 0.975"), each = dim(model)[1]*dim(model)[2])
+  df$Parameter <- rep(c("Mean","St.dev","Min","Max","Lower","Upper"), each = dim(model)[1]*dim(model)[2])
+  df <- spread(df,"Parameter","Diversity")
+  df[["Scale"]] <- as.factor(df[["Scale"]])
   df
 }

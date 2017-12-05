@@ -4,17 +4,21 @@
 \alias{autoplot.renyiaccum}
 \title{ggplot-based plot for objects of class \code{"renyiaccum"}}
 \usage{
-\method{autoplot}{renyiaccum}(object, col = c("red", "blue"), nrow = 2,
-  xlab = "Sites", ylab = "Diversity",
+\method{autoplot}{renyiaccum}(object, facet = TRUE, ribbon = facet,
+  ncol = NULL, ribbon.alpha = 0.3, xlab = "Sites", ylab = "Diversity",
   title = "Diversity accumulation curves", subtitle = NULL,
   caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{renyiaccum}, the result of a call to \code{\link[vegan]{renyiaccum}}.}
 
-\item{col}{character; colors of mean diversity line and qunatiles envelope.}
+\item{facet}{logical; should diversity values be shown in separate facets?}
 
-\item{nrow}{numeric; number of rows in faceted plot.}
+\item{ribbon}{logical; show the quantile-based uncertainty interval? Uses \code{\link{geom_ribbon}} for plot.}
+
+\item{ncol}{numeric; if facetting the plot, how many columns to use.}
+
+\item{ribbon.alpha}{numeric; alpha transparency used for the uncertainty interval. Passed to the \code{alpha} aesthetic of \code{\link[ggplot2]{geom_ribbon}}.}
 
 \item{xlab}{character; label for the x axis.}
 
@@ -41,7 +45,9 @@ i <- sample(nrow(BCI), 12)
 mod <- renyiaccum(BCI[i,])
 
 autoplot(mod)
+## Turn off facetting; turns off ribbon too
+autoplot(mod, facet = FALSE)
 }
 \author{
-Didzis Elferts
+Didzis Elferts & Gavin L. Simpson
 }

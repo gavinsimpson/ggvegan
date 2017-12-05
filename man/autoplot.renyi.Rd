@@ -4,17 +4,21 @@
 \alias{autoplot.renyi}
 \title{ggplot-based plot for objects of class \code{"renyi"}}
 \usage{
-\method{autoplot}{renyi}(object, col = c("red", "blue"), nrow = 3,
-  xlab = "Scale", ylab = "Diversity",
+\method{autoplot}{renyi}(object, facet = TRUE, ribbon = TRUE, ncol = NULL,
+  ribbon.alpha = 0.3, xlab = "Scale", ylab = "Diversity",
   title = "Diversity at different scales", subtitle = NULL,
   caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{renyi}, the result of a call to \code{\link[vegan]{renyi}}.}
 
-\item{col}{character; colors of median diversity line and qunatiles envelope.}
+\item{facet}{logical; should diversity values be shown in separate facets if more than one site present?}
 
-\item{nrow}{numeric; number of rows in faceted plot.}
+\item{ribbon}{logical; show the quantile-based uncertainty interval? Uses \code{\link{geom_ribbon}} for plot.}
+
+\item{ncol}{numeric; if facetting the plot, how many columns to use.}
+
+\item{ribbon.alpha}{numeric; alpha transparency used for the uncertainty interval. Passed to the \code{alpha} aesthetic of \code{\link[ggplot2]{geom_ribbon}}.}
 
 \item{xlab}{character; label for the x axis.}
 
@@ -43,5 +47,5 @@ mod <- renyi(BCI[i,])
 autoplot(mod)
 }
 \author{
-Didzis Elferts
+Didzis Elferts & Gavin L. Simpson
 }
