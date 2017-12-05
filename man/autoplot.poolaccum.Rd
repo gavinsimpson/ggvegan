@@ -4,19 +4,21 @@
 \alias{autoplot.poolaccum}
 \title{ggplot-based plot for objects of class \code{"poolaccum"}}
 \usage{
-\method{autoplot}{poolaccum}(object, alpha = 0.05, col = c("red", "blue"),
-  nrow = 2, xlab = "Size", ylab = "Richness",
-  title = "Accumulated species richness in a species pool", subtitle = NULL,
-  caption = NULL, ...)
+\method{autoplot}{poolaccum}(object, facet = TRUE, ribbon = facet,
+  ncol = NULL, ribbon.alpha = 0.3, xlab = "Size", ylab = "Richness",
+  title = "Accumulated species richness", subtitle = NULL, caption = NULL,
+  ...)
 }
 \arguments{
 \item{object}{an object of class \code{"poolaccum"}, the result of a call to \code{\link[vegan]{poolaccum}}.}
 
-\item{alpha}{numeric; level of quantiles for envelopes shown (default 0.05).}
+\item{facet}{logical; should extrapolated richness estimators be shown in separate facets?}
 
-\item{col}{character; colors of mean Richness line and qunatiles envelope.}
+\item{ribbon}{logical; show the quantile-based uncertainty interval? Uses \code{\link{geom_ribbon}} for plot.}
 
-\item{nrow}{numeric; number of rows in faceted plot.}
+\item{ncol}{numeric; if facetting the plot, how many columns to use. Default arguuments will result in three columns.}
+
+\item{ribbon.alpha}{numeric; alpha transparency used for the uncertainty interval. Passed to the \code{alpha} aesthetic of \code{\link[ggplot2]{geom_ribbon}}.}
 
 \item{xlab}{character; label for the x axis.}
 
@@ -28,7 +30,7 @@
 
 \item{caption}{character; caption for the plot.}
 
-\item{...}{additional arguments passed to other methods.}
+\item{...}{additional arguments passed to \code{\link{fortify.poolaccum}}.}
 }
 \value{
 A ggplot object.
@@ -37,12 +39,14 @@ A ggplot object.
 Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{poolaccum}}.
 }
 \examples{
-
 data(BCI)
 pool <- poolaccum(BCI)
 
 autoplot(pool)
+
+## Turn off facetting; turns off ribbon too
+autoplot(pool, facet = FALSE)
 }
 \author{
-Didzis Elferts
+Didzis Elferts & Gavin L. Simpson
 }
