@@ -6,8 +6,9 @@
 \usage{
 \method{autoplot}{prestonfit}(object, show.fitted = TRUE,
   xlab = "Abundance", ylab = "Number of Species",
-  title = "Preston's lognormal distribution", bar.col = NA,
-  bar.fill = "grey35", line.col = "red", size = 1, ...)
+  title = "Preston's lognormal distribution", subtitle = NULL,
+  caption = NULL, bar.col = NA, bar.fill = "grey35", line.col = "red",
+  size = 1, ...)
 }
 \arguments{
 \item{object}{an object of class \code{\link{prestonfit}}.}
@@ -19,6 +20,10 @@
 \item{ylab}{character; label for the y axis.}
 
 \item{title}{character; title for the plot.}
+
+\item{subtitle}{character; subtitle for the plot.}
+
+\item{caption}{character; caption for the plot.}
 
 \item{bar.col}{colour for the bar outlines. The default, \code{NA}, does not draw outlines around bars.}
 

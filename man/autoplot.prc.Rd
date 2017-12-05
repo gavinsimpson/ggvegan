@@ -4,8 +4,8 @@
 \alias{autoplot.prc}
 \title{ggplot-based plot for objects of class \code{"prc"}}
 \usage{
-\method{autoplot}{prc}(object, select, xlab, ylab, legend.position = "top",
-  ...)
+\method{autoplot}{prc}(object, select, xlab, ylab, title = NULL,
+  subtitle = NULL, caption = NULL, legend.position = "top", ...)
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"prc"}, the
@@ -20,6 +20,12 @@ object.}
 \item{xlab}{character; label for the x-axis}
 
 \item{ylab}{character; label for the y-axis}
+
+\item{title}{character; subtitle for the plot}
+
+\item{subtitle}{character; subtitle for the plot}
+
+\item{caption}{character; caption for the plot}
 
 \item{legend.position}{character; position for the legend grob. See argument
 \code{legend.position} in function \code{\link[ggplot2]{theme}}.}

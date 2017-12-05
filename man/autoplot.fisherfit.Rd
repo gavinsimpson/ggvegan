@@ -6,7 +6,8 @@
 \usage{
 \method{autoplot}{fisherfit}(object, show.fitted = TRUE, xlab = "Abundance",
   ylab = "Number of Species", title = "Fisher's log-series distribution",
-  bar.col = NA, bar.fill = "grey35", line.col = "red", size = 1, ...)
+  bar.col = NA, bar.fill = "grey35", line.col = "red", size = 1,
+  subtitle = NULL, caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{\link{fisherfit}}.}
@@ -17,7 +18,7 @@
 
 \item{ylab}{character; label for the y axis.}
 
-\item{title}{character; title for the plot.}
+\item{title}{character; subtitle for the plot.}
 
 \item{bar.col}{colour for the bar outlines. The default, \code{NA}, does not draw outlines around bars.}
 
@@ -26,6 +27,10 @@
 \item{line.col}{colour for Fisher's log-series curve.}
 
 \item{size}{numeric; size aesthetic for the log-series curve.}
+
+\item{subtitle}{character; subtitle for the plot.}
+
+\item{caption}{character; caption for the plot.}
 
 \item{...}{additional arguments passed to other methods.}
 }

@@ -7,6 +7,8 @@
 ##' @param xlab character; label for the x axis.
 ##' @param ylab character; label for the y axis.
 ##' @param title character; title for the plot.
+##' @param subtitle character; subtitle for the plot.
+##' @param caption character; caption for the plot.
 ##' @param bar.col colour for the bar outlines. The default, \code{NA}, does not draw outlines around bars.
 ##' @param bar.fill fill colour for the bars.
 ##' @param line.col colour for Fisher's log-series curve.
@@ -27,6 +29,7 @@
 `autoplot.prestonfit` <- function(object, show.fitted = TRUE,
                                   xlab = "Abundance", ylab = "Number of Species",
                                   title = "Preston's lognormal distribution",
+                                  subtitle = NULL, caption = NULL,
                                   bar.col = NA, bar.fill = "grey35",
                                   line.col = "red", size = 1,
                                   ...) {
@@ -56,6 +59,7 @@
                                                    xend = 'x2', yend = 'y2'),
                               colour = line.col, size = size) +
         scale_x_continuous(breaks = brks, labels = 2^brks) +
-        labs(x = xlab, y = ylab, title = title)
+        labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
+             caption = caption)
     plt
 }

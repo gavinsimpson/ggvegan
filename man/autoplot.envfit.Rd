@@ -6,7 +6,7 @@
 \usage{
 \method{autoplot}{envfit}(object, geom = c("label", "text", "label_repel",
   "text_repel"), line.col = "black", xlab = NULL, ylab = NULL,
-  title = NULL, ...)
+  title = NULL, subtitle = NULL, caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"envfit"}, the result of a call to \code{\link[vegan]{envfit}}.}
@@ -19,7 +19,11 @@
 
 \item{ylab}{character; label for the y-axis.}
 
-\item{title}{character; title for the plot.}
+\item{title}{character; subtitle for the plot.}
+
+\item{subtitle}{character; subtitle for the plot.}
+
+\item{caption}{character; caption for the plot.}
 
 \item{...}{additional arguments passed to \code{\link{fortify}}.}
 }

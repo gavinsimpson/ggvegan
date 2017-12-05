@@ -7,7 +7,9 @@
 ##' @param line.col colour with which to draw vectors.
 ##' @param xlab character; label for the x-axis.
 ##' @param ylab character; label for the y-axis.
-##' @param title character; title for the plot.
+##' @param title character; subtitle for the plot.
+##' @param subtitle character; subtitle for the plot.
+##' @param caption character; caption for the plot.
 ##' @param ... additional arguments passed to \code{\link{fortify}}.
 ##' @return A ggplot object.
 ##'
@@ -33,7 +35,8 @@
 `autoplot.envfit` <- function(object,
                               geom = c("label","text","label_repel","text_repel"),
                               line.col = 'black',
-                              xlab = NULL, ylab = NULL, title = NULL, ...) {
+                              xlab = NULL, ylab = NULL, title = NULL, 
+                              subtitle = NULL, caption = NULL, ...) {
     geom <- match.arg(geom)
 
     df <- fortify(object, ...)
@@ -75,7 +78,8 @@
     }
 
     plt <- plt +
-        labs(x = xlab, y = ylab, title = title) +
+        labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
+             caption = caption) +
         coord_fixed()
 
     plt

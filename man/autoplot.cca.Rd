@@ -6,7 +6,8 @@
 \usage{
 \method{autoplot}{cca}(object, axes = c(1, 2), geom = c("point", "text"),
   layers = c("species", "sites", "biplot", "centroids"),
-  legend.position = "right", ylab, xlab, const, ...)
+  legend.position = "right", title = NULL, subtitle = NULL,
+  caption = NULL, ylab, xlab, const, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"cca"}, the result of a call to \code{\link[vegan]{cca}} or \code{\link[vegan]{capscale}}.}
@@ -21,6 +22,12 @@ of \code{display}.}
 \item{layers}{character; which scores to plot as layers}
 
 \item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
+
+\item{title}{character; subtitle for the plot}
+
+\item{subtitle}{character; subtitle for the plot}
+
+\item{caption}{character; caption for the plot}
 
 \item{ylab}{character; label for the y-axis}
 

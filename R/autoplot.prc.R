@@ -16,6 +16,9 @@
 ##' object.
 ##' @param xlab character; label for the x-axis
 ##' @param ylab character; label for the y-axis
+##' @param title character; subtitle for the plot
+##' @param subtitle character; subtitle for the plot
+##' @param caption character; caption for the plot
 ##' @param legend.position character; position for the legend grob. See argument
 ##' \code{legend.position} in function \code{\link[ggplot2]{theme}}.
 ##' @param ... Additional arguments passed to \code{\link{fortify.prc}}.
@@ -40,6 +43,7 @@
 ##' want <- colSums(pyrifos)
 ##' autoplot(mod, select = want)
 `autoplot.prc` <- function(object, select, xlab, ylab,
+                           title = NULL, subtitle = NULL, caption = NULL,
                            legend.position = "top", ...) {
     ## fortify the model object
     fobj <- fortify(object, ...)
@@ -87,7 +91,8 @@
     if(missing(ylab)) {
         ylab <- 'Treatment'
     }
-    plt <- plt + labs(x = xlab, y = ylab)
+    plt <- plt + labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
+                      caption = caption)
 
     ## return
     plt
