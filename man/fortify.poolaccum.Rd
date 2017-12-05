@@ -2,7 +2,7 @@
 % Please edit documentation in R/fortify.poolaccum.R
 \name{fortify.poolaccum}
 \alias{fortify.poolaccum}
-\title{Fortify accumulated species richness in as species pool results}
+\title{Fortify extrapolated species richness of a species pool}
 \usage{
 \method{fortify}{poolaccum}(model, data, alpha = 0.05, ...)
 }
@@ -13,10 +13,10 @@
 
 \item{alpha}{level of quantiles for envelopes shown (default 0.05).}
 
-\item{...}{additional arguments for other methods. Currently ignored.}
+\item{...}{additional arguments passed to \code{\link[vegan]{summary.poolaccum}}, notably \code{display} to control which indices should be computed.}
 }
 \value{
-A data frame with columns \code{Size}, \code{Richness}, \code{Lower}, \code{Upper}, \code{Std.dev} and \code{Index}, showing permutation richness estimator, sample size, standart deviation, quantile envelope and indices names.
+A data frame with columns \code{Index}, \code{Size}, \code{Richness}, \code{Lower}, \code{Upper}, and \code{Std.dev}, containing the richness index, permutation richness estimator, sample size, upper and lower \eqn{1 - \alpha}{1 - alpha} quantile interval, and standard deviation of permutation estimates, respectively.
 }
 \description{
 Prepares a fortified version of results from \code{\link[vegan]{poolaccum}} objects.
@@ -26,12 +26,12 @@ data(BCI)
 pool <- poolaccum(BCI)
 df <- fortify(pool)
 
-ggplot(df, aes(x = Size)) + 
-   geom_line(aes(y = Richness), color = "red") +
-   geom_line(aes(y = Lower), color = "blue") +
-   geom_line(aes(y = Upper), color = "blue") +
-   facet_wrap(~Index, ncol = 3) 
+ggplot(df, aes(x = Size, y = Richness, colour = Index)) +
+    geom_ribbon(aes(ymin = Lower, ymax = Upper, x = Size, fill = Index),
+                alpha = 0.3, inherit.aes = FALSE) +
+    geom_line() +
+    facet_wrap(~ Index)
 }
 \author{
-Didzis Elferts
+Didzis Elferts & Gavin L. Simpson
 }
