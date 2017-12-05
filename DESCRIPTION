@@ -9,7 +9,8 @@ Depends:
 Imports:
     grid,
     tidyr,
-    ggrepel
+    ggrepel,
+    scales
 Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
                     email = "ucfagls@gmail.com"),
              person("Jari", "Oksanen", role = "ctb"),
