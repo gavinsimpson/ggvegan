@@ -5,9 +5,9 @@
 \title{ggplot-based plot for objects of class \code{"poolaccum"}}
 \usage{
 \method{autoplot}{poolaccum}(object, facet = TRUE, ribbon = facet,
-  ncol = NULL, ribbon.alpha = 0.3, xlab = "Size", ylab = "Richness",
-  title = "Accumulated species richness", subtitle = NULL, caption = NULL,
-  ...)
+  ncol = NULL, ribbon.alpha = 0.3, xlab = "Size",
+  ylab = "Richness", title = "Accumulated species richness",
+  subtitle = NULL, caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"poolaccum"}, the result of a call to \code{\link[vegan]{poolaccum}}.}

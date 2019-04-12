@@ -4,17 +4,21 @@
 \alias{autoplot.rda}
 \title{ggplot-based plot for objects of class \code{'rda'}}
 \usage{
-\method{autoplot}{rda}(object, axes = c(1, 2), geom = c("point", "text"),
-  layers = c("species", "sites", "biplot", "centroids"), arrows = TRUE,
-  legend.position = "right", title = NULL, subtitle = NULL,
-  caption = NULL, ylab, xlab, const, ...)
+\method{autoplot}{rda}(object, axes = c(1, 2), geom = c("point",
+  "text"), layers = c("species", "sites", "biplot", "centroids"),
+  arrows = TRUE, legend.position = "right", title = NULL,
+  subtitle = NULL, caption = NULL, ylab, xlab, const, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"rda"}, the result of a call to \code{\link[vegan]{rda}}}
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
-\item{geom}{character; which geoms to use for the layers. Can be a vector of length equal to \code{length(display)}, in which case the \emph{i}th element of \code{type} refers to the \emph{i}th element of \code{display}.}
+\item{geom}{character; which geoms to use for the layers. Can be a vector of
+up to length 2, in which case, the first element of \code{geom} will be
+used for any site scores (both weighted sum or linear combination scores),
+and the second element will be used for species scores. The latter will be
+ignored if \code{arrows = TRUE}.}
 
 \item{layers}{character; which scores to plot as layers}
 
@@ -50,11 +54,10 @@ TODO
 data(dune)
 
 pca <- rda(dune)
-autoplot(pca, arrows = TRUE)
+autoplot(pca)
 
 ## Just the species scores
-autoplot(pca, arrows = TRUE, display = "species")
-
+autoplot(pca, layers = "species")
 }
 \author{
 Gavin L. Simpson

@@ -4,8 +4,8 @@
 \alias{fortify.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-\method{fortify}{cca}(model, data, axes = 1:6, display = c("sp", "wa", "lc",
-  "bp", "cn"), ...)
+\method{fortify}{cca}(model, data, axes = 1:6, display = c("sp", "wa",
+  "lc", "bp", "cn"), ...)
 }
 \arguments{
 \item{model}{an object of class \code{"cca"}, the result of a call to

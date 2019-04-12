@@ -4,8 +4,8 @@
 \alias{fortify.isomap}
 \title{Fortify isometric feature mapping results}
 \usage{
-\method{fortify}{isomap}(model, data = NULL, axes = 1:6, what = c("sites",
-  "network"), ...)
+\method{fortify}{isomap}(model, data = NULL, axes = 1:6,
+  what = c("sites", "network"), ...)
 }
 \arguments{
 \item{model}{an object of class \code{\link[vegan]{isomap}}.}

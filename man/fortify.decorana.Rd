@@ -4,8 +4,8 @@
 \alias{fortify.decorana}
 \title{Fortify a \code{"decorana"} object.}
 \usage{
-\method{fortify}{decorana}(model, data, axes = 1:4, display = c("sites",
-  "species"), ...)
+\method{fortify}{decorana}(model, data, axes = 1:4,
+  display = c("sites", "species"), ...)
 }
 \arguments{
 \item{model}{an object of class \code{"decorana"}, the result of a call to

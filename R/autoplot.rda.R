@@ -8,7 +8,11 @@
 ##'
 ##' @param object an object of class \code{"rda"}, the result of a call to \code{\link[vegan]{rda}}
 ##' @param axes numeric; which axes to plot, given as a vector of length 2.
-##' @param geom character; which geoms to use for the layers. Can be a vector of length equal to \code{length(display)}, in which case the \emph{i}th element of \code{type} refers to the \emph{i}th element of \code{display}.
+##' @param geom character; which geoms to use for the layers. Can be a vector of
+##'   up to length 2, in which case, the first element of \code{geom} will be
+##'   used for any site scores (both weighted sum or linear combination scores),
+##'   and the second element will be used for species scores. The latter will be
+##'   ignored if \code{arrows = TRUE}.
 ##' @param layers character; which scores to plot as layers
 ##' @param arrows logical; represent species (variables) using vectors?
 ##' @param legend.position character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.
@@ -34,88 +38,68 @@
 ##' data(dune)
 ##'
 ##' pca <- rda(dune)
-##' autoplot(pca, arrows = TRUE)
+##' autoplot(pca)
 ##'
 ##' ## Just the species scores
-##' autoplot(pca, arrows = TRUE, display = "species")
-##'
+##' autoplot(pca, layers = "species")
 `autoplot.rda` <- function(object, axes = c(1,2), geom = c("point", "text"),
                            layers = c("species", "sites", "biplot", "centroids"),
                            arrows = TRUE, legend.position = "right",
                            title = NULL, subtitle = NULL, caption = NULL,
                            ylab, xlab, const, ...) {
-    axes <- rep(axes, length.out = 2L)
-    obj <- fortify(object, axes = axes, ...)
-    LAYERS <- levels(obj$Score)
+    ## determine which layers to plot
+    valid <- valid_layers(object)       # vector of valid layers
+    ok_layers <- check_user_layers(layers, valid, message = TRUE)
+    layers <- layers[ok_layers]         # subset user-supplied layers
+    draw_list <- layer_draw_list(valid, layers) # what are we drawing
+
+    ## fix-up axes needed to plot
+    laxes <- length(axes)
+    if (laxes != 2L) {
+        if (laxes > 2L) {
+            axes <- rep(axes, length.out = 2L)  # shrink to required length
+        } else {
+            stop("Need 2 ordination axes to plot; only 1 was given.",
+                 call. = FALSE)
+        }
+    }
+
+    obj <- fortify(object, axes = axes, ...) # grab some scores
+    available <- levels(obj[["Score"]])
+    draw_list <- layer_draw_list(valid, layers, available) # what are we drawing
+    layer_names <- names(draw_list)[draw_list]
+
     ## sort out x, y aesthetics
     vars <- getDimensionNames(obj)
-    ## match the geom
-    geom <- match.arg(geom)
-    point <- TRUE
-    if (isTRUE(all.equal(geom, "text"))) {
-        point <- FALSE
-    }
+
+    ## process geom arg
+    geom <- match.arg(geom, several.ok = TRUE)
+    geom <- unique(geom)    # simplify geom if elements are the same
+
     ## subset out the layers wanted
-    ### need something here first to match acceptable ones?
-    ### or just check that the layers selected would return a df with
-    ### at least 1 row.
-    obj <- obj[obj$Score %in% layers, , drop = FALSE]
+    obj <- obj[obj[["Score"]] %in% layer_names, , drop = FALSE]
+
     ## skeleton layer
     plt <- ggplot()
-    ## add plot layers as required
-    take <- if (isTRUE(arrows)) {
-        "sites"
-    } else {
-        c("species", "sites")
+
+    ## draw sites, species, constraints == lc site scores
+    if (any(draw_list[c("species","sites","constraints")])) {
+        plt <- add_spp_site_scores(obj, plt, vars, geom, draw_list, arrows)
     }
-    want <- obj$Score %in% take
-    if (point) {
-        plt <- plt +
-            geom_point(data = obj[want, , drop = FALSE ],
-                       aes_string(x = vars[1], y = vars[2], shape = 'Score',
-                                  colour = 'Score'))
-    } else {
-        plt <- plt +
-            geom_text(data = obj[want, , drop = FALSE ],
-                      aes_string(x = vars[1], y = vars[2], label = 'Label',
-                                 colour = 'Score'), size = 3)
-    }
-    ## Draw species (variables) as arrows?
-    if (isTRUE(arrows)) {
-        want <- obj$Score == "species"
-        pdat <- obj[want, , drop = FALSE]
-        col <- "black"
-        want <- obj[["Score"]] == "species"
-        plt <- plt +
-            geom_segment(data = pdat,
-                         aes_string(x = 0, y = 0, xend = vars[1], yend = vars[2]),
-                         arrow = arrow(length = unit(0.2, "cm")),
-                         colour = col)
-        pdat[, vars] <- 1.1 * pdat[, vars, drop = FALSE]
-        plt <- plt + geom_text(data = pdat,
-                               aes_string(x = vars[1], y = vars[2], label = 'Label'), size = 4)
-    }
+
     ## remove biplot arrows for centroids if present
-    if(all(c("biplot","centroids") %in% LAYERS)) {
-        want <- obj$Score == "biplot"
+    if(all(draw_list[c("biplot","centroids")])) {
+        want <- obj[["Score"]] == "biplot"
         tmp <- obj[want, ]
         obj <- obj[!want, ]
         bnam <- tmp[, "Label"]
-        cnam <- obj[obj$Score == "centroids", "Label"]
+        cnam <- obj[obj[["Score"]] == "centroids", "Label"]
         obj <- rbind(obj, tmp[!bnam %in% cnam, , drop = FALSE])
     }
-    if(any(want <- obj$Score == "constraints")) {
-        if (point) {
-            plt <- plt + geom_point(data = obj[want, , drop = FALSE ],
-                                    aes_string(x = vars[1], y = vars[2]))
-        } else {
-            plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                                   aes_string(x = vars[1], y = vars[2],
-                                              label = 'Label'))
-        }
-    }
-    if(any(want <- obj$Score == "biplot")) {
-        if (length(layers) > 1) {
+
+    if(isTRUE(draw_list["biplot"])) {
+        want <- obj[["Score"]] == "biplot"
+        if (length(layer_names) > 1) {
             mul <- arrowMul(obj[want, vars, drop = FALSE],
                             obj[!want, vars, drop = FALSE])
             obj[want, vars] <- mul * obj[want, vars]
@@ -123,18 +107,24 @@
         col <- "navy"
         plt <- plt +
             geom_segment(data = obj[want, , drop = FALSE ],
-                         aes_string(x = 0, y = 0, xend = vars[1], yend = vars[2]),
+                         aes_string(x = 0, y = 0,
+                                    xend = vars[1], yend = vars[2]),
                          arrow = arrow(length = unit(0.2, "cm")),
                          colour = col)
         obj[want, vars] <- 1.1 * obj[want, vars]
         plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                               aes_string(x = vars[1], y = vars[2], label = 'Label'))
+                               aes_string(x = vars[1], y = vars[2],
+                                          label = 'Label'))
     }
-    if(any(want <- obj$Score == "centroids")) {
-        plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                               aes_string(x = vars[1], y = vars[2], label = 'Label'),
-                               colour = "navy")
+
+    if(isTRUE(draw_list["centroids"])) {
+        want <- obj[["Score"]] == "centroids"
+        plt <- plt +
+            geom_text(data = obj[want, , drop = FALSE],
+                      aes_string(x = vars[1], y = vars[2], label = 'Label'),
+                      colour = "navy")
     }
+
     if(missing(xlab)) {
         xlab <- vars[1]
     }

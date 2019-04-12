@@ -4,10 +4,11 @@
 \alias{autoplot.fisherfit}
 \title{Plot Fisher's log-series}
 \usage{
-\method{autoplot}{fisherfit}(object, show.fitted = TRUE, xlab = "Abundance",
-  ylab = "Number of Species", title = "Fisher's log-series distribution",
-  bar.col = NA, bar.fill = "grey35", line.col = "red", size = 1,
-  subtitle = NULL, caption = NULL, ...)
+\method{autoplot}{fisherfit}(object, show.fitted = TRUE,
+  xlab = "Abundance", ylab = "Number of Species",
+  title = "Fisher's log-series distribution", bar.col = NA,
+  bar.fill = "grey35", line.col = "red", size = 1, subtitle = NULL,
+  caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{\link{fisherfit}}.}
