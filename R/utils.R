@@ -86,3 +86,166 @@
                  )
     ll
 }
+
+##' @title Valid layers for vegan objects
+##'
+##' @param object An R object.
+##' @param ... Additional arguments passed to methods.
+##'
+##' @rdname valid_layers
+##' @export
+`valid_layers` <- function(object, ...) {
+    UseMethod('valid_layers')
+}
+
+##' @rdname valid_layers
+##' @export
+`valid_layers.rda` <- function(object, ...) {
+    c("species", "sites", "constraints", "biplot", "centroids", "regression")
+}
+##' @rdname valid_layers
+##' @export
+`valid_layers.cca` <- function(object, ...) {
+    c("species", "sites", "constraints", "biplot", "centroids", "regression")
+}
+
+##' @title Check user-supplied layers against list of valid layers
+##'
+##' @param user character; vector of user supplied layer names.
+##' @param valid character; vector of valid layer names.
+##' @param message logical; should a message be raised in the case of invalid
+##'   user-supplied layer names.
+`check_user_layers` <- function(user, valid, message = FALSE) {
+    ok <- user %in% valid
+
+    if (isTRUE(message) && any(!ok)) {
+        msg <- "Invalid (ignored) layers for this object:"
+        invalid <- paste(user[!ok], collapse = ', ')
+        message(paste(msg, invalid, sep = " "))
+    }
+
+    ok
+}
+
+##' @title List of layers to draw for a given vegan object
+##'
+##' @param valid character; vector of valid layer names
+##' @param layers character; a vector of layer names for \code{object} that has
+##'   already been filtered for validity.
+##' @param available charecter; what layers are actually available
+##'
+##' @importFrom stats setNames
+`layer_draw_list` <- function(valid, layers = NULL, available = NULL) {
+    l <- setNames(rep(TRUE, length(valid)), valid)
+    if (!is.null(layers)) {
+        if (!is.null(available)) {
+            layers <- layers[layers %in% available]
+        }
+        i <- valid %in% layers
+        l[!i] <- FALSE
+    }
+
+    l
+}
+
+##' @title Adds species and site score layers to an existing plot
+##'
+##' @param object an ordination object.
+##' @param plt a ggplot object.
+##' @param vars character; length 2 vector of dimension names.
+##' @param geom character; vector of length 1 or 2 indicating which geoms will
+##'   be used ofr the species or site scores.
+##' @param draw_list logical; vector of types of scores indicating which are
+##'   available and requested for plotting.
+##' @param arrows logical; length 1 vector indicating if species scores should
+##'   be drawn using arrows.
+##'
+##' @importFrom ggplot2 geom_point geom_text
+`add_spp_site_scores` <- function(object, plt, vars, geom, draw_list, arrows) {
+    wanted <- names(draw_list[c("species","sites","constraints")])
+    ## if we're plotting species by arrows, drop species if in list
+    if (isTRUE(arrows)) {
+        wanted <- wanted[wanted != "species"]
+    }
+
+    ## if still something to draw, draw it
+    if (length(wanted) > 0L) {
+        ## case of a single geom
+        if (length(geom) == 1L) {
+            take <- object[["Score"]] %in% wanted
+            if (geom == "point") {
+                plt <- plt +
+                    geom_point(data = object[take, , drop = FALSE],
+                               aes_string(x = vars[1], y = vars[2],
+                                          shape = 'Score', colour = 'Score'))
+            } else {
+                plt <- plt +
+                    geom_text(data = object[take, , drop = FALSE ],
+                              aes_string(x = vars[1], y = vars[2],
+                                         label = 'Label', colour = 'Score'),
+                              size = 3)
+            }
+        } else {
+            ## we have to plot species and sites/constraints separately
+            if ("species" %in% wanted) {
+                take <- object[["Score"]] == "species"
+                if (geom[2L] == "point") {
+                    plt <- plt +
+                        geom_point(data = object[take, , drop = FALSE],
+                                   aes_string(x = vars[1], y = vars[2],
+                                              shape = 'Score',
+                                              colour = 'Score'))
+
+                } else {
+                    plt <- plt +
+                        geom_text(data = object[take, , drop = FALSE ],
+                                  aes_string(x = vars[1],
+                                             y = vars[2],
+                                             label = 'Label',
+                                             colour = 'Score'),
+                                  size = 3)
+
+                }
+            }
+            if (any(c("sites","constraints") %in% wanted)) {
+                take <- object[["Score"]] %in% c("sites","constraints")
+                if (geom[1L] == "point") {
+                    plt <- plt +
+                        geom_point(data = object[take, , drop = FALSE],
+                                   aes_string(x = vars[1], y = vars[2],
+                                              shape = 'Score',
+                                              colour = 'Score'))
+
+                } else {
+                    plt <- plt +
+                        geom_text(data = object[take, , drop = FALSE ],
+                                  aes_string(x = vars[1],
+                                             y = vars[2],
+                                             label = 'Label',
+                                             colour = 'Score'),
+                                  size = 3)
+                }
+            }
+        }
+    }
+
+    ## now check if species should be added as arrows
+    if (isTRUE(arrows) && draw_list["species"]) {
+        take <- object[["Score"]] == "species"
+        pdat <- object[take, , drop = FALSE]
+        col <- "black"
+        plt <- plt +
+            geom_segment(data = pdat,
+                         aes_string(x = 0, y = 0,
+                                    xend = vars[1], yend = vars[2]),
+                         arrow = arrow(length = unit(0.2, "cm")),
+                         colour = col)
+        pdat[, vars] <- 1.1 * pdat[, vars, drop = FALSE]
+        plt <- plt + geom_text(data = pdat,
+                               aes_string(x = vars[1], y = vars[2],
+                                          label = 'Label'), size = 4)
+    }
+
+    ## return
+    plt
+}
