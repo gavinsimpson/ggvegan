@@ -4,8 +4,8 @@
 \alias{autoplot.cca}
 \title{ggplot-based plot for objects of class \code{"cca"}}
 \usage{
-\method{autoplot}{cca}(object, axes = c(1, 2), geom = c("point", "text"),
-  layers = c("species", "sites", "biplot", "centroids"),
+\method{autoplot}{cca}(object, axes = c(1, 2), geom = c("point",
+  "text"), layers = c("species", "sites", "biplot", "centroids"),
   legend.position = "right", title = NULL, subtitle = NULL,
   caption = NULL, ylab, xlab, const, ...)
 }

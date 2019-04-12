@@ -1,8 +1,8 @@
 Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
-Version: 0.0-9
-Date: 2017-11-12
+Version: 0.1-0
+Date: 2019-04-11
 Depends:
     vegan (>= 2.3-0),
     ggplot2
@@ -18,4 +18,5 @@ Description: Functions to produce ggplot2-based plots of objects produced by
     functions in the vegan package.
 License: GPL-2
 ByteCompile: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
+Encoding: UTF-8

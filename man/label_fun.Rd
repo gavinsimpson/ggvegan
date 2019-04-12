@@ -4,7 +4,8 @@
 \alias{label_fun}
 \title{Adds a label layer using one of a set of common geoms}
 \usage{
-label_fun(data, geom = c("label", "text", "label_repel", "text_repel"), vars)
+label_fun(data, geom = c("label", "text", "label_repel", "text_repel"),
+  vars)
 }
 \arguments{
 \item{data}{data frame; data set to use for the label layer. Must contain a variable \code{Label} containing the strings to use as labels.}

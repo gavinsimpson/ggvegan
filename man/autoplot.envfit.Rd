@@ -4,9 +4,9 @@
 \alias{autoplot.envfit}
 \title{ggplot-based plot for \code{envfit} objects}
 \usage{
-\method{autoplot}{envfit}(object, geom = c("label", "text", "label_repel",
-  "text_repel"), line.col = "black", xlab = NULL, ylab = NULL,
-  title = NULL, subtitle = NULL, caption = NULL, ...)
+\method{autoplot}{envfit}(object, geom = c("label", "text",
+  "label_repel", "text_repel"), line.col = "black", xlab = NULL,
+  ylab = NULL, title = NULL, subtitle = NULL, caption = NULL, ...)
 }
 \arguments{
 \item{object}{an object of class \code{"envfit"}, the result of a call to \code{\link[vegan]{envfit}}.}
