@@ -64,7 +64,7 @@
         }
     }
 
-    obj <- fortify(object, axes = axes, ...) # grab some scores
+    obj <- fortify(object, axes = axes, const = const, ...) # grab some scores
     available <- levels(obj[["Score"]])
     draw_list <- layer_draw_list(valid, layers, available) # what are we drawing
     layer_names <- names(draw_list)[draw_list]
