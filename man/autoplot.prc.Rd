@@ -4,8 +4,17 @@
 \alias{autoplot.prc}
 \title{ggplot-based plot for objects of class \code{"prc"}}
 \usage{
-\method{autoplot}{prc}(object, select, xlab, ylab, title = NULL,
-  subtitle = NULL, caption = NULL, legend.position = "top", ...)
+\method{autoplot}{prc}(
+  object,
+  select,
+  xlab,
+  ylab,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  legend.position = "top",
+  ...
+)
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"prc"}, the

@@ -4,8 +4,13 @@
 \alias{fortify.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-\method{fortify}{cca}(model, data, axes = 1:6, display = c("sp", "wa",
-  "lc", "bp", "cn"), ...)
+\method{fortify}{cca}(
+  model,
+  data,
+  axes = 1:6,
+  display = c("sp", "wa", "lc", "bp", "cn"),
+  ...
+)
 }
 \arguments{
 \item{model}{an object of class \code{"cca"}, the result of a call to
@@ -18,7 +23,8 @@
 
 \item{display}{numeric; the scores to extract in the fortified object.}
 
-\item{...}{additional arguments passed to \code{\link[vegan]{scores.cca}}.}
+\item{...}{additional arguments passed to \code{\link[vegan]{scores.cca}},
+and \code{\link[vegan]{scores.rda}}.}
 }
 \value{
 A data frame in long format containing the ordination scores.

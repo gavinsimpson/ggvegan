@@ -4,9 +4,17 @@
 \alias{autoplot.anosim}
 \title{ggplot-based plot for objects of class \code{"anosim"}}
 \usage{
-\method{autoplot}{anosim}(object, notch = TRUE, varwidth = TRUE,
-  xlab = NULL, ylab = NULL, title = "Analysis of similarities",
-  subtitle = NULL, caption = bquote(R == .(R) * "," ~ P == .(P)), ...)
+\method{autoplot}{anosim}(
+  object,
+  notch = TRUE,
+  varwidth = TRUE,
+  xlab = NULL,
+  ylab = NULL,
+  title = "Analysis of similarities",
+  subtitle = NULL,
+  caption = bquote(R == .(R) * "," ~ P == .(P)),
+  ...
+)
 }
 \arguments{
 \item{object}{an object of class \code{"anosim"}, the result of a call to \code{\link[vegan]{anosim}}.}

@@ -4,11 +4,20 @@
 \alias{autoplot.prestonfit}
 \title{Plot Preston's log-normal model of species abundance}
 \usage{
-\method{autoplot}{prestonfit}(object, show.fitted = TRUE,
-  xlab = "Abundance", ylab = "Number of Species",
-  title = "Preston's lognormal distribution", subtitle = NULL,
-  caption = NULL, bar.col = NA, bar.fill = "grey35",
-  line.col = "red", size = 1, ...)
+\method{autoplot}{prestonfit}(
+  object,
+  show.fitted = TRUE,
+  xlab = "Abundance",
+  ylab = "Number of Species",
+  title = "Preston's lognormal distribution",
+  subtitle = NULL,
+  caption = NULL,
+  bar.col = NA,
+  bar.fill = "grey35",
+  line.col = "red",
+  size = 1,
+  ...
+)
 }
 \arguments{
 \item{object}{an object of class \code{\link{prestonfit}}.}

@@ -4,10 +4,20 @@
 \alias{autoplot.isomap}
 \title{ggplot-based plot for objects of class \code{"isomap"}}
 \usage{
-\method{autoplot}{isomap}(object, axes = c(1, 2), geom = c("point",
-  "text"), network = TRUE, line.col = "grey85", size = 0.7,
-  xlab = NULL, ylab = NULL, title = "Isometric feature mapping",
-  subtitle = NULL, caption = NULL, ...)
+\method{autoplot}{isomap}(
+  object,
+  axes = c(1, 2),
+  geom = c("point", "text"),
+  network = TRUE,
+  line.col = "grey85",
+  size = 0.7,
+  xlab = NULL,
+  ylab = NULL,
+  title = "Isometric feature mapping",
+  subtitle = NULL,
+  caption = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{an object of class \code{"isomap"}, the result of a call to \code{\link[vegan]{isomap}}.}

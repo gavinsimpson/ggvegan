@@ -18,5 +18,6 @@ Description: Functions to produce ggplot2-based plots of objects produced by
     functions in the vegan package.
 License: GPL-2
 ByteCompile: true
-RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.0
 Encoding: UTF-8

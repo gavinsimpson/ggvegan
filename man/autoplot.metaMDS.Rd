@@ -4,9 +4,19 @@
 \alias{autoplot.metaMDS}
 \title{ggplot-based plot for objects of class \code{"metaMDS"}}
 \usage{
-\method{autoplot}{metaMDS}(object, axes = c(1, 2), geom = c("point",
-  "text"), layers = c("species", "sites"), legend.position = "right",
-  title = NULL, subtitle = NULL, caption = NULL, ylab, xlab, ...)
+\method{autoplot}{metaMDS}(
+  object,
+  axes = c(1, 2),
+  geom = c("point", "text"),
+  layers = c("species", "sites"),
+  legend.position = "right",
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  ylab,
+  xlab,
+  ...
+)
 }
 \arguments{
 \item{object}{an object of class \code{"metaMDS"}, the result of a call
