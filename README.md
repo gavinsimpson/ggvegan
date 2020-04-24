@@ -1,10 +1,12 @@
 # ggvegan; ggplot2-based plots for vegan
 
-#### Released version
-[![CRAN version](http://www.r-pkg.org/badges/version/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html) [![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
-
-#### Build status
-[![Build Status](https://travis-ci.org/gavinsimpson/ggvegan.svg?branch=master)](https://travis-ci.org/gavinsimpson/ggvegan)  [![Build status](https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master)](https://ci.appveyor.com/project/gavinsimpson/ggvegan/branch/master)
+<!-- badges: start -->
+[![R build status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/ggvegan/actions)
+[![Travis CI Build Status](https://travis-ci.org/gavinsimpson/ggvegan.svg?branch=master)](https://travis-ci.org/gavinsimpson/ggvegan)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master)](https://ci.appveyor.com/project/gavinsimpson/ggvegan/branch/master)
+[![CRAN version](http://www.r-pkg.org/badges/version/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
+<!-- badges: end -->
 
 ## What is ggvegan?
 **ggvegan** is a package for the R statistical software and environment. It aims to implement **ggplot**-based versions of the plots produced by the **vegan** package. Initially, ggvegan will provide `fortify` and `autoplot` methods for objects created in vegan, with the aim of providing full replacement plots via `autoplot`. The `fortify` methods allow the data contained within objects created by vegan to be converted into a format suitable for use with `ggplot` directly.
