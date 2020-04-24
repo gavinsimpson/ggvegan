@@ -58,10 +58,10 @@ The following `fortify` method are currently available
 ## Installation
 No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.
 
-Finally, if you use Hadley Wickham's **devtools** package then you can install ggvegan directly from github using functions that devtools provides. To do this, install **devtools** from CRAN via
+Finally, you can install ggvegan directly from GitHub using functions that the **remotes** package provides. To do this, install **remotes** from CRAN via
 
-    install.packages("devtools")
+    install.packages("remotes")
 
 then run
 
-    devtools::install_github("gavinsimpson/ggvegan")
+    remotes::install_github("gavinsimpson/ggvegan")
