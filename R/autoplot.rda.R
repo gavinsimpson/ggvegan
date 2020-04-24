@@ -21,7 +21,8 @@
 ##' @param title character; subtitle for the plot
 ##' @param subtitle character; subtitle for the plot
 ##' @param caption character; caption for the plot
-##' @param const General scaling constant to \code{rda} scores. See \code{\link[vegan]{plot.cca}} for details.
+##' @param const General scaling constant to \code{rda} scores. See
+##'   \code{\link[vegan]{scores.rda}} for details.
 ##' @param ... Additional arguments passed to \code{\link{fortify.cca}}.
 ##'
 ##' @return Returns a ggplot object.
@@ -64,7 +65,7 @@
         }
     }
 
-    obj <- fortify(object, axes = axes, ...) # grab some scores
+    obj <- fortify(object, axes = axes, const = const, ...) # grab some scores
     available <- levels(obj[["Score"]])
     draw_list <- layer_draw_list(valid, layers, available) # what are we drawing
     layer_names <- names(draw_list)[draw_list]

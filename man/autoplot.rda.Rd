@@ -4,10 +4,21 @@
 \alias{autoplot.rda}
 \title{ggplot-based plot for objects of class \code{'rda'}}
 \usage{
-\method{autoplot}{rda}(object, axes = c(1, 2), geom = c("point",
-  "text"), layers = c("species", "sites", "biplot", "centroids"),
-  arrows = TRUE, legend.position = "right", title = NULL,
-  subtitle = NULL, caption = NULL, ylab, xlab, const, ...)
+\method{autoplot}{rda}(
+  object,
+  axes = c(1, 2),
+  geom = c("point", "text"),
+  layers = c("species", "sites", "biplot", "centroids"),
+  arrows = TRUE,
+  legend.position = "right",
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  ylab,
+  xlab,
+  const,
+  ...
+)
 }
 \arguments{
 \item{object}{an object of class \code{"rda"}, the result of a call to \code{\link[vegan]{rda}}}
@@ -36,7 +47,8 @@ ignored if \code{arrows = TRUE}.}
 
 \item{xlab}{character; label for the x-axis}
 
-\item{const}{General scaling constant to \code{rda} scores. See \code{\link[vegan]{plot.cca}} for details.}
+\item{const}{General scaling constant to \code{rda} scores. See
+\code{\link[vegan]{scores.rda}} for details.}
 
 \item{...}{Additional arguments passed to \code{\link{fortify.cca}}.}
 }

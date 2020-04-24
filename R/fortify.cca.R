@@ -14,7 +14,8 @@
 ##' @param data currently ignored.
 ##' @param axes numeric; which axes to extract scores for.
 ##' @param display numeric; the scores to extract in the fortified object.
-##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}}.
+##' @param ... additional arguments passed to \code{\link[vegan]{scores.cca}},
+##'   and \code{\link[vegan]{scores.rda}}.
 ##' @return A data frame in long format containing the ordination scores.
 ##' The first two components are the axis scores.
 ##' @author Gavin L. Simpson
