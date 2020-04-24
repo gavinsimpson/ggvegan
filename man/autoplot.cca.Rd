@@ -4,10 +4,19 @@
 \alias{autoplot.cca}
 \title{ggplot-based plot for objects of class \code{"cca"}}
 \usage{
-\method{autoplot}{cca}(object, axes = c(1, 2), geom = c("point",
-  "text"), layers = c("species", "sites", "biplot", "centroids"),
-  legend.position = "right", title = NULL, subtitle = NULL,
-  caption = NULL, ylab, xlab, const, ...)
+\method{autoplot}{cca}(
+  object,
+  axes = c(1, 2),
+  geom = c("point", "text"),
+  layers = c("species", "sites", "biplot", "centroids"),
+  legend.position = "right",
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  ylab,
+  xlab,
+  ...
+)
 }
 \arguments{
 \item{object}{an object of class \code{"cca"}, the result of a call to \code{\link[vegan]{cca}} or \code{\link[vegan]{capscale}}.}
@@ -32,9 +41,6 @@ of \code{display}.}
 \item{ylab}{character; label for the y-axis}
 
 \item{xlab}{character; label for the x-axis}
-
-\item{const}{General scaling constant to \code{rda} scores. See
-\code{\link[vegan]{plot.cca}} for details.}
 
 \item{...}{Additional arguments passed to \code{\link{fortify.cca}}.}
 }

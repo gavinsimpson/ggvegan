@@ -19,8 +19,6 @@
 ##' @param title character; subtitle for the plot
 ##' @param subtitle character; subtitle for the plot
 ##' @param caption character; caption for the plot
-##' @param const General scaling constant to \code{rda} scores. See
-##' \code{\link[vegan]{plot.cca}} for details.
 ##' @param ... Additional arguments passed to \code{\link{fortify.cca}}.
 ##' @return Returns a ggplot object.
 ##' @author Gavin L. Simpson
@@ -40,7 +38,7 @@
                            layers = c("species", "sites", "biplot", "centroids"),
                            legend.position = "right",
                            title = NULL, subtitle = NULL, caption = NULL,
-                           ylab, xlab, const, ...) {
+                           ylab, xlab, ...) {
     axes <- rep(axes, length.out = 2L)
     obj <- fortify(object, axes = axes, ...)
     LAYERS <- levels(obj$Score)
