@@ -39,9 +39,9 @@
         stop("only two-dimensional plots made: too many axes defined")
     df <- fortify(model, axes = axes,
                   display = c("sp", "wa", "lc", "bp", "cn", "reg"), ...)
-    dlab <- colnames(df)[1:2]
-    pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2]),
-                 label="Label")
+    dlab <- colnames(df)[3:4]
+    pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2],
+                 label="Label"))
     pl <- pl + coord_equal()
     pl
 }
