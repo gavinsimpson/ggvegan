@@ -37,8 +37,7 @@
         warning("currently tried only with cca objects: you are on your own")
     if (length(axes) > 2)
         stop("only two-dimensional plots made: too many axes defined")
-    df <- fortify(model, axes = axes,
-                  display = c("sp", "wa", "lc", "bp", "cn", "reg"), ...)
+    df <- fortify(model, axes = axes, ...)
     dlab <- colnames(df)[3:4]
     pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2],
                  label="Label"))
