@@ -63,6 +63,15 @@
     if (length(axes) > 2)
         stop("only two-dimensional plots made: too many axes defined")
     df <- fortify(model, axes = axes, ...)
+    ## I don't currently know a way of adjusting arrows to the final
+    ## plot frame, so try to scale them to fit the data points at
+    ## least
+    isBip <- df$Score == "biplot"
+    if (any(isBip)) {
+        mul <- arrowMul(df[isBip, 3:4, drop=FALSE],
+                        df[!isBip, 3:4, drop=FALSE])
+        df[isBip, 3:4] <- df[isBip, 3:4] * mul
+    }
     dlab <- colnames(df)[3:4]
     pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2],
                  label="Label"))
