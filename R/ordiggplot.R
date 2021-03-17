@@ -111,6 +111,30 @@
         geom_text(data = data, ...)
 }
 
+#' @importFrom ggplot geom_segment geom_label geom_text aes arrow
+#' @rdname ordiggplot
+#' @export
+`geom_ordiarrow` <-
+    function(Score, text = TRUE, box = FALSE, ...)
+{
+    if (missing(Score))
+        stop("Score must be defined")
+    data <- ggscores(Score)
+    pl <- geom_segment(data = data, mapping = aes(xend = 0, yend = 0),
+                       arrow = arrow(ends = "first", length=unit(0.2, "cm")),
+                       ...)
+    if (text) {
+        if(box)
+            p2 <- geom_label(data = data, vjust = "outward", hjust = "outward",
+                             ...)
+        else
+            p2 <- geom_text(data = data, vjust = "outward", hjust = "outward",
+                            ...)
+        pl <- list(pl, p2) ## ggprotos cannot be added (+)
+    }
+    pl
+}
+
 ## extract ordination scores for data= statement in ggplot2 functions
 #' @rdname ordiggplot
 #' @export
