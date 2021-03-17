@@ -35,6 +35,7 @@
 #' @param axes Two axes to be plotted
 #' @param Score Ordination score to be added to the plot.
 #' @param box Draw a box behind the text (logical).
+#' @param text Add text labels to the plot.
 #' @param ... Parameters passed to underlying functions.
 #'
 #'
@@ -111,7 +112,7 @@
         geom_text(data = data, ...)
 }
 
-#' @importFrom ggplot geom_segment geom_label geom_text aes arrow
+#' @importFrom ggplot2 geom_segment geom_label geom_text aes arrow
 #' @rdname ordiggplot
 #' @export
 `geom_ordiarrow` <-

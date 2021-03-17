@@ -4,6 +4,7 @@
 \alias{ordiggplot}
 \alias{geom_ordipoint}
 \alias{geom_orditext}
+\alias{geom_ordiarrow}
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
@@ -12,6 +13,8 @@ ordiggplot(model, axes = c(1, 2), ...)
 geom_ordipoint(Score, ...)
 
 geom_orditext(Score, box = FALSE, ...)
+
+geom_ordiarrow(Score, text = TRUE, box = FALSE, ...)
 
 ggscores(Score)
 }
@@ -25,6 +28,8 @@ ggscores(Score)
 \item{Score}{Ordination score to be added to the plot.}
 
 \item{box}{Draw a box behind the text (logical).}
+
+\item{text}{Add text labels to the plot.}
 }
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
