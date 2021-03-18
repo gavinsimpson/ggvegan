@@ -67,9 +67,18 @@
     ## least
     isBip <- df$Score == "biplot"
     if (any(isBip)) {
-        mul <- arrowMul(df[isBip, 3:4, drop=FALSE],
-                        df[!isBip, 3:4, drop=FALSE])
-        df[isBip, 3:4] <- df[isBip, 3:4] * mul
+        ## remove biplot scores that have equal centroid
+        if (any(cntr <- df$Score == "centroids")) {
+            dup <- isBip & df$Label %in% df$Label[cntr]
+            if (any(dup))
+                df <- df[!dup,]
+            isBip <- df$Score == "biplot"
+        }
+        if (any(isBip)) { # isBip may have changed
+            mul <- arrowMul(df[isBip, 3:4, drop=FALSE],
+                            df[!isBip, 3:4, drop=FALSE])
+            df[isBip, 3:4] <- df[isBip, 3:4] * mul
+        }
     }
     dlab <- colnames(df)[3:4]
     pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2],
