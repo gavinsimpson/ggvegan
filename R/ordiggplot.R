@@ -59,8 +59,6 @@
 `ordiggplot` <-
     function(model, axes = c(1,2), ...)
 {
-    if (!inherits(model, "cca"))
-        warning("currently tried only with cca objects: you are on your own")
     if (length(axes) > 2)
         stop("only two-dimensional plots made: too many axes defined")
     df <- fortify(model, axes = axes, ...)
