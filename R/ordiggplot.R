@@ -143,6 +143,19 @@
     pl
 }
 
+## crosshair for axes in eigenvector methods
+
+#' @rdname ordiggplot
+#' @export
+`geom_ordiaxis` <-
+    function(lty = 3, ...)
+{
+    list(
+        geom_hline(yintercept = 0, lty = lty, ...),
+        geom_vline(xintercept = 0, lty = lty, ...)
+    )
+}
+
 ## extract ordination scores for data= statement in ggplot2 functions
 #' @rdname ordiggplot
 #' @export
