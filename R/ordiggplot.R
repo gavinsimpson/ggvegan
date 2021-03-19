@@ -186,8 +186,8 @@
 #' @importFrom ggplot2 layer
 #´ @export
 `stat_vectorfit` <-
-    function(mapping = mapping, data = NULL,
-             geom = NULL, position = "identity",
+    function(mapping = NULL, data = NULL,
+             geom = "text", position = "identity",
              na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE,
              edata = NULL, formula = NULL, ...)
 {
