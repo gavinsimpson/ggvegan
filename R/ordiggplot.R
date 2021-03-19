@@ -145,6 +145,7 @@
 
 ## crosshair for axes in eigenvector methods
 
+#' @importFrom ggplot2 geom_hline geom_vline
 #' @rdname ordiggplot
 #' @export
 `geom_ordiaxis` <-
@@ -156,6 +157,46 @@
     )
 }
 
+## envfit, separately for vectorfit & factorfit as these imply
+## different geometries
+#' @importFrom stats model.frame
+#' @importFrom vegan vectorfit
+
+`calculate_vectorfit` <-
+    function(data = data, scales, vars = c("x", "y"), edata, formula)
+{
+    if(!missing(formula) && !is.null(formula))
+        edata <- model.frame(formula, edata)
+    vecs <- sapply(edata, is.numeric)
+    edata <- edata[, vecs, drop=FALSE]
+    ## FIXME: not yet weights
+    fit <- vectorfit(as.matrix(data[, vars]), edata, permutations=0, w=1)
+    fit <- sqrt(fit$r) * fit$arrows
+    fit <- as.data.frame(fit)
+    fit$label = rownames(fit)
+    fit
+}
+
+`StatVectorfit` <-
+    ggproto("StatVectorfit", Stat,
+            required_aes = c("x","y"),
+            compute_group = calculate_vectorfit
+    )
+
+#' @importFrom ggplot2 layer
+#´ @export
+`stat_vectorfit` <-
+    function(mapping = mapping, data = NULL,
+             geom = NULL, position = "identity",
+             na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE,
+             edata = NULL, formula = NULL, ...)
+{
+    layer(stat = StatVectorfit, data = data, mapping = mapping, geom = geom,
+          position = position, show.legend = show.legend,
+          inherit.aes = inherit.aes,
+          params = list(edata = edata, formula = formula, na.rm = na.rm)
+          )
+}
 ## extract ordination scores for data= statement in ggplot2 functions
 #' @rdname ordiggplot
 #' @export
