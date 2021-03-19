@@ -5,6 +5,7 @@
 \alias{geom_ordipoint}
 \alias{geom_orditext}
 \alias{geom_ordiarrow}
+\alias{geom_ordiaxis}
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
@@ -15,6 +16,8 @@ geom_ordipoint(Score, ...)
 geom_orditext(Score, box = FALSE, ...)
 
 geom_ordiarrow(Score, text = TRUE, box = FALSE, ...)
+
+geom_ordiaxis(lty = 3, ...)
 
 ggscores(Score)
 }
