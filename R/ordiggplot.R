@@ -53,7 +53,7 @@
 #'    geom_label(data=ggscores("centroids"), fill="yellow")
 #'
 #'
-#' @importFrom ggplot2 ggplot coord_equal aes_string
+#' @importFrom ggplot2 ggplot coord_fixed aes_string
 #'
 #' @export
 `ordiggplot` <-
@@ -83,7 +83,7 @@
     dlab <- colnames(df)[3:4]
     pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2],
                  label="Label"))
-    pl <- pl + coord_equal()
+    pl <- pl + coord_fixed(ratio=1)
     pl
 }
 
@@ -119,7 +119,8 @@
         geom_text(data = data, ...)
 }
 
-#' @importFrom ggplot2 geom_segment geom_label geom_text aes arrow
+#' @importFrom ggplot2 geom_segment geom_label geom_text aes
+#' @importFrom grid arrow
 #' @rdname ordiggplot
 #' @export
 `geom_ordiarrow` <-
