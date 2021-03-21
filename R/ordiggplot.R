@@ -80,6 +80,19 @@
             df[isBip, 3:4] <- df[isBip, 3:4] * mul
         }
     }
+    ## weights are needed in some statistics
+    if (inherits(model, c("cca", "wcmdscale", "decorana"))) {
+        rw <- weights(model)
+        cw <- weights(model, display="species")
+        wts <- rep(NA, nrow(df))
+        if (any(want <- df$Score == "sites"))
+            wts[want] <- rw
+        if (any(want <- df$Score == "constraints"))
+            wts[want] <- rw
+        if (any(want <- df$Score == "species"))
+            wts[want] <- cw
+        df$weight <- wts
+    }
     dlab <- colnames(df)[3:4]
     pl <- ggplot(data = df, mapping=aes_string(dlab[1], dlab[2],
                  label="Label"))
@@ -171,7 +184,8 @@
     vecs <- sapply(edata, is.numeric)
     edata <- edata[, vecs, drop=FALSE]
     ## FIXME: not yet weights
-    fit <- vectorfit(as.matrix(data[, vars]), edata, permutations=0, w=1)
+    wts <- data$weight
+    fit <- vectorfit(as.matrix(data[, vars]), edata, permutations=0, w=wts)
     fit <- sqrt(fit$r) * fit$arrows
     ## scale arrows
     mul <- ggvegan:::arrowMul(fit,
