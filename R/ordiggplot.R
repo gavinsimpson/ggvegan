@@ -107,11 +107,13 @@
 #' @rdname ordiggplot
 #' @export
 `geom_ordipoint` <-
-    function(Score, ...)
+    function(Score, data,...)
 {
-    if (missing(Score))
-        stop("Score must be defined")
-    geom_point(data = ~.x[.x$Score == Score, ], ...)
+    if (missing(Score) && missing(data))
+        stop("either Score or data must be defined")
+    if (missing(data))
+        data <- ggscores(Score)
+    geom_point(data = data, ...)
 }
 
 ### add text to the plot
@@ -121,11 +123,12 @@
 #' @rdname ordiggplot
 #' @export
 `geom_orditext` <-
-    function(Score, box = FALSE, ...)
+    function(Score, data, box = FALSE, ...)
 {
-    if (missing(Score))
-        stop("Score must be defined")
-    data = ~.x[.x$Score == Score,]
+    if (missing(Score) && missing(data))
+        stop("either Score or data must be defined")
+    if (missing(data))
+        data <- ~.x[.x$Score == Score,]
     if (box)
         geom_label(data = data, ... )
     else
@@ -137,11 +140,12 @@
 #' @rdname ordiggplot
 #' @export
 `geom_ordiarrow` <-
-    function(Score, text = TRUE, box = FALSE, ...)
+    function(Score, data, text = TRUE, box = FALSE, ...)
 {
-    if (missing(Score))
-        stop("Score must be defined")
-    data <- ggscores(Score)
+    if (missing(Score) && missing(data))
+        stop("either Score or data must be defined")
+    if (missing(data))
+        data <- ggscores(Score)
     pl <- geom_segment(data = data, mapping = aes(xend = 0, yend = 0),
                        arrow = arrow(ends = "first", length=unit(0.2, "cm")),
                        ...)
