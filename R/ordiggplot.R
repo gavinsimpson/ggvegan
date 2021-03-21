@@ -173,6 +173,10 @@
     ## FIXME: not yet weights
     fit <- vectorfit(as.matrix(data[, vars]), edata, permutations=0, w=1)
     fit <- sqrt(fit$r) * fit$arrows
+    ## scale arrows
+    mul <- ggvegan:::arrowMul(fit,
+                    cbind(scales$x$dimension(), scales$y$dimension()))
+    fit <- mul * fit
     fit <- as.data.frame(fit)
     fit$label = rownames(fit)
     fit
