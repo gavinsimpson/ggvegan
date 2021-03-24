@@ -193,7 +193,7 @@
     if(!missing(formula) && !is.null(formula))
         edata <- model.frame(formula, data)
     else
-        edata < data[, names(edata)]
+        edata <- data[, names(edata)]
     vecs <- sapply(edata, is.numeric)
     edata <- edata[, vecs, drop=FALSE]
     ## FIXME: not yet weights
