@@ -129,8 +129,7 @@
         stop("either Score or data must be defined")
     if (missing(data))
         data <- ~.x[.x$Score == Score,]
-    else
-        geom_text(data = data, ...)
+    geom_text(data = data, ...)
 }
 #' @rdname ordiggplot
 #' @export
@@ -141,8 +140,7 @@
         stop("either Score or data must be defined")
     if (missing(data))
         data <- ~.x[.x$Score == Score,]
-    else
-        geom_label(data = data, ...)
+    geom_label(data = data, ...)
 }
 #' @importFrom ggplot2 geom_segment geom_label geom_text aes
 #' @importFrom grid arrow
@@ -193,7 +191,9 @@
     function(data = data, scales, vars = c("x", "y"), edata, formula)
 {
     if(!missing(formula) && !is.null(formula))
-        edata <- model.frame(formula, edata)
+        edata <- model.frame(formula, data)
+    else
+        edata < data[, names(edata)]
     vecs <- sapply(edata, is.numeric)
     edata <- edata[, vecs, drop=FALSE]
     ## FIXME: not yet weights
@@ -209,10 +209,15 @@
     fit
 }
 
+#' @export
 `StatVectorfit` <-
     ggproto("StatVectorfit", Stat,
             required_aes = c("x","y"),
-            compute_group = calculate_vectorfit
+            compute_group = calculate_vectorfit,
+            setup_data = function(data, params) {
+               data <- cbind(data, params$edata)
+               data
+            }
     )
 
 #' @importFrom ggplot2 layer
