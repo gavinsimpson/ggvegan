@@ -123,18 +123,27 @@
 #' @rdname ordiggplot
 #' @export
 `geom_orditext` <-
-    function(Score, data, box = FALSE, ...)
+    function(Score, data, ...)
 {
     if (missing(Score) && missing(data))
         stop("either Score or data must be defined")
     if (missing(data))
         data <- ~.x[.x$Score == Score,]
-    if (box)
-        geom_label(data = data, ... )
     else
         geom_text(data = data, ...)
 }
-
+#' @rdname ordiggplot
+#' @export
+`geom_ordilabel` <-
+    function(Score, data, ...)
+{
+    if (missing(Score) && missing(data))
+        stop("either Score or data must be defined")
+    if (missing(data))
+        data <- ~.x[.x$Score == Score,]
+    else
+        geom_label(data = data, ...)
+}
 #' @importFrom ggplot2 geom_segment geom_label geom_text aes
 #' @importFrom grid arrow
 #' @rdname ordiggplot
