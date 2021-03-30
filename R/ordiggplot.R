@@ -292,10 +292,10 @@
 #' m <- metaMDS(mite, trace=FALSE, trymax=100)
 #' ## add fitted vectors for continuous variables
 #' ordiggplot(m) + geom_ordipoint("sites") +
-#'   geom_ordiarrow("sites", edata=mite.env)
+#'   geom_ordiarrow("sites", stat="vectorfit", edata=mite.env)
 #' ## can be faceted
 #' ordiggplot(m) + geom_ordipoint("sites") +
-#'   geom_ordiarrow("sites", edata=mite.env) +
+#'   geom_ordiarrow("sites", stat="vectorfit", edata=mite.env) +
 #'   facet_wrap(mite.env$Topo)
 #' @export
 `stat_vectorfit` <-
