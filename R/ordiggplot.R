@@ -183,12 +183,14 @@
 }
 
 ## envfit, separately for vectorfit & factorfit as these imply
-## different geometries
+## different geometries. 'edata', 'formula' and 'arrowmul' can be
+## given as parameters, and 'arrowmul' is calculated in
+## StatVectorfit$setup_params if not given.
 #' @importFrom stats model.frame
 #' @importFrom vegan vectorfit
 
 `calculate_vectorfit` <-
-    function(data = data, scales, vars = c("x", "y"), edata, formula)
+    function(data = data, scales, vars = c("x", "y"), edata, formula, arrowmul)
 {
     if(!missing(formula) && !is.null(formula))
         edata <- model.frame(formula, data)
@@ -196,14 +198,10 @@
         edata <- data[, names(edata)]
     vecs <- sapply(edata, is.numeric)
     edata <- edata[, vecs, drop=FALSE]
-    ## FIXME: not yet weights
     wts <- data$weight
     fit <- vectorfit(as.matrix(data[, vars]), edata, permutations=0, w=wts)
     fit <- sqrt(fit$r) * fit$arrows
-    ## scale arrows
-    mul <- ggvegan:::arrowMul(fit,
-                    cbind(scales$x$dimension(), scales$y$dimension()))
-    fit <- mul * fit
+    fit <- arrowmul * fit
     fit <- as.data.frame(fit)
     fit$label = rownames(fit)
     fit
@@ -217,6 +215,29 @@
             setup_data = function(data, params) {
                data <- cbind(data, params$edata)
                data
+            },
+            ## same scaling of arrows in all panels
+            setup_params = function(data, params) {
+               if (!is.null(params$arrowmul))
+                   return(params)
+               if (!is.null(params$formula))
+                   ed <- model.frame(params$formula, params$edata)
+               else
+                   ed <- params$edata
+               vecs <- sapply(ed, is.numeric)
+               ed <- ed[,vecs, drop=FALSE]
+               xy <- data[, c("x","y")]
+               if (is.null(data$weight))
+                   data$weight <- 1
+               w <- split(data$weight, data$PANEL)
+               sxy <- split(xy, data$PANEL)
+               ed <- split(ed, data$PANEL)
+               arrs <- sapply(seq_len(length(sxy)), function(i) {
+                   v <- vectorfit(as.matrix(sxy[[i]]), as.matrix(ed[[i]]), w=w[[i]])
+                   ggvegan:::arrowMul(sqrt(v$r)*v$arrows, as.matrix(xy))
+               })
+               params$arrowmul <- min(arrs)
+               params
             }
     )
 
@@ -226,12 +247,13 @@
     function(mapping = NULL, data = NULL,
              geom = "text", position = "identity",
              na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE,
-             edata = NULL, formula = NULL, ...)
+             edata = NULL, formula = NULL, arrowmul=NULL, ...)
 {
     layer(stat = StatVectorfit, data = data, mapping = mapping, geom = geom,
           position = position, show.legend = show.legend,
           inherit.aes = inherit.aes,
-          params = list(edata = edata, formula = formula, na.rm = na.rm)
+          params = list(edata = edata, formula = formula, na.rm = na.rm,
+                        arrowmul = arrowmul)
           )
 }
 ## extract ordination scores for data= statement in ggplot2 functions
