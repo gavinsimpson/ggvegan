@@ -4,18 +4,21 @@
 \alias{ordiggplot}
 \alias{geom_ordipoint}
 \alias{geom_orditext}
+\alias{geom_ordilabel}
 \alias{geom_ordiarrow}
 \alias{geom_ordiaxis}
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
-ordiggplot(model, axes = c(1, 2), ...)
+ordiggplot(model, axes = c(1, 2), arrowmul, ...)
 
-geom_ordipoint(Score, ...)
+geom_ordipoint(Score, data, ...)
 
-geom_orditext(Score, box = FALSE, ...)
+geom_orditext(Score, data, ...)
 
-geom_ordiarrow(Score, text = TRUE, box = FALSE, ...)
+geom_ordilabel(Score, data, ...)
+
+geom_ordiarrow(Score, data, text = TRUE, box = FALSE, ...)
 
 geom_ordiaxis(lty = 3, ...)
 
@@ -26,13 +29,23 @@ ggscores(Score)
 
 \item{axes}{Two axes to be plotted}
 
+\item{arrowmul}{Multiplier to arrow length. If missing, the arrow
+length are adjusted to fit to other scores, but if some score
+types are not displayed, the arrows may be badly scaled, and
+manual adjustment can be useful.}
+
 \item{...}{Parameters passed to underlying functions.}
 
 \item{Score}{Ordination score to be added to the plot.}
 
-\item{box}{Draw a box behind the text (logical).}
+\item{data}{Alternative data to the function that will be used
+instead of \code{Score}.}
 
 \item{text}{Add text labels to the plot.}
+
+\item{box}{Draw a box behind the text (logical).}
+
+\item{lty}{Linetype.}
 }
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
@@ -67,16 +80,25 @@ arguments of those functions. This allows setting, e.g., the
 scaling of ordination axes.
 }
 \examples{
-data(dune, dune.env)
-m <- cca(dune ~ Management, dune.env)
+data(dune, dune.env, varespec, varechem)
+m <- cca(dune ~ Management + A1, dune.env)
 ## use geom_ordi* functions
-ordiggplot(m) + geom_ordipoint("sites") +
+ordiggplot(m) + geom_ordiaxis() + geom_ordipoint("sites") +
   geom_orditext("species", col="darkblue", mapping=aes(fontface="italic")) +
-  geom_orditext("centroids", box=TRUE)
+  geom_ordilabel("centroids") + geom_ordiarrow("biplot")
 ## use ggscores + standard geom_* functions
 ordiggplot(m, scaling="sites") + geom_point(data=ggscores("sites")) +
    geom_text(data=ggscores("species"), mapping=aes(fontface="italic")) +
-   geom_label(data=ggscores("centroids"), fill="yellow")
-
+   geom_label(data=ggscores("centroids"), fill="yellow") +
+   geom_ordiarrow("biplot")
+## Messy arrow biplot for PCA
+m <- rda(dune)
+ordiggplot(m) + geom_ordiaxis() + geom_ordipoint("sites") +
+   geom_ordiarrow("species")
+## Fitted vectors, selecting variables with formula
+m <- metaMDS(varespec, trace=FALSE)
+ordiggplot(m) + geom_ordipoint("sites") +
+   geom_ordiarrow("sites", stat="vectorfit", edata=varechem,
+   formula = ~ N + Ca + Al + Humdepth + pH)
 
 }

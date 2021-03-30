@@ -41,23 +41,37 @@
 #'
 #'
 #' @examples
-#' data(dune, dune.env)
-#' m <- cca(dune ~ Management, dune.env)
+#' data(dune, dune.env, varespec, varechem)
+#' m <- cca(dune ~ Management + A1, dune.env)
 #' ## use geom_ordi* functions
-#' ordiggplot(m) + geom_ordipoint("sites") +
+#' ordiggplot(m) + geom_ordiaxis() + geom_ordipoint("sites") +
 #'   geom_orditext("species", col="darkblue", mapping=aes(fontface="italic")) +
-#'   geom_orditext("centroids", box=TRUE)
+#'   geom_ordilabel("centroids") + geom_ordiarrow("biplot")
 #' ## use ggscores + standard geom_* functions
 #' ordiggplot(m, scaling="sites") + geom_point(data=ggscores("sites")) +
 #'    geom_text(data=ggscores("species"), mapping=aes(fontface="italic")) +
-#'    geom_label(data=ggscores("centroids"), fill="yellow")
+#'    geom_label(data=ggscores("centroids"), fill="yellow") +
+#'    geom_ordiarrow("biplot")
+#' ## Messy arrow biplot for PCA
+#' m <- rda(dune)
+#' ordiggplot(m) + geom_ordiaxis() + geom_ordipoint("sites") +
+#'    geom_ordiarrow("species")
+#' ## Fitted vectors, selecting variables with formula
+#' m <- metaMDS(varespec, trace=FALSE)
+#' ordiggplot(m) + geom_ordipoint("sites") +
+#'    geom_ordiarrow("sites", stat="vectorfit", edata=varechem,
+#'    formula = ~ N + Ca + Al + Humdepth + pH)
 #'
-#'
+#' @importFrom stats weights
 #' @importFrom ggplot2 ggplot coord_fixed aes_string
 #'
+#' @param arrowmul Multiplier to arrow length. If missing, the arrow
+#'     length are adjusted to fit to other scores, but if some score
+#'     types are not displayed, the arrows may be badly scaled, and
+#'     manual adjustment can be useful.
 #' @export
 `ordiggplot` <-
-    function(model, axes = c(1,2), ...)
+    function(model, axes = c(1,2), arrowmul, ...)
 {
     if (length(axes) > 2)
         stop("only two-dimensional plots made: too many axes defined")
@@ -75,9 +89,10 @@
             isBip <- df$Score == "biplot"
         }
         if (any(isBip)) { # isBip may have changed
-            mul <- arrowMul(df[isBip, 3:4, drop=FALSE],
-                            df[!isBip, 3:4, drop=FALSE])
-            df[isBip, 3:4] <- df[isBip, 3:4] * mul
+            if (missing(arrowmul))
+                arrowmul <- arrowMul(df[isBip, 3:4, drop=FALSE],
+                                     df[!isBip, 3:4, drop=FALSE])
+            df[isBip, 3:4] <- df[isBip, 3:4] * arrowmul
         }
     }
     ## weights are needed in some statistics
@@ -105,6 +120,10 @@
 #' @importFrom ggplot2 geom_point
 
 #' @rdname ordiggplot
+#'
+#' @param data Alternative data to the function that will be used
+#'     instead of \code{Score}.
+#'
 #' @export
 `geom_ordipoint` <-
     function(Score, data,...)
@@ -172,6 +191,8 @@
 
 #' @importFrom ggplot2 geom_hline geom_vline
 #' @rdname ordiggplot
+#' @param lty Linetype.
+#'
 #' @export
 `geom_ordiaxis` <-
     function(lty = 3, ...)
@@ -207,6 +228,9 @@
     fit
 }
 
+#' @rdname stat_vectorfit
+#' @format NULL
+#' @usage NULL
 #' @export
 `StatVectorfit` <-
     ggproto("StatVectorfit", Stat,
@@ -242,6 +266,37 @@
     )
 
 #' @importFrom ggplot2 layer
+#' @rdname stat_vectorfit
+#'
+#' @title Add Fitted Vectors to Ordination plots
+#'
+#' @description Fits arrows to show the direction of fastest increase
+#'     in continuous environmental variables in ordination space.The
+#'     arrows are scaled relative to their correlation coefficient,
+#'     and they can be added to an ordination plot with
+#'     \code{\link{geom_ordiarrow}}.
+#'
+#' @inheritParams ggplot2::layer
+#' @param na.rm Remove missing values (Not Yet Implemented).
+#' @param edata Environmental data where the continuous variables are
+#'     found.
+#' @param formula Formula to select variables from \code{edata}. If
+#'     missing, all continuos variables of \code{edata} are used.
+#' @param arrowmul Multiplier to arrow length. If missing, the
+#'     multiplier is selected automatically so that arrows fit the
+#'     current graph.
+#' @param ... Other arguments passed to the functions.
+#' 
+#' @examples
+#' data(mite, mite.env)
+#' m <- metaMDS(mite, trace=FALSE, trymax=100)
+#' ## add fitted vectors for continuous variables
+#' ordiggplot(m) + geom_ordipoint("sites") +
+#'   geom_ordiarrow("sites", edata=mite.env)
+#' ## can be faceted
+#' ordiggplot(m) + geom_ordipoint("sites") +
+#'   geom_ordiarrow("sites", edata=mite.env) +
+#'   facet_wrap(mite.env$Topo)
 #' @export
 `stat_vectorfit` <-
     function(mapping = NULL, data = NULL,
