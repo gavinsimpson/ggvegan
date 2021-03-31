@@ -30,7 +30,7 @@
 `autoplot.radfit` <-
     function(object, facet = TRUE, ...)
 {
-    df <- fortify(object)
+    df <- fortify(object, ...)
     pl <- ggplot(df, aes_(~Rank)) +
         scale_y_log10(limit=c(1,NA)) +
         geom_point(mapping=aes_(y = ~Abundance)) +
@@ -43,18 +43,36 @@
 #'
 #' @inheritParams ggplot2::fortify
 #'
-#' @importFrom stats fitted
+#' @param pick Pick or several models. Allowed values are \code{"AIC"}
+#'     and \code{"BIC"} for selecting the best model by AIC or BIC, or
+#'     (a vector of) model names that can be abbreviated. The default
+#'     returns all fitted models.
+#'
+#' @importFrom stats AIC fitted
 #'
 #' @rdname autoplot.radfit
 #' @export
 `fortify.radfit` <-
-    function(model, data, ...)
+    function(model, data, pick = NULL, ...)
 {
     Abundance <- model$y
     nsp <- length(Abundance)
     Rank <- seq_len(nsp)
     Species <- names(Abundance)
     fv <- fitted(model)
+    ## only pick wanted models
+    if (!is.null(pick)) {
+        pick <- match.arg(pick, c(names(model$models), "AIC","BIC"),
+                          several.ok=TRUE)
+        if (any(c("AIC","BIC") %in% pick)) {
+            if("BIC" %in% pick)
+                k <- log(length(model$y))
+            else
+                k <- 2
+            pick <- which.min(AIC(model, k=k))
+        }
+        fv <- fv[, pick, drop=FALSE]
+    }
     nmods <- NCOL(fv)
     modnames <- colnames(fv)
     mods <- factor(rep(modnames, each=nsp), levels=modnames)
@@ -65,3 +83,16 @@
                      Model = mods)
     df
 }
+
+## support function to pick the model with lowest AIC or BIC
+
+`radpicker` <-
+    function(model, BIC = FALSE, ...)
+{
+    k <- if(BIC)
+             log(length(model$y))
+         else
+             2
+    which.min(AIC(model, k))
+}
+
