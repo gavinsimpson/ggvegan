@@ -18,13 +18,21 @@
 #' autoplot(m1)
 #' ## With log-log scale, Zipf model is a line
 #' autoplot(m1) + scale_x_log10()
+#' ## Show only the best model
+#' autoplot(m1, pick = "AIC")
+#' ## Show selected models in one frame
+#' autoplot(m1, pick = c("Z","M","L"), facet=FALSE)
+#' ## plot best modesl for several sites
+#' m <- radfit(mite[1:12,])
+#' autoplot(m, pick="AIC")
+#'
 
 #' @param object Result object from \code{\link[vegan]{radfit}}.
 #' @param facet Draw each fitted model to a separate facet or (if
 #'     \code{FALSE}) all fitted lines to a single graph.
 #'
 #' @importFrom ggplot2 ggplot aes_ scale_y_log10 facet_wrap geom_point
-#'     geom_line
+#'     geom_line fortify
 #'
 #' @export
 `autoplot.radfit` <-
@@ -37,6 +45,24 @@
         geom_line(mapping=aes_(y = ~Fit, colour = ~Model))
     if(facet)
         pl <- pl + facet_wrap(~Model)
+    pl
+}
+
+#'
+#' @importFrom ggplot2 fortify aes_ scale_y_log10 geom_point geom_line
+#'     facet_wrap
+#'
+#' @rdname autoplot.radfit
+#' @export
+`autoplot.radfit.frame` <-
+    function(object, ...)
+{
+    df <- fortify(object, ...)
+    pl <- ggplot(df, aes_(~Rank)) +
+        scale_y_log10(limit=c(1,NA)) +
+        geom_point(mapping=aes_(y = ~Abundance)) +
+        geom_line(mapping=aes_(y = ~Fit, colour = ~Model)) +
+        facet_wrap(~Site)
     pl
 }
 
@@ -84,15 +110,44 @@
     df
 }
 
-## support function to pick the model with lowest AIC or BIC
-
-`radpicker` <-
-    function(model, BIC = FALSE, ...)
+#'
+#'
+#' @rdname autoplot.radfit
+#' @export
+`fortify.radfit.frame` <-
+    function(model, data, pick = "AIC", ...)
 {
-    k <- if(BIC)
-             log(length(model$y))
-         else
-             2
-    which.min(AIC(model, k))
+    allmods <- names(model[[1]]$models)
+    pick <- match.arg(pick, c(allmods, "AIC", "BIC"))
+    abu <- lapply(model, function(x) x$y)
+    nsp <- sapply(abu, length)
+    spe <- lapply(abu, names)
+    sit <- names(model)
+    fv <- lapply(model, radpicker, pick = pick)
+    mod <- sapply(fv, colnames)
+    df <- data.frame(
+        "Site" = factor(rep(sit, nsp), levels=sit),
+        "Species" = unlist(spe, use.names=FALSE),
+        "Rank" =  unlist(sapply(nsp, seq_len), use.names=FALSE),
+        "Abundance" = unlist(abu, use.names=FALSE),
+        "Fit" = drop(do.call(rbind, fv)),
+        "Model" = factor(rep(mod, nsp), levels=allmods)
+    )
+    df
+}
+## support function to pick the model with lowest AIC or BIC or by the
+## name. Input is a single model from a radfit.frame and pick is a
+## single argument value.
+
+#' @importFrom stats AIC fitted
+#'
+`radpicker` <-
+    function(mod1, pick, ...)
+{
+    fv <- fitted(mod1)
+    switch(pick,
+           "AIC" = fv[, which.min(AIC(mod1)), drop=FALSE],
+           "BIC" = fv[, which.min(AIC(mod1, k=log(nrow(fv)))), drop=FALSE],
+           fv[,pick, drop=FALSE])
 }
 
