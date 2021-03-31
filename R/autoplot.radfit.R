@@ -20,20 +20,24 @@
 #' autoplot(m1) + scale_x_log10()
 
 #' @param object Result object from \code{\link[vegan]{radfit}}.
+#' @param facet Draw each fitted model to a separate facet or (if
+#'     \code{FALSE}) all fitted lines to a single graph.
 #'
 #' @importFrom ggplot2 ggplot aes_ scale_y_log10 facet_wrap geom_point
 #'     geom_line
 #'
 #' @export
 `autoplot.radfit` <-
-    function(object, ...)
+    function(object, facet = TRUE, ...)
 {
     df <- fortify(object)
-    ggplot(df, aes_(~Rank)) +
+    pl <- ggplot(df, aes_(~Rank)) +
         scale_y_log10(limit=c(1,NA)) +
-        facet_wrap(~Model) +
         geom_point(mapping=aes_(y = ~Abundance)) +
         geom_line(mapping=aes_(y = ~Fit, colour = ~Model))
+    if(facet)
+        pl <- pl + facet_wrap(~Model)
+    pl
 }
 
 #'
