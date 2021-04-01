@@ -15,16 +15,20 @@
 #' data(mite)
 #' m1 <- radfit(mite[1,])
 #' ## With logarithmic y-axis (default) Pre-emption model is a line
-#' autoplot(m1)
+#' autoplot(m1) + labs(title="log-Abundance: Pre-emption model is a line")
 #' ## With log-log scale, Zipf model is a line
-#' autoplot(m1) + scale_x_log10()
+#' autoplot(m1) + scale_x_log10() +
+#'    labs(title="log-log Scale: Zipf model is a line")
 #' ## Show only the best model
 #' autoplot(m1, pick = "AIC")
 #' ## Show selected models in one frame
 #' autoplot(m1, pick = c("Z","M","L"), facet=FALSE)
-#' ## plot best modesl for several sites
+#' ## plot best models for several sites
 #' m <- radfit(mite[1:12,])
-#' autoplot(m, pick="AIC")
+#' autoplot(m) + labs(title="Model Selection AIC (Default)")
+#' ## use BIC and reoreder sites by their diversity
+#' autoplot(m, pick="BIC", order.by = diversity(mite[1:12,])) +
+#'    labs(title="Model Selection BIC, Ordered by Increasing Diversity")
 #'
 
 #' @param object Result object from \code{\link[vegan]{radfit}}.
@@ -110,12 +114,12 @@
     df
 }
 
-#'
+#' @param order.by A vector used for ordering site panels.
 #'
 #' @rdname autoplot.radfit
 #' @export
 `fortify.radfit.frame` <-
-    function(model, data, pick = "AIC", ...)
+    function(model, data, pick = "AIC", order.by = NULL, ...)
 {
     allmods <- names(model[[1]]$models)
     pick <- match.arg(pick, c(allmods, "AIC", "BIC"))
@@ -125,8 +129,13 @@
     sit <- names(model)
     fv <- lapply(model, radpicker, pick = pick)
     mod <- sapply(fv, colnames)
+    ## enable re-ordering of Site panels
+    if (is.null(order.by))
+        order.by <- seq_along(sit)
+    else
+        order.by <- order(order.by)
     df <- data.frame(
-        "Site" = factor(rep(sit, nsp), levels=sit),
+        "Site" = factor(rep(sit, nsp), levels=sit[order.by]),
         "Species" = unlist(spe, use.names=FALSE),
         "Rank" =  unlist(sapply(nsp, seq_len), use.names=FALSE),
         "Abundance" = unlist(abu, use.names=FALSE),
