@@ -18,7 +18,15 @@ geom_orditext(Score, data, ...)
 
 geom_ordilabel(Score, data, ...)
 
-geom_ordiarrow(Score, data, text = TRUE, box = FALSE, ...)
+geom_ordiarrow(
+  Score,
+  data,
+  text = TRUE,
+  box = FALSE,
+  arrow.params = list(),
+  text.params = list(),
+  ...
+)
 
 geom_ordiaxis(lty = 3, ...)
 
@@ -44,6 +52,9 @@ instead of \code{Score}.}
 \item{text}{Add text labels to the plot.}
 
 \item{box}{Draw a box behind the text (logical).}
+
+\item{arrow.params, text.params}{Parameters to modify arrows or
+their text labels.}
 
 \item{lty}{Linetype.}
 }

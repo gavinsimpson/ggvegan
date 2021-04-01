@@ -161,27 +161,41 @@
         data <- ~.x[.x$Score == Score,]
     geom_label(data = data, ...)
 }
+
+#' @param arrow.params,text.params Parameters to modify arrows or
+#'     their text labels.
+#'
 #' @importFrom ggplot2 geom_segment geom_label geom_text aes
 #' @importFrom grid arrow
+#' @importFrom utils modifyList
+#'
 #' @rdname ordiggplot
 #' @export
 `geom_ordiarrow` <-
-    function(Score, data, text = TRUE, box = FALSE, ...)
+    function(Score, data, text = TRUE, box = FALSE,
+             arrow.params=list(), text.params=list(), ...)
 {
     if (missing(Score) && missing(data))
         stop("either Score or data must be defined")
     if (missing(data))
         data <- ggscores(Score)
-    pl <- geom_segment(data = data, mapping = aes(xend = 0, yend = 0),
-                       arrow = arrow(ends = "first", length=unit(0.2, "cm")),
-                       ...)
+    ## default params & possible modification
+    arrowdefs <- list(arrow = arrow(ends = "first", length=unit(0.2, "cm")))
+    textdefs <- list(vjust = "outward", hjust = "outward")
+    arrowdefs <- modifyList(arrowdefs, arrow.params)
+    textdefs <- modifyList(textdefs, text.params)
+    ## graphics
+    pl <- do.call("geom_segment",
+                  modifyList(list(data = data,
+                                  mapping = aes(xend = 0, yend = 0)),
+                                  arrowdefs))
     if (text) {
         if(box)
-            p2 <- geom_label(data = data, vjust = "outward", hjust = "outward",
-                             ...)
+            p2 <- do.call("geom_label",
+                          modifyList(list(data = data), textdefs))
         else
-            p2 <- geom_text(data = data, vjust = "outward", hjust = "outward",
-                            ...)
+            p2 <- do.call("geom_text",
+                          modifyList(list(data = data), textdefs))
         pl <- list(pl, p2) ## ggprotos cannot be added (+)
     }
     pl
@@ -286,7 +300,7 @@
 #'     multiplier is selected automatically so that arrows fit the
 #'     current graph.
 #' @param ... Other arguments passed to the functions.
-#' 
+#'
 #' @examples
 #' data(mite, mite.env)
 #' m <- metaMDS(mite, trace=FALSE, trymax=100)
