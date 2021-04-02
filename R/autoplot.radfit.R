@@ -72,6 +72,21 @@
     pl
 }
 
+#' @importFrom ggplot2 ggplot scale_y_log10 geom_point geom_line aes_
+#'     fortify
+#' @rdname autoplot.radfit
+#' @export
+`autoplot.radline`<-
+    function(object, ...)
+{
+    df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
+    ggplot(df, aes_(~Rank)) +
+        scale_y_log10() +  # no lower limit for a single line
+        geom_point(mapping=aes_(y = ~Abundance)) +
+        geom_line(mapping=aes_(y = ~ Fit))
+}
+
 #'
 #' @inheritParams ggplot2::fortify
 #'
@@ -162,3 +177,16 @@
            fv[,pick, drop=FALSE])
 }
 
+#' @importFrom stats fitted
+#' @rdname autoplot.radfit
+#' @export
+`fortify.radline` <-
+    function(model, data, ...)
+{
+    data.frame(
+        Species = names(model$y),
+        Rank = seq_along(model$y),
+        Abundance = unclass(model$y),
+        Fit = fitted(model)
+    )
+}
