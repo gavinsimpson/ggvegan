@@ -43,8 +43,9 @@
     function(object, facet = TRUE, ...)
 {
     df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
     pl <- ggplot(df, aes_(~Rank)) +
-        scale_y_log10(limit=c(1,NA)) +
+        scale_y_log10(limit=c(ymin,NA)) +
         geom_point(mapping=aes_(y = ~Abundance)) +
         geom_line(mapping=aes_(y = ~Fit, colour = ~Model))
     if(facet)
@@ -62,8 +63,9 @@
     function(object, ...)
 {
     df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
     pl <- ggplot(df, aes_(~Rank)) +
-        scale_y_log10(limit=c(1,NA)) +
+        scale_y_log10(limit=c(ymin,NA)) +
         geom_point(mapping=aes_(y = ~Abundance)) +
         geom_line(mapping=aes_(y = ~Fit, colour = ~Model)) +
         facet_wrap(~Site)
