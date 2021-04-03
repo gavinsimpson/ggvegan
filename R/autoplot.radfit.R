@@ -34,20 +34,29 @@
 #' @param object Result object from \code{\link[vegan]{radfit}}.
 #' @param facet Draw each fitted model to a separate facet or (if
 #'     \code{FALSE}) all fitted lines to a single graph.
+#' @param point.params,line.params Parameters to modify points or
+#'     lines (passed to \code{\link[ggplot2]{geom_point}} and
+#'     \code{\link[ggplot2]{geom_line}}).
 #'
 #' @importFrom ggplot2 ggplot aes_ scale_y_log10 facet_wrap geom_point
 #'     geom_line fortify
+#' @importFrom utils modifyList
 #'
 #' @export
 `autoplot.radfit` <-
-    function(object, facet = TRUE, ...)
+    function(object, facet = TRUE, point.params = list(), line.params = list(),
+             ...)
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~ Model)),
+                                   line.params)
     pl <- ggplot(df, aes_(~Rank)) +
         scale_y_log10(limit=c(ymin,NA)) +
-        geom_point(mapping=aes_(y = ~Abundance)) +
-        geom_line(mapping=aes_(y = ~Fit, colour = ~Model))
+        do.call("geom_point", point.params) +
+        do.call("geom_line", line.params)
     if(facet)
         pl <- pl + facet_wrap(~Model)
     pl
@@ -56,35 +65,45 @@
 #'
 #' @importFrom ggplot2 fortify aes_ scale_y_log10 geom_point geom_line
 #'     facet_wrap
+#' @importForm utils modifyList
 #'
 #' @rdname autoplot.radfit
 #' @export
 `autoplot.radfit.frame` <-
-    function(object, ...)
+    function(object, point.params=list(), line.params=list(), ...)
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~Model)),
+                              line.params)
     pl <- ggplot(df, aes_(~Rank)) +
         scale_y_log10(limit=c(ymin,NA)) +
-        geom_point(mapping=aes_(y = ~Abundance)) +
-        geom_line(mapping=aes_(y = ~Fit, colour = ~Model)) +
+        do.call("geom_point", point.params) +
+        do.call("geom_line", line.params) +
         facet_wrap(~Site)
     pl
 }
 
 #' @importFrom ggplot2 ggplot scale_y_log10 geom_point geom_line aes_
 #'     fortify
+#' @importFrom utils modifyList
 #' @rdname autoplot.radfit
 #' @export
 `autoplot.radline`<-
-    function(object, ...)
+    function(object, point.params = list(), line.params = list(), ...)
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    line.params <- modifyList(list(mapping=aes_(y = ~ Fit)),
+                              line.params)
     ggplot(df, aes_(~Rank)) +
         scale_y_log10() +  # no lower limit for a single line
-        geom_point(mapping=aes_(y = ~Abundance)) +
-        geom_line(mapping=aes_(y = ~ Fit))
+        do.call("geom_point", point.params) +
+        do.call("geom_line", line.params)
 }
 
 #'
