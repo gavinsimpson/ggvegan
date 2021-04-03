@@ -78,12 +78,11 @@
                                point.params)
     line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~Model)),
                               line.params)
-    pl <- ggplot(df, aes_(~Rank)) +
+    ggplot(df, aes_(~Rank)) +
         scale_y_log10(limit=c(ymin,NA)) +
         do.call("geom_point", point.params) +
         do.call("geom_line", line.params) +
         facet_wrap(~Site)
-    pl
 }
 
 #' @importFrom ggplot2 ggplot scale_y_log10 geom_point geom_line aes_
@@ -142,12 +141,11 @@
     nmods <- NCOL(fv)
     modnames <- colnames(fv)
     mods <- factor(rep(modnames, each=nsp), levels=modnames)
-    df <- data.frame(Species = Species,
-                     Rank = rep(Rank, nmods),
-                     Abundance = rep(Abundance, nmods),
-                     Fit = as.vector(fv),
-                     Model = mods)
-    df
+    data.frame(Species = Species,
+               Rank = rep(Rank, nmods),
+               Abundance = rep(Abundance, nmods),
+               Fit = as.vector(fv),
+               Model = mods)
 }
 
 #' @param order.by A vector used for ordering site panels.
@@ -170,7 +168,7 @@
         order.by <- seq_along(sit)
     else
         order.by <- order(order.by)
-    df <- data.frame(
+    data.frame(
         "Site" = factor(rep(sit, nsp), levels=sit[order.by]),
         "Species" = unlist(spe, use.names=FALSE),
         "Rank" =  unlist(sapply(nsp, seq_len), use.names=FALSE),
@@ -178,7 +176,6 @@
         "Fit" = drop(do.call(rbind, fv)),
         "Model" = factor(rep(mod, nsp), levels=allmods)
     )
-    df
 }
 ## support function to pick the model with lowest AIC or BIC or by the
 ## name. Input is a single model from a radfit.frame and pick is a
