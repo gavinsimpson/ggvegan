@@ -184,6 +184,11 @@
     textdefs <- list(vjust = "outward", hjust = "outward")
     arrowdefs <- modifyList(arrowdefs, arrow.params)
     textdefs <- modifyList(textdefs, text.params)
+    dots <- match.call(expand.dots = FALSE)$...
+    if (!is.null(dots)) {
+        arrowdefs <- modifyList(arrowdefs, dots)
+        textdefs <- modifyList(textdefs, dots)
+    }
     ## graphics
     pl <- do.call("geom_segment",
                   modifyList(list(data = data,
