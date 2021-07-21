@@ -100,30 +100,34 @@
 
     if(isTRUE(draw_list["biplot"])) {
         want <- obj[["Score"]] == "biplot"
-        if (length(layer_names) > 1) {
-            mul <- arrowMul(obj[want, vars, drop = FALSE],
-                            obj[!want, vars, drop = FALSE])
-            obj[want, vars] <- mul * obj[want, vars]
+        if (any(want)) {
+            if (length(layer_names) > 1) {
+                mul <- arrowMul(obj[want, vars, drop = FALSE],
+                                obj[!want, vars, drop = FALSE])
+                obj[want, vars] <- mul * obj[want, vars]
+            }
+            col <- "navy"
+            plt <- plt +
+                geom_segment(data = obj[want, , drop = FALSE ],
+                            aes_string(x = 0, y = 0,
+                                        xend = vars[1], yend = vars[2]),
+                            arrow = arrow(length = unit(0.2, "cm")),
+                            colour = col)
+            obj[want, vars] <- 1.1 * obj[want, vars]
+            plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
+                                aes_string(x = vars[1], y = vars[2],
+                                            label = 'Label'))
         }
-        col <- "navy"
-        plt <- plt +
-            geom_segment(data = obj[want, , drop = FALSE ],
-                         aes_string(x = 0, y = 0,
-                                    xend = vars[1], yend = vars[2]),
-                         arrow = arrow(length = unit(0.2, "cm")),
-                         colour = col)
-        obj[want, vars] <- 1.1 * obj[want, vars]
-        plt <- plt + geom_text(data = obj[want, , drop = FALSE ],
-                               aes_string(x = vars[1], y = vars[2],
-                                          label = 'Label'))
     }
 
     if(isTRUE(draw_list["centroids"])) {
         want <- obj[["Score"]] == "centroids"
-        plt <- plt +
-            geom_text(data = obj[want, , drop = FALSE],
-                      aes_string(x = vars[1], y = vars[2], label = 'Label'),
-                      colour = "navy")
+        if (any(want)) {
+            plt <- plt +
+                geom_text(data = obj[want, , drop = FALSE],
+                        aes_string(x = vars[1], y = vars[2], label = 'Label'),
+                        colour = "navy")
+        }
     }
 
     if(missing(xlab)) {
