@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fortify method for <code>envfit</code> objects — fortify.envfit • ggvegan</title>
+<title>Fortify method for envfit objects — fortify.envfit • ggvegan</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="Fortify method for <code>envfit</code> objects — fortify.envfit" />
+<meta property="og:title" content="Fortify method for envfit objects — fortify.envfit" />
 <meta property="og:description" content="Produces a tidy data frame from the results of an envfit object." />
+
+
 
 
 
@@ -56,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -115,8 +117,8 @@
     <p>Produces a tidy data frame from the results of an <code><a href='https://rdrr.io/pkg/vegan/man/envfit.html'>envfit</a></code> object.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for envfit</span>
-<span class='fu'>fortify</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='no'>...</span>)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for envfit</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,65 +140,75 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A data frame with columns <code>Label</code>, <code>Type</code>, containing the label for, and whether each row refers to, the fitted vector or factor. Remaining variables are coordinates on the respective ordination axes returned by <code><a href='https://rdrr.io/pkg/vegan/man/envfit.html'>scores.envfit</a></code>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Gavin L. Simpson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>varespec</span>, <span class='no'>varechem</span>)
-<span class='no'>ord</span> <span class='kw'>&lt;-</span> <span class='fu'>metaMDS</span>(<span class='no'>varespec</span>)</div><div class='output co'>#&gt; Square root transformation
-#&gt; Wisconsin double standardization
-#&gt; Run 0 stress 0.1843196 
-#&gt; Run 1 stress 0.2331602 
-#&gt; Run 2 stress 0.2353278 
-#&gt; Run 3 stress 0.2136773 
-#&gt; Run 4 stress 0.1955854 
-#&gt; Run 5 stress 0.2218504 
-#&gt; Run 6 stress 0.2032569 
-#&gt; Run 7 stress 0.1825658 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 0.04171002  max resid 0.1521984 
-#&gt; Run 8 stress 0.2269403 
-#&gt; Run 9 stress 0.1825658 
-#&gt; ... Procrustes: rmse 0.0001248331  max resid 0.0003366667 
-#&gt; ... Similar to previous best
-#&gt; Run 10 stress 0.2050757 
-#&gt; Run 11 stress 0.2088293 
-#&gt; Run 12 stress 0.1969805 
-#&gt; Run 13 stress 0.1845801 
-#&gt; Run 14 stress 0.2404575 
-#&gt; Run 15 stress 0.1825659 
-#&gt; ... Procrustes: rmse 0.0001535111  max resid 0.0005017307 
-#&gt; ... Similar to previous best
-#&gt; Run 16 stress 0.2028828 
-#&gt; Run 17 stress 0.2338494 
-#&gt; Run 18 stress 0.2396823 
-#&gt; Run 19 stress 0.2057245 
-#&gt; Run 20 stress 0.2200288 
-#&gt; *** Solution reached</div><div class='input'><span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>envfit</span>(<span class='no'>ord</span>, <span class='no'>varechem</span>, <span class='kw'>perm</span> <span class='kw'>=</span> <span class='fl'>199</span>)
-
-<span class='fu'>fortify</span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt;       Label   Type       NMDS1      NMDS2
-#&gt; 1         N Vector -0.02877476 -0.5029069
-#&gt; 2         P Vector  0.27272946  0.3455565
-#&gt; 3         K Vector  0.32590338  0.2733061
-#&gt; 4        Ca Vector  0.43961276  0.4675688
-#&gt; 5        Mg Vector  0.41324785  0.5062745
-#&gt; 6         S Vector  0.08001655  0.4108906
-#&gt; 7        Al Vector -0.63280391  0.3556894
-#&gt; 8        Fe Vector -0.62457003  0.2345064
-#&gt; 9        Mn Vector  0.57764952 -0.4351441
-#&gt; 10       Zn Vector  0.26765710  0.3409615
-#&gt; 11       Mo Vector -0.22292058  0.1060425
-#&gt; 12 Baresoil Vector  0.46326691 -0.1901603
-#&gt; 13 Humdepth Vector  0.67274641 -0.2596255
-#&gt; 14       pH Vector -0.31134048  0.3658234</div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune</span>, <span class='no'>dune.env</span>)
-<span class='no'>ord</span> <span class='kw'>&lt;-</span> <span class='fu'>cca</span>(<span class='no'>dune</span>)
-<span class='no'>fit</span> <span class='kw'>&lt;-</span> <span class='fu'>envfit</span>(<span class='no'>ord</span> ~ <span class='no'>Moisture</span> + <span class='no'>A1</span>, <span class='no'>dune.env</span>, <span class='kw'>perm</span> <span class='kw'>=</span> <span class='fl'>199</span>)
-
-<span class='fu'>fortify</span>(<span class='no'>fit</span>)</div><div class='output co'>#&gt;       Label     Type        CA1         CA2
-#&gt; 1        A1   Vector  0.5560989  0.03376924
-#&gt; 2 Moisture1 Centroid -0.7484337 -0.14227818
-#&gt; 3 Moisture2 Centroid -0.4651928 -0.21556841
-#&gt; 4 Moisture4 Centroid  0.1826781 -0.73151540
-#&gt; 5 Moisture5 Centroid  1.1142548  0.57080238</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>varespec</span>, <span class='va'>varechem</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ord</span> <span class='op'>&lt;-</span> <span class='fu'>metaMDS</span><span class='op'>(</span><span class='va'>varespec</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Square root transformation</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Wisconsin double standardization</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 0 stress 0.1843196 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 1 stress 0.2331579 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 2 stress 0.2353272 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 3 stress 0.2136763 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 4 stress 0.1955836 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 5 stress 0.2218502 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 6 stress 0.2032569 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 7 stress 0.1825658 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 0.04163956  max resid 0.1518716 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 8 stress 0.2269402 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 9 stress 0.1825658 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.364782e-05  max resid 0.0001012571 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 10 stress 0.1948413 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 11 stress 0.2088293 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 12 stress 0.1969805 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 13 stress 0.18458 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 14 stress 0.2404569 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 15 stress 0.1825658 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.82545e-05  max resid 0.0001221486 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 16 stress 0.2028828 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 17 stress 0.2338494 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 18 stress 0.2396702 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 19 stress 0.2057245 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 20 stress 0.2200285 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> *** Solution reached</span>
+<span class='r-in'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>envfit</span><span class='op'>(</span><span class='va'>ord</span>, <span class='va'>varechem</span>, perm <span class='op'>=</span> <span class='fl'>199</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>fortify</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Label   Type       NMDS1      NMDS2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1         N Vector -0.02887163 -0.5027736</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2         P Vector  0.27285614  0.3455344</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3         K Vector  0.32602827  0.2731980</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4        Ca Vector  0.43974618  0.4674180</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5        Mg Vector  0.41334063  0.5061291</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6         S Vector  0.08011005  0.4108088</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 7        Al Vector -0.63268557  0.3558613</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 8        Fe Vector -0.62441036  0.2348277</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 9        Mn Vector  0.57767101 -0.4351840</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 10       Zn Vector  0.26771528  0.3409638</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 11       Mo Vector -0.22295679  0.1060218</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 12 Baresoil Vector  0.46314406 -0.1904459</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 13 Humdepth Vector  0.67270113 -0.2598610</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 14       pH Vector -0.31129817  0.3659080</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune</span>, <span class='va'>dune.env</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ord</span> <span class='op'>&lt;-</span> <span class='fu'>cca</span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'>envfit</span><span class='op'>(</span><span class='va'>ord</span> <span class='op'>~</span> <span class='va'>Moisture</span> <span class='op'>+</span> <span class='va'>A1</span>, <span class='va'>dune.env</span>, perm <span class='op'>=</span> <span class='fl'>199</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>fortify</span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Label     Type        CA1         CA2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1        A1   Vector  0.5560989  0.03376924</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 Moisture1 Centroid -0.7484337 -0.14227818</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 Moisture2 Centroid -0.4651928 -0.21556841</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 Moisture4 Centroid  0.1826781 -0.73151540</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 Moisture5 Centroid  1.1142548  0.57080238</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -208,11 +220,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -220,6 +232,8 @@
 
   
 
+
+  
 
   </body>
 </html>

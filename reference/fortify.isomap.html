@@ -45,6 +45,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -56,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -115,8 +117,8 @@
     <p>Prepares fortified versions of results from <code><a href='https://rdrr.io/pkg/vegan/man/isomap.html'>isomap</a></code> objects.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for isomap</span>
-<span class='fu'>fortify</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sites"</span>, <span class='st'>"network"</span>), <span class='no'>...</span>)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for isomap</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>model</span>, data <span class='op'>=</span> <span class='cn'>NULL</span>, axes <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>, what <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sites"</span>, <span class='st'>"network"</span><span class='op'>)</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,22 +151,27 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Two different objects can be created from the results of an <code><a href='https://rdrr.io/pkg/vegan/man/isomap.html'>isomap</a></code> object. The first is the standard scores representation of fortified ordinations in vegan, which results in a wide data frame where rows cotain observations and columne the coordinates of observations on the MDS axes. Because ISOMAP also produces a network or sorts, the coordinates of the edges of the network can also be returned in a tidy format using <code>what = "network"</code>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Gavin L. Simpson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>BCI</span>)
-<span class='no'>dis</span> <span class='kw'>&lt;-</span> <span class='fu'>vegdist</span>(<span class='no'>BCI</span>)
-<span class='no'>ord</span> <span class='kw'>&lt;-</span> <span class='fu'>isomap</span>(<span class='no'>dis</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>3</span>)
-
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>fortify</span>(<span class='no'>ord</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>Richness</span> <span class='kw'>=</span> <span class='fu'>specnumber</span>(<span class='no'>BCI</span>)))
-<span class='no'>net</span> <span class='kw'>&lt;-</span> <span class='fu'>fortify</span>(<span class='no'>ord</span>, <span class='kw'>what</span> <span class='kw'>=</span> <span class='st'>"network"</span>, <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>2</span>)
-
-<span class='fu'>ggplot</span>(<span class='no'>df</span>, <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Dim1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Dim2</span>)) +
-    <span class='fu'>geom_segment</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>net</span>,
-                 <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>xfrom</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>yfrom</span>,
-                     <span class='kw'>xend</span> <span class='kw'>=</span> <span class='no'>xto</span>, <span class='kw'>yend</span> <span class='kw'>=</span> <span class='no'>yto</span>),
-                 <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"grey85"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.8</span>) +
-    <span class='fu'>geom_point</span>(<span class='fu'>aes</span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>Richness</span>)) +
-    <span class='fu'>coord_fixed</span>()</div><div class='img'><img src='fortify.isomap-1.png' alt='' width='700' height='433' /></div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>BCI</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dis</span> <span class='op'>&lt;-</span> <span class='fu'>vegdist</span><span class='op'>(</span><span class='va'>BCI</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ord</span> <span class='op'>&lt;-</span> <span class='fu'>isomap</span><span class='op'>(</span><span class='va'>dis</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>ord</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>Richness <span class='op'>=</span> <span class='fu'>specnumber</span><span class='op'>(</span><span class='va'>BCI</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>net</span> <span class='op'>&lt;-</span> <span class='fu'>fortify</span><span class='op'>(</span><span class='va'>ord</span>, what <span class='op'>=</span> <span class='st'>"network"</span>, axes <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>df</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Dim1</span>, y <span class='op'>=</span> <span class='va'>Dim2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>    <span class='fu'>geom_segment</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>net</span>,</span>
+<span class='r-in'>                 <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>xfrom</span>, y <span class='op'>=</span> <span class='va'>yfrom</span>,</span>
+<span class='r-in'>                     xend <span class='op'>=</span> <span class='va'>xto</span>, yend <span class='op'>=</span> <span class='va'>yto</span><span class='op'>)</span>,</span>
+<span class='r-in'>                 colour <span class='op'>=</span> <span class='st'>"grey85"</span>, size <span class='op'>=</span> <span class='fl'>0.8</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>    <span class='fu'>geom_point</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>size <span class='op'>=</span> <span class='va'>Richness</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span class='r-in'>    <span class='fu'>coord_fixed</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='fortify.isomap-1.png' alt='' width='700' height='433' /></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -176,11 +183,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -188,6 +195,8 @@
 
   
 
+
+  
 
   </body>
 </html>

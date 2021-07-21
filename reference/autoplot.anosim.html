@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggplot-based plot for objects of class <code>"anosim"</code> — autoplot.anosim • ggvegan</title>
+<title>ggplot-based plot for objects of class "anosim" — autoplot.anosim • ggvegan</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="ggplot-based plot for objects of class <code>"anosim"</code> — autoplot.anosim" />
+<meta property="og:title" content="ggplot-based plot for objects of class "anosim" — autoplot.anosim" />
 <meta property="og:description" content="Produces a multi-layer ggplot object representing the output of objects produced by anosim." />
+
+
 
 
 
@@ -56,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -115,18 +117,18 @@
     <p>Produces a multi-layer ggplot object representing the output of objects produced by <code><a href='https://rdrr.io/pkg/vegan/man/anosim.html'>anosim</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for anosim</span>
-<span class='fu'>autoplot</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>notch</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>varwidth</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Analysis of similarities"</span>,
-  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/bquote.html'>bquote</a></span>(<span class='no'>R</span> <span class='kw'>==</span> <span class='fu'>.</span>(<span class='no'>R</span>) * <span class='st'>","</span> ~ <span class='no'>P</span> <span class='kw'>==</span> <span class='fu'>.</span>(<span class='no'>P</span>)),
-  <span class='no'>...</span>
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for anosim</span>
+<span class='fu'>autoplot</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  notch <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  varwidth <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  xlab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ylab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  title <span class='op'>=</span> <span class='st'>"Analysis of similarities"</span>,
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  caption <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/bquote.html'>bquote</a></span><span class='op'>(</span><span class='va'>R</span> <span class='op'>==</span> <span class='fu'>.</span><span class='op'>(</span><span class='va'>R</span><span class='op'>)</span> <span class='op'>*</span> <span class='st'>","</span> <span class='op'>~</span> <span class='va'>P</span> <span class='op'>==</span> <span class='fu'>.</span><span class='op'>(</span><span class='va'>P</span><span class='op'>)</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -172,15 +174,20 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A ggplot object.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Didzis Elferts. Modifications by Gavin L. Simpson.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune.env</span>)
-<span class='no'>dune.dist</span> <span class='kw'>&lt;-</span> <span class='fu'>vegdist</span>(<span class='no'>dune</span>)
-<span class='no'>dune.ano</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span>(<span class='no'>dune.env</span>, <span class='fu'>anosim</span>(<span class='no'>dune.dist</span>, <span class='no'>Management</span>))
-
-<span class='fu'>autoplot</span>(<span class='no'>dune.ano</span>, <span class='kw'>notch</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='autoplot.anosim-1.png' alt='' width='700' height='433' /></div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune.env</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dune.dist</span> <span class='op'>&lt;-</span> <span class='fu'>vegdist</span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>dune.ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>dune.env</span>, <span class='fu'>anosim</span><span class='op'>(</span><span class='va'>dune.dist</span>, <span class='va'>Management</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>autoplot</span><span class='op'>(</span><span class='va'>dune.ano</span>, notch <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='autoplot.anosim-1.png' alt='' width='700' height='433' /></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -192,11 +199,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -204,6 +211,8 @@
 
   
 
+
+  
 
   </body>
 </html>

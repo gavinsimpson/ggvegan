@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggplot-based plot for objects of class <code>"poolaccum"</code> — autoplot.poolaccum • ggvegan</title>
+<title>ggplot-based plot for objects of class "poolaccum" — autoplot.poolaccum • ggvegan</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,10 @@
 
 
 
-<meta property="og:title" content="ggplot-based plot for objects of class <code>"poolaccum"</code> — autoplot.poolaccum" />
+<meta property="og:title" content="ggplot-based plot for objects of class "poolaccum" — autoplot.poolaccum" />
 <meta property="og:description" content="Produces a multi-layer ggplot object representing the output of objects produced by poolaccum." />
+
+
 
 
 
@@ -56,9 +58,15 @@
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,12 +87,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -115,20 +117,20 @@
     <p>Produces a multi-layer ggplot object representing the output of objects produced by <code><a href='https://rdrr.io/pkg/vegan/man/specpool.html'>poolaccum</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for poolaccum</span>
-<span class='fu'>autoplot</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ribbon</span> <span class='kw'>=</span> <span class='no'>facet</span>,
-  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ribbon.alpha</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
-  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Size"</span>,
-  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Richness"</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Accumulated species richness"</span>,
-  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for poolaccum</span>
+<span class='fu'>autoplot</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  facet <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ribbon <span class='op'>=</span> <span class='va'>facet</span>,
+  ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ribbon.alpha <span class='op'>=</span> <span class='fl'>0.3</span>,
+  xlab <span class='op'>=</span> <span class='st'>"Size"</span>,
+  ylab <span class='op'>=</span> <span class='st'>"Richness"</span>,
+  title <span class='op'>=</span> <span class='st'>"Accumulated species richness"</span>,
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  caption <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -182,14 +184,22 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A ggplot object.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Didzis Elferts &amp; Gavin L. Simpson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>BCI</span>)
-<span class='no'>pool</span> <span class='kw'>&lt;-</span> <span class='fu'>poolaccum</span>(<span class='no'>BCI</span>)
-
-<span class='fu'>autoplot</span>(<span class='no'>pool</span>)</div><div class='img'><img src='autoplot.poolaccum-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='co'>## Turn off facetting; turns off ribbon too</span>
-<span class='fu'>autoplot</span>(<span class='no'>pool</span>, <span class='kw'>facet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='autoplot.poolaccum-2.png' alt='' width='700' height='433' /></div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>BCI</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>pool</span> <span class='op'>&lt;-</span> <span class='fu'>poolaccum</span><span class='op'>(</span><span class='va'>BCI</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>autoplot</span><span class='op'>(</span><span class='va'>pool</span><span class='op'>)</span></span>
+<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>`ncol` is missing or less than 1 and will be treated as NULL.</span>
+<span class='r-plt'><img src='autoplot.poolaccum-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## Turn off facetting; turns off ribbon too</span></span>
+<span class='r-in'><span class='fu'>autoplot</span><span class='op'>(</span><span class='va'>pool</span>, facet <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='autoplot.poolaccum-2.png' alt='' width='700' height='433' /></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -201,11 +211,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -213,6 +223,8 @@
 
   
 
+
+  
 
   </body>
 </html>

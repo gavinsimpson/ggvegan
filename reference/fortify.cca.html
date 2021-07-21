@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fortify a <code>"cca"</code> object. — fortify.cca • ggvegan</title>
+<title>Fortify a "cca" object. — fortify.cca • ggvegan</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,12 @@
 
 
 
-<meta property="og:title" content="Fortify a <code>"cca"</code> object. — fortify.cca" />
+<meta property="og:title" content="Fortify a "cca" object. — fortify.cca" />
 <meta property="og:description" content="Fortifies an object of class &quot;cca&quot; to produce a
 data frame of the selected axis scores in long format, suitable for
 plotting with ggplot." />
+
+
 
 
 
@@ -58,9 +60,15 @@ plotting with ggplot." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,12 +89,6 @@ plotting with ggplot." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -119,14 +121,14 @@ data frame of the selected axis scores in long format, suitable for
 plotting with <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for cca</span>
-<span class='fu'>fortify</span>(
-  <span class='no'>model</span>,
-  <span class='no'>data</span>,
-  <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>,
-  <span class='kw'>display</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sp"</span>, <span class='st'>"wa"</span>, <span class='st'>"lc"</span>, <span class='st'>"bp"</span>, <span class='st'>"cn"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for cca</span>
+<span class='fu'>fortify</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>data</span>,
+  axes <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>6</span>,
+  display <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sp"</span>, <span class='st'>"wa"</span>, <span class='st'>"lc"</span>, <span class='st'>"bp"</span>, <span class='st'>"cn"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,26 +165,31 @@ The first two components are the axis scores.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>TODO</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Gavin L. Simpson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune.env</span>)
-
-<span class='no'>sol</span> <span class='kw'>&lt;-</span> <span class='fu'>cca</span>(<span class='no'>dune</span> ~ <span class='no'>A1</span> + <span class='no'>Management</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dune.env</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>fortify</span>(<span class='no'>sol</span>))</div><div class='output co'>#&gt;     Score    Label       CCA1       CCA2       CCA3        CCA4        CA1
-#&gt; 1 species Achimill  0.2148956  0.6791166 -0.2244523 -0.36922857  0.5675090
-#&gt; 2 species Agrostol -0.1213250 -0.7574756  0.2775783  0.03523410 -0.5799404
-#&gt; 3 species Airaprae -1.8379217  0.8876801  0.7707220  0.60764105  2.1380074
-#&gt; 4 species Alopgeni  0.5378414 -0.6600444  0.4651552  0.07371563 -0.1991750
-#&gt; 5 species Anthodor -0.3771475  0.5807899 -0.2313703  0.21281154  1.1869495
-#&gt; 6 species Bellpere  0.1411665  0.2279161  0.1843069 -0.51485941  0.2352670
-#&gt;          CA2
-#&gt; 1  0.4127753
-#&gt; 2 -0.2138080
-#&gt; 3 -1.5906586
-#&gt; 4 -0.5489354
-#&gt; 5 -0.2081577
-#&gt; 6  0.7116896</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune.env</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>sol</span> <span class='op'>&lt;-</span> <span class='fu'>cca</span><span class='op'>(</span><span class='va'>dune</span> <span class='op'>~</span> <span class='va'>A1</span> <span class='op'>+</span> <span class='va'>Management</span>, data <span class='op'>=</span> <span class='va'>dune.env</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>fortify</span><span class='op'>(</span><span class='va'>sol</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Score    Label       CCA1       CCA2       CCA3        CCA4        CA1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 species Achimill  0.2148956  0.6791166 -0.2244523 -0.36922857  0.5675090</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 species Agrostol -0.1213250 -0.7574756  0.2775783  0.03523410 -0.5799404</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 species Airaprae -1.8379217  0.8876801  0.7707220  0.60764105  2.1380074</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 species Alopgeni  0.5378414 -0.6600444  0.4651552  0.07371563 -0.1991750</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 species Anthodor -0.3771475  0.5807899 -0.2313703  0.21281154  1.1869495</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 species Bellpere  0.1411665  0.2279161  0.1843069 -0.51485941  0.2352670</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          CA2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1  0.4127753</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 -0.2138080</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 -1.5906586</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 -0.5489354</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 -0.2081577</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6  0.7116896</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -194,11 +201,11 @@ The first two components are the axis scores.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -206,6 +213,8 @@ The first two components are the axis scores.</p>
 
   
 
+
+  
 
   </body>
 </html>

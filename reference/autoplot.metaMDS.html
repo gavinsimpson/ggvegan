@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ggplot-based plot for objects of class <code>"metaMDS"</code> — autoplot.metaMDS • ggvegan</title>
+<title>ggplot-based plot for objects of class "metaMDS" — autoplot.metaMDS • ggvegan</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,11 @@
 
 
 
-<meta property="og:title" content="ggplot-based plot for objects of class <code>"metaMDS"</code> — autoplot.metaMDS" />
+<meta property="og:title" content="ggplot-based plot for objects of class "metaMDS" — autoplot.metaMDS" />
 <meta property="og:description" content="Produces a multi-layer ggplot object representing the output of
 objects produced by metaMDS." />
+
+
 
 
 
@@ -57,9 +59,15 @@ objects produced by metaMDS." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -80,12 +88,6 @@ objects produced by metaMDS." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -117,20 +119,20 @@ objects produced by metaMDS." />
 objects produced by <code><a href='https://rdrr.io/pkg/vegan/man/metaMDS.html'>metaMDS</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for metaMDS</span>
-<span class='fu'>autoplot</span>(
-  <span class='no'>object</span>,
-  <span class='kw'>axes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>),
-  <span class='kw'>geom</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"point"</span>, <span class='st'>"text"</span>),
-  <span class='kw'>layers</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"species"</span>, <span class='st'>"sites"</span>),
-  <span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"right"</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>ylab</span>,
-  <span class='no'>xlab</span>,
-  <span class='no'>...</span>
-)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for metaMDS</span>
+<span class='fu'>autoplot</span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  axes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  geom <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"point"</span>, <span class='st'>"text"</span><span class='op'>)</span>,
+  layers <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"species"</span>, <span class='st'>"sites"</span><span class='op'>)</span>,
+  legend.position <span class='op'>=</span> <span class='st'>"right"</span>,
+  title <span class='op'>=</span> <span class='cn'>NULL</span>,
+  subtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  caption <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>ylab</span>,
+  <span class='va'>xlab</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -147,7 +149,7 @@ to <code><a href='https://rdrr.io/pkg/vegan/man/metaMDS.html'>metaMDS</a></code>
     <tr>
       <th>geom</th>
       <td><p>character; which geoms to use for the layers. Can be a
-vector of length equal to <code><a href='https://rdrr.io/r/base/length.html'>length(display)</a></code>, in which case the
+vector of length equal to <code>length(display)</code>, in which case the
 <em>i</em>th element of <code>type</code> refers to the <em>i</em>th element
 of <code>display</code>.</p></td>
     </tr>
@@ -191,60 +193,66 @@ of <code>display</code>.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>TODO</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Gavin L. Simpson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load example data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune</span>)
-
-<span class='no'>sol</span> <span class='kw'>&lt;-</span> <span class='fu'>metaMDS</span>(<span class='no'>dune</span>)</div><div class='output co'>#&gt; Run 0 stress 0.1192678 
-#&gt; Run 1 stress 0.1939202 
-#&gt; Run 2 stress 0.2045511 
-#&gt; Run 3 stress 0.1192679 
-#&gt; ... Procrustes: rmse 0.0001754862  max resid 0.0005326518 
-#&gt; ... Similar to previous best
-#&gt; Run 4 stress 0.1192684 
-#&gt; ... Procrustes: rmse 0.0004271897  max resid 0.001315729 
-#&gt; ... Similar to previous best
-#&gt; Run 5 stress 0.1192681 
-#&gt; ... Procrustes: rmse 0.0002862166  max resid 0.0008790551 
-#&gt; ... Similar to previous best
-#&gt; Run 6 stress 0.119268 
-#&gt; ... Procrustes: rmse 0.0002134842  max resid 0.0006527093 
-#&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.1808911 
-#&gt; Run 8 stress 0.1192679 
-#&gt; ... Procrustes: rmse 0.0001828437  max resid 0.0005605521 
-#&gt; ... Similar to previous best
-#&gt; Run 9 stress 0.119268 
-#&gt; ... Procrustes: rmse 0.000177726  max resid 0.0005361201 
-#&gt; ... Similar to previous best
-#&gt; Run 10 stress 0.181295 
-#&gt; Run 11 stress 0.1183186 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 0.02027203  max resid 0.06496555 
-#&gt; Run 12 stress 0.1183186 
-#&gt; ... Procrustes: rmse 2.647164e-05  max resid 8.748593e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 13 stress 0.1183186 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 5.39927e-05  max resid 0.0001843536 
-#&gt; ... Similar to previous best
-#&gt; Run 14 stress 0.1183186 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 2.763973e-05  max resid 9.227906e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 15 stress 0.1192679 
-#&gt; Run 16 stress 0.1192678 
-#&gt; Run 17 stress 0.1183186 
-#&gt; ... Procrustes: rmse 3.438502e-05  max resid 0.0001072042 
-#&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.1192681 
-#&gt; Run 19 stress 0.1192679 
-#&gt; Run 20 stress 0.1183186 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 1.310995e-05  max resid 4.04074e-05 
-#&gt; ... Similar to previous best
-#&gt; *** Solution reached</div><div class='input'><span class='fu'>autoplot</span>(<span class='no'>sol</span>)</div><div class='img'><img src='autoplot.metaMDS-1.png' alt='' width='700' height='433' /></div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## load example data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>sol</span> <span class='op'>&lt;-</span> <span class='fu'>metaMDS</span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 0 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 1 stress 0.1939202 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 2 stress 0.2045511 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 3 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 8.411151e-05  max resid 0.0002578573 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 4 stress 0.1192679 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 0.0001733397  max resid 0.0005313396 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 5 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.910995e-05  max resid 5.734867e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 6 stress 0.1192679 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 7.00374e-05  max resid 0.0002118066 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 7 stress 0.1808911 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 8 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.535594e-05  max resid 0.0001088348 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 9 stress 0.1192679 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 0.0001014256  max resid 0.0003107043 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 10 stress 0.1812934 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 11 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 0.02027086  max resid 0.06496448 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 12 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 7.007935e-06  max resid 2.285531e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 13 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.053488e-05  max resid 3.493044e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 14 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 5.159963e-06  max resid 1.582493e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 15 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 16 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 17 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.649059e-05  max resid 5.296048e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 18 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 19 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 20 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.731411e-06  max resid 1.321845e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> *** Solution reached</span>
+<span class='r-in'><span class='fu'>autoplot</span><span class='op'>(</span><span class='va'>sol</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='autoplot.metaMDS-1.png' alt='' width='700' height='433' /></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -256,11 +264,11 @@ of <code>display</code>.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -268,6 +276,8 @@ of <code>display</code>.</p></td>
 
   
 
+
+  
 
   </body>
 </html>

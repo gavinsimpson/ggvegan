@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fortify a <code>"mataMDS"</code> object. — fortify.metaMDS • ggvegan</title>
+<title>Fortify a "mataMDS" object. — fortify.metaMDS • ggvegan</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,12 @@
 
 
 
-<meta property="og:title" content="Fortify a <code>"mataMDS"</code> object. — fortify.metaMDS" />
+<meta property="og:title" content="Fortify a "mataMDS" object. — fortify.metaMDS" />
 <meta property="og:description" content="Fortifies an object of class &quot;metaMDS&quot; to produce a
 data frame of the selected axis scores in long format, suitable for
 plotting with ggplot." />
+
+
 
 
 
@@ -58,9 +60,15 @@ plotting with ggplot." />
 
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -81,12 +89,6 @@ plotting with ggplot." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -119,8 +121,8 @@ data frame of the selected axis scores in long format, suitable for
 plotting with <code><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for metaMDS</span>
-<span class='fu'>fortify</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='no'>...</span>)</pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for metaMDS</span>
+<span class='fu'>fortify</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>data</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,57 +150,65 @@ The first two components are the axis scores.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>TODO</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Gavin L. Simpson</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load example data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>dune</span>)
-
-<span class='no'>ord</span> <span class='kw'>&lt;-</span> <span class='fu'>metaMDS</span>(<span class='no'>dune</span>)</div><div class='output co'>#&gt; Run 0 stress 0.1192678 
-#&gt; Run 1 stress 0.1183186 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 0.02026992  max resid 0.06495411 
-#&gt; Run 2 stress 0.1192679 
-#&gt; Run 3 stress 0.1192682 
-#&gt; Run 4 stress 0.1183186 
-#&gt; ... Procrustes: rmse 3.57951e-05  max resid 9.691533e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 5 stress 0.1192686 
-#&gt; Run 6 stress 0.1192685 
-#&gt; Run 7 stress 0.1192679 
-#&gt; Run 8 stress 0.1183186 
-#&gt; ... Procrustes: rmse 5.277213e-06  max resid 1.492931e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 9 stress 0.1192678 
-#&gt; Run 10 stress 0.1183186 
-#&gt; ... Procrustes: rmse 1.081168e-05  max resid 3.468916e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 11 stress 0.1183186 
-#&gt; ... Procrustes: rmse 7.209057e-05  max resid 0.0002266506 
-#&gt; ... Similar to previous best
-#&gt; Run 12 stress 0.1183186 
-#&gt; ... Procrustes: rmse 2.079642e-05  max resid 5.787151e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 13 stress 0.1192686 
-#&gt; Run 14 stress 0.1192685 
-#&gt; Run 15 stress 0.119268 
-#&gt; Run 16 stress 0.1183186 
-#&gt; ... Procrustes: rmse 1.561567e-05  max resid 5.123386e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 17 stress 0.1183186 
-#&gt; ... Procrustes: rmse 3.460559e-05  max resid 9.955366e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 18 stress 0.1192679 
-#&gt; Run 19 stress 0.200356 
-#&gt; Run 20 stress 0.1183186 
-#&gt; ... Procrustes: rmse 2.214771e-05  max resid 7.007003e-05 
-#&gt; ... Similar to previous best
-#&gt; *** Solution reached</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='fu'>fortify</span>(<span class='no'>ord</span>))</div><div class='output co'>#&gt;   Score Label       NMDS1       NMDS2
-#&gt; 1 sites     1 -0.84053265 -0.71584691
-#&gt; 2 sites     2 -0.50485275 -0.40893645
-#&gt; 3 sites     3 -0.08266702 -0.43667555
-#&gt; 4 sites     4 -0.11561972 -0.52223972
-#&gt; 5 sites     5 -0.62654418 -0.08670082
-#&gt; 6 sites     6 -0.54268985  0.11315758</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## load example data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>ord</span> <span class='op'>&lt;-</span> <span class='fu'>metaMDS</span><span class='op'>(</span><span class='va'>dune</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 0 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 1 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 0.02027032  max resid 0.0649614 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 2 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 3 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 4 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 6.495695e-06  max resid 1.957736e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 5 stress 0.1192679 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 6 stress 0.1192679 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 7 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 8 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 4.246485e-06  max resid 1.326091e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 9 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 10 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... New best solution</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.81361e-06  max resid 4.198697e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 11 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.450304e-05  max resid 4.526135e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 12 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.22925e-06  max resid 1.016814e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 13 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 14 stress 0.1192679 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 15 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 16 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 1.649744e-06  max resid 3.608095e-06 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 17 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 3.850601e-06  max resid 1.198875e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 18 stress 0.1192678 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 19 stress 0.2003486 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Run 20 stress 0.1183186 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Procrustes: rmse 6.675886e-06  max resid 2.105997e-05 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> ... Similar to previous best</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> *** Solution reached</span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>fortify</span><span class='op'>(</span><span class='va'>ord</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Score Label       NMDS1       NMDS2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1 sites     1 -0.84052791 -0.71584674</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 2 sites     2 -0.50485342 -0.40893961</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 3 sites     3 -0.08266444 -0.43667903</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 4 sites     4 -0.11561664 -0.52224247</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 5 sites     5 -0.62654099 -0.08670176</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 6 sites     6 -0.54269063  0.11315451</span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -210,11 +220,11 @@ The first two components are the axis scores.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Gavin L. Simpson.</p>
+  <p><p>Developed by Gavin L. Simpson.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -222,6 +232,8 @@ The first two components are the axis scores.</p>
 
   
 
+
+  
 
   </body>
 </html>
