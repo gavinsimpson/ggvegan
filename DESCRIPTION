@@ -19,5 +19,5 @@ Description: Functions to produce ggplot2-based plots of objects produced by
 License: GPL-2
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8
