@@ -39,7 +39,7 @@
 #'     \code{\link[ggplot2]{geom_line}}).
 #'
 #' @importFrom ggplot2 ggplot aes_ scale_y_log10 facet_wrap geom_point
-#'     geom_line fortify
+#'     geom_line fortify autoplot
 #' @importFrom utils modifyList
 #'
 #' @export
