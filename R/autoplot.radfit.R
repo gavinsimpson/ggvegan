@@ -40,6 +40,7 @@
 #'
 #' @importFrom ggplot2 ggplot aes_ scale_y_log10 facet_wrap geom_point
 #'     geom_line fortify autoplot
+#' @importFrom scales oob_squish_infinite
 #' @importFrom utils modifyList
 #'
 #' @export
@@ -54,7 +55,7 @@
     line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~ Model)),
                                    line.params)
     pl <- ggplot(df, aes_(~Rank)) +
-        scale_y_log10(limit=c(ymin,NA)) +
+        scale_y_log10(limit=c(ymin,NA), oob = oob_squish_infinite) +
         do.call("geom_point", point.params) +
         do.call("geom_line", line.params)
     if(facet)
@@ -65,7 +66,8 @@
 #'
 #' @importFrom ggplot2 fortify aes_ scale_y_log10 geom_point geom_line
 #'     facet_wrap
-#' @importForm utils modifyList
+#' @importFrom scales oob_squish_infinite
+#' @importFrom utils modifyList
 #'
 #' @rdname autoplot.radfit
 #' @export
@@ -79,7 +81,7 @@
     line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~Model)),
                               line.params)
     ggplot(df, aes_(~Rank)) +
-        scale_y_log10(limit=c(ymin,NA)) +
+        scale_y_log10(limit=c(ymin,NA), oob = oob_squish_infinite) +
         do.call("geom_point", point.params) +
         do.call("geom_line", line.params) +
         facet_wrap(~Site)
