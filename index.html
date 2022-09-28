@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">ggvegan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1-0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1-0</span>
       </span>
     </div>
 
@@ -59,57 +59,56 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="ggvegan-ggplot2-based-plots-for-vegan" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#ggvegan-ggplot2-based-plots-for-vegan" class="anchor" aria-hidden="true"></a>ggvegan; ggplot2-based plots for vegan</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="ggvegan-ggplot2-based-plots-for-vegan">ggvegan; ggplot2-based plots for vegan<a class="anchor" aria-label="anchor" href="#ggvegan-ggplot2-based-plots-for-vegan"></a>
+</h1></div>
 <!-- badges: start -->
-
-<div id="what-is-ggvegan" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-is-ggvegan" class="anchor" aria-hidden="true"></a>What is ggvegan?</h2>
+<div class="section level2">
+<h2 id="what-is-ggvegan">What is ggvegan?<a class="anchor" aria-label="anchor" href="#what-is-ggvegan"></a>
+</h2>
 <p><strong>ggvegan</strong> is a package for the R statistical software and environment. It aims to implement <strong>ggplot</strong>-based versions of the plots produced by the <strong>vegan</strong> package. Initially, ggvegan will provide <code>fortify</code> and <code>autoplot</code> methods for objects created in vegan, with the aim of providing full replacement plots via <code>autoplot</code>. The <code>fortify</code> methods allow the data contained within objects created by vegan to be converted into a format suitable for use with <code>ggplot</code> directly.</p>
 </div>
-<div id="licence" class="section level2">
-<h2 class="hasAnchor">
-<a href="#licence" class="anchor" aria-hidden="true"></a>Licence</h2>
+<div class="section level2">
+<h2 id="licence">Licence<a class="anchor" aria-label="anchor" href="#licence"></a>
+</h2>
 <p>ggvegan is released under the <a href="http://www.r-project.org/Licenses/GPL-2" class="external-link">GNU General Public Licence, version 2</a>.</p>
 </div>
-<div id="development--contributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#development--contributions" class="anchor" aria-hidden="true"></a>Development &amp; contributions</h2>
+<div class="section level2">
+<h2 id="development--contributions">Development &amp; contributions<a class="anchor" aria-label="anchor" href="#development--contributions"></a>
+</h2>
 <p>ggvegan uses the <strong>roxygen2</strong> system to document package functions alongside the code itself.</p>
 <p>ggvegan is very much alpha code at the moment. Comments and feedback on the approach taken are welcome, as are code contributions. See <strong>Design decisions</strong> below for two important areas for consideration</p>
 </div>
-<div id="design-decisions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#design-decisions" class="anchor" aria-hidden="true"></a>Design decisions</h2>
-<div id="autoplot" class="section level3">
-<h3 class="hasAnchor">
-<a href="#autoplot" class="anchor" aria-hidden="true"></a><code>autoplot</code>
+<div class="section level2">
+<h2 id="design-decisions">Design decisions<a class="anchor" aria-label="anchor" href="#design-decisions"></a>
+</h2>
+<div class="section level3">
+<h3 id="autoplot">
+<code>autoplot</code><a class="anchor" aria-label="anchor" href="#autoplot"></a>
 </h3>
 <p>The <code>autoplot</code> concept is somewhat poorly defined at the moment — at least in public. I have taken it to mean that a full ggplot object is returned, which can then be augmented with additional layers and changes to the scales etc. This means that the aesthetics for the scores are hard-coded in the <code>autoplot</code> methods. If you want greater control over these aesthetics, use <code>fortify</code> to return the scores in a suitable format and build the plot up yourself. I hope to include at least one example of this, where applicable, in the help pages for each <code>autoplot</code> method.</p>
 </div>
-<div id="fortify" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fortify" class="anchor" aria-hidden="true"></a><code>fortify</code>
+<div class="section level3">
+<h3 id="fortify">
+<code>fortify</code><a class="anchor" aria-label="anchor" href="#fortify"></a>
 </h3>
 <p><code>fortify</code> methods are supposed to return a data frame but this is not necessarily the most convenient representation for vegan’s ordination objects where several data frames representing the various sets of ordination scores would be more natural. Currently, ggvegan follows the existing <code>fortify</code> convention of returning a single data frame so returns the ordination scores in long format with variables <code>Score</code> indicating the type of score and <code>Label</code> the label/rowname for each score.</p>
-<div id="standard-ordination-methods" class="section level4">
-<h4 class="hasAnchor">
-<a href="#standard-ordination-methods" class="anchor" aria-hidden="true"></a>Standard ordination methods</h4>
+<div class="section level4">
+<h4 id="standard-ordination-methods">Standard ordination methods<a class="anchor" aria-label="anchor" href="#standard-ordination-methods"></a>
+</h4>
 <p>From version 0.0-9, I changed the representation of <em>fortified</em> ordination objects. The first two columns will now be <code>Score</code> and <code>Label</code>. The remaining columns will be the requested ordination dimensions, named as per the <code>scores</code> method from <strong>vegan</strong>. For example, a PCA will have columns named <code>'PC1'</code>, <code>'PC2'</code>, etc. How many and their numbering depending on the <code>axes</code> argument; the default is <code>1:6</code>. Consequently, the <code>'dimLables'</code> attribute is no longer necessary.</p>
 <p>A further design decision is that ggvegan <code>fortify</code> methods for ordination objects will return all possible sets of scores and the set returned can not be chosen by the user. Instead, the sets of scores to be plotted should be chosen at the <code>autoplot</code> stage.</p>
 </div>
-<div id="more-specialised-objects" class="section level4">
-<h4 class="hasAnchor">
-<a href="#more-specialised-objects" class="anchor" aria-hidden="true"></a>More specialised objects</h4>
+<div class="section level4">
+<h4 id="more-specialised-objects">More specialised objects<a class="anchor" aria-label="anchor" href="#more-specialised-objects"></a>
+</h4>
 <p>The components returned for more specialised objects will typically vary as needed for a sensible, tidy data representation. Such <code>fortify()</code> methods will return suitable components. For example, <code><a href="reference/fortify.prc.html">fortify.prc()</a></code> returns components <code>Time</code>, <code>Treatment</code>, and <code>Response</code> corresponding to the two-way factors defining the experiment and the regression coefficients on RDA axis 1 respectively.</p>
 </div>
 </div>
 </div>
-<div id="status" class="section level2">
-<h2 class="hasAnchor">
-<a href="#status" class="anchor" aria-hidden="true"></a>Status</h2>
+<div class="section level2">
+<h2 id="status">Status<a class="anchor" aria-label="anchor" href="#status"></a>
+</h2>
 <p>The following <code>autoplot</code> methods are currently available</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -154,14 +153,22 @@
 </li>
 </ol>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
-<p>No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.</p>
-<p>Finally, you can install ggvegan directly from GitHub using functions that the <strong>remotes</strong> package provides. To do this, install <strong>remotes</strong> from CRAN via</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">install.packages</span>(<span class="st">"remotes"</span>)</span></code></pre></div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>No binary packages are currently available via CRAN for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.</p>
+<p>You can install ggvegan directly from GitHub using functions that the <strong>remotes</strong> package provides. To do this, install <strong>remotes</strong> from CRAN via</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code></pre></div>
 <p>then run</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"gavinsimpson/ggvegan"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gavinsimpson/ggvegan"</span>)</span></code></pre></div>
+<p>If that doesn’t work or you prefer to install from binaries, the R Universe service run by rOpenSci now provides binaries. Instruction on how to install ggvegan from that repository are:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Enable repository from gavinsimpson</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  gavinsimpson <span class="op">=</span> <span class="st">'https://gavinsimpson.r-universe.dev'</span>,</span>
+<span>  CRAN <span class="op">=</span> <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Download and install ggvegan in R</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'ggvegan'</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -170,16 +177,23 @@
     <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></li>
 </ul>
 </div>
 
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing ggvegan</a></li>
+</ul>
+</div>
 
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Gavin L. Simpson <br><small class="roles"> Author, maintainer </small>  </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -187,8 +201,6 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/gavinsimpson/ggvegan/actions" class="external-link"><img src="https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://travis-ci.org/gavinsimpson/ggvegan" class="external-link"><img src="https://travis-ci.org/gavinsimpson/ggvegan.svg?branch=master" alt="Travis CI Build Status"></a></li>
-<li><a href="https://ci.appveyor.com/project/gavinsimpson/ggvegan/branch/master" class="external-link"><img src="https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master" alt="Appveyor Build status"></a></li>
 <li><a href="http://cran.rstudio.com/web/packages/ggvegan/index.html" class="external-link"><img src="http://www.r-pkg.org/badges/version/ggvegan" alt="CRAN version"></a></li>
 <li><a href="http://cran.rstudio.com/web/packages/ggvegan/index.html" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/ggvegan"></a></li>
 </ul>
@@ -205,7 +217,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
