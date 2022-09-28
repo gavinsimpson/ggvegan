@@ -54,14 +54,24 @@ The following `fortify` method are currently available
  5. `autoplot.prestonfit` --- for objects of class `"prestonfit"`
  6. `autoplot.fisherfit` --- for objects of class `"fisherfit"`
 
-
 ## Installation
-No binary packages are currently available for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.
+No binary packages are currently available via CRAN for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.
 
-Finally, you can install ggvegan directly from GitHub using functions that the **remotes** package provides. To do this, install **remotes** from CRAN via
+You can install ggvegan directly from GitHub using functions that the **remotes** package provides. To do this, install **remotes** from CRAN via
 
     install.packages("remotes")
 
 then run
 
     remotes::install_github("gavinsimpson/ggvegan")
+
+If that doesn't work or you prefer to install from binaries, the R Universe service run by rOpenSci now provides binaries. Instruction on how to install ggvegan from that repository are:
+
+```r
+# Enable repository from gavinsimpson
+options(repos = c(
+  gavinsimpson = 'https://gavinsimpson.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+# Download and install ggvegan in R
+install.packages('ggvegan')
+```
