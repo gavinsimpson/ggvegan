@@ -2,8 +2,6 @@
 
 <!-- badges: start -->
 [![R build status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/ggvegan/actions)
-[![Travis CI Build Status](https://travis-ci.org/gavinsimpson/ggvegan.svg?branch=master)](https://travis-ci.org/gavinsimpson/ggvegan)
-[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/hc8dbxrim2nj3c1i/branch/master)](https://ci.appveyor.com/project/gavinsimpson/ggvegan/branch/master)
 [![CRAN version](http://www.r-pkg.org/badges/version/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
 <!-- badges: end -->
