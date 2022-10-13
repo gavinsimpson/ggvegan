@@ -32,7 +32,7 @@
 #' autoplot(pstat, "qqnorm")
 #'
 
-#' @importFrom ggplot2 fortify ggplot aes geom_hline geom_vline geom_boxplot
+#' @importFrom ggplot2 fortify ggplot aes_ geom_hline geom_vline geom_boxplot
 #' geom_violin geom_density geom_qq facet_wrap
 #'
 #' @rdname autoplot.permustats
@@ -47,11 +47,11 @@
         switch(plot,
                "box" =,
                "violin" = ggplot(df,
-                                 aes(Term, Permutations, fill=Term,
-                                     colour=Term)),
-               "density" = ggplot(df, aes(Permutations, fill = Term,
-                                          colour=Term)),
-               "qqnorm" = ggplot(df, aes(sample = Permutations, colour=Term)))
+                                 aes_(~Term, ~Permutations, fill=~Term,
+                                     colour=~Term)),
+               "density" = ggplot(df, aes_(~Permutations, fill = ~Term,
+                                          colour=~Term)),
+               "qqnorm" = ggplot(df, aes_(sample = ~Permutations, colour=~Term)))
     if(!scale) {
         pl <- pl + switch(plot,
                           "density" = geom_vline(xintercept=0, lty=3),
