@@ -27,7 +27,7 @@
 #'
 #' @param fill,alpha Parameters passed to \code{\link[ggplot2]{geom_ribbon}}
 #'
-#' @importFrom ggplot2 fortify ggplot aes geom_point geom_ribbon geom_line
+#' @importFrom ggplot2 fortify ggplot aes_ geom_point geom_ribbon geom_line
 #'      facet_wrap
 
 #' @export
@@ -38,11 +38,11 @@
     ## geom ordering is weird because alpha is a factor, but
     ## geom_ribbon and geom_line need continuous x and geom_point
     ## against factor alpha must be befor them
-    ggplot(df, aes(alpha, Diversity)) +
+    ggplot(df, aes_(~alpha, ~Diversity)) +
         geom_point(...) +
-        geom_ribbon(aes(x = as.numeric(alpha), ymin = lo, ymax = hi),
+        geom_ribbon(aes_(x = ~as.numeric(alpha), ymin = ~lo, ymax = ~hi),
                     fill = fill, alpha = alpha) +
-        geom_line(aes(x = as.numeric(alpha), y = median), ...) +
+        geom_line(aes_(x = ~as.numeric(alpha), y = ~median), ...) +
         facet_wrap(~Site)
 }
 
@@ -75,7 +75,7 @@
 #' @param ribbon Show ribbon for 0.95 interval, extreme values or for
 #'     standard deviation of permutations.
 #'
-#' @importFrom ggplot2 fortify ggplot aes geom_ribbon geom_line facet_wrap
+#' @importFrom ggplot2 fortify ggplot aes aes_ geom_ribbon geom_line facet_wrap
 #'
 #' @rdname autoplot.renyi
 #' @export
@@ -95,7 +95,7 @@
                  "minmax" = df[, "max"],
                  "stdev" = df[, "mean"] + df[, "stdev"]
                  )
-    ggplot(df, aes(Sites, Diversity)) +
+    ggplot(df, aes_(~Sites, ~Diversity)) +
         geom_ribbon(aes(ymin = lo, ymax = hi), fill = fill, alpha = alpha) +
         geom_line(...) +
         facet_wrap(~alpha)
