@@ -55,20 +55,46 @@
     df
 }
 
+#' @importFrom ggplot2 fortify ggplot aes geom_ribbon geom_line facet_wrap
+#'
 #' @rdname autoplot.renyi
 #' @export
 `autoplot.renyiaccum` <-
-    function(object)
+    function(object, ribbon = c("0.95", "minmax", "stdev"), ...)
 {
-    .NotYetImplemented()
+    df <- fortify(object)
+    ribbon <- match.arg(ribbon)
+    lo <- switch(ribbon,
+                 "0.95" = df[, "Qnt 0.025"],
+                 "minmax" = df[, "min"],
+                 "stdev" = df[,"mean"] - df[, "stdev"]
+                 )
+    hi <- switch(ribbon,
+                 "0.95" = df[, "Qnt 0.975"],
+                 "minmax" = df[, "max"],
+                 "stdev" = df[, "mean"] + df[, "stdev"]
+                 )
+    ggplot(df, aes(Sites, mean)) +
+        geom_ribbon(aes(ymin = lo, ymax = hi), fill = "skyblue", alpha = 0.5) +
+        geom_line(...) +
+        facet_wrap(~alpha)
 }
 
 #' @inheritParams ggplot2::fortify
+#'
+#' @importFrom ggplot2 fortify
 
 #' @rdname autoplot.renyi
 #' @export
 `fortify.renyiaccum` <-
     function(model, data, ...)
 {
-    .NotYetImplemented()
+    nr <- nrow(model)
+    Sites <- seq_len(nr)
+    alpha <- unlist(dimnames(model)[2])
+    alpha <- factor(rep(alpha, each = nr), levels=alpha)
+    x <- apply(model, 3, as.vector)
+    df <- cbind(data.frame(Sites=Sites, alpha=alpha), x)
+    rownames(df) <- seq_len(nrow(df))
+    df
 }
