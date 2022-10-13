@@ -71,6 +71,7 @@
 #' @inheritParams ggplot2::fortify
 #'
 #' @importFrom ggplot2 fortify
+#' @importFrom stats sd
 #'
 #' @rdname autoplot.permustats
 #' @export
