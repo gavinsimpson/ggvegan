@@ -2,15 +2,32 @@
 
 #' Autoplot Graphics for vegan renyi and renyiaccum Objects
 #'
-#' Alternatives to \pkg{lattice} graphics \code{plot} functions in
+#' Alternatives to \pkg{lattice} graphics functions in
 #' \pkg{vegan}.
+#'
+#' \code{autoplot} for \code{\link[vegan]{renyi}} displays the
+#' diversites against alpha as dots over a ribbon of data extremes in
+#' the graph and line of data median faceted by sites. \code{autoplot}
+#' for \code{\link[vegan]{renyiaccum}} shows the median of diversity
+#' accumulation against the number of sites over a ribbon of
+#' permutation values faceted by alpha.
+#'
+#' @examples
+#' ## Rényi
+#' data(BCI)
+#' mod <- renyi(BCI[sample(16),])
+#' autoplot(mod)
+#' ## Diversity against the number of sites
+#' mod <- renyiaccum(BCI)
+#' autoplot(mod)
+#' autoplot(mod) + scale_x_log10()
 #'
 #' @param object Result from \pkg{vegan} \code{\link[vegan]{renyi}} or
 #'     \code{\link[vegan]{renyiaccum}} functions.
 #'
 #' @param fill,alpha Parameters passed to \code{\link[ggplot2]{geom_ribbon}}
 #'
-#' @importFrom ggplot2 fortfiy ggplot aes geom_point geom_ribbon geom_line
+#' @importFrom ggplot2 fortify ggplot aes geom_point geom_ribbon geom_line
 #'      facet_wrap
 
 #' @export
@@ -55,12 +72,16 @@
     df
 }
 
+#' @param ribbon Show ribbon for 0.95 interval, extreme values or for
+#'     standard deviation of permutations.
+#'
 #' @importFrom ggplot2 fortify ggplot aes geom_ribbon geom_line facet_wrap
 #'
 #' @rdname autoplot.renyi
 #' @export
 `autoplot.renyiaccum` <-
-    function(object, ribbon = c("0.95", "minmax", "stdev"), ...)
+    function(object, ribbon = c("0.95", "minmax", "stdev"),
+             fill = "skyblue", alpha = 0.5, ...)
 {
     df <- fortify(object)
     ribbon <- match.arg(ribbon)
@@ -74,8 +95,8 @@
                  "minmax" = df[, "max"],
                  "stdev" = df[, "mean"] + df[, "stdev"]
                  )
-    ggplot(df, aes(Sites, mean)) +
-        geom_ribbon(aes(ymin = lo, ymax = hi), fill = "skyblue", alpha = 0.5) +
+    ggplot(df, aes(Sites, Diversity)) +
+        geom_ribbon(aes(ymin = lo, ymax = hi), fill = fill, alpha = alpha) +
         geom_line(...) +
         facet_wrap(~alpha)
 }
@@ -94,6 +115,7 @@
     alpha <- unlist(dimnames(model)[2])
     alpha <- factor(rep(alpha, each = nr), levels=alpha)
     x <- apply(model, 3, as.vector)
+    colnames(x)[1] <- "Diversity"
     df <- cbind(data.frame(Sites=Sites, alpha=alpha), x)
     rownames(df) <- seq_len(nrow(df))
     df
