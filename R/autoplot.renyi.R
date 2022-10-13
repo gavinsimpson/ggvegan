@@ -15,7 +15,7 @@
 #' @examples
 #' ## Rényi
 #' data(BCI)
-#' mod <- renyi(BCI[sample(16),])
+#' mod <- renyi(BCI[sample(50, 16),])
 #' autoplot(mod)
 #' ## Diversity against the number of sites
 #' mod <- renyiaccum(BCI)
@@ -88,12 +88,12 @@
     lo <- switch(ribbon,
                  "0.95" = df[, "Qnt 0.025"],
                  "minmax" = df[, "min"],
-                 "stdev" = df[,"mean"] - df[, "stdev"]
+                 "stdev" = df[,"Diversity"] - df[, "stdev"]
                  )
     hi <- switch(ribbon,
                  "0.95" = df[, "Qnt 0.975"],
                  "minmax" = df[, "max"],
-                 "stdev" = df[, "mean"] + df[, "stdev"]
+                 "stdev" = df[, "Diversity"] + df[, "stdev"]
                  )
     ggplot(df, aes_(~Sites, ~Diversity)) +
         geom_ribbon(aes(ymin = lo, ymax = hi), fill = fill, alpha = alpha) +
