@@ -17,7 +17,12 @@
 #' @param plot Plot type, or geometry of \pkg{ggplot2}.
 #' @param scale Use standardized effect sizes (SES).
 #' @param facet Split graph to facets by \code{Term}.
-#' @param alpha alpha channel of geometry.
+#' @param gg.params Arguments passed to function drawing the box-like
+#'     object. Depending on argument \code{plot} the parameters are
+#'     passed to
+#'     \code{\link[ggplot2]{geom_boxplot}},\code{\link[ggplot2]{geom_violin}},
+#'     \code{\link[ggplot2]{geom_density}} or
+#'     \code{\link[ggplot2]{geom_qq}}
 #' @param ... Other parameters passed to functions (ignored).
 #'
 #' @examples
@@ -34,15 +39,18 @@
 
 #' @importFrom ggplot2 fortify ggplot aes_ geom_hline geom_vline geom_boxplot
 #' geom_violin geom_density geom_qq facet_wrap
+#' @importFrom utils modifyList
 #'
 #' @rdname autoplot.permustats
 #' @export
 `autoplot.permustats` <-
     function(object, plot = c("box", "violin", "density", "qqnorm"),
-             scale = FALSE, facet = FALSE, alpha = 0.5, ...)
+             scale = FALSE, facet = FALSE, gg.params = list(), ...)
 {
     df <- fortify(object, scale = scale)
     plot <- match.arg(plot)
+    if (plot != "qqnorm")
+        gg.params <- modifyList(list(alpha = 0.5), gg.params)
     pl <-
         switch(plot,
                "box" =,
@@ -59,10 +67,10 @@
     }
     pl <- pl +
         switch(plot,
-               "box" = geom_boxplot(alpha = alpha),
-               "violin" = geom_violin(alpha = alpha),
-               "density" = geom_density(alpha = alpha),
-               "qqnorm" = geom_qq(alpha = alpha))
+               "box" = do.call("geom_boxplot", gg.params),
+               "violin" = do.call("geom_violin", gg.params),
+               "density" = do.call("geom_density", gg.params),
+               "qqnorm" = do.call("geom_qq", gg.params))
     if (facet)
         pl <- pl + facet_wrap(~Term)
     pl
