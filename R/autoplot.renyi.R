@@ -97,8 +97,8 @@
 {
     df <- fortify(object)
     ribbon <- match.arg(ribbon)
-    ribbon.params = modifyList(list(mapping = aes(ymin = lo, ymax = hi),
-                                    alpha = 0.05, fill = "skyblue"),
+    ribbon.params = modifyList(list(mapping = aes_(ymin = ~lo, ymax = ~hi),
+                                    alpha = 0.5, fill = "skyblue"),
                                ribbon.params)
     lo <- switch(ribbon,
                  "0.95" = df[, "Qnt 0.025"],
