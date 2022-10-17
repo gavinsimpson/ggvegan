@@ -32,9 +32,10 @@
 #' pstat <- permustats(ano)
 #' head(fortify(pstat))
 #' autoplot(pstat, "box")
-#' autoplot(pstat, "violin")
+#' ## avoid overplotting x-axis text
+#' autoplot(pstat, "violin") + scale_x_discrete(guide = guide_axis(n.dodge = 2))
 #' autoplot(pstat, "density", facet = TRUE)
-#' autoplot(pstat, "qqnorm")
+#' autoplot(pstat, "qqnorm", facet = TRUE) + geom_qq_line()
 #'
 
 #' @importFrom ggplot2 fortify ggplot aes_ geom_hline geom_vline geom_boxplot
