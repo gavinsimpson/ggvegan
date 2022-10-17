@@ -48,7 +48,8 @@
              fill = "skyblue", alpha = 0.2),
         ribbon.params)
     line.params = modifyList(
-        list(mapping = aes_(x = ~as.numeric(alpha), y = ~median)),
+        list(mapping = aes_(x = ~as.numeric(alpha), y = ~median),
+             colour = "blue"),
         line.params)
     ggplot(df, aes_(~alpha, ~Diversity)) +
         do.call("geom_point", point.params) +
@@ -100,6 +101,7 @@
     ribbon.params = modifyList(list(mapping = aes_(ymin = ~lo, ymax = ~hi),
                                     alpha = 0.5, fill = "skyblue"),
                                ribbon.params)
+    line.params <- modifyList(list(colour = "blue"), line.params)
     lo <- switch(ribbon,
                  "0.95" = df[, "Qnt 0.025"],
                  "minmax" = df[, "min"],
