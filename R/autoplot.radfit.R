@@ -208,3 +208,72 @@
         Fit = fitted(model)
     )
 }
+
+### Methods for rad: only points, no lines
+
+#' @rdname autoplot.radfit
+#' @export
+`fortify.rad` <-
+    function(model, data, ...)
+{
+    data.frame(
+        Species = names(model),
+        Rank = seq_along(model),
+        Abundance = as.vector(model)
+    )
+}
+
+#' @rdname autoplot.radfit
+#' @export
+`fortify.rad.frame` <-
+    function(model, data, order.by = NULL, ... )
+{
+    abu <- lapply(model, as.vector)
+    nsp <- sapply(model, length)
+    spe <- lapply(model, names)
+    sit <- names(model)
+    ## enable re-ordering of Site panels
+    if (is.null(order.by))
+        order.by <- seq_along(sit)
+    else
+        order.by <- order(order.by)
+    data.frame(
+        "Site" = factor(rep(sit, nsp), levels=sit[order.by]),
+        "Species" = unlist(spe, use.names=FALSE),
+        "Rank" =  unlist(sapply(nsp, seq_len), use.names=FALSE),
+        "Abundance" = unlist(abu, use.names=FALSE)
+    )
+}
+
+#' @importFrom utils modifyList
+#' @importFrom ggplot2 aes_ scale_y_log10 geom_point
+#' @rdname autoplot.radfit
+#' @export
+`autoplot.rad` <-
+    function(object, point.params = list(), line.params = list(), ...)
+{
+    df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    ggplot(df, aes_(~Rank)) +
+        scale_y_log10() +  # no lower limit for a single line
+        do.call("geom_point", point.params)
+}
+
+#' @importFrom utils modifyList
+#' @importFrom ggplot2 aes_ scale_y_log10 geom_point facet_wrap
+#' @rdname autoplot.radfit
+#' @export
+`autoplot.rad.frame` <-
+    function(object, point.params=list(), ...)
+{
+    df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    ggplot(df, aes_(~Rank)) +
+        scale_y_log10(limit=c(ymin,NA)) +
+        do.call("geom_point", point.params) +
+        facet_wrap(~Site)
+}
