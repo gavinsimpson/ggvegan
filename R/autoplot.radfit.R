@@ -107,6 +107,52 @@
         do.call("geom_line", line.params)
 }
 
+### Methods for rad: only points, no lines from vegan::as.rad()
+
+#' @importFrom utils modifyList
+#' @importFrom ggplot2 aes_ scale_y_log10 geom_point
+#' @rdname autoplot.radfit
+#' @export
+`autoplot.rad` <-
+    function(object, point.params = list(), line.params = list(), ...)
+{
+    df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    ggplot(df, aes_(~Rank)) +
+        scale_y_log10() +  # no lower limit for a single line
+        do.call("geom_point", point.params)
+}
+
+#' @param highlight Names of species that should be highlighted as
+#'     coloured points.
+#' @importFrom utils modifyList
+#' @importFrom ggplot2 aes_ scale_colour_discrete scale_y_log10
+#'     geom_point facet_wrap
+#' @rdname autoplot.radfit
+#' @export
+`autoplot.rad.frame` <-
+    function(object, point.params=list(), highlight = NULL, ...)
+{
+    df <- fortify(object, ...)
+    ymin <- min(1, df$Abundance)
+    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+                               point.params)
+    pl <- ggplot(df, aes_(~Rank)) +
+        scale_y_log10(limit=c(ymin,NA)) +
+        do.call("geom_point", point.params) +
+        facet_wrap(~Site)
+    if (!is.null(highlight)) {
+        highlight <- factor(highlight, levels=highlight)
+        for(sp in highlight)
+            pl <- pl + geom_point(data=df[df$Species == sp, ,drop=FALSE],
+                                  aes_(y = ~Abundance, colour = sp))
+        pl <- pl + scale_colour_discrete(highlight, name = "Species")
+    }
+    pl
+}
+
 #'
 #' @inheritParams ggplot2::fortify
 #'
@@ -209,8 +255,6 @@
     )
 }
 
-### Methods for rad: only points, no lines
-
 #' @rdname autoplot.radfit
 #' @export
 `fortify.rad` <-
@@ -245,45 +289,4 @@
     )
 }
 
-#' @importFrom utils modifyList
-#' @importFrom ggplot2 aes_ scale_y_log10 geom_point
-#' @rdname autoplot.radfit
-#' @export
-`autoplot.rad` <-
-    function(object, point.params = list(), line.params = list(), ...)
-{
-    df <- fortify(object, ...)
-    ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
-                               point.params)
-    ggplot(df, aes_(~Rank)) +
-        scale_y_log10() +  # no lower limit for a single line
-        do.call("geom_point", point.params)
-}
 
-#' @param higlight Names of species that should be highlighted as
-#'     coloured points.
-#' @importFrom utils modifyList
-#' @importFrom ggplot2 aes_ scale_y_log10 geom_point facet_wrap
-#' @rdname autoplot.radfit
-#' @export
-`autoplot.rad.frame` <-
-    function(object, point.params=list(), highlight = NULL, ...)
-{
-    df <- fortify(object, ...)
-    ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
-                               point.params)
-    pl <- ggplot(df, aes_(~Rank)) +
-        scale_y_log10(limit=c(ymin,NA)) +
-        do.call("geom_point", point.params) +
-        facet_wrap(~Site)
-    if (!is.null(highlight)) {
-        highlight <- factor(highlight, levels=highlight)
-        for(sp in highlight)
-            pl <- pl + geom_point(data=df[df$Species == sp, ,drop=FALSE],
-                                  aes_(y = ~Abundance, colour = sp))
-        pl <- pl + scale_colour_discrete(highlight, name = "Species")
-    }
-    pl
-}
