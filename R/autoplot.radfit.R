@@ -7,8 +7,10 @@
 #' fitted with \CRANpkg{vegan} function \code{\link[vegan]{radfit}}.
 #'
 #' The \code{autoplot} function draws graphics which are \pkg{ggplot2}
-#' alternatives for \CRANpkg{lattice} graphics in \pkg{vegan}. The
-#' \code{fortify} function produces \dQuote{tidy} data frames that can
+#' alternatives for \CRANpkg{lattice} graphics in \pkg{vegan}. In
+#' addition, there are functions for \code{\link[vegan]{as.rad}}
+#' results which do not have dedicated graphics in\pkg{vegan}. The
+#' \code{fortify} functions produce \dQuote{tidy} data frames that can
 #' be used to produce the graphics.
 #'
 #' @examples
@@ -29,7 +31,11 @@
 #' ## use BIC and reoreder sites by their diversity
 #' autoplot(m, pick="BIC", order.by = diversity(mite[1:12,])) +
 #'    labs(title="Model Selection BIC, Ordered by Increasing Diversity")
-#'
+#' ## Plot RAD models without fits highlighting most abundant species in the
+#' ## whole data.
+#' m0 <- as.rad(mite[1:12,])
+#' dominants <- names(sort(colSums(mite), decreasing=TRUE))[1:6]
+#' autoplot(m0, highlight = dominants)
 
 #' @param object Result object from \code{\link[vegan]{radfit}}.
 #' @param facet Draw each fitted model to a separate facet or (if
