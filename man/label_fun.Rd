@@ -7,7 +7,7 @@
 label_fun(data, geom = c("label", "text", "label_repel", "text_repel"), vars)
 }
 \arguments{
-\item{data}{data frame; data set to use for the label layer. Must contain a variable \code{Label} containing the strings to use as labels.}
+\item{data}{data frame; data set to use for the label layer. Must contain a variable \code{label} containing the strings to use as labels.}
 
 \item{geom}{character; which geom to use for labelling.}
 

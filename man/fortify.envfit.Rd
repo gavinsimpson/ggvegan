@@ -14,7 +14,7 @@
 \item{...}{arguments passed to \code{\link[vegan]{scores.envfit}}.}
 }
 \value{
-A data frame with columns \code{Label}, \code{Type}, containing the label for, and whether each row refers to, the fitted vector or factor. Remaining variables are coordinates on the respective ordination axes returned by \code{\link[vegan]{scores.envfit}}.
+A data frame with columns \code{label}, \code{type}, containing the label for, and whether each row refers to, the fitted vector or factor. Remaining variables are coordinates on the respective ordination axes returned by \code{\link[vegan]{scores.envfit}}.
 }
 \description{
 Produces a tidy data frame from the results of an \code{\link[vegan]{envfit}} object.

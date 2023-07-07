@@ -18,7 +18,7 @@
 \item{...}{additional arguments for other methods. Currently ignored.}
 }
 \value{
-A data frame. For \code{what = "sites"}, the data frame contains one variable per dimension of the multidimensional scaling embedding of the dissimilarities. Variables are named \code{"DimX"} with \code{"X"} being an integer. An adidtional variable is \code{Labels}, containing a label for each observation. For \code{what = "network"}, the data frame contains four variables cotaining the coordinates in the chosen MDS axes for the start and end points of the network edges.
+A data frame. For \code{what = "sites"}, the data frame contains one variable per dimension of the multidimensional scaling embedding of the dissimilarities. Variables are named \code{"DimX"} with \code{"X"} being an integer. An adidtional variable is \code{label}, containing a label for each observation. For \code{what = "network"}, the data frame contains four variables cotaining the coordinates in the chosen MDS axes for the start and end points of the network edges.
 }
 \description{
 Prepares fortified versions of results from \code{\link[vegan]{isomap}} objects.

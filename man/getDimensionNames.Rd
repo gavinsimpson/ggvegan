@@ -13,7 +13,8 @@ getDimensionNames(object)
 A length 2 character vector of dimension names.
 }
 \description{
-Find the character vector of names for the two dimensions of data to be plotted.
+Find the character vector of names for the two dimensions of
+data to be plotted.
 }
 \author{
 Gavin L. Simpson

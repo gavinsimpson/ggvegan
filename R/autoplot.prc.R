@@ -1,47 +1,47 @@
-##' @title ggplot-based plot for objects of class \code{"prc"}
-##'
-##' @description
-##' Produces a multi-layer ggplot object representing the output of
-##' objects produced by \code{\link[vegan]{prc}}.
-##'
-##' @details
-##' TODO
-##'
-##' @param object an object inheriting from class \code{"prc"}, the
-##' result of a call to \code{\link[vegan]{prc}}.
-##' @param select a logical vector where \code{TRUE} selects and
-##' \code{FALSE} deselects species. Alternatively a numeric vector that
-##' contains the indices selecting species. Note that these are with
-##' respect to the original species matrix, \strong{not} the fortified
-##' object.
-##' @param xlab character; label for the x-axis
-##' @param ylab character; label for the y-axis
-##' @param title character; subtitle for the plot
-##' @param subtitle character; subtitle for the plot
-##' @param caption character; caption for the plot
-##' @param legend.position character; position for the legend grob. See argument
-##' \code{legend.position} in function \code{\link[ggplot2]{theme}}.
-##' @param ... Additional arguments passed to \code{\link{fortify.prc}}.
-##'
-##' @return Returns a ggplot object.
-##'
-##' @author Gavin L. Simpson
-##'
-##' @export
-##'
-##' @importFrom ggplot2 fortify ggplot geom_hline geom_rug geom_line theme scale_x_continuous labs aes_string
-##'
-##' @examples
-##' data(pyrifos)
-##' week <- gl(11, 12, labels=c(-4, -1, 0.1, 1, 2, 4, 8, 12, 15, 19, 24))
-##' dose <- factor(rep(c(0.1, 0, 0, 0.9, 0, 44, 6, 0.1, 44, 0.9, 0, 6), 11))
-##'
-##' ## Fit PRC model
-##' mod <- prc(pyrifos, dose, week)
-##'
-##' ## plot
-##' want <- colSums(pyrifos)
-##' autoplot(mod, select = want)
+#' @title ggplot-based plot for objects of class \code{"prc"}
+#'
+#' @description
+#' Produces a multi-layer ggplot object representing the output of
+#' objects produced by \code{\link[vegan]{prc}}.
+#'
+#' @details
+#' TODO
+#'
+#' @param object an object inheriting from class \code{"prc"}, the
+#' result of a call to \code{\link[vegan]{prc}}.
+#' @param select a logical vector where \code{TRUE} selects and
+#' \code{FALSE} deselects species. Alternatively a numeric vector that
+#' contains the indices selecting species. Note that these are with
+#' respect to the original species matrix, \strong{not} the fortified
+#' object.
+#' @param xlab character; label for the x-axis
+#' @param ylab character; label for the y-axis
+#' @param title character; subtitle for the plot
+#' @param subtitle character; subtitle for the plot
+#' @param caption character; caption for the plot
+#' @param legend.position character; position for the legend grob. See argument
+#' \code{legend.position} in function \code{\link[ggplot2]{theme}}.
+#' @param ... Additional arguments passed to \code{\link{fortify.prc}}.
+#'
+#' @return Returns a ggplot object.
+#'
+#' @author Gavin L. Simpson
+#'
+#' @export
+#'
+#' @importFrom ggplot2 fortify ggplot geom_hline geom_rug geom_line theme scale_x_continuous labs aes_string
+#'
+#' @examples
+#' data(pyrifos)
+#' week <- gl(11, 12, labels=c(-4, -1, 0.1, 1, 2, 4, 8, 12, 15, 19, 24))
+#' dose <- factor(rep(c(0.1, 0, 0, 0.9, 0, 44, 6, 0.1, 44, 0.9, 0, 6), 11))
+#'
+#' ## Fit PRC model
+#' mod <- prc(pyrifos, dose, week)
+#'
+#' ## plot
+#' want <- colSums(pyrifos)
+#' autoplot(mod, select = want)
 `autoplot.prc` <- function(object, select, xlab, ylab,
                            title = NULL, subtitle = NULL, caption = NULL,
                            legend.position = "top", ...) {
@@ -56,7 +56,7 @@
     fobj$Time <- as.numeric(as.character(fobj$Time))
 
     ## process select
-    ind <- fobj$Score != "Sample"
+    ind <- fobj$score != "Sample"
     if(missing(select)) {
         select <- rep(TRUE,sum(ind))
     } else {

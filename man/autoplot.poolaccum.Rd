@@ -19,15 +19,20 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{"poolaccum"}, the result of a call to \code{\link[vegan]{poolaccum}}.}
+\item{object}{an object of class \code{"poolaccum"}, the result of a call to
+\code{\link[vegan]{poolaccum}}.}
 
-\item{facet}{logical; should extrapolated richness estimators be shown in separate facets?}
+\item{facet}{logical; should extrapolated richness estimators be shown in
+separate facets?}
 
-\item{ribbon}{logical; show the quantile-based uncertainty interval? Uses \code{\link{geom_ribbon}} for plot.}
+\item{ribbon}{logical; show the quantile-based uncertainty interval? Uses
+\code{\link{geom_ribbon}} for plot.}
 
-\item{ncol}{numeric; if facetting the plot, how many columns to use. Default arguuments will result in three columns.}
+\item{ncol}{numeric; if facetting the plot, how many columns to use. Default
+arguuments will result in three columns.}
 
-\item{ribbon.alpha}{numeric; alpha transparency used for the uncertainty interval. Passed to the \code{alpha} aesthetic of \code{\link[ggplot2]{geom_ribbon}}.}
+\item{ribbon.alpha}{numeric; alpha transparency used for the uncertainty
+interval. Passed to the \code{alpha} aesthetic of \code{\link[ggplot2:geom_ribbon]{ggplot2::geom_ribbon()}}.}
 
 \item{xlab}{character; label for the x axis.}
 
@@ -39,13 +44,14 @@
 
 \item{caption}{character; caption for the plot.}
 
-\item{...}{additional arguments passed to \code{\link{fortify.poolaccum}}.}
+\item{...}{additional arguments passed to \code{\link[=fortify.poolaccum]{fortify.poolaccum()}}.}
 }
 \value{
 A ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{poolaccum}}.
+Produces a multi-layer ggplot object representing the output of objects
+produced by \code{\link[vegan]{poolaccum}}.
 }
 \examples{
 data(BCI)
