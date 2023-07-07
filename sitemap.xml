@@ -19,7 +19,7 @@
     <loc>/reference/add_spp_site_scores.html</loc>
   </url>
   <url>
-    <loc>/reference/arrowMul.html</loc>
+    <loc>/reference/arrow_mul.html</loc>
   </url>
   <url>
     <loc>/reference/autoplot.anosim.html</loc>
@@ -88,6 +88,21 @@
     <loc>/reference/fortify.prestonfit.html</loc>
   </url>
   <url>
+    <loc>/reference/geom_ordi_arrow.html</loc>
+  </url>
+  <url>
+    <loc>/reference/geom_ordi_axis.html</loc>
+  </url>
+  <url>
+    <loc>/reference/geom_ordi_label.html</loc>
+  </url>
+  <url>
+    <loc>/reference/geom_ordi_point.html</loc>
+  </url>
+  <url>
+    <loc>/reference/geom_ordi_text.html</loc>
+  </url>
+  <url>
     <loc>/reference/getDimensionNames.html</loc>
   </url>
   <url>
@@ -100,7 +115,13 @@
     <loc>/reference/layer_draw_list.html</loc>
   </url>
   <url>
+    <loc>/reference/ordiggplot.html</loc>
+  </url>
+  <url>
     <loc>/reference/scoresLength.html</loc>
+  </url>
+  <url>
+    <loc>/reference/stat_vectorfit.html</loc>
   </url>
   <url>
     <loc>/reference/valid_layers.html</loc>
