@@ -23,8 +23,8 @@ details.}
 \value{
 A data frame in long format containing the ordination scores.
 The first three components are the \code{Time}, \code{Treatment}, and
-associated \code{Response}. The last two components, \code{Score} and
-\code{Label} are an indictor factor and a label for the rows for use
+associated \code{Response}. The last two components, \code{score} and
+\code{label} are an indictor factor and a label for the rows for use
 in plotting.
 }
 \description{

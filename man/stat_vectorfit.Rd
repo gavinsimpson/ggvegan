@@ -21,10 +21,10 @@ stat_vectorfit(
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
-\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply \code{mapping} if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
+\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
+at the top level of the plot. You must supply \code{mapping} if there is no plot
+mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -41,10 +41,14 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{geom}{The geometric object to use display the data}
+\item{geom}{The geometric object to use to display the data, either as a
+\code{ggproto} \code{Geom} subclass or as a string naming the geom stripped of the
+\code{geom_} prefix (e.g. \code{"point"} rather than \code{"geom_point"})}
 
-\item{position}{Position adjustment, either as a string, or the result of
-a call to a position adjustment function.}
+\item{position}{Position adjustment, either as a string naming the adjustment
+(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
+position adjustment function. Use the latter if you need to change the
+settings of the adjustment.}
 
 \item{na.rm}{Remove missing values (Not Yet Implemented).}
 
@@ -75,18 +79,22 @@ current graph.}
 Fits arrows to show the direction of fastest increase
 in continuous environmental variables in ordination space.The
 arrows are scaled relative to their correlation coefficient,
-and they can be added to an ordination plot with
-\code{\link{geom_ordiarrow}}.
+and they can be added to an ordination plot with \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}}.
 }
 \examples{
+library("vegan")
+\dontshow{set.seed(1)}
 data(mite, mite.env)
-m <- metaMDS(mite, trace=FALSE, trymax=100)
+m <- metaMDS(mite, trace = FALSE, trymax = 100)
+
 ## add fitted vectors for continuous variables
-ordiggplot(m) + geom_ordipoint("sites") +
-  geom_ordiarrow("sites", stat="vectorfit", edata=mite.env)
+ordiggplot(m) +
+  geom_ordi_point("sites") +
+  geom_ordi_arrow("sites", stat = "vectorfit", edata = mite.env)
+
 ## can be faceted
-ordiggplot(m) + geom_ordipoint("sites") +
-  geom_ordiarrow("sites", stat="vectorfit", edata=mite.env) +
+ordiggplot(m) + geom_ordi_point("sites") +
+  geom_ordi_arrow("sites", stat = "vectorfit", edata = mite.env) +
   facet_wrap(mite.env$Topo)
 }
 \keyword{datasets}

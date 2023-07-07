@@ -2,35 +2,12 @@
 % Please edit documentation in R/ordiggplot.R
 \name{ordiggplot}
 \alias{ordiggplot}
-\alias{geom_ordipoint}
-\alias{geom_orditext}
-\alias{geom_ordilabel}
-\alias{geom_ordiarrow}
-\alias{geom_ordiaxis}
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
 ordiggplot(model, axes = c(1, 2), arrowmul, ...)
 
-geom_ordipoint(Score, data, ...)
-
-geom_orditext(Score, data, ...)
-
-geom_ordilabel(Score, data, ...)
-
-geom_ordiarrow(
-  Score,
-  data,
-  text = TRUE,
-  box = FALSE,
-  arrow.params = list(),
-  text.params = list(),
-  ...
-)
-
-geom_ordiaxis(lty = 3, ...)
-
-ggscores(Score)
+ggscores(score)
 }
 \arguments{
 \item{model}{An ordination result object from \CRANpkg{vegan}.}
@@ -44,72 +21,74 @@ manual adjustment can be useful.}
 
 \item{...}{Parameters passed to underlying functions.}
 
-\item{Score}{Ordination score to be added to the plot.}
-
-\item{data}{Alternative data to the function that will be used
-instead of \code{Score}.}
-
-\item{text}{Add text labels to the plot.}
-
-\item{box}{Draw a box behind the text (logical).}
-
-\item{arrow.params, text.params}{Parameters to modify arrows or
-their text labels.}
-
-\item{lty}{Linetype.}
+\item{score}{Ordination score to be added to the plot.}
 }
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
 result. You can add new graphical elements to this plot with
-\code{geom_ordi*} function of this package, or you can use standard
-\CRANpkg{ggplot2} \code{geom_*} functions and use \code{ggscores}
-as their \code{data=} argument.
+\verb{geom_ordi_*} function of this package, or you can use standard
+\CRANpkg{ggplot2} \verb{geom_*} functions and use \code{ggscores}
+as their \code{data} argument.
 }
 \details{
 The \pkg{ggvegan} package has two contrasting approaches to draw
-ordination plots. The \code{autoplot} functions
-(e.g. \code{\link{autoplot.rda}}, \code{\link{autoplot.cca}},
-\code{\link{autoplot.metaMDS}}) draw a complete plot with one
+ordination plots. The \code{autoplot} functions (e.g. \code{\link[=autoplot.rda]{autoplot.rda()}},
+\code{\link[=autoplot.cca]{autoplot.cca()}}, and \link{autoplot.metaMDS}) draw a complete plot with one
 command, but the design is hard-coded in the function. However, you
-but can add new elements to the graph.
+can add new elements to the graph.
 
-In contrast, function \code{ordiggplot} only sets up an ordination
-plot, but draws no result. It allows you to add layers to the graph
-one by one with full flexibility of the \CRANpkg{ggplot2}
-functions. There are some specific functions \code{geom_ordi*}
-functions that are similar as similarly named \code{geom_*}
-functions. For these you need to give the name of ordination score
-to be added, and in addition, you can give any \code{geom_}
+In contrast, function \code{ordiggplot()} only sets up an ordination
+plot, and does not draw anything. It allows you to add layers to the plot
+one by one with full flexibility of the \CRANpkg{ggplot2} functions.
+There are some specific functions \verb{geom_ordi_*}
+functions that are similar as similarly named \verb{geom_*}
+functions. For these you need to give the type of ordination scores
+to be added, and in addition, you can give any \verb{geom_*}
 function arguments to modify the plot. Alternatively, you can use
-any \pkg{ggplot2} function and in its \code{data=} argument use
-\code{ggscores} function to select the data elements for the
+any \pkg{ggplot2} function and in its \code{data} argument use
+\code{ggscores()} function to select the data elements for the
 function.
 
-The \code{ordiggplot} function extracts results using
-\code{fortify} functions of this package, and it accepts the
+The \code{ordiggplot()} function extracts results using
+\code{fortify()} functions of this package, and it accepts the
 arguments of those functions. This allows setting, e.g., the
 scaling of ordination axes.
 }
 \examples{
+library("vegan")
 data(dune, dune.env, varespec, varechem)
 m <- cca(dune ~ Management + A1, dune.env)
-## use geom_ordi* functions
-ordiggplot(m) + geom_ordiaxis() + geom_ordipoint("sites") +
-  geom_orditext("species", col="darkblue", mapping=aes(fontface="italic")) +
-  geom_ordilabel("centroids") + geom_ordiarrow("biplot")
+
+## use geom_ordi_* functions
+ordiggplot(m) + geom_ordi_axis() +
+  geom_ordi_point("sites") +
+  geom_ordi_text("species", col = "darkblue",
+                 mapping = aes(fontface = "italic")) +
+  geom_ordi_label("centroids") +
+  geom_ordi_arrow("biplot")
+
 ## use ggscores + standard geom_* functions
-ordiggplot(m, scaling="sites") + geom_point(data=ggscores("sites")) +
-   geom_text(data=ggscores("species"), mapping=aes(fontface="italic")) +
-   geom_label(data=ggscores("centroids"), fill="yellow") +
-   geom_ordiarrow("biplot")
+ordiggplot(m, scaling = "sites") +
+  geom_point(data = ggscores("sites")) +
+  geom_text(data = ggscores("species"),
+            mapping = aes(fontface = "italic")) +
+  geom_label(data = ggscores("centroids"), fill = "yellow") +
+  geom_ordi_arrow("biplot")
+
 ## Messy arrow biplot for PCA
 m <- rda(dune)
-ordiggplot(m) + geom_ordiaxis() + geom_ordipoint("sites") +
-   geom_ordiarrow("species")
+ordiggplot(m) +
+  geom_ordi_axis() +
+  geom_ordi_point("sites") +
+  geom_ordi_arrow("species")
+
 ## Fitted vectors, selecting variables with formula
-m <- metaMDS(varespec, trace=FALSE)
-ordiggplot(m) + geom_ordipoint("sites") +
-   geom_ordiarrow("sites", stat="vectorfit", edata=varechem,
-   formula = ~ N + Ca + Al + Humdepth + pH)
+\dontshow{set.seed(1)} 
+m <- metaMDS(varespec, trace = FALSE)
+## plot
+ordiggplot(m) +
+  geom_ordi_point("sites") +
+  geom_ordi_arrow("sites", stat = "vectorfit", edata = varechem,
+                  formula = ~ N + Ca + Al + Humdepth + pH)
 
 }
