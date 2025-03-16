@@ -26,6 +26,7 @@
 #' data(BCI)
 #' pool <- poolaccum(BCI)
 #' df <- fortify(pool)
+#' df
 #'
 #' ggplot(df, aes(x = size, y = richness, colour = index)) +
 #'     geom_ribbon(aes(ymin = lower, ymax = upper, x = size, fill = index),
