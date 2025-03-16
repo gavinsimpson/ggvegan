@@ -32,6 +32,7 @@ library("ggplot2")
 data(BCI)
 pool <- poolaccum(BCI)
 df <- fortify(pool)
+df
 
 ggplot(df, aes(x = size, y = richness, colour = index)) +
     geom_ribbon(aes(ymin = lower, ymax = upper, x = size, fill = index),
@@ -40,5 +41,5 @@ ggplot(df, aes(x = size, y = richness, colour = index)) +
     facet_wrap(~ index)
 }
 \author{
-Didzis Elferts & Gavin L. Simpson
+Gavin L. Simpson & Didzis Elferts
 }
