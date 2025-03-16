@@ -18,9 +18,10 @@
 #' @export
 #'
 #' @importFrom ggplot2 fortify
+#' @importFrom tibble as_tibble
+#' @importFrom vctrs vec_cbind
 #'
-#' @author Didzis Elferts & Gavin L. Simpson
-#'
+#' @author Gavin L. Simpson & Didzis Elferts
 #' @examples
 #' library("ggplot2")
 #' data(BCI)
@@ -33,14 +34,22 @@
 #'                 alpha = 0.3, inherit.aes = FALSE) +
 #'     geom_line() +
 #'     facet_wrap(~ index)
-
 `fortify.poolaccum` <- function(model, data, alpha = 0.05, ...) {
-    m <- summary(model, alpha = alpha, ...)
-    lens <- vapply(m, NROW, numeric(1), USE.NAMES = FALSE)
-    vars <- vapply(m, function(x) colnames(x)[2], character(1),
-                   USE.NAMES = FALSE)
-    df <- as.data.frame(do.call("rbind", m)) # bind_rows later?
-    names(df) <- c("size", "richness", "lower", "upper", "std_dev")
-    df <- cbind(index = factor(rep(vars, times = lens)), df)
+  m <- summary(model, alpha = alpha, ...)
+  lens <- vapply(
+    m, FUN = NROW, FUN.VALUE = numeric(1), USE.NAMES = FALSE
+  )
+  vars <- vapply(
+    m, FUN = \(x) colnames(x)[2], FUN.VALUE = character(1),
+    USE.NAMES = FALSE
+  )
+  df <- do.call("rbind", m) |>
+    as.data.frame() |>
+    setNames(c("size", "richness", "lower", "upper", "std_dev")) |>
+    as_tibble()
+  df <- vec_cbind(
+    index = factor(rep(vars, times = lens)),
     df
+  )
+  df
 }
