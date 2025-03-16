@@ -27,6 +27,7 @@ Prepares fortified versions of results from \code{\link[vegan]{isomap}} objects.
 Two different objects can be created from the results of an \code{\link[vegan]{isomap}} object. The first is the standard scores representation of fortified ordinations in vegan, which results in a wide data frame where rows cotain observations and columne the coordinates of observations on the MDS axes. Because ISOMAP also produces a network or sorts, the coordinates of the edges of the network can also be returned in a tidy format using \code{what = "network"}.
 }
 \examples{
+library("ggplot2")
 data(BCI)
 dis <- vegdist(BCI)
 ord <- isomap(dis, k = 3)

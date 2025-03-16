@@ -22,6 +22,7 @@
 #' @author Didzis Elferts & Gavin L. Simpson
 #'
 #' @examples
+#' library("ggplot2")
 #' data(BCI)
 #' pool <- poolaccum(BCI)
 #' df <- fortify(pool)
