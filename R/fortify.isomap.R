@@ -15,6 +15,7 @@
 #' @author Gavin L. Simpson
 #'
 #' @examples
+#' library("ggplot2")
 #' data(BCI)
 #' dis <- vegdist(BCI)
 #' ord <- isomap(dis, k = 3)
