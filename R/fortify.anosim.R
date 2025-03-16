@@ -12,6 +12,7 @@
 #' @author Didzis Elferts
 #'
 #' @examples
+#' library("ggplot2")
 #' data(dune, dune.env)
 #' dune.dist <- vegdist(dune)
 #' dune.ano <- with(dune.env, anosim(dune.dist, Management))
