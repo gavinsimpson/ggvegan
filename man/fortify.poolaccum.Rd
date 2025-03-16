@@ -28,6 +28,7 @@ Prepares a fortified version of results from
 \code{\link[vegan:specpool]{vegan::poolaccum()}} objects.
 }
 \examples{
+library("ggplot2")
 data(BCI)
 pool <- poolaccum(BCI)
 df <- fortify(pool)

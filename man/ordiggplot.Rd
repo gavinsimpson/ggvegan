@@ -56,6 +56,7 @@ scaling of ordination axes.
 }
 \examples{
 library("vegan")
+library("ggplot2")
 data(dune, dune.env, varespec, varechem)
 m <- cca(dune ~ Management + A1, dune.env)
 
@@ -83,7 +84,7 @@ ordiggplot(m) +
   geom_ordi_arrow("species")
 
 ## Fitted vectors, selecting variables with formula
-\dontshow{set.seed(1)} 
+\dontshow{set.seed(1)}
 m <- metaMDS(varespec, trace = FALSE)
 ## plot
 ordiggplot(m) +
