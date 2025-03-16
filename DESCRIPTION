@@ -8,6 +8,7 @@ Depends:
 Imports:
     dplyr,
     tibble,
+    vctrs,
     ggplot2,
     grid,
     tidyr,
