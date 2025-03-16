@@ -36,10 +36,9 @@
 #' @param score Ordination score to be added to the plot.
 #' @param ... Parameters passed to underlying functions.
 #'
-#'
-#'
 #' @examples
 #' library("vegan")
+#' library("ggplot2")
 #' data(dune, dune.env, varespec, varechem)
 #' m <- cca(dune ~ Management + A1, dune.env)
 #'
@@ -67,7 +66,7 @@
 #'   geom_ordi_arrow("species")
 #'
 #' ## Fitted vectors, selecting variables with formula
-#' \dontshow{set.seed(1)} 
+#' \dontshow{set.seed(1)}
 #' m <- metaMDS(varespec, trace = FALSE)
 #' ## plot
 #' ordiggplot(m) +
@@ -76,7 +75,7 @@
 #'                   formula = ~ N + Ca + Al + Humdepth + pH)
 #'
 #' @importFrom stats weights
-#' @importFrom ggplot2 ggplot coord_fixed aes_string
+#' @importFrom ggplot2 ggplot coord_fixed aes_string ggproto
 #'
 #' @param arrowmul Multiplier to arrow length. If missing, the arrow
 #'     length are adjusted to fit to other scores, but if some score
@@ -274,6 +273,7 @@
 }
 
 #' @rdname stat_vectorfit
+#' @importFrom ggplot2 Stat
 #' @format NULL
 #' @usage NULL
 #' @export
@@ -334,6 +334,7 @@
 #'
 #' @examples
 #' library("vegan")
+#' library("ggplot2")
 #' \dontshow{set.seed(1)}
 #' data(mite, mite.env)
 #' m <- metaMDS(mite, trace = FALSE, trymax = 100)
