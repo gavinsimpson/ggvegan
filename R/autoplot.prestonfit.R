@@ -23,6 +23,8 @@
 #'
 #' @examples
 #'
+#' library("vegan")
+#'
 #' data(BCI)
 #' pfit <- prestonfit(colSums(BCI))
 #' autoplot(pfit)

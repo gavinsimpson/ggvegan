@@ -33,7 +33,9 @@
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text labs coord_fixed aes_string
 #'
 #' @examples
-#' ## load example data
+#'
+#' library("vegan")
+#'
 #' data(dune)
 #'
 #' sol <- metaMDS(dune)

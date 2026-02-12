@@ -26,6 +26,9 @@
 #' @importFrom vegan scores
 #'
 #' @examples
+#'
+#' library("vegan")
+#'
 #' data(dune)
 #' data(dune.env)
 #'

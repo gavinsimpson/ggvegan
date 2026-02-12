@@ -23,6 +23,8 @@
 #'
 #' @author Gavin L. Simpson & Didzis Elferts
 #' @examples
+#'
+#' library("vegan")
 #' library("ggplot2")
 #' data(BCI)
 #' pool <- poolaccum(BCI)

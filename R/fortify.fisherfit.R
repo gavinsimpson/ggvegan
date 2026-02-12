@@ -14,6 +14,8 @@
 #'
 #' @examples
 #'
+#' library("vegan")
+#'
 #' data(BCI)
 #' mod <- fisherfit(BCI[5,])
 #' head(fortify(mod))

@@ -12,6 +12,9 @@
 #' @author Didzis Elferts
 #'
 #' @examples
+#'
+#' library("vegan")
+#'
 #' library("ggplot2")
 #' data(dune, dune.env)
 #' dune.dist <- vegdist(dune)

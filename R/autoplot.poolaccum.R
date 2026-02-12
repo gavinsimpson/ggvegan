@@ -30,6 +30,9 @@
 #' @importFrom ggplot2 ggplot autoplot geom_line geom_ribbon aes_string labs fortify facet_wrap
 #'
 #' @examples
+#'
+#' library("vegan")
+#'
 #' data(BCI)
 #' pool <- poolaccum(BCI)
 #'

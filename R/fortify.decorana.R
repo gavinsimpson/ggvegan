@@ -21,6 +21,9 @@
 #' @importFrom vegan scores
 #'
 #' @examples
+#' 
+#' library("vegan")
+#'
 #' data(dune)
 #'
 #' sol <- decorana(dune)

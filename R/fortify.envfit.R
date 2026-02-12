@@ -12,6 +12,9 @@
 #' @export
 #'
 #' @examples
+#'
+#' library("vegan")
+#'
 #' data(varespec, varechem)
 #' ord <- metaMDS(varespec)
 #' fit <- envfit(ord, varechem, perm = 199)

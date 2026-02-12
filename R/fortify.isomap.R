@@ -15,6 +15,9 @@
 #' @author Gavin L. Simpson
 #'
 #' @examples
+#'
+#' library("vegan")
+#'
 #' library("ggplot2")
 #' data(BCI)
 #' dis <- vegdist(BCI)

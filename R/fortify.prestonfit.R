@@ -14,6 +14,8 @@
 #'
 #' @examples
 #'
+#' library("vegan")
+#'
 #' data(BCI)
 #' pfit <- prestonfit(colSums(BCI))
 #' head(fortify(pfit))

@@ -9,17 +9,19 @@
 #' @return a numeric multiplier that will scale the arrows
 #' @author Gavin L. Simpson
 `arrow_mul` <- function(arrows, data, at = c(0, 0), fill = 0.75) {
-    u <- c(range(data[, 1], range(data[, 2])))
-    u <- u - rep(at, each = 2)
-    r <- c(range(arrows[, 1], na.rm = TRUE), range(arrows[, 2], na.rm = TRUE))
-    rev <- sign(diff(u))[-2]
-    if (rev[1] < 0)
-        u[1:2] <- u[2:1]
-    if (rev[2] < 0)
-        u[3:4] <- u[4:3]
-    u <- u/r
-    u <- u[is.finite(u) & u > 0]
-    fill * min(u)
+  u <- c(range(data[, 1], range(data[, 2])))
+  u <- u - rep(at, each = 2)
+  r <- c(range(arrows[, 1], na.rm = TRUE), range(arrows[, 2], na.rm = TRUE))
+  rev <- sign(diff(u))[-2]
+  if (rev[1] < 0) {
+    u[1:2] <- u[2:1]
+  }
+  if (rev[2] < 0) {
+      u[3:4] <- u[4:3]
+  }
+  u <- u / r
+  u <- u[is.finite(u) & u > 0]
+  fill * min(u)
 }
 
 #' @title Number of scores
@@ -31,11 +33,11 @@
 #'
 #' @author Gavin L. Simpson
 `scoresLength` <- function(x) {
-        obs <- NROW(x)
-        if (is.null(obs))
-            obs <- 0
-        obs
-
+  obs <- NROW(x)
+  if (is.null(obs)) {
+    obs <- 0
+  }
+  obs
 }
 
 #' @title Extract the names of the dimensions to plot as a character vector
@@ -46,7 +48,7 @@
 #' @return A length 2 character vector of dimension names.
 #' @author Gavin L. Simpson
 `getDimensionNames` <- function(object) {
-    names(object)[-c(1,2)]
+  names(object)[-c(1,2)]
 }
 
 #' @title Adds a label layer using one of a set of common geoms
@@ -62,32 +64,47 @@
 #' @importFrom ggplot2 geom_text geom_label aes_string
 #' @importFrom ggrepel geom_text_repel geom_label_repel
 #'
-`label_fun` <- function(data,
-                        geom = c("label", "text", "label_repel", "text_repel"),
-                        vars) {
-    ll <- switch(geom,
-                 label =
-                     geom_label(data = data,
-                                mapping = aes_string(x = vars[1],
-                                                     y = vars[2],
-                                                     label = 'label')),
-                 text =
-                     geom_text(data = data,
-                               mapping = aes_string(x = vars[1],
-                                                    y = vars[2],
-                                                    label = 'label')),
-                 label_repel =
-                     geom_label_repel(data = data,
-                                      mapping = aes_string(x = vars[1],
-                                                           y = vars[2],
-                                                          label = 'label')),
-                 text_repel =
-                     geom_text_repel(data = data,
-                                    mapping = aes_string(x = vars[1],
-                                                         y = vars[2],
-                                                         label = 'label'))
-                 )
-    ll
+`label_fun` <- function(
+  data,
+  geom = c("label", "text", "label_repel", "text_repel"),
+  vars
+) {
+  ll <- switch(
+    geom,
+    label = geom_label(
+      data = data,
+      mapping = aes_string(
+        x = vars[1],
+        y = vars[2],
+        label = 'label'
+      )
+    ),
+    text = geom_text(
+      data = data,
+      mapping = aes_string(
+        x = vars[1],
+        y = vars[2],
+        label = 'label'
+      )
+    ),
+    label_repel = geom_label_repel(
+      data = data,
+      mapping = aes_string(
+        x = vars[1],
+        y = vars[2],
+        label = 'label'
+      )
+    ),
+    text_repel = geom_text_repel(
+      data = data,
+      mapping = aes_string(
+        x = vars[1],
+        y = vars[2],
+        label = 'label'
+      )
+    )
+  )
+  ll
 }
 
 #' @title Valid layers for vegan objects

@@ -29,6 +29,9 @@
 #' @rdname autoplot.permustats
 #' @export
 #' @examples
+#'
+#' library("vegan")
+#'
 #' data(dune, dune.env)
 #' mod <- cca(dune ~ A1 + Management + Moisture, dune.env)
 #' (ano <- anova(mod, by = "onedf"))

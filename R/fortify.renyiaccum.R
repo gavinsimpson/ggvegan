@@ -29,6 +29,8 @@
 #'
 #' @author Gavin L. Simpson much rewritten from an original by Didzis Elferts.
 #' @examples
+#' 
+#' library("vegan")
 #' library("ggplot2")
 #' data(BCI)
 #' pool <- renyiaccum(BCI)

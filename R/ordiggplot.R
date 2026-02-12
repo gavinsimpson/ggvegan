@@ -333,6 +333,7 @@
 #' @param ... Other arguments passed to the functions.
 #'
 #' @examples
+#'
 #' library("vegan")
 #' library("ggplot2")
 #' \dontshow{set.seed(1)}
