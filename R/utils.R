@@ -55,7 +55,7 @@
 #'
 #' @description Adds labels to a plot using one of [ggplot2::geom_label()],
 #'   [ggplot2::geom_text()], [ggrepel::geom_label_repel()] or
-#'   [ggplot2::geom_text_repel()].
+#'   [ggrepel::geom_text_repel()].
 #'
 #' @param data data frame; data set to use for the label layer. Must contain a
 #'   variable label containing the strings to use as labels.
@@ -154,7 +154,7 @@
 #' @title List of layers to draw for a given vegan object
 #'
 #' @param valid character; vector of valid layer names
-#' @param layers character; a vector of layer names for \code{object} that has
+#' @param layers character; a vector of layer names for `object` that has
 #'   already been filtered for validity.
 #' @param available character; what layers are actually available
 #'
@@ -176,8 +176,8 @@
 #' @param object an ordination object.
 #' @param plt a ggplot object.
 #' @param vars character; length 2 vector of dimension names.
-#' @param geom character; vector of length 1 or 2 indicating which geoms will
-#'   be used ofr the species or site scores.
+#' @param geom character; vector of length 1 or 2 indicating which geom will
+#'   be used for the species or site scores.
 #' @param draw_list logical; vector of types of scores indicating which are
 #'   available and requested for plotting.
 #' @param arrows logical; length 1 vector indicating if species scores should

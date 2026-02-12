@@ -29,6 +29,8 @@
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment labs coord_fixed aes_string
 #'
 #' @examples
+#'
+#' library("vegan")
 #' data(dune)
 #'
 #' sol <- decorana(dune)

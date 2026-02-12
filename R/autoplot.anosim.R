@@ -21,6 +21,8 @@
 #'
 #' @examples
 #'
+#' library("vegan")
+#'
 #' data(dune)
 #' data(dune.env)
 #' dune.dist <- vegdist(dune)

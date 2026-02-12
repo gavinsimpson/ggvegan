@@ -1,17 +1,17 @@
-#' @title ggplot-based plot for objects of class \code{"poolaccum"}
+#' @title ggplot-based plot for objects of class `"poolaccum"`
 #'
 #' @description
 #' Produces a multi-layer ggplot object representing the output of objects
 #' produced by \code{\link[vegan]{poolaccum}}.
 #'
-#' @param object an object of class \code{"poolaccum"}, the result of a call to
-#'   \code{\link[vegan]{poolaccum}}.
+#' @param object an object of class `"poolaccum"`, the result of a call to
+#'   [vegan::poolaccum()].
 #' @param facet logical; should extrapolated richness estimators be shown in
 #'   separate facets?
 #' @param ribbon logical; show the quantile-based uncertainty interval? Uses
-#'   \code{\link{geom_ribbon}} for plot.
-#' @param ncol numeric; if facetting the plot, how many columns to use. Default
-#'   arguuments will result in three columns.
+#'   [ggplot2::geom_ribbon()] for plot.
+#' @param ncol numeric; if faceting the plot, how many columns to use. Default
+#'   arguments will result in three columns.
 #' @param ribbon.alpha numeric; alpha transparency used for the uncertainty
 #'   interval. Passed to the `alpha` aesthetic of [ggplot2::geom_ribbon()].
 #' @param xlab character; label for the x axis.

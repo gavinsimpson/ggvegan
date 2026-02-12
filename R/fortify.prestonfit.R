@@ -1,10 +1,11 @@
 #' @title Tidied species octave abundance data
 #'
-#' @description Prepares a data frame of results from a \code{\link{fisherfit}} object suitable for plotting with \code{\link{ggplot}}.
-#' @param model an object of class \code{\link{prestonfit}}
+#' @description Prepares a data frame of results from a [vegan::prestonfit()]
+#'   object suitable for plotting with [ggplot2::ggplot()].
+#' @param model an object of class [vegan::prestonfit()].
 #' @param data original data set. Currently ignored.
 #' @param ... other arguments pass to methods. Currently ignored.
-#' @return A data frame with columns \code{'Octave'} and \code{'Abundance'}.
+#' @return A data frame with columns `'Octave'`` and `'Abundance'``.
 #'
 #' @author Gavin L. Simpson
 #'
