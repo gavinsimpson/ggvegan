@@ -20,9 +20,10 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{\link{fisherfit}}.}
+\item{object}{an object of class \code{\link[vegan:fisherfit]{vegan::fisherfit()}}.}
 
-\item{show.fitted}{logical; should the estimated distribution also be plotted?}
+\item{show.fitted}{logical; should the estimated distribution also be
+plotted?}
 
 \item{xlab}{character; label for the x axis.}
 
@@ -30,7 +31,8 @@
 
 \item{title}{character; subtitle for the plot.}
 
-\item{bar.col}{colour for the bar outlines. The default, \code{NA}, does not draw outlines around bars.}
+\item{bar.col}{colour for the bar outlines. The default, \code{NA}, does not
+draw outlines around bars.}
 
 \item{bar.fill}{fill colour for the bars.}
 
@@ -48,7 +50,8 @@
 A ggplot object.
 }
 \description{
-Draws a bar plot of species rank abundance with Fisher's log-series superimposed.
+Draws a bar plot of species rank abundance with Fisher's
+log-series superimposed.
 }
 \examples{
 

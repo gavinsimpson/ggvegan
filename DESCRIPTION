@@ -2,8 +2,7 @@ Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
 Version: 0.1.999
-Date: 2023-07-07
-Depends:
+Suggests:
     vegan (>= 2.3-0)
 Imports:
     dplyr,
@@ -22,7 +21,7 @@ Description: Functions to produce ggplot2-based plots of objects produced by
 License: GPL-2
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Encoding: UTF-8
 Suggests: 
     testthat (>= 3.0.0)
