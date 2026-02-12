@@ -36,13 +36,13 @@
 <url><loc>/reference/geom_ordi_label.html</loc></url>
 <url><loc>/reference/geom_ordi_point.html</loc></url>
 <url><loc>/reference/geom_ordi_text.html</loc></url>
-<url><loc>/reference/getDimensionNames.html</loc></url>
+<url><loc>/reference/get_dimension_names.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/label_fun.html</loc></url>
 <url><loc>/reference/layer_draw_list.html</loc></url>
 <url><loc>/reference/ordiggplot.html</loc></url>
 <url><loc>/reference/reexports.html</loc></url>
-<url><loc>/reference/scoresLength.html</loc></url>
+<url><loc>/reference/scores_length.html</loc></url>
 <url><loc>/reference/stat_vectorfit.html</loc></url>
 <url><loc>/reference/valid_layers.html</loc></url>
 </urlset>
