@@ -2,9 +2,9 @@ Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
 Version: 0.1.999
-Suggests:
-    vegan (>= 2.3-0)
+Depends: R (>= 4.1.0)
 Imports:
+    vegan (>= 2.3-0),
     dplyr,
     tibble,
     vctrs,
@@ -12,8 +12,11 @@ Imports:
     grid,
     tidyr,
     ggrepel
+Suggests:
+    testthat (>= 3.0.0)
 Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
-                    email = "ucfagls@gmail.com"),
+                    email = "ucfagls@gmail.com",
+		            comment = c(ORCID = "0000-0002-9084-8413")),
              person("Jari", "Oksanen", role = "aut"),
 	         person("Didzis", "Elferts", role = "ctb"))
 Description: Functions to produce ggplot2-based plots of objects produced by
@@ -23,6 +26,5 @@ ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Encoding: UTF-8
-Suggests: 
-    testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Language: en-GB
