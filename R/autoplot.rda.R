@@ -73,7 +73,7 @@
     layer_names <- names(draw_list)[draw_list]
 
     ## sort out x, y aesthetics
-    vars <- getDimensionNames(obj)
+    vars <- get_dimension_names(obj)
 
     ## process geom arg
     geom <- match.arg(geom, several.ok = TRUE)

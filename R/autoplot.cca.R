@@ -43,7 +43,7 @@
     obj <- fortify(object, axes = axes, ...)
     LAYERS <- levels(obj$score)
     ## sort out x, y aesthetics
-    vars <- getDimensionNames(obj)
+    vars <- get_dimension_names(obj)
     ## match the geom
     geom <- match.arg(geom)
     point <- TRUE
