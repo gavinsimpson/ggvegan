@@ -20,6 +20,9 @@ A data frame with columns \code{label}, \code{type}, containing the label for, a
 Produces a tidy data frame from the results of an \code{\link[vegan]{envfit}} object.
 }
 \examples{
+
+library("vegan")
+
 data(varespec, varechem)
 ord <- metaMDS(varespec)
 fit <- envfit(ord, varechem, perm = 199)

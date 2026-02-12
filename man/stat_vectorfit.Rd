@@ -101,6 +101,7 @@ arrows are scaled relative to their correlation coefficient,
 and they can be added to an ordination plot with \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}}.
 }
 \examples{
+
 library("vegan")
 library("ggplot2")
 \dontshow{set.seed(1)}

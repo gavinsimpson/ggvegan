@@ -7,14 +7,18 @@
 label_fun(data, geom = c("label", "text", "label_repel", "text_repel"), vars)
 }
 \arguments{
-\item{data}{data frame; data set to use for the label layer. Must contain a variable \code{label} containing the strings to use as labels.}
+\item{data}{data frame; data set to use for the label layer. Must contain a
+variable label containing the strings to use as labels.}
 
 \item{geom}{character; which geom to use for labelling.}
 
-\item{vars}{character; vector of names of variables to ass to the \code{x} and \code{y} aesthetics of the chosen geom.}
+\item{vars}{character; vector of names of variables to pass to the \code{x} and
+\code{y} aesthetics of the chosen geom.}
 }
 \description{
-Adds labels to a plot using one of \code{geom_label}, \code{geom_text}, \code{geom_label_repel} or \code{geom_text_repel}.
+Adds labels to a plot using one of \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}},
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}, \code{\link[ggrepel:geom_text_repel]{ggrepel::geom_label_repel()}} or
+\code{\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel()}}.
 }
 \author{
 Gavin L. Simpson

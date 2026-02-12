@@ -20,9 +20,10 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{\link{prestonfit}}.}
+\item{object}{an object of class \code{\link[vegan:fisherfit]{vegan::prestonfit()}}.}
 
-\item{show.fitted}{logical; should the estimated distribution also be plotted?}
+\item{show.fitted}{logical; should the estimated distribution also be
+plotted?}
 
 \item{xlab}{character; label for the x axis.}
 
@@ -34,13 +35,14 @@
 
 \item{caption}{character; caption for the plot.}
 
-\item{bar.col}{colour for the bar outlines. The default, \code{NA}, does not draw outlines around bars.}
+\item{bar.col}{colour for the bar outlines. The default, `NA``, does not
+draw outlines around bars.}
 
 \item{bar.fill}{fill colour for the bars.}
 
-\item{line.col}{colour for Fisher's log-series curve.}
+\item{line.col}{colour for Preston's log-normal curve.}
 
-\item{size}{numeric; size aesthetic for the log-series curve.}
+\item{size}{numeric; size aesthetic for the log-normal curve.}
 
 \item{...}{additional arguments passed to other methods.}
 }
@@ -48,9 +50,12 @@
 A ggplot object.
 }
 \description{
-Draws a bar plot of species rank abundance with Fisher's log-series superimposed.
+Draws a bar plot of species rank abundance with Preston's
+log-normal model superimposed.
 }
 \examples{
+
+library("vegan")
 
 data(BCI)
 pfit <- prestonfit(colSums(BCI))

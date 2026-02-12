@@ -28,6 +28,9 @@ Fortifies an object of class \code{"decorana"} to produce a data frame of the se
 TODO
 }
 \examples{
+
+library("vegan")
+
 data(dune)
 
 sol <- decorana(dune)

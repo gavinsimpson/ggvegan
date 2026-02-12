@@ -39,6 +39,9 @@ plotting with \code{\link[ggplot2]{ggplot}}.
 TODO
 }
 \examples{
+
+library("vegan")
+
 data(dune)
 data(dune.env)
 

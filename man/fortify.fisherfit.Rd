@@ -7,19 +7,24 @@
 \method{fortify}{fisherfit}(model, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link{fisherfit}}}
+\item{model}{an object of class \code{\link[vegan:fisherfit]{vegan::fisherfit()}}).}
 
 \item{data}{original data set. Currently ignored.}
 
 \item{...}{other arguments pass to methods. Currently ignored.}
 }
 \value{
-A data frame with columns \code{'Rank'} and \code{'Abundance'}. Additionally, Fisher's \eqn{\alpha} and the nuisance parameter are returned as attributes \code{'alpha'} and \code{'k'} respectively.
+A data frame with columns \code{'Rank'} and \code{'Abundance'}. Additionally,
+Fisher's \eqn{\alpha} and the nuisance parameter are returned as
+attributes \code{'alpha'} and \code{'k'} respectively.
 }
 \description{
-Prepares a data frame of results from a \code{\link{fisherfit}} object suitable for plotting with \code{\link{ggplot}}.
+Prepares a data frame of results from a \code{\link[vegan:fisherfit]{vegan::fisherfit()}})
+object suitable for plotting with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}).
 }
 \examples{
+
+library("vegan")
 
 data(BCI)
 mod <- fisherfit(BCI[5,])

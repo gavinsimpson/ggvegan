@@ -28,7 +28,9 @@ plotting with \code{\link[ggplot2]{ggplot}}.
 TODO
 }
 \examples{
-## load example data
+
+library("vegan")
+
 data(dune)
 
 ord <- metaMDS(dune)

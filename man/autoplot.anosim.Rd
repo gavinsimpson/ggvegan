@@ -43,6 +43,8 @@ Produces a multi-layer ggplot object representing the output of objects produced
 }
 \examples{
 
+library("vegan")
+
 data(dune)
 data(dune.env)
 dune.dist <- vegdist(dune)

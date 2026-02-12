@@ -63,6 +63,8 @@ TODO
 }
 \examples{
 
+library("vegan")
+
 data(dune)
 
 pca <- rda(dune)

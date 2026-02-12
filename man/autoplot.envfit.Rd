@@ -17,9 +17,11 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{"envfit"}, the result of a call to \code{\link[vegan]{envfit}}.}
+\item{object}{an object of class \code{"envfit"}, the result of a call to
+\code{\link[vegan:envfit]{vegan::envfit()}}.}
 
-\item{geom}{character; which geom to use to label vectors and factor centroids.}
+\item{geom}{character; which geom to use to label vectors and factor
+centroids.}
 
 \item{line.col}{colour with which to draw vectors.}
 
@@ -33,15 +35,18 @@
 
 \item{caption}{character; caption for the plot.}
 
-\item{...}{additional arguments passed to \code{\link{fortify}}.}
+\item{...}{additional arguments passed to \code{\link[ggplot2:fortify]{ggplot2::fortify()}}.}
 }
 \value{
 A ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{isomap}}.
+Produces a multi-layer ggplot object representing the output of objects
+produced by \code{\link[vegan:envfit]{vegan::envfit()}}.
 }
 \examples{
+
+library("vegan")
 data(varespec, varechem)
 ord1 <- metaMDS(varespec)
 fit1 <- envfit(ord1, varechem, perm = 199)

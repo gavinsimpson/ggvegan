@@ -12,7 +12,7 @@ layer_draw_list(valid, layers = NULL, available = NULL)
 \item{layers}{character; a vector of layer names for \code{object} that has
 already been filtered for validity.}
 
-\item{available}{charecter; what layers are actually available}
+\item{available}{character; what layers are actually available}
 }
 \description{
 List of layers to draw for a given vegan object

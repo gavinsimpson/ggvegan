@@ -13,8 +13,8 @@ add_spp_site_scores(object, plt, vars, geom, draw_list, arrows)
 
 \item{vars}{character; length 2 vector of dimension names.}
 
-\item{geom}{character; vector of length 1 or 2 indicating which geoms will
-be used ofr the species or site scores.}
+\item{geom}{character; vector of length 1 or 2 indicating which geom will
+be used for the species or site scores.}
 
 \item{draw_list}{logical; vector of types of scores indicating which are
 available and requested for plotting.}

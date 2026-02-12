@@ -20,6 +20,9 @@ A data frame with columns \code{Rank} and \code{Class} with ranks of dissimilari
 Prepares a fortified version of results from \code{\link[vegan]{anosim}} objects.
 }
 \examples{
+
+library("vegan")
+
 library("ggplot2")
 data(dune, dune.env)
 dune.dist <- vegdist(dune)

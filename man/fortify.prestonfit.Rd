@@ -7,19 +7,22 @@
 \method{fortify}{prestonfit}(model, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link{prestonfit}}}
+\item{model}{an object of class \code{\link[vegan:fisherfit]{vegan::prestonfit()}}.}
 
 \item{data}{original data set. Currently ignored.}
 
 \item{...}{other arguments pass to methods. Currently ignored.}
 }
 \value{
-A data frame with columns \code{'Octave'} and \code{'Abundance'}.
+A data frame with columns \verb{'Octave'`` and }'Abundance'``.
 }
 \description{
-Prepares a data frame of results from a \code{\link{fisherfit}} object suitable for plotting with \code{\link{ggplot}}.
+Prepares a data frame of results from a \code{\link[vegan:fisherfit]{vegan::prestonfit()}}
+object suitable for plotting with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \examples{
+
+library("vegan")
 
 data(BCI)
 pfit <- prestonfit(colSums(BCI))

@@ -52,6 +52,8 @@ Produces a multi-layer ggplot object representing the output of objects produced
 }
 \examples{
 
+library("vegan")
+
 data(BCI)
 dis <- vegdist(BCI)
 ord <- isomap(dis, k = 3)

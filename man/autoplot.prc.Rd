@@ -52,6 +52,9 @@ objects produced by \code{\link[vegan]{prc}}.
 TODO
 }
 \examples{
+
+library("vegan")
+
 data(pyrifos)
 week <- gl(11, 12, labels=c(-4, -1, 0.1, 1, 2, 4, 8, 12, 15, 19, 24))
 dose <- factor(rep(c(0.1, 0, 0, 0.9, 0, 44, 6, 0.1, 44, 0.9, 0, 6), 11))

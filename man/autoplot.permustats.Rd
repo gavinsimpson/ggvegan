@@ -43,6 +43,9 @@ provides basic plots of \code{\link[vegan:permustats]{vegan::permustats()}} obje
 flexibility.
 }
 \examples{
+
+library("vegan")
+
 data(dune, dune.env)
 mod <- cca(dune ~ A1 + Management + Moisture, dune.env)
 (ano <- anova(mod, by = "onedf"))

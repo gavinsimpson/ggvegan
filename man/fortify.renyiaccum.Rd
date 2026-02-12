@@ -33,6 +33,8 @@ Prepares a fortified version of results from
 \code{\link[vegan:renyi]{vegan::renyiaccum()}} objects.
 }
 \examples{
+
+library("vegan")
 library("ggplot2")
 data(BCI)
 pool <- renyiaccum(BCI)

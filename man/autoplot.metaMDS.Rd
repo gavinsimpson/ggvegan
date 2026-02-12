@@ -56,7 +56,9 @@ objects produced by \code{\link[vegan]{metaMDS}}.
 TODO
 }
 \examples{
-## load example data
+
+library("vegan")
+
 data(dune)
 
 sol <- metaMDS(dune)
