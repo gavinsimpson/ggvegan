@@ -39,10 +39,15 @@
 `fortify.poolaccum` <- function(model, data, alpha = 0.05, ...) {
   m <- summary(model, alpha = alpha, ...)
   lens <- vapply(
-    m, FUN = NROW, FUN.VALUE = numeric(1), USE.NAMES = FALSE
+    m,
+    FUN = NROW,
+    FUN.VALUE = numeric(1),
+    USE.NAMES = FALSE
   )
   vars <- vapply(
-    m, FUN = \(x) colnames(x)[2], FUN.VALUE = character(1),
+    m,
+    FUN = \(x) colnames(x)[2],
+    FUN.VALUE = character(1),
     USE.NAMES = FALSE
   )
   df <- do.call("rbind", m) |>

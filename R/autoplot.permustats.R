@@ -62,8 +62,9 @@
 ) {
   df <- fortify(object, scale = scale)
   plot <- match.arg(plot)
-  if (plot != "qqnorm")
+  if (plot != "qqnorm") {
     gg.params <- modifyList(list(alpha = 0.5), gg.params)
+  }
   pl <- switch(
     plot,
     "box" = ,
@@ -94,27 +95,29 @@
   )
 
   if (!scale) {
-    pl <- pl + switch(
-      plot,
-      "density" = geom_vline(
-        xintercept = 0,
-        linetype = 3
-      ),
-      geom_hline(
-        yintercept = 0,
-        linetype = 3
+    pl <- pl +
+      switch(
+        plot,
+        "density" = geom_vline(
+          xintercept = 0,
+          linetype = 3
+        ),
+        geom_hline(
+          yintercept = 0,
+          linetype = 3
+        )
       )
-    )
   }
   pl <- pl +
-    switch(plot,
+    switch(
+      plot,
       "box" = do.call("geom_boxplot", gg.params),
       "violin" = do.call("geom_violin", gg.params),
       "density" = do.call("geom_density", gg.params),
       "qqnorm" = do.call("geom_qq", gg.params)
     )
   if (facet) {
-    pl <- pl + facet_wrap(~ term)
+    pl <- pl + facet_wrap(~term)
   }
   pl
 }

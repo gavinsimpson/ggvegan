@@ -33,16 +33,21 @@
 #' pfit <- prestonfit(colSums(BCI))
 #' autoplot(pfit)
 `autoplot.prestonfit` <- function(
-  object, show.fitted = TRUE,
-  xlab = "Abundance", ylab = "Number of Species",
+  object,
+  show.fitted = TRUE,
+  xlab = "Abundance",
+  ylab = "Number of Species",
   title = "Preston's lognormal distribution",
-  subtitle = NULL, caption = NULL,
-  bar.col = NA, bar.fill = "grey35",
-  line.col = "red", size = 1,
+  subtitle = NULL,
+  caption = NULL,
+  bar.col = NA,
+  bar.fill = "grey35",
+  line.col = "red",
+  size = 1,
   ...
-){
+) {
   presfun <- function(x, mode, width, S0) {
-    S0 * exp(-(x - mode)^2/2/width^2)
+    S0 * exp(-(x - mode)^2 / 2 / width^2)
   }
   df <- fortify(object)
   noct <- nrow(df)
@@ -61,24 +66,32 @@
     y2 = c(coefs['S0'], coefs['S0'] * exp(-0.5))
   )
   if (show.fitted) {
-    plt <- plt + stat_function(
-      fun = presfun,
-      args = list(
-        mode = coefs['mode'],
-        width = coefs['width'],
-        S0 = coefs['S0']
-      ),
-      colour = line.col, size = size)
+    plt <- plt +
+      stat_function(
+        fun = presfun,
+        args = list(
+          mode = coefs['mode'],
+          width = coefs['width'],
+          S0 = coefs['S0']
+        ),
+        colour = line.col,
+        size = size
+      )
   }
-  plt <- plt + geom_segment(
-    data = lineSegs,
-    mapping = aes_string(x = 'x1', y = 'y1',
-    xend = 'x2', yend = 'y2'),
-    colour = line.col, size = size
-  ) +
+  plt <- plt +
+    geom_segment(
+      data = lineSegs,
+      mapping = aes_string(x = 'x1', y = 'y1', xend = 'x2', yend = 'y2'),
+      colour = line.col,
+      size = size
+    ) +
     scale_x_continuous(breaks = brks, labels = 2^brks) +
     labs(
-      x = xlab, y = ylab, title = title, subtitle = subtitle, caption = caption
+      x = xlab,
+      y = ylab,
+      title = title,
+      subtitle = subtitle,
+      caption = caption
     )
   plt
 }

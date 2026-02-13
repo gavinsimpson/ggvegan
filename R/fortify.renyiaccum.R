@@ -29,7 +29,7 @@
 #'
 #' @author Gavin L. Simpson much rewritten from an original by Didzis Elferts.
 #' @examples
-#' 
+#'
 #' library("vegan")
 #' library("ggplot2")
 #' data(BCI)
@@ -64,15 +64,19 @@
       model,
       arrayInd(seq_along(model), dim(model))[, 2]
     ),
-    FUN = \(x, dim, dn) array(x, dim = dim, dimnames = dn) |> 
-      as.data.frame() |>
-      as_tibble(),
-    dim = dim(model)[-2], dn = dimnames(model)[-2]
+    FUN = \(x, dim, dn) {
+      array(x, dim = dim, dimnames = dn) |>
+        as.data.frame() |>
+        as_tibble()
+    },
+    dim = dim(model)[-2],
+    dn = dimnames(model)[-2]
   )
   # might need .names_to = rlang::zap(), but it works without
   df <- vec_rbind(!!!m)
   new_dn <- c("mean", "std_dev", "min", "max", "q2.5", "q97.5", "collector")
-  if (length(names(m[[1]])) < 7L) { # must not have the collectors curve
+  if (length(names(m[[1]])) < 7L) {
+    # must not have the collectors curve
     new_dn <- new_dn[-7L]
   }
   df <- setNames(df, new_dn)
@@ -98,10 +102,13 @@
       model,
       arrayInd(seq_along(model), dim(model))[, 2]
     ),
-    FUN = \(x, dim, dn) array(x, dim = dim, dimnames = dn) |> 
-      as.data.frame() |>
-      as_tibble(),
-    dim = dim(model)[-2], dn = dimnames(model)[-2]
+    FUN = \(x, dim, dn) {
+      array(x, dim = dim, dimnames = dn) |>
+        as.data.frame() |>
+        as_tibble()
+    },
+    dim = dim(model)[-2],
+    dn = dimnames(model)[-2]
   )
   # might need .names_to = rlang::zap(), but it works without
   df <- vec_rbind(!!!m)
@@ -110,9 +117,10 @@
     permutation = vec_rep(seq_len(n_perm), times = n_sites),
     df
   )
-  df |> pivot_longer(
-    cols = !c("site", "permutation"),
-    names_to = "scale",
-    values_to = "diversity"
-  )
+  df |>
+    pivot_longer(
+      cols = !c("site", "permutation"),
+      names_to = "scale",
+      values_to = "diversity"
+    )
 }

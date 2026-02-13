@@ -1,9 +1,12 @@
 #' @title Fortify analysis of similarities (ANOSIM) results
-#' @description Prepares a fortified version of results from \code{\link[vegan]{anosim}} objects.
-#' @param model an object of class \code{\link[vegan]{anosim}}.
+#'
+#' @description Prepares a fortified version of results from [vegan::anosim()]
+#'   objects.
+#' @param model an object of class [vegan::anosim()].
 #' @param data original data set. Currently ignored.
 #' @param ... additional arguments for other methods. Currently ignored.
-#' @return A data frame with columns \code{Rank} and \code{Class} with ranks of dissimilarity.
+#' @return A data frame with columns `Rank` and `Class` with ranks of
+#'   dissimilarity.
 #'
 #' @export
 #'
@@ -26,7 +29,6 @@
 #'     geom_boxplot(notch = FALSE, varwidth = TRUE)
 #'
 `fortify.anosim` <- function(model, data, ...) {
-    df <- data.frame(Rank = model[["dis.rank"]],
-                     Class = model[["class.vec"]])
-    df
+  df <- data.frame(Rank = model[["dis.rank"]], Class = model[["class.vec"]])
+  df
 }

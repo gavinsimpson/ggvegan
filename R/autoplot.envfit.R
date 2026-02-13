@@ -40,10 +40,15 @@
 #' autoplot(fit2)
 `autoplot.envfit` <- function(
   object,
-  geom = c("label","text","label_repel","text_repel"),
+  geom = c("label", "text", "label_repel", "text_repel"),
   line.col = 'black',
-  xlab = NULL, ylab = NULL, title = NULL, 
-  subtitle = NULL, caption = NULL, ...) {
+  xlab = NULL,
+  ylab = NULL,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  ...
+) {
   geom <- match.arg(geom)
   df <- fortify(object, ...)
   plt <- ggplot()

@@ -39,7 +39,7 @@
   rs <- rownames(b)
   cs <- colnames(b)
   b <- cbind(Time = as.numeric(rs), b)
-  res <- gather(b, 'Treatment', 'Response', - 'Time')
+  res <- gather(b, 'Treatment', 'Response', -'Time')
   ##names(res) <- c("Time", "Treatment", "Response")
 
   ## insure Treatment is a factor

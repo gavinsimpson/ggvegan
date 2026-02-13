@@ -83,46 +83,57 @@
 #'     manual adjustment can be useful.
 #' @export
 `ordiggplot` <- function(model, axes = c(1, 2), arrowmul, ...) {
-    if (length(axes) > 2)
-        stop("only two-dimensional plots made: too many axes defined")
-    df <- fortify(model, axes = axes, ...)
-    ## I don't currently know a way of adjusting arrows to the final
-    ## plot frame, so try to scale them to fit the data points at
-    ## least
-    isBip <- df$score == "biplot"
+  if (length(axes) > 2) {
+    stop("only two-dimensional plots made: too many axes defined")
+  }
+  df <- fortify(model, axes = axes, ...)
+  ## I don't currently know a way of adjusting arrows to the final
+  ## plot frame, so try to scale them to fit the data points at
+  ## least
+  isBip <- df$score == "biplot"
+  if (any(isBip)) {
+    ## remove biplot scores that have equal centroid
+    if (any(cntr <- df$score == "centroids")) {
+      dup <- isBip & df$label %in% df$label[cntr]
+      if (any(dup)) {
+        df <- df[!dup, ]
+      }
+      isBip <- df$score == "biplot"
+    }
     if (any(isBip)) {
-        ## remove biplot scores that have equal centroid
-        if (any(cntr <- df$score == "centroids")) {
-            dup <- isBip & df$label %in% df$label[cntr]
-            if (any(dup))
-                df <- df[!dup,]
-            isBip <- df$score == "biplot"
-        }
-        if (any(isBip)) { # isBip may have changed
-            if (missing(arrowmul))
-                arrowmul <- arrow_mul(df[isBip, 3:4, drop = FALSE],
-                                     df[!isBip, 3:4, drop = FALSE])
-            df[isBip, 3:4] <- df[isBip, 3:4] * arrowmul
-        }
+      # isBip may have changed
+      if (missing(arrowmul)) {
+        arrowmul <- arrow_mul(
+          df[isBip, 3:4, drop = FALSE],
+          df[!isBip, 3:4, drop = FALSE]
+        )
+      }
+      df[isBip, 3:4] <- df[isBip, 3:4] * arrowmul
     }
-    ## weights are needed in some statistics
-    if (inherits(model, c("cca", "wcmdscale", "decorana"))) {
-        rw <- weights(model)
-        cw <- weights(model, display = "species")
-        wts <- rep(NA, nrow(df))
-        if (any(want <- df$score == "sites"))
-            wts[want] <- rw
-        if (any(want <- df$score == "constraints"))
-            wts[want] <- rw
-        if (any(want <- df$score == "species"))
-            wts[want] <- cw
-        df$weight <- wts
+  }
+  ## weights are needed in some statistics
+  if (inherits(model, c("cca", "wcmdscale", "decorana"))) {
+    rw <- weights(model)
+    cw <- weights(model, display = "species")
+    wts <- rep(NA, nrow(df))
+    if (any(want <- df$score == "sites")) {
+      wts[want] <- rw
     }
-    dlab <- colnames(df)[3:4]
-    pl <- ggplot(data = df, mapping = aes_string(dlab[1], dlab[2],
-                 label = "label"))
-    pl <- pl + coord_fixed(ratio = 1)
-    pl
+    if (any(want <- df$score == "constraints")) {
+      wts[want] <- rw
+    }
+    if (any(want <- df$score == "species")) {
+      wts[want] <- cw
+    }
+    df$weight <- wts
+  }
+  dlab <- colnames(df)[3:4]
+  pl <- ggplot(
+    data = df,
+    mapping = aes_string(dlab[1], dlab[2], label = "label")
+  )
+  pl <- pl + coord_fixed(ratio = 1)
+  pl
 }
 
 ### add points to the skeleton
@@ -138,11 +149,13 @@
 #'
 #' @export
 `geom_ordi_point` <- function(score, data, ...) {
-    if (missing(score) && missing(data))
-        stop("either score or data must be defined")
-    if (missing(data))
-        data <- ggscores(score)
-    geom_point(data = data, ...)
+  if (missing(score) && missing(data)) {
+    stop("either score or data must be defined")
+  }
+  if (missing(data)) {
+    data <- ggscores(score)
+  }
+  geom_point(data = data, ...)
 }
 
 ### add text to the plot
@@ -157,11 +170,13 @@
 #'
 #' @export
 `geom_ordi_text` <- function(score, data, ...) {
-    if (missing(score) && missing(data))
-        stop("either score or data must be defined")
-    if (missing(data))
-        data <- ~ .x[.x$score == score, ]
-    geom_text(data = data, ...)
+  if (missing(score) && missing(data)) {
+    stop("either score or data must be defined")
+  }
+  if (missing(data)) {
+    data <- ~ .x[.x$score == score, ]
+  }
+  geom_text(data = data, ...)
 }
 
 #' Add a label layer to an ordiggplot
@@ -174,11 +189,13 @@
 #' @importFrom ggplot2 geom_label
 #' @export
 `geom_ordi_label` <- function(score, data, ...) {
-    if (missing(score) && missing(data))
-        stop("either score or data must be defined")
-    if (missing(data))
-        data <- ~.x[.x$score == score, ]
-    geom_label(data = data, ...)
+  if (missing(score) && missing(data)) {
+    stop("either score or data must be defined")
+  }
+  if (missing(data)) {
+    data <- ~ .x[.x$score == score, ]
+  }
+  geom_label(data = data, ...)
 }
 
 #' Add a biplot arrow layer to an ordiggplot
@@ -198,37 +215,45 @@
 #' @importFrom utils modifyList
 #'
 #' @export
-`geom_ordi_arrow` <- function(score, data, text = TRUE, box = FALSE,
-             arrow.params = list(), text.params = list(), ...) {
-    if (missing(score) && missing(data))
-        stop("either score or data must be defined")
-    if (missing(data))
-        data <- ggscores(score)
-    ## default params & possible modification
-    arrowdefs <- list(arrow = arrow(ends = "first", length = unit(0.2, "cm")))
-    textdefs <- list(vjust = "outward", hjust = "outward")
-    arrowdefs <- modifyList(arrowdefs, arrow.params)
-    textdefs <- modifyList(textdefs, text.params)
-    dots <- match.call(expand.dots = FALSE)$...
-    if (!is.null(dots)) {
-        arrowdefs <- modifyList(arrowdefs, dots)
-        textdefs <- modifyList(textdefs, dots)
+`geom_ordi_arrow` <- function(
+  score,
+  data,
+  text = TRUE,
+  box = FALSE,
+  arrow.params = list(),
+  text.params = list(),
+  ...
+) {
+  if (missing(score) && missing(data)) {
+    stop("either score or data must be defined")
+  }
+  if (missing(data)) {
+    data <- ggscores(score)
+  }
+  ## default params & possible modification
+  arrowdefs <- list(arrow = arrow(ends = "first", length = unit(0.2, "cm")))
+  textdefs <- list(vjust = "outward", hjust = "outward")
+  arrowdefs <- modifyList(arrowdefs, arrow.params)
+  textdefs <- modifyList(textdefs, text.params)
+  dots <- match.call(expand.dots = FALSE)$...
+  if (!is.null(dots)) {
+    arrowdefs <- modifyList(arrowdefs, dots)
+    textdefs <- modifyList(textdefs, dots)
+  }
+  ## graphics
+  pl <- do.call(
+    "geom_segment",
+    modifyList(list(data = data, mapping = aes(xend = 0, yend = 0)), arrowdefs)
+  )
+  if (text) {
+    if (box) {
+      p2 <- do.call("geom_label", modifyList(list(data = data), textdefs))
+    } else {
+      p2 <- do.call("geom_text", modifyList(list(data = data), textdefs))
     }
-    ## graphics
-    pl <- do.call("geom_segment",
-                  modifyList(list(data = data,
-                                  mapping = aes(xend = 0, yend = 0)),
-                                  arrowdefs))
-    if (text) {
-        if(box)
-            p2 <- do.call("geom_label",
-                          modifyList(list(data = data), textdefs))
-        else
-            p2 <- do.call("geom_text",
-                          modifyList(list(data = data), textdefs))
-        pl <- list(pl, p2) ## ggprotos cannot be added (+)
-    }
-    pl
+    pl <- list(pl, p2) ## ggprotos cannot be added (+)
+  }
+  pl
 }
 
 #' Crosshair for axes in eigenvector methods
@@ -241,10 +266,10 @@
 #'
 #' @export
 `geom_ordi_axis` <- function(lty = 3, ...) {
-    list(
-        geom_hline(yintercept = 0, lty = lty, ...),
-        geom_vline(xintercept = 0, lty = lty, ...)
-    )
+  list(
+    geom_hline(yintercept = 0, lty = lty, ...),
+    geom_vline(xintercept = 0, lty = lty, ...)
+  )
 }
 
 ## envfit, separately for vectorfit & factorfit as these imply
@@ -254,22 +279,28 @@
 #' @importFrom stats model.frame
 #' @importFrom vegan vectorfit
 
-`calculate_vectorfit` <- function(data = data, scales, vars = c("x", "y"),
-    edata, formula, arrowmul) {
-    if (!missing(formula) && !is.null(formula)) {
-        edata <- model.frame(formula, data)
-    } else {
-        edata <- data[, names(edata)]
-    }
-    vecs <- sapply(edata, is.numeric)
-    edata <- edata[, vecs, drop = FALSE]
-    wts <- data$weight
-    fit <- vectorfit(as.matrix(data[, vars]), edata, permutations = 0, w = wts)
-    fit <- sqrt(fit$r) * fit$arrows
-    fit <- arrowmul * fit
-    fit <- as.data.frame(fit) # as_tibble? FIXME
-    fit$label = rownames(fit)
-    fit
+`calculate_vectorfit` <- function(
+  data = data,
+  scales,
+  vars = c("x", "y"),
+  edata,
+  formula,
+  arrowmul
+) {
+  if (!missing(formula) && !is.null(formula)) {
+    edata <- model.frame(formula, data)
+  } else {
+    edata <- data[, names(edata)]
+  }
+  vecs <- sapply(edata, is.numeric)
+  edata <- edata[, vecs, drop = FALSE]
+  wts <- data$weight
+  fit <- vectorfit(as.matrix(data[, vars]), edata, permutations = 0, w = wts)
+  fit <- sqrt(fit$r) * fit$arrows
+  fit <- arrowmul * fit
+  fit <- as.data.frame(fit) # as_tibble? FIXME
+  fit$label = rownames(fit)
+  fit
 }
 
 #' @rdname stat_vectorfit
@@ -278,38 +309,42 @@
 #' @usage NULL
 #' @export
 `StatVectorfit` <-
-    ggproto("StatVectorfit", Stat,
-        required_aes = c("x", "y"),
-        compute_group = calculate_vectorfit,
-        setup_data = function(data, params) {
-            data <- cbind(data, params$edata)
-            data
-        },
-        ## same scaling of arrows in all panels
-        setup_params = function(data, params) {
-            if (!is.null(params$arrowmul))
-                return(params)
-            if (!is.null(params$formula))
-                ed <- model.frame(params$formula, params$edata)
-            else
-                ed <- params$edata
-            vecs <- sapply(ed, is.numeric)
-            ed <- ed[, vecs, drop = FALSE]
-            xy <- data[, c("x", "y")]
-            if (is.null(data$weight))
-                data$weight <- 1
-            w <- split(data$weight, data$PANEL)
-            sxy <- split(xy, data$PANEL)
-            ed <- split(ed, data$PANEL)
-            arrs <- sapply(seq_len(length(sxy)), function(i) {
-                v <- vectorfit(as.matrix(sxy[[i]]),
-                    as.matrix(ed[[i]]), w = w[[i]])
-                ggvegan:::arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
-            })
-            params$arrowmul <- min(arrs)
-            params
-        }
-    )
+  ggproto(
+    "StatVectorfit",
+    Stat,
+    required_aes = c("x", "y"),
+    compute_group = calculate_vectorfit,
+    setup_data = function(data, params) {
+      data <- cbind(data, params$edata)
+      data
+    },
+    ## same scaling of arrows in all panels
+    setup_params = function(data, params) {
+      if (!is.null(params$arrowmul)) {
+        return(params)
+      }
+      if (!is.null(params$formula)) {
+        ed <- model.frame(params$formula, params$edata)
+      } else {
+        ed <- params$edata
+      }
+      vecs <- sapply(ed, is.numeric)
+      ed <- ed[, vecs, drop = FALSE]
+      xy <- data[, c("x", "y")]
+      if (is.null(data$weight)) {
+        data$weight <- 1
+      }
+      w <- split(data$weight, data$PANEL)
+      sxy <- split(xy, data$PANEL)
+      ed <- split(ed, data$PANEL)
+      arrs <- sapply(seq_len(length(sxy)), function(i) {
+        v <- vectorfit(as.matrix(sxy[[i]]), as.matrix(ed[[i]]), w = w[[i]])
+        ggvegan:::arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
+      })
+      params$arrowmul <- min(arrs)
+      params
+    }
+  )
 
 #' @importFrom ggplot2 layer
 #' @rdname stat_vectorfit
@@ -350,20 +385,38 @@
 #'   geom_ordi_arrow("sites", stat = "vectorfit", edata = mite.env) +
 #'   facet_wrap(mite.env$Topo)
 #' @export
-`stat_vectorfit` <- function(mapping = NULL, data = NULL,
-    geom = "text", position = "identity",
-    na.rm = FALSE, show.legend = FALSE, inherit.aes = TRUE,
-    edata = NULL, formula = NULL, arrowmul = NULL, ...) {
-    layer(stat = StatVectorfit, data = data, mapping = mapping, geom = geom,
-          position = position, show.legend = show.legend,
-          inherit.aes = inherit.aes,
-          params = list(edata = edata, formula = formula, na.rm = na.rm,
-                        arrowmul = arrowmul)
-          )
+`stat_vectorfit` <- function(
+  mapping = NULL,
+  data = NULL,
+  geom = "text",
+  position = "identity",
+  na.rm = FALSE,
+  show.legend = FALSE,
+  inherit.aes = TRUE,
+  edata = NULL,
+  formula = NULL,
+  arrowmul = NULL,
+  ...
+) {
+  layer(
+    stat = StatVectorfit,
+    data = data,
+    mapping = mapping,
+    geom = geom,
+    position = position,
+    show.legend = show.legend,
+    inherit.aes = inherit.aes,
+    params = list(
+      edata = edata,
+      formula = formula,
+      na.rm = na.rm,
+      arrowmul = arrowmul
+    )
+  )
 }
 ## extract ordination scores for data statement in ggplot2 functions
 #' @rdname ordiggplot
 #' @export
 `ggscores` <- function(score) {
-    ~.x[.x$score == score, ]
+  ~ .x[.x$score == score, ]
 }

@@ -2,7 +2,7 @@
 #'
 #' @description
 #' Produces a multi-layer ggplot object representing the output of objects
-#' produced by \code{\link[vegan]{poolaccum}}.
+#' produced by [vegan::poolaccum()].
 #'
 #' @param object an object of class `"poolaccum"`, the result of a call to
 #'   [vegan::poolaccum()].
@@ -27,7 +27,8 @@
 #'
 #' @export
 #'
-#' @importFrom ggplot2 ggplot autoplot geom_line geom_ribbon aes_string labs fortify facet_wrap
+#' @importFrom ggplot2 ggplot autoplot geom_line geom_ribbon aes_string labs
+#'   fortify facet_wrap
 #'
 #' @examples
 #'
@@ -40,41 +41,51 @@
 #'
 #' ## Turn off facetting; turns off ribbon too
 #' autoplot(pool, facet = FALSE)
-`autoplot.poolaccum` <- function(object,
-                                 facet = TRUE,
-                                 ribbon = facet,
-                                 ncol = NULL,
-                                 ribbon.alpha = 0.3,
-                                 xlab = "Size",
-                                 ylab = "Richness",
-                                 title = "Accumulated species richness",
-                                 subtitle = NULL,
-                                 caption = NULL,
-                                 ...) {
-    ## Fortify object; pass ... here
-    df <- fortify(object, ...)
+`autoplot.poolaccum` <- function(
+  object,
+  facet = TRUE,
+  ribbon = facet,
+  ncol = NULL,
+  ribbon.alpha = 0.3,
+  xlab = "Size",
+  ylab = "Richness",
+  title = "Accumulated species richness",
+  subtitle = NULL,
+  caption = NULL,
+  ...
+) {
+  ## Fortify object; pass ... here
+  df <- fortify(object, ...)
 
-    ## base plot
-    plt <- ggplot(df, aes_string(x = "size", y = "richness", colour = "index"))
+  ## base plot
+  plt <- ggplot(df, aes_string(x = "size", y = "richness", colour = "index"))
 
-    if (isTRUE(ribbon)) {
-        plt <- plt +
-            geom_ribbon(aes_string(ymin = "lower", ymax = "upper", x = "size",
-                                   fill = "index"),
-                        alpha = ribbon.alpha, inherit.aes = FALSE)
+  if (isTRUE(ribbon)) {
+    plt <- plt +
+      geom_ribbon(
+        aes_string(ymin = "lower", ymax = "upper", x = "size", fill = "index"),
+        alpha = ribbon.alpha,
+        inherit.aes = FALSE
+      )
+  }
+
+  plt <- plt +
+    geom_line() +
+    labs(
+      x = xlab,
+      y = ylab,
+      title = title,
+      subtitle = subtitle,
+      caption = caption
+    )
+
+  ## are we facetting
+  if (isTRUE(facet)) {
+    if (is.null(ncol)) {
+      ncol <- (nlevels(df[["index"]]) + 1) %/% 2
     }
+    plt <- plt + facet_wrap("index", ncol = ncol)
+  }
 
-    plt <- plt + geom_line() +
-        labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
-             caption = caption)
-
-    ## are we facetting
-    if (isTRUE(facet)) {
-        if (is.null(ncol)) {
-            ncol <- (nlevels(df[["index"]]) + 1) %/% 2
-        }
-        plt <- plt + facet_wrap("index", ncol = ncol)
-    }
-
-    plt
+  plt
 }

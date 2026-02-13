@@ -21,7 +21,9 @@
 #' pfit <- prestonfit(colSums(BCI))
 #' head(fortify(pfit))
 `fortify.prestonfit` <- function(model, data, ...) {
-    df <- data.frame(Octave = as.numeric(names(model[['freq']])),
-                     Abundance = unclass(model[['freq']]))
-    df
+  df <- data.frame(
+    Octave = as.numeric(names(model[['freq']])),
+    Abundance = unclass(model[['freq']])
+  )
+  df
 }

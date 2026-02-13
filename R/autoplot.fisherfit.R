@@ -32,26 +32,44 @@
 #' data(BCI)
 #' mod <- fisherfit(BCI[5,])
 #' autoplot(mod)
-`autoplot.fisherfit` <- function(object, show.fitted = TRUE,
-                                 xlab = "Abundance", ylab = "Number of Species",
-                                 title = "Fisher's log-series distribution",
-                                 bar.col = NA, bar.fill = "grey35",
-                                 line.col = "red", size = 1,
-                                 subtitle = NULL, caption = NULL,
-                                 ...) {
-    fishfun <- function(x, k, alpha) {
-        alpha * k^x / x
-    }
-    df <- fortify(object)
-    plt <- ggplot(df, aes_string(x = 'Rank', y = 'Abundance')) +
-        geom_bar(stat = 'identity', colour = bar.col, fill = bar.fill)
-    if (show.fitted) {
-        alpha <- object[['estimate']]
-        k <- object[['nuisance']]
-        plt <- plt + stat_function(fun = fishfun, args = list(k = k, alpha = alpha),
-                                   colour = line.col, size = size)
-    }
-    plt <- plt + labs(x = xlab, y = ylab, title = title, subtitle = subtitle,
-                      caption = caption)
-    plt
+`autoplot.fisherfit` <- function(
+  object,
+  show.fitted = TRUE,
+  xlab = "Abundance",
+  ylab = "Number of Species",
+  title = "Fisher's log-series distribution",
+  bar.col = NA,
+  bar.fill = "grey35",
+  line.col = "red",
+  size = 1,
+  subtitle = NULL,
+  caption = NULL,
+  ...
+) {
+  fishfun <- function(x, k, alpha) {
+    alpha * k^x / x
+  }
+  df <- fortify(object)
+  plt <- ggplot(df, aes_string(x = 'Rank', y = 'Abundance')) +
+    geom_bar(stat = 'identity', colour = bar.col, fill = bar.fill)
+  if (show.fitted) {
+    alpha <- object[['estimate']]
+    k <- object[['nuisance']]
+    plt <- plt +
+      stat_function(
+        fun = fishfun,
+        args = list(k = k, alpha = alpha),
+        colour = line.col,
+        size = size
+      )
+  }
+  plt <- plt +
+    labs(
+      x = xlab,
+      y = ylab,
+      title = title,
+      subtitle = subtitle,
+      caption = caption
+    )
+  plt
 }

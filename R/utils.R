@@ -1,5 +1,5 @@
 #' @title Scale Vectors to Data
-#' @description Scale vector arrows to \code{fill} proportion of the data.
+#' @description Scale vector arrows to `fill` proportion of the data.
 #' @param arrows a two-column matrix-like object containing coordinates for the
 #'   arrows/vectors on x and y axes.
 #' @param data a two-column matrix-like object containing coordinates of the
@@ -119,7 +119,7 @@
 #' @rdname valid_layers
 #' @export
 `valid_layers` <- function(object, ...) {
-    UseMethod('valid_layers')
+  UseMethod('valid_layers')
 }
 
 #' @rdname valid_layers
@@ -185,7 +185,7 @@
 #'
 #' @importFrom ggplot2 geom_point geom_text
 `add_spp_site_scores` <- function(object, plt, vars, geom, draw_list, arrows) {
-  wanted <- names(draw_list[c("species","sites","constraints")])
+  wanted <- names(draw_list[c("species", "sites", "constraints")])
   ## if we're plotting species by arrows, drop species if in list
   if (isTRUE(arrows)) {
     wanted <- wanted[wanted != "species"]
@@ -249,8 +249,8 @@
             )
         }
       }
-      if (any(c("sites","constraints") %in% wanted)) {
-        take <- object[["score"]] %in% c("sites","constraints")
+      if (any(c("sites", "constraints") %in% wanted)) {
+        take <- object[["score"]] %in% c("sites", "constraints")
         if (geom[1L] == "point") {
           plt <- plt +
             geom_point(
@@ -291,9 +291,9 @@
           x = 0,
           y = 0,
           xend = vars[1],
-          yend = vars[2]),
-          arrow = arrow(length = unit(0.2, "cm")
+          yend = vars[2]
         ),
+        arrow = arrow(length = unit(0.2, "cm")),
         colour = col
       )
     pdat[, vars] <- 1.1 * pdat[, vars, drop = FALSE]
