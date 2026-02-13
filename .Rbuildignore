@@ -7,3 +7,5 @@ appveyor.yml
 .gitattributes
 .gitignore
 ^\.github$
+^[.]?air[.]toml$
+^\.vscode$
