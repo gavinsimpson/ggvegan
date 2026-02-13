@@ -15,7 +15,7 @@
 #'   element of `type` refers to the *i*th element of `display`.
 #' @param layers character; which scores to plot as layers
 #' @param legend.position character or two-element numeric vector; where to
-#'   position the legend. See [vegan::theme()] for details. Use `"none"`
+#'   position the legend. See [ggplot2::theme()] for details. Use `"none"`
 #'   to not draw the legend.
 #' @param xlab character; label for the x-axis
 #' @param ylab character; label for the y-axis
