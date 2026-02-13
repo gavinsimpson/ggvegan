@@ -21,11 +21,12 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{"rda"}, the result of a call to \code{\link[vegan]{rda}}}
+\item{object}{an object of class \code{"rda"}, the result of a call to
+\code{\link[vegan:cca]{vegan::rda()}}}
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
-\item{geom}{character; which geoms to use for the layers. Can be a vector of
+\item{geom}{character; which geom to use for the layers. Can be a vector of
 up to length 2, in which case, the first element of \code{geom} will be
 used for any site scores (both weighted sum or linear combination scores),
 and the second element will be used for species scores. The latter will be
@@ -35,7 +36,9 @@ ignored if \code{arrows = TRUE}.}
 
 \item{arrows}{logical; represent species (variables) using vectors?}
 
-\item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
+\item{legend.position}{character or two-element numeric vector; where to
+position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"} to
+not draw the legend.}
 
 \item{title}{character; subtitle for the plot}
 
@@ -48,15 +51,16 @@ ignored if \code{arrows = TRUE}.}
 \item{xlab}{character; label for the x-axis}
 
 \item{const}{General scaling constant to \code{rda} scores. See
-\code{\link[vegan]{scores.rda}} for details.}
+\code{\link[vegan:plot.cca]{vegan::scores.rda()}} for details.}
 
-\item{...}{Additional arguments passed to \code{\link{fortify.cca}}.}
+\item{...}{Additional arguments passed to \verb{\link{fortify.cca}}.}
 }
 \value{
 Returns a ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{rda}}.
+Produces a multi-layer ggplot object representing the output of objects
+produced by \code{\link[vegan:cca]{vegan::rda()}}.
 }
 \details{
 TODO

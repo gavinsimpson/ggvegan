@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{model}{an object of class \code{"decorana"}, the result of a call to
-\code{\link[vegan]{decorana}}.}
+\code{\link[vegan:decorana]{vegan::decorana()}}.}
 
 \item{data}{currently ignored.}
 
@@ -16,13 +16,16 @@
 
 \item{display}{character; the scores to extract in the fortified object.}
 
-\item{...}{additional arguments passed to \code{\link[vegan]{scores.decorana}}.}
+\item{...}{additional arguments passed to \code{\link[vegan:decorana]{vegan::scores.decorana()}}.}
 }
 \value{
-A data frame in long format containing the ordination scores. The first two components are the axis scores.
+A data frame in long format containing the ordination scores. The
+first two components are the axis scores.
 }
 \description{
-Fortifies an object of class \code{"decorana"} to produce a data frame of the selected axis scores in long format, suitable for plotting with \code{\link[ggplot2]{ggplot}}.
+Fortifies an object of class \code{"decorana"} to produce a data
+frame of the selected axis scores in long format, suitable for plotting
+with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \details{
 TODO

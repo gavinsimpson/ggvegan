@@ -18,7 +18,7 @@
 }
 \arguments{
 \item{object}{an object inheriting from class \code{"prc"}, the
-result of a call to \code{\link[vegan]{prc}}.}
+result of a call to \code{\link[vegan:prc]{vegan::prc()}}.}
 
 \item{select}{a logical vector where \code{TRUE} selects and
 \code{FALSE} deselects species. Alternatively a numeric vector that
@@ -37,16 +37,16 @@ object.}
 \item{caption}{character; caption for the plot}
 
 \item{legend.position}{character; position for the legend grob. See argument
-\code{legend.position} in function \code{\link[ggplot2]{theme}}.}
+\code{legend.position} in function \code{\link[ggplot2:theme]{ggplot2::theme()}}.}
 
-\item{...}{Additional arguments passed to \code{\link{fortify.prc}}.}
+\item{...}{Additional arguments passed to \verb{\link{fortify.prc}}.}
 }
 \value{
 Returns a ggplot object.
 }
 \description{
 Produces a multi-layer ggplot object representing the output of
-objects produced by \code{\link[vegan]{prc}}.
+objects produced by \code{\link[vegan:prc]{vegan::prc()}}.
 }
 \details{
 TODO

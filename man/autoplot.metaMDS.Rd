@@ -20,7 +20,7 @@
 }
 \arguments{
 \item{object}{an object of class \code{"metaMDS"}, the result of a call
-to \code{\link[vegan]{metaMDS}}.}
+to \code{\link[vegan:metaMDS]{vegan::metaMDS()}}.}
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
@@ -31,7 +31,9 @@ of \code{display}.}
 
 \item{layers}{character; which scores to plot as layers}
 
-\item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
+\item{legend.position}{character or two-element numeric vector; where to
+position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"}
+to not draw the legend.}
 
 \item{title}{character; subtitle for the plot}
 
@@ -43,14 +45,14 @@ of \code{display}.}
 
 \item{xlab}{character; label for the x-axis}
 
-\item{...}{Additional arguments passed to \code{\link{fortify.metaMDS}}.}
+\item{...}{Additional arguments passed to \verb{\link{fortify.metaMDS}}.}
 }
 \value{
 Returns a ggplot object.
 }
 \description{
 Produces a multi-layer ggplot object representing the output of
-objects produced by \code{\link[vegan]{metaMDS}}.
+objects produced by \code{\link[vegan:metaMDS]{vegan::metaMDS()}}.
 }
 \details{
 TODO

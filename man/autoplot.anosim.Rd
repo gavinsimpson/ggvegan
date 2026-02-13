@@ -12,16 +12,18 @@
   ylab = NULL,
   title = "Analysis of similarities",
   subtitle = NULL,
-  caption = bquote(R == .(R) * "," ~ P == .(P)),
+  caption = bquote(R == .(r) * "," ~ P == .(p)),
   ...
 )
 }
 \arguments{
-\item{object}{an object of class \code{"anosim"}, the result of a call to \code{\link[vegan]{anosim}}.}
+\item{object}{an object of class \code{"anosim"}, the result of a call to
+\code{\link[vegan:anosim]{vegan::anosim()}}.}
 
 \item{notch}{logical; make notched (default) or standard box plot?}
 
-\item{varwidth}{logical; make box width proportional to the square-root of the number of observations in the group (default)?}
+\item{varwidth}{logical; make box width proportional to the square-root of
+the number of observations in the group (default)?}
 
 \item{xlab}{character; label for the x-axis.}
 
@@ -39,7 +41,8 @@
 A ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{anosim}}.
+Produces a multi-layer ggplot object representing the output of objects
+produced by \code{\link[vegan:anosim]{vegan::anosim()}}.
 }
 \examples{
 

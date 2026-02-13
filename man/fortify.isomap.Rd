@@ -7,24 +7,41 @@
 \method{fortify}{isomap}(model, data = NULL, axes = 1:6, what = c("sites", "network"), ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan]{isomap}}.}
+\item{model}{an object of class \code{\link[vegan:isomap]{vegan::isomap()}}.}
 
-\item{data}{data.frame; additonal data to be added to the forified object.}
+\item{data}{data.frame; additional data to be added to the fortified object.}
 
-\item{axes}{numeric; which axes to return. For \code{what = "network"} this must be of length two only.}
+\item{axes}{numeric; which axes to return. For \code{what = "network"} this must
+be of length two only.}
 
-\item{what}{character; what aspect of the results should be fortified? \code{"sites"} returns to ordination scores from the multidimensional scaling part of the model. \code{"network"} returns the coordinates for edges joining points.}
+\item{what}{character; what aspect of the results should be fortified?
+\code{"sites"} returns to ordination scores from the multidimensional scaling
+part of the model. \code{"network"} returns the coordinates for edges joining
+points.}
 
 \item{...}{additional arguments for other methods. Currently ignored.}
 }
 \value{
-A data frame. For \code{what = "sites"}, the data frame contains one variable per dimension of the multidimensional scaling embedding of the dissimilarities. Variables are named \code{"DimX"} with \code{"X"} being an integer. An adidtional variable is \code{label}, containing a label for each observation. For \code{what = "network"}, the data frame contains four variables cotaining the coordinates in the chosen MDS axes for the start and end points of the network edges.
+A data frame. For \code{what = "sites"}, the data frame contains one
+variable per dimension of the multidimensional scaling embedding of the
+dissimilarities. Variables are named \code{"DimX"} with \code{"X"} being an integer.
+An additional variable is \code{label}, containing a label for each observation.
+For \code{what = "network"}, the data frame contains four variables containing
+the coordinates in the chosen MDS axes for the start and end points of the
+network edges.
 }
 \description{
-Prepares fortified versions of results from \code{\link[vegan]{isomap}} objects.
+Prepares fortified versions of results from \code{\link[vegan:isomap]{vegan::isomap()}}
+objects.
 }
 \details{
-Two different objects can be created from the results of an \code{\link[vegan]{isomap}} object. The first is the standard scores representation of fortified ordinations in vegan, which results in a wide data frame where rows cotain observations and columne the coordinates of observations on the MDS axes. Because ISOMAP also produces a network or sorts, the coordinates of the edges of the network can also be returned in a tidy format using \code{what = "network"}.
+Two different objects can be created from the results of an
+\code{\link[vegan:isomap]{vegan::isomap()}} object. The first is the standard scores representation
+of fortified ordinations in vegan, which results in a wide data frame
+where rows contain observations and column the coordinates of observations
+on the MDS axes. Because ISOMAP also produces a network or sorts, the
+coordinates of the edges of the network can also be returned in a tidy
+format using \code{what = "network"}.
 }
 \examples{
 

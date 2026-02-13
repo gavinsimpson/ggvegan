@@ -19,18 +19,21 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{"decorana"}, the result of a call to \code{\link[vegan]{decorana}}.}
+\item{object}{an object of class \code{"decorana"}, the result of a call to
+\code{\link[vegan:decorana]{vegan::decorana()}}.}
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
-\item{geom}{character; which geoms to use for the layers. Can be a
+\item{geom}{character; which geom to use for the layers. Can be a
 vector of length equal to \code{length(display)}, in which case the
-\emph{i}th element of \code{type} refers to the \emph{i}th element
+\emph{i}th element of \code{type} refers to the _i_th element
 of \code{display}.}
 
 \item{layers}{character; which scores to plot as layers}
 
-\item{legend.position}{character or two-element numeric vector; where to position the legend. See \code{\link[ggplot2]{theme}} for details. Use \code{"none"} to not draw the legend.}
+\item{legend.position}{character or two-element numeric vector; where to
+position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"} to
+not draw the legend.}
 
 \item{title}{character; subtitle for the plot}
 
@@ -42,13 +45,14 @@ of \code{display}.}
 
 \item{xlab}{character; label for the x-axis}
 
-\item{...}{Additional arguments passed to \code{\link{fortify.decorana}}.}
+\item{...}{Additional arguments passed to \code{\link[=fortify.decorana]{fortify.decorana()}}.}
 }
 \value{
 Returns a ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{decorana}}.
+Produces a multi-layer ggplot object representing the output of objects
+produced by \code{\link[vegan:decorana]{vegan::decorana()}}.
 }
 \details{
 TODO

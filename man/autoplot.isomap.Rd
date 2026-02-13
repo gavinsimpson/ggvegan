@@ -20,7 +20,8 @@
 )
 }
 \arguments{
-\item{object}{an object of class \code{"isomap"}, the result of a call to \code{\link[vegan]{isomap}}.}
+\item{object}{an object of class \code{"isomap"}, the result of a call to
+\code{\link[vegan:isomap]{vegan::isomap()}}.}
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
@@ -48,7 +49,8 @@
 A ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects produced by \code{\link[vegan]{isomap}}.
+Produces a multi-layer ggplot object representing the output of objects
+produced by \code{\link[vegan:isomap]{vegan::isomap()}}.
 }
 \examples{
 

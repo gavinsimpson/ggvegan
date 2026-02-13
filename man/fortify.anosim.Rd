@@ -7,17 +7,19 @@
 \method{fortify}{anosim}(model, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan]{anosim}}.}
+\item{model}{an object of class \code{\link[vegan:anosim]{vegan::anosim()}}.}
 
 \item{data}{original data set. Currently ignored.}
 
 \item{...}{additional arguments for other methods. Currently ignored.}
 }
 \value{
-A data frame with columns \code{Rank} and \code{Class} with ranks of dissimilarity.
+A data frame with columns \code{Rank} and \code{Class} with ranks of
+dissimilarity.
 }
 \description{
-Prepares a fortified version of results from \code{\link[vegan]{anosim}} objects.
+Prepares a fortified version of results from \code{\link[vegan:anosim]{vegan::anosim()}}
+objects.
 }
 \examples{
 

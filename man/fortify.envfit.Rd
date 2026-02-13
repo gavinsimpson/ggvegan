@@ -7,17 +7,23 @@
 \method{fortify}{envfit}(model, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{envfit}, the result of a call to \code{\link[vegan]{envfit}}.}
+\item{model}{an object of class \code{envfit}, the result of a call to
+\code{\link[vegan:envfit]{vegan::envfit()}}.}
 
-\item{data}{additional data to augment the \code{envfit} results. Currently ignored.}
+\item{data}{additional data to augment the \code{envfit} results. Currently
+ignored.}
 
-\item{...}{arguments passed to \code{\link[vegan]{scores.envfit}}.}
+\item{...}{arguments passed to \code{\link[vegan:envfit]{vegan::scores.envfit()}}.}
 }
 \value{
-A data frame with columns \code{label}, \code{type}, containing the label for, and whether each row refers to, the fitted vector or factor. Remaining variables are coordinates on the respective ordination axes returned by \code{\link[vegan]{scores.envfit}}.
+A data frame with columns \code{label}, \code{type}, containing the label for,
+and whether each row refers to, the fitted vector or factor. Remaining
+variables are coordinates on the respective ordination axes returned by
+\code{\link[vegan:envfit]{vegan::scores.envfit()}}.
 }
 \description{
-Produces a tidy data frame from the results of an \code{\link[vegan]{envfit}} object.
+Produces a tidy data frame from the results of an
+\code{\link[vegan:envfit]{vegan::envfit()}} object.
 }
 \examples{
 

@@ -14,8 +14,7 @@
 }
 \arguments{
 \item{model}{an object of class \code{"cca"}, the result of a call to
-\code{\link[vegan]{cca}}, \code{\link[vegan]{rda}}, or
-\code{\link[vegan]{capscale}}.}
+\code{\link[vegan:cca]{vegan::cca()}}, \code{\link[vegan:cca]{vegan::rda()}}, or \code{\link[vegan:dbrda]{vegan::capscale()}}.}
 
 \item{data}{currently ignored.}
 
@@ -23,8 +22,8 @@
 
 \item{display}{numeric; the scores to extract in the fortified object.}
 
-\item{...}{additional arguments passed to \code{\link[vegan]{scores.cca}},
-and \code{\link[vegan]{scores.rda}}.}
+\item{...}{additional arguments passed to \code{\link[vegan:plot.cca]{vegan::scores.cca()}},
+and \code{\link[vegan:plot.cca]{vegan::scores.rda()}}.}
 }
 \value{
 A data frame in long format containing the ordination scores.
@@ -33,7 +32,7 @@ The first two components are the axis scores.
 \description{
 Fortifies an object of class \code{"cca"} to produce a
 data frame of the selected axis scores in long format, suitable for
-plotting with \code{\link[ggplot2]{ggplot}}.
+plotting with \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}}.
 }
 \details{
 TODO
