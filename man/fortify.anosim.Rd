@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.anosim.R
 \name{fortify.anosim}
 \alias{fortify.anosim}
+\alias{tidy.anosim}
 \title{Fortify analysis of similarities (ANOSIM) results}
 \usage{
 \method{fortify}{anosim}(model, data, ...)
+
+\method{tidy}{anosim}(x, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan:anosim]{vegan::anosim()}}.}
+\item{model, x}{an object of class \code{\link[vegan:anosim]{vegan::anosim()}}.}
 
 \item{data}{original data set. Currently ignored.}
 
@@ -32,10 +35,11 @@ dune.ano <- with(dune.env, anosim(dune.dist, Management))
 
 df <- fortify(dune.ano)
 
-ggplot(df, aes(x = Class, y = Rank)) +
+ggplot(df, aes(x = class, y = rank)) +
     geom_boxplot(notch = FALSE, varwidth = TRUE)
 
 }
 \author{
-Didzis Elferts
+Original implementation by Didzis Elferts. Modification to tibbles
+by Gavin L. Simpson.
 }

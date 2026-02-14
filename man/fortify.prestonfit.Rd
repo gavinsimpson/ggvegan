@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.prestonfit.R
 \name{fortify.prestonfit}
 \alias{fortify.prestonfit}
+\alias{tidy.prestonfit}
 \title{Tidied species octave abundance data}
 \usage{
 \method{fortify}{prestonfit}(model, data, ...)
+
+\method{tidy}{prestonfit}(x, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan:fisherfit]{vegan::prestonfit()}}.}
+\item{model, x}{an object of class \code{\link[vegan:fisherfit]{vegan::prestonfit()}}.}
 
 \item{data}{original data set. Currently ignored.}
 
@@ -26,7 +29,7 @@ library("vegan")
 
 data(BCI)
 pfit <- prestonfit(colSums(BCI))
-head(fortify(pfit))
+fortify(pfit)
 }
 \author{
 Gavin L. Simpson

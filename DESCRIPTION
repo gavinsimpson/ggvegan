@@ -1,7 +1,7 @@
 Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
-Version: 0.1.999
+Version: 0.1.9992
 Depends: R (>= 4.1.0)
 Imports:
     vegan (>= 2.3-0),
@@ -11,9 +11,12 @@ Imports:
     ggplot2,
     grid,
     tidyr,
-    ggrepel
+    ggrepel,
+    generics
 Suggests:
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    permute,
+    withr
 Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
                     email = "ucfagls@gmail.com",
 		            comment = c(ORCID = "0000-0002-9084-8413")),

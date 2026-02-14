@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.decorana.R
 \name{fortify.decorana}
 \alias{fortify.decorana}
+\alias{tidy.decorana}
 \title{Fortify a \code{"decorana"} object.}
 \usage{
 \method{fortify}{decorana}(model, data, axes = 1:4, display = c("sites", "species"), ...)
+
+\method{tidy}{decorana}(x, data, axes = 1:4, display = c("sites", "species"), ...)
 }
 \arguments{
-\item{model}{an object of class \code{"decorana"}, the result of a call to
+\item{model, x}{an object of class \code{"decorana"}, the result of a call to
 \code{\link[vegan:decorana]{vegan::decorana()}}.}
 
 \item{data}{currently ignored.}

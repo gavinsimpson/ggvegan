@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.metaMDS.R
 \name{fortify.metaMDS}
 \alias{fortify.metaMDS}
+\alias{tidy.metaMDS}
 \title{Fortify a \code{"mataMDS"} object.}
 \usage{
 \method{fortify}{metaMDS}(model, data, ...)
+
+\method{tidy}{metaMDS}(x, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{"metaMDS"}, the result of a call
+\item{model, x}{an object of class \code{"metaMDS"}, the result of a call
 to \code{\link[vegan:metaMDS]{vegan::metaMDS()}}.}
 
 \item{data}{currently ignored.}

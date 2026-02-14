@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.isomap.R
 \name{fortify.isomap}
 \alias{fortify.isomap}
+\alias{tidy.isomap}
 \title{Fortify isometric feature mapping results}
 \usage{
-\method{fortify}{isomap}(model, data = NULL, axes = 1:6, what = c("sites", "network"), ...)
+\method{fortify}{isomap}(model, data = NULL, axes = NULL, what = c("sites", "network"), ...)
+
+\method{tidy}{isomap}(x, data = NULL, axes = NULL, what = c("sites", "network"), ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan:isomap]{vegan::isomap()}}.}
+\item{model, x}{an object of class \code{\link[vegan:isomap]{vegan::isomap()}}.}
 
 \item{data}{data.frame; additional data to be added to the fortified object.}
 
@@ -55,7 +58,7 @@ ord <- isomap(dis, k = 3)
 df <- fortify(ord, data = data.frame(Richness = specnumber(BCI)))
 net <- fortify(ord, what = "network", axes = 1:2)
 
-ggplot(df, aes(x = Dim1, y = Dim2)) +
+ggplot(df, aes(x = dim1, y = dim2)) +
     geom_segment(data = net,
                  aes(x = xfrom, y = yfrom,
                      xend = xto, yend = yto),

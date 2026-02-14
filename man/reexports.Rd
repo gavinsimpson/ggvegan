@@ -5,6 +5,7 @@
 \alias{reexports}
 \alias{autoplot}
 \alias{fortify}
+\alias{tidy}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,6 +13,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{generics}{\code{\link[generics]{tidy}}}
+
   \item{ggplot2}{\code{\link[ggplot2]{autoplot}}, \code{\link[ggplot2]{fortify}}}
 }}
 

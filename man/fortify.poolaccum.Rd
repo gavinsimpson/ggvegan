@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.poolaccum.R
 \name{fortify.poolaccum}
 \alias{fortify.poolaccum}
+\alias{tidy.poolaccum}
 \title{Fortify extrapolated species richness of a species pool}
 \usage{
 \method{fortify}{poolaccum}(model, data, alpha = 0.05, ...)
+
+\method{tidy}{poolaccum}(x, data, alpha = 0.05, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan:specpool]{vegan::poolaccum()}}.}
+\item{model, x}{an object of class \code{\link[vegan:specpool]{vegan::poolaccum()}}.}
 
 \item{data}{original data set. Currently ignored.}
 

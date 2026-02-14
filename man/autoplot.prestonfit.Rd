@@ -15,7 +15,7 @@
   bar.col = NA,
   bar.fill = "grey35",
   line.col = "red",
-  size = 1,
+  linewidth = 0.7,
   ...
 )
 }
@@ -42,7 +42,7 @@ draw outlines around bars.}
 
 \item{line.col}{colour for Preston's log-normal curve.}
 
-\item{size}{numeric; size aesthetic for the log-normal curve.}
+\item{linewidth}{numeric; size aesthetic for the log-normal curve.}
 
 \item{...}{additional arguments passed to other methods.}
 }

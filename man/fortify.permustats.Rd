@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.permustats.R
 \name{fortify.permustats}
 \alias{fortify.permustats}
+\alias{tidy.permustats}
 \title{Fortify permutation statistics}
 \usage{
 \method{fortify}{permustats}(model, data, scale = FALSE, ...)
+
+\method{tidy}{permustats}(x, data, scale = FALSE, ...)
 }
 \arguments{
-\item{model}{an object of created by \code{\link[vegan:permustats]{vegan::permustats()}}.}
+\item{model, x}{an object of created by \code{\link[vegan:permustats]{vegan::permustats()}}.}
 
 \item{data}{original data set. Currently ignored.}
 
@@ -22,4 +25,11 @@ labelling the permutation, respectively.
 }
 \description{
 Fortify permutation statistics
+}
+\examples{
+library("vegan")
+data(dune, dune.env, package = "vegan")
+mod <- adonis2(dune ~ Management + A1, data = dune.env)
+## use permustats
+perm <- permustats(mod)
 }

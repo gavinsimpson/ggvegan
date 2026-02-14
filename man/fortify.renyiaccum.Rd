@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.renyiaccum.R
 \name{fortify.renyiaccum}
 \alias{fortify.renyiaccum}
+\alias{tidy.renyiaccum}
 \title{Fortify \enc{Rényi}{Renyi} accumulation curves}
 \usage{
 \method{fortify}{renyiaccum}(model, data, ...)
+
+\method{tidy}{renyiaccum}(x, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan:renyi]{vegan::renyiaccum()}}.}
+\item{model, x}{an object of class \code{\link[vegan:renyi]{vegan::renyiaccum()}}.}
 
 \item{data}{original data set. Currently ignored.}
 

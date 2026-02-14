@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.prc.R
 \name{fortify.prc}
 \alias{fortify.prc}
+\alias{tidy.prc}
 \title{Fortify a \code{"prc"} object}
 \usage{
-\method{fortify}{prc}(model, data, scaling = 3, axis = 1, ...)
+\method{fortify}{prc}(model, data, scaling = "symmetric", axis = 1, ...)
+
+\method{tidy}{prc}(x, data, scaling = "symmetric", axis = 1, ...)
 }
 \arguments{
-\item{model}{an object of class \code{"prc"}, the result of a call to
+\item{model, x}{an object of class \code{"prc"}, the result of a call to
 \code{\link[vegan:prc]{vegan::prc()}}.}
 
 \item{data}{currently ignored.}
@@ -31,6 +34,16 @@ axis scores in long format, suitable for plotting with \code{\link[ggplot2:ggplo
 }
 \details{
 TODO
+}
+\examples{
+library("vegan")
+data(pyrifos)
+week <- gl(11, 12, labels=c(-4, -1, 0.1, 1, 2, 4, 8, 12, 15, 19, 24))
+dose <- factor(rep(c(0.1, 0, 0, 0.9, 0, 44, 6, 0.1, 44, 0.9, 0, 6), 11))
+ditch <- gl(12, 1, length=132)
+
+pyrifos_prc <- prc(pyrifos, dose, week)
+fortify(pyrifos_prc)
 }
 \author{
 Gavin L. Simpson

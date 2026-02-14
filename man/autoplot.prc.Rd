@@ -63,7 +63,7 @@ dose <- factor(rep(c(0.1, 0, 0, 0.9, 0, 44, 6, 0.1, 44, 0.9, 0, 6), 11))
 mod <- prc(pyrifos, dose, week)
 
 ## plot
-want <- colSums(pyrifos)
+want <- colSums(pyrifos) >= 300
 autoplot(mod, select = want)
 }
 \author{

@@ -2,6 +2,7 @@
 % Please edit documentation in R/fortify.cca.R
 \name{fortify.cca}
 \alias{fortify.cca}
+\alias{tidy.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
 \method{fortify}{cca}(
@@ -11,9 +12,11 @@
   display = c("sp", "wa", "lc", "bp", "cn"),
   ...
 )
+
+\method{tidy}{cca}(x, data, axes = 1:6, display = c("sp", "wa", "lc", "bp", "cn"), ...)
 }
 \arguments{
-\item{model}{an object of class \code{"cca"}, the result of a call to
+\item{model, x}{an object of class \code{"cca"}, the result of a call to
 \code{\link[vegan:cca]{vegan::cca()}}, \code{\link[vegan:cca]{vegan::rda()}}, or \code{\link[vegan:dbrda]{vegan::capscale()}}.}
 
 \item{data}{currently ignored.}
@@ -26,8 +29,10 @@
 and \code{\link[vegan:plot.cca]{vegan::scores.rda()}}.}
 }
 \value{
-A data frame in long format containing the ordination scores.
-The first two components are the axis scores.
+A data frame (tibble) in long format containing the ordination
+scores. The first two components are \code{score} (the type of score in each
+row) and \code{label} (the text label to use on plots for this row). The
+remaining columns are the extracted ordination axis scores.
 }
 \description{
 Fortifies an object of class \code{"cca"} to produce a

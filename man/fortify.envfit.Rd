@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.envfit.R
 \name{fortify.envfit}
 \alias{fortify.envfit}
+\alias{tidy.envfit}
 \title{Fortify method for \code{envfit} objects}
 \usage{
 \method{fortify}{envfit}(model, data, ...)
+
+\method{tidy}{envfit}(x, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{envfit}, the result of a call to
+\item{model, x}{an object of class \code{envfit}, the result of a call to
 \code{\link[vegan:envfit]{vegan::envfit()}}.}
 
 \item{data}{additional data to augment the \code{envfit} results. Currently
@@ -36,7 +39,7 @@ fit <- envfit(ord, varechem, perm = 199)
 fortify(fit)
 
 data(dune, dune.env)
-ord <- cca(dune)
+ord <- ca(dune)
 fit <- envfit(ord ~ Moisture + A1, dune.env, perm = 199)
 
 fortify(fit)

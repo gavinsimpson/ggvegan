@@ -8,7 +8,7 @@
   object,
   axes = c(1, 2),
   geom = c("point", "text"),
-  layers = c("species", "sites"),
+  layers = c("sites", "species"),
   legend.position = "right",
   title = NULL,
   subtitle = NULL,
@@ -64,7 +64,7 @@ data(dune)
 
 sol <- decorana(dune)
 autoplot(sol)
-autoplot(sol, display = "species", geom = "text")
+autoplot(sol, layers = "species", geom = "text")
 }
 \author{
 Gavin L. Simpson

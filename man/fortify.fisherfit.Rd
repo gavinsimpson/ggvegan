@@ -2,12 +2,15 @@
 % Please edit documentation in R/fortify.fisherfit.R
 \name{fortify.fisherfit}
 \alias{fortify.fisherfit}
+\alias{tidy.fisherfit}
 \title{Tidied species rank abundance data and estimated Fisher's log-series}
 \usage{
 \method{fortify}{fisherfit}(model, data, ...)
+
+\method{tidy}{fisherfit}(x, data, ...)
 }
 \arguments{
-\item{model}{an object of class \code{\link[vegan:fisherfit]{vegan::fisherfit()}}).}
+\item{model, x}{an object of class \code{\link[vegan:fisherfit]{vegan::fisherfit()}}).}
 
 \item{data}{original data set. Currently ignored.}
 
