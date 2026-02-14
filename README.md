@@ -6,6 +6,10 @@ status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)
 [![codecov](https://codecov.io/gh/gavinsimpson/ggvegan/branch/main/graph/badge.svg?token=pwoTNmIfOg)](https://codecov.io/gh/gavinsimpson/ggvegan)
 [![CRAN version](http://www.r-pkg.org/badges/version/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
+[![r-universe
+version](https://gavinsimpson.r-universe.dev/ggvegan/badges/version)](https://gavinsimpson.r-universe.dev/ggvegan)
+[![r-universe
+status](https://gavinsimpson.r-universe.dev/ggvegan/badges/checks)](https://gavinsimpson.r-universe.dev/ggvegan)
 <!-- badges: end -->
 
 ## What is ggvegan?
