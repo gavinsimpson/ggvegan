@@ -18,6 +18,26 @@
       10    10 0      5.21  0.0247  5.15  5.27  5.16  5.24
       # i 290 more rows
 
+# fortify works for renyiaccum objects raw
+
+    Code
+      fortify(bci_renyi_raw)
+    Output
+      # A tibble: 30,000 x 4
+          site permutation scale diversity
+         <int>       <int> <chr>     <dbl>
+       1     1           1 0          4.38
+       2     1           1 0.5        3.86
+       3     1           1 1          3.23
+       4     1           1 2          2.45
+       5     1           1 4          2.04
+       6     1           1 Inf        1.62
+       7     1           2 0          4.53
+       8     1           2 0.5        4.16
+       9     1           2 1          3.74
+      10     1           2 2          3.09
+      # i 29,990 more rows
+
 # tidy works for renyiaccum objects
 
     Code
@@ -37,4 +57,24 @@
        9     9 0      5.19  0.0260  5.11  5.24  5.14  5.23
       10    10 0      5.21  0.0247  5.15  5.27  5.16  5.24
       # i 290 more rows
+
+# tidy works for renyiaccum objects raw
+
+    Code
+      tidy(bci_renyi_raw)
+    Output
+      # A tibble: 30,000 x 4
+          site permutation scale diversity
+         <int>       <int> <chr>     <dbl>
+       1     1           1 0          4.38
+       2     1           1 0.5        3.86
+       3     1           1 1          3.23
+       4     1           1 2          2.45
+       5     1           1 4          2.04
+       6     1           1 Inf        1.62
+       7     1           2 0          4.53
+       8     1           2 0.5        4.16
+       9     1           2 1          3.74
+      10     1           2 2          3.09
+      # i 29,990 more rows
 

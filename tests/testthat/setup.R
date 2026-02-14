@@ -116,3 +116,7 @@ bci_renyi <- withr::with_seed(
   seed,
   renyiaccum(BCI)
 )
+bci_renyi_raw <- withr::with_seed(
+  seed,
+  renyiaccum(BCI, raw = TRUE)
+)
