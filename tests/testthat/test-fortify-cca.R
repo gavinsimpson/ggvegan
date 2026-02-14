@@ -23,3 +23,8 @@ test_that("tidy works for cca objects", {
   expect_s3_class(tidy(dune_rda), "tbl_df")
   expect_s3_class(tidy(dune_cca), "tbl_df")
 })
+
+test_that("fortify works for cca with display length 1", {
+  expect_snapshot(fortify(dune_cca, display = "sites"))
+  expect_snapshot(tidy(dune_cca, display = "sites"))
+})
