@@ -18,7 +18,7 @@ vegan::envfit() object."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggvegan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.9992</span>
       </span>
     </div>
 
@@ -50,14 +50,17 @@ vegan::envfit() object."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'envfit'</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'envfit'</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
+<dl><dt id="arg-model-x">model, x<a class="anchor" aria-label="anchor" href="#arg-model-x"></a></dt>
 <dd><p>an object of class <code>envfit</code>, the result of a call to
 <code><a href="https://vegandevs.github.io/vegan/reference/envfit.html" class="external-link">vegan::envfit()</a></code>.</p></dd>
 
@@ -119,33 +122,37 @@ variables are coordinates on the respective ordination axes returned by
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/envfit.html" class="external-link">envfit</a></span><span class="op">(</span><span class="va">ord</span>, <span class="va">varechem</span>, perm <span class="op">=</span> <span class="fl">199</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       label   type       NMDS1      NMDS2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1         N Vector -0.02298448 -0.4555495</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         P Vector  0.28785488  0.3044152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3         K Vector  0.33676867  0.2286479</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4        Ca Vector  0.39769955  0.3505525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        Mg Vector  0.41184412  0.4239451</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6         S Vector  0.11637297  0.4047729</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7        Al Vector -0.60146204  0.3920973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8        Fe Vector -0.54512355  0.3207078</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9        Mn Vector  0.58531265 -0.4354945</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10       Zn Vector  0.28058970  0.3149280</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11       Mo Vector -0.19293587  0.1202130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 Baresoil Vector  0.43551045 -0.2444282</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 Humdepth Vector  0.69259827 -0.2816765</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14       pH Vector -0.40932453  0.3080079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    label    type     NMDS1  NMDS2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> N        Vector -<span style="color: #BB0000;">0.023</span><span style="color: #BB0000; text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.456</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> P        Vector  0.288   0.304</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> K        Vector  0.337   0.229</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Ca       Vector  0.398   0.351</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Mg       Vector  0.412   0.424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> S        Vector  0.116   0.405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Al       Vector -<span style="color: #BB0000;">0.601</span>   0.392</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Fe       Vector -<span style="color: #BB0000;">0.545</span>   0.321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Mn       Vector  0.585  -<span style="color: #BB0000;">0.435</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Zn       Vector  0.281   0.315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Mo       Vector -<span style="color: #BB0000;">0.193</span>   0.120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Baresoil Vector  0.436  -<span style="color: #BB0000;">0.244</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Humdepth Vector  0.693  -<span style="color: #BB0000;">0.282</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> pH       Vector -<span style="color: #BB0000;">0.409</span>   0.308</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">dune</span>, <span class="va">dune.env</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">cca</a></span><span class="op">(</span><span class="va">dune</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">ord</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">ca</a></span><span class="op">(</span><span class="va">dune</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/envfit.html" class="external-link">envfit</a></span><span class="op">(</span><span class="va">ord</span> <span class="op">~</span> <span class="va">Moisture</span> <span class="op">+</span> <span class="va">A1</span>, <span class="va">dune.env</span>, perm <span class="op">=</span> <span class="fl">199</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       label     type        CA1         CA2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        A1   Vector -0.5560989 -0.03376924</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Moisture1 Centroid  0.7484337  0.14227818</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 Moisture2 Centroid  0.4651928  0.21556841</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 Moisture4 Centroid -0.1826781  0.73151540</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 Moisture5 Centroid -1.1142548 -0.57080238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   label     type        CA1     CA2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A1        Vector   -<span style="color: #BB0000;">0.556</span> -<span style="color: #BB0000;">0.033</span><span style="color: #BB0000; text-decoration: underline;">8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Moisture1 Centroid  0.748  0.142 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Moisture2 Centroid  0.465  0.216 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Moisture4 Centroid -<span style="color: #BB0000;">0.183</span>  0.732 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Moisture5 Centroid -<span style="color: #BB0000;">1.11</span>  -<span style="color: #BB0000;">0.571</span> </span>
 </code></pre></div>
     </div>
   </div>

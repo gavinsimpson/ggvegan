@@ -19,7 +19,7 @@ plotting with ggplot2::ggplot().'><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggvegan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.9992</span>
       </span>
     </div>
 
@@ -52,14 +52,17 @@ plotting with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'metaMDS'</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'metaMDS'</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
+<dl><dt id="arg-model-x">model, x<a class="anchor" aria-label="anchor" href="#arg-model-x"></a></dt>
 <dd><p>an object of class <code>"metaMDS"</code>, the result of a call
 to <code><a href="https://vegandevs.github.io/vegan/reference/metaMDS.html" class="external-link">vegan::metaMDS()</a></code>.</p></dd>
 
@@ -136,13 +139,15 @@ The first two components are the axis scores.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Run 20 stress 0.2407564 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> *** Best solution repeated 1 times</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">ord</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   score label       NMDS1       NMDS2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 sites     1 -0.84054519 -0.71582686</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 sites     2 -0.50485471 -0.40893626</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 sites     3 -0.08267233 -0.43667508</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 sites     4 -0.11562631 -0.52223858</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 sites     5 -0.62654338 -0.08669489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 sites     6 -0.54269773  0.11315547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   score label   nmds1   nmds2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> sites 1     -<span style="color: #BB0000;">0.841</span>  -<span style="color: #BB0000;">0.716</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> sites 2     -<span style="color: #BB0000;">0.505</span>  -<span style="color: #BB0000;">0.409</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> sites 3     -<span style="color: #BB0000;">0.082</span><span style="color: #BB0000; text-decoration: underline;">7</span> -<span style="color: #BB0000;">0.437</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> sites 4     -<span style="color: #BB0000;">0.116</span>  -<span style="color: #BB0000;">0.522</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> sites 5     -<span style="color: #BB0000;">0.627</span>  -<span style="color: #BB0000;">0.086</span><span style="color: #BB0000; text-decoration: underline;">7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> sites 6     -<span style="color: #BB0000;">0.543</span>   0.113 </span>
 </code></pre></div>
     </div>
   </div>

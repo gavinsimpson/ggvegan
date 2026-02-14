@@ -19,7 +19,7 @@ plotting with ggplot2::ggplot().'><!-- mathjax --><script src="https://cdnjs.clo
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggvegan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.9992</span>
       </span>
     </div>
 
@@ -58,14 +58,17 @@ plotting with <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html
 <span>  axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>,</span>
 <span>  display <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sp"</span>, <span class="st">"wa"</span>, <span class="st">"lc"</span>, <span class="st">"bp"</span>, <span class="st">"cn"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'cca'</span></span>
+<span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">data</span>, axes <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, display <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sp"</span>, <span class="st">"wa"</span>, <span class="st">"lc"</span>, <span class="st">"bp"</span>, <span class="st">"cn"</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg-model">model<a class="anchor" aria-label="anchor" href="#arg-model"></a></dt>
+<dl><dt id="arg-model-x">model, x<a class="anchor" aria-label="anchor" href="#arg-model-x"></a></dt>
 <dd><p>an object of class <code>"cca"</code>, the result of a call to
 <code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">vegan::cca()</a></code>, <code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">vegan::rda()</a></code>, or <code><a href="https://vegandevs.github.io/vegan/reference/dbrda.html" class="external-link">vegan::capscale()</a></code>.</p></dd>
 
@@ -89,8 +92,10 @@ and <code><a href="https://vegandevs.github.io/vegan/reference/plot.cca.html" cl
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A data frame in long format containing the ordination scores.
-The first two components are the axis scores.</p>
+    <p>A data frame (tibble) in long format containing the ordination
+scores. The first two components are <code>score</code> (the type of score in each
+row) and <code>label</code> (the text label to use on plots for this row). The
+remaining columns are the extracted ordination axis scores.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -111,20 +116,15 @@ The first two components are the axis scores.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">sol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">cca</a></span><span class="op">(</span><span class="va">dune</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Management</span>, data <span class="op">=</span> <span class="va">dune.env</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify</a></span><span class="op">(</span><span class="va">sol</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     score    label       CCA1       CCA2       CCA3        CCA4        CA1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 species Achimill  0.2148956  0.6791166 -0.2244523  0.36922857  0.5675090</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 species Agrostol -0.1213250 -0.7574756  0.2775783 -0.03523410 -0.5799404</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 species Airaprae -1.8379217  0.8876801  0.7707220 -0.60764105  2.1380074</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 species Alopgeni  0.5378414 -0.6600444  0.4651552 -0.07371563 -0.1991750</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 species Anthodor -0.3771475  0.5807899 -0.2313703 -0.21281154  1.1869495</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 species Bellpere  0.1411665  0.2279161  0.1843069  0.51485941  0.2352670</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          CA2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.4127753</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.2138080</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -1.5906586</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.5489354</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.2081577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.7116896</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   score   label      cca1   cca2   cca3    cca4    ca1    ca2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> species Achimill  0.215  0.679 -<span style="color: #BB0000;">0.224</span>  0.369   0.568  0.413</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> species Agrostol -<span style="color: #BB0000;">0.121</span> -<span style="color: #BB0000;">0.757</span>  0.278 -<span style="color: #BB0000;">0.035</span><span style="color: #BB0000; text-decoration: underline;">2</span> -<span style="color: #BB0000;">0.580</span> -<span style="color: #BB0000;">0.214</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> species Airaprae -<span style="color: #BB0000;">1.84</span>   0.888  0.771 -<span style="color: #BB0000;">0.608</span>   2.14  -<span style="color: #BB0000;">1.59</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> species Alopgeni  0.538 -<span style="color: #BB0000;">0.660</span>  0.465 -<span style="color: #BB0000;">0.073</span><span style="color: #BB0000; text-decoration: underline;">7</span> -<span style="color: #BB0000;">0.199</span> -<span style="color: #BB0000;">0.549</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> species Anthodor -<span style="color: #BB0000;">0.377</span>  0.581 -<span style="color: #BB0000;">0.231</span> -<span style="color: #BB0000;">0.213</span>   1.19  -<span style="color: #BB0000;">0.208</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> species Bellpere  0.141  0.228  0.184  0.515   0.235  0.712</span>
 </code></pre></div>
     </div>
   </div>
