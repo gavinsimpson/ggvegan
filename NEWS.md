@@ -1,4 +1,6 @@
-# ggvegan (development version)
+# ggvegan 0.1.9992
+
+## New features
 
 * Added a `NEWS.md` file to track changes to the package.
 

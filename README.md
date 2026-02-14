@@ -3,9 +3,9 @@
 <!-- badges: start -->
 [![R build
 status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/ggvegan/actions)
-[![codecov](https://codecov.io/gh/gavinsimpson/ggvegan/branch/main/graph/badge.svg?token=pwoTNmIfOg)](https://codecov.io/gh/gavinsimpson/ggvegan)
+[![codecov](https://codecov.io/gh/gavinsimpson/ggvegan/branch/main/graph/badge.svg?token=pwoTNmIfOg)](https://app.codecov.io/gh/gavinsimpson/ggvegan)
 [![CRAN version](http://www.r-pkg.org/badges/version/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
-[![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](https://cran.rstudio.com/web/packages/ggvegan/index.html)
 [![r-universe
 version](https://gavinsimpson.r-universe.dev/ggvegan/badges/version)](https://gavinsimpson.r-universe.dev/ggvegan)
 [![r-universe
@@ -16,7 +16,7 @@ status](https://gavinsimpson.r-universe.dev/ggvegan/badges/checks)](https://gavi
 **ggvegan** is a package for the R statistical software and environment. It aims to implement **ggplot**-based versions of the plots produced by the **vegan** package. Initially, ggvegan will provide `fortify` and `autoplot` methods for objects created in vegan, with the aim of providing full replacement plots via `autoplot`. The `fortify` methods allow the data contained within objects created by vegan to be converted into a format suitable for use with `ggplot` directly.
 
 ## Licence
-ggvegan is released under the [GNU General Public Licence, version 2](http://www.r-project.org/Licenses/GPL-2).
+ggvegan is released under the [GNU General Public Licence, version 2](https://www.r-project.org/Licenses/GPL-2).
 
 ## Development & contributions
 ggvegan uses the **roxygen2** system to document package functions alongside the code itself.
