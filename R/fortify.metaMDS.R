@@ -21,7 +21,8 @@
 #'
 #' @importFrom ggplot2 fortify
 #' @importFrom vegan scores
-#' @importFrom tibble as_tibble
+#' @importFrom tibble tibble as_tibble
+#' @importFrom dplyr bind_cols
 #'
 #' @examples
 #'
@@ -36,51 +37,51 @@
   spp <- tryCatch(scores(model, display = "species", ...), error = function(c) {
     NULL
   })
-  if (!is.null(spp)) {
+  if (length(spp) > 0L) {
     df <- rbind(samp, spp)
-    df <- as.data.frame(df)
-    df <- cbind(
+    df <- tibble::as_tibble(as.data.frame(df))
+    df <- tibble::add_column(
+      df,
       score = factor(rep(c("sites", "species"), c(nrow(samp), nrow(spp)))),
       label = c(rownames(samp), rownames(spp)),
-      df
+      .before = 1L
     )
   } else {
-    df <- data.frame(
-      score = factor(rep("sites", nrow(df))),
-      label = rownames(samp),
-      samp
-    )
+    df <- tibble(
+      score = factor(rep("sites", nrow(samp))),
+      label = rownames(samp)
+    ) |>
+      bind_cols(samp)
   }
   names(df) <- tolower(names(df))
-  rownames(df) <- NULL
-  df <- tibble::as_tibble(df)
   df
 }
 
 #' @export
 #' @rdname fortify.metaMDS
+#' @importFrom tibble tibble as_tibble
+#' @importFrom dplyr bind_cols
 `tidy.metaMDS` <- function(x, data, ...) {
   samp <- scores(x, display = "sites", ...)
   spp <- tryCatch(scores(x, display = "species", ...), error = function(c) {
     NULL
   })
-  if (!is.null(spp)) {
+  if (length(spp) > 0L) {
     df <- rbind(samp, spp)
-    df <- as.data.frame(df)
-    df <- cbind(
+    df <- tibble::as_tibble(as.data.frame(df))
+    df <- tibble::add_column(
+      df,
       score = factor(rep(c("sites", "species"), c(nrow(samp), nrow(spp)))),
       label = c(rownames(samp), rownames(spp)),
-      df
+      .before = 1L
     )
   } else {
-    df <- data.frame(
-      score = factor(rep("sites", nrow(df))),
-      label = rownames(samp),
-      samp
-    )
+    df <- tibble(
+      score = factor(rep("sites", nrow(samp))),
+      label = rownames(samp)
+    ) |>
+      bind_cols(samp)
   }
   names(df) <- tolower(names(df))
-  rownames(df) <- NULL
-  df <- tibble::as_tibble(df)
   df
 }

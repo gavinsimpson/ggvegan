@@ -71,6 +71,10 @@ dune_mds <- withr::with_seed(
   seed,
   metaMDS(dune, trace = FALSE)
 )
+dune_mds_no_spp <- withr::with_seed(
+  seed,
+  metaMDS(vegdist(dune), trace = FALSE)
+)
 
 # permustats
 permu_adonis <- permustats(dune_adonis)
