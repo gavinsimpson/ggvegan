@@ -21,7 +21,8 @@ Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
                     email = "ucfagls@gmail.com",
 		            comment = c(ORCID = "0000-0002-9084-8413")),
              person("Jari", "Oksanen", role = "aut"),
-	         person("Didzis", "Elferts", role = "ctb"))
+	         person("Didzis", "Elferts", role = "ctb",
+                    comment = c(ORCID = "0000-0002-9401-1231")))
 Description: Functions to produce 'ggplot2'-based plots of objects produced by
     functions in the vegan package.
 License: GPL-2
