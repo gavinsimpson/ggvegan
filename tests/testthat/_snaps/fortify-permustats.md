@@ -198,3 +198,43 @@
       10 RDA1        -9.20
       # i 89 more rows
 
+# tidy works for permustats objects with scale
+
+    Code
+      fortify(permu_cca, scale = TRUE)
+    Output
+      # A tibble: 999 x 2
+         term  permutation
+         <fct>       <dbl>
+       1 Model       -1.44
+       2 Model       -4.13
+       3 Model       -3.43
+       4 Model       -3.93
+       5 Model       -3.48
+       6 Model       -3.31
+       7 Model       -3.73
+       8 Model       -3.65
+       9 Model       -4.58
+      10 Model       -3.36
+      # i 989 more rows
+
+---
+
+    Code
+      tidy(permu_cca, scale = TRUE)
+    Output
+      # A tibble: 999 x 2
+         term  permutation
+         <fct>       <dbl>
+       1 Model       -1.44
+       2 Model       -4.13
+       3 Model       -3.43
+       4 Model       -3.93
+       5 Model       -3.48
+       6 Model       -3.31
+       7 Model       -3.73
+       8 Model       -3.65
+       9 Model       -4.58
+      10 Model       -3.36
+      # i 989 more rows
+

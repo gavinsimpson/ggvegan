@@ -27,3 +27,10 @@ test_that("tidy works for permustats objects", {
   expect_s3_class(tidy(permu_rda), "tbl_df")
   expect_s3_class(tidy(permu_prc), "tbl_df")
 })
+
+test_that("tidy works for permustats objects with scale", {
+  expect_snapshot(fortify(permu_cca, scale = TRUE))
+  expect_s3_class(fortify(permu_cca, scale = TRUE), "tbl_df")
+  expect_snapshot(tidy(permu_cca, scale = TRUE))
+  expect_s3_class(tidy(permu_cca, scale = TRUE), "tbl_df")
+})
