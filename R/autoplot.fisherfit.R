@@ -22,7 +22,7 @@
 #'
 #' @export
 #'
-#' @importFrom ggplot2 ggplot autoplot geom_bar stat_function aes_string labs
+#' @importFrom ggplot2 ggplot autoplot geom_bar stat_function aes labs
 #'   fortify
 #'
 #' @examples
@@ -50,7 +50,13 @@
     alpha * k^x / x
   }
   df <- fortify(object)
-  plt <- ggplot(df, aes_string(x = 'Rank', y = 'Abundance')) +
+  plt <- ggplot(
+    df,
+    aes(
+      x = .data[["rank"]],
+      y = .data[["abundance"]]
+    )
+  ) +
     geom_bar(stat = 'identity', colour = bar.col, fill = bar.fill)
   if (show.fitted) {
     alpha <- object[['estimate']]

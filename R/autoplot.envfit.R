@@ -17,7 +17,7 @@
 #' @return A ggplot object.
 #'
 #' @importFrom ggplot2 autoplot fortify geom_segment geom_text geom_label
-#'   aes_string labs coord_fixed
+#'   aes labs coord_fixed
 #' @importFrom ggrepel geom_text_repel geom_label_repel
 #'
 #' @export
@@ -53,7 +53,7 @@
   df <- fortify(object, ...)
   plt <- ggplot()
 
-  ind <- df[['type']] == 'Vector'
+  ind <- df[["type"]] == "Vector"
   vs <- df[ind, ]
   fs <- df[!ind, ]
 
@@ -64,11 +64,11 @@
     plt <- plt +
       geom_segment(
         data = vs,
-        mapping = aes_string(
+        mapping = aes(
           x = 0,
           y = 0,
-          xend = vars[1],
-          yend = vars[2]
+          xend = .data[[vars[1]]],
+          yend = .data[[vars[2]]]
         ),
         arrow = arrow(length = unit(0.1, 'cm')),
         colour = line.col
@@ -80,9 +80,9 @@
     plt <- plt +
       geom_point(
         data = fs,
-        mapping = aes_string(
-          x = vars[1],
-          y = vars[2]
+        mapping = aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]]
         )
       ) +
       label_fun(data = fs, geom = geom, vars = vars)

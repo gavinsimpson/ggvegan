@@ -30,7 +30,7 @@
 #'
 #' @importFrom grid arrow unit
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment labs
-#'   coord_fixed aes_string
+#'   coord_fixed aes
 #'
 #' @examples
 #'
@@ -77,13 +77,23 @@
     plt <- plt +
       geom_point(
         data = obj[want, , drop = FALSE],
-        aes_string(x = vars[1], y = vars[2], shape = 'score', colour = 'score')
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          shape = .data[["score"]],
+          colour = .data[["score"]]
+        )
       )
   } else {
     plt <- plt +
       geom_text(
         data = obj[want, , drop = FALSE],
-        aes_string(x = vars[1], y = vars[2], label = 'label', colour = 'score')
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]],
+          colour = .data[["score"]]
+        )
       )
   }
   ## remove biplot arrows for centroids if present
@@ -100,13 +110,20 @@
       plt <- plt +
         geom_point(
           data = obj[want, , drop = FALSE],
-          aes_string(x = vars[1], y = vars[2])
+          aes(
+            x = .data[[vars[1]]],
+            y = .data[[vars[2]]]
+          )
         )
     } else {
       plt <- plt +
         geom_text(
           data = obj[want, , drop = FALSE],
-          aes_string(x = vars[1], y = vars[2], label = 'label')
+          aes(
+            x = .data[[vars[1]]],
+            y = .data[[vars[2]]],
+            label = .data[["label"]]
+          )
         )
     }
   }
@@ -122,7 +139,12 @@
     plt <- plt +
       geom_segment(
         data = obj[want, , drop = FALSE],
-        aes_string(x = 0, y = 0, xend = vars[1], yend = vars[2]),
+        aes(
+          x = 0,
+          y = 0,
+          xend = .data[[vars[1]]],
+          yend = .data[[vars[2]]]
+        ),
         arrow = arrow(length = unit(0.2, "cm")),
         colour = col
       )
@@ -130,14 +152,22 @@
     plt <- plt +
       geom_text(
         data = obj[want, , drop = FALSE],
-        aes_string(x = vars[1], y = vars[2], label = 'label')
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]]
+        )
       )
   }
   if (any(want <- obj$score == "centroids")) {
     plt <- plt +
       geom_text(
         data = obj[want, , drop = FALSE],
-        aes_string(x = vars[1], y = vars[2], label = 'label'),
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]]
+        ),
         colour = "navy"
       )
   }
@@ -161,5 +191,3 @@
   plt <- plt + theme(legend.position = legend.position)
   plt
 }
-
-## `aplot.cca` <- `autoplot.cca`

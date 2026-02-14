@@ -30,7 +30,7 @@
 #' @export
 #'
 #' @importFrom ggplot2 fortify ggplot geom_hline geom_rug geom_line theme
-#'   scale_x_continuous labs aes_string
+#'   scale_x_continuous labs aes
 #'
 #' @examples
 #'
@@ -44,7 +44,7 @@
 #' mod <- prc(pyrifos, dose, week)
 #'
 #' ## plot
-#' want <- colSums(pyrifos)
+#' want <- colSums(pyrifos) >= 300
 #' autoplot(mod, select = want)
 `autoplot.prc` <- function(
   object,
@@ -61,11 +61,11 @@
   fobj <- fortify(object, ...)
 
   ## levels of factors - do this now before we convert things
-  TimeLevs <- levels(fobj$Time)
-  TreatLevs <- levels(fobj$Treatment)
+  time_levs <- levels(fobj$time)
+  treat_levs <- levels(fobj$treatment)
 
-  ## convert Time to a numeric
-  fobj$Time <- as.numeric(as.character(fobj$Time))
+  ## convert time to a numeric
+  fobj$time <- as.numeric(as.character(fobj$time))
 
   ## process select
   ind <- fobj$score != "Sample"
@@ -82,12 +82,12 @@
   ## base plot
   plt <- ggplot(
     data = samp,
-    aes_string(
-      x = 'Time',
-      y = 'Response',
-      group = 'Treatment',
-      colour = 'Treatment',
-      linetype = 'Treatment'
+    aes(
+      x = .data[["time"]],
+      y = .data[["response"]],
+      group = .data[["treatment"]],
+      colour = .data[["treatment"]],
+      linetype = .data[["treatment"]]
     )
   )
   ## add the control
@@ -97,7 +97,7 @@
     geom_rug(
       data = spp,
       sides = "r",
-      mapping = aes_string(
+      mapping = aes(
         group = NULL,
         x = NULL,
         colour = NULL,
@@ -108,14 +108,14 @@
   plt <- plt +
     geom_line() +
     theme(legend.position = legend.position) +
-    scale_x_continuous(breaks = as.numeric(TimeLevs), minor_breaks = NULL)
+    scale_x_continuous(breaks = as.numeric(time_levs), minor_breaks = NULL)
 
   ## add labels
   if (missing(xlab)) {
-    xlab <- 'Time'
+    xlab <- "Time"
   }
   if (missing(ylab)) {
-    ylab <- 'Treatment'
+    ylab <- "Treatment"
   }
   plt <- plt +
     labs(
@@ -123,7 +123,9 @@
       y = ylab,
       title = title,
       subtitle = subtitle,
-      caption = caption
+      caption = caption,
+      colour = ylab,
+      linetype = ylab
     )
 
   ## return

@@ -8,7 +8,7 @@
 #' @details
 #' TODO
 #'
-#' @param  model an object of class `"metaMDS"`, the result of a call
+#' @param model,x an object of class `"metaMDS"`, the result of a call
 #' to [vegan::metaMDS()].
 #' @param data currently ignored.
 #' @param ... additional arguments passed to
@@ -21,6 +21,7 @@
 #'
 #' @importFrom ggplot2 fortify
 #' @importFrom vegan scores
+#' @importFrom tibble as_tibble
 #'
 #' @examples
 #'
@@ -50,6 +51,36 @@
       samp
     )
   }
+  names(df) <- tolower(names(df))
   rownames(df) <- NULL
+  df <- tibble::as_tibble(df)
+  df
+}
+
+#' @export
+#' @rdname fortify.metaMDS
+`tidy.metaMDS` <- function(x, data, ...) {
+  samp <- scores(x, display = "sites", ...)
+  spp <- tryCatch(scores(x, display = "species", ...), error = function(c) {
+    NULL
+  })
+  if (!is.null(spp)) {
+    df <- rbind(samp, spp)
+    df <- as.data.frame(df)
+    df <- cbind(
+      score = factor(rep(c("sites", "species"), c(nrow(samp), nrow(spp)))),
+      label = c(rownames(samp), rownames(spp)),
+      df
+    )
+  } else {
+    df <- data.frame(
+      score = factor(rep("sites", nrow(df))),
+      label = rownames(samp),
+      samp
+    )
+  }
+  names(df) <- tolower(names(df))
+  rownames(df) <- NULL
+  df <- tibble::as_tibble(df)
   df
 }

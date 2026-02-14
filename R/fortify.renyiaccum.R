@@ -3,7 +3,7 @@
 #' @description Prepares a fortified version of results from
 #'   [vegan::renyiaccum()] objects.
 #'
-#' @param model an object of class [vegan::renyiaccum()].
+#' @param model,x an object of class [vegan::renyiaccum()].
 #' @param data original data set. Currently ignored.
 #' @param ... additional arguments passed to other methods. Ignored in this
 #'   method.
@@ -123,4 +123,19 @@
       names_to = "scale",
       values_to = "diversity"
     )
+}
+
+#' @export
+#' @rdname fortify.renyiaccum
+#' @importFrom tibble as_tibble
+`tidy.renyiaccum` <- function(x, data, ...) {
+  dn_names <- dimnames(x) |> names()
+
+  df <- if (identical(dn_names[3], "permutation")) {
+    fortify_renyi_permuted(x)
+  } else {
+    fortify_renyi_accum(x)
+  }
+
+  df
 }

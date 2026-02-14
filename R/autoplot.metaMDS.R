@@ -33,7 +33,7 @@
 #'
 #' @importFrom grid arrow unit
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text labs coord_fixed
-#'   aes_string
+#'   aes
 #'
 #' @examples
 #'
@@ -72,13 +72,23 @@
     plt <- plt +
       geom_point(
         data = obj,
-        aes_string(x = vars[1], y = vars[2], shape = 'score', colour = 'score')
+        mapping = aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          shape = .data[["score"]],
+          colour = .data[["score"]]
+        )
       )
   } else {
     plt <- plt +
       geom_text(
         data = obj,
-        aes_string(x = vars[1], y = vars[2], label = 'label', colour = 'score')
+        mapping = aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]],
+          colour = .data[["score"]]
+        )
       )
   }
   if (missing(xlab)) {

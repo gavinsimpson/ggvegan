@@ -2,7 +2,7 @@
 #'
 #' @description Produces a tidy data frame from the results of an
 #'   [vegan::envfit()] object.
-#' @param model an object of class `envfit`, the result of a call to
+#' @param model,x an object of class `envfit`, the result of a call to
 #'   [vegan::envfit()].
 #' @param data additional data to augment the `envfit` results. Currently
 #'   ignored.
@@ -16,6 +16,7 @@
 #' @author Gavin L. Simpson
 #'
 #' @importFrom vegan scores
+#' @importFrom tibble as_tibble
 #'
 #' @export
 #'
@@ -30,19 +31,35 @@
 #' fortify(fit)
 #'
 #' data(dune, dune.env)
-#' ord <- cca(dune)
+#' ord <- ca(dune)
 #' fit <- envfit(ord ~ Moisture + A1, dune.env, perm = 199)
 #'
 #' fortify(fit)
 `fortify.envfit` <- function(model, data, ...) {
   vs <- scores(model, display = 'vectors', ...)
   fs <- scores(model, display = 'factors', ...)
-  df <- as.data.frame(rbind(vs, fs))
-  df <- cbind(
+  df <- as.data.frame(rbind(vs, fs)) |> as_tibble()
+  df <- tibble::add_column(
+    df,
     label = c(rownames(vs), rownames(fs)),
     type = rep(c('Vector', 'Centroid'), times = c(NROW(vs), NROW(fs))),
-    df
+    .before = 1L
   )
-  rownames(df) <- NULL
+  df
+}
+
+#' @export
+#' @rdname fortify.envfit
+#' @importFrom tibble as_tibble add_column
+`tidy.envfit` <- function(x, data, ...) {
+  vs <- scores(x, display = 'vectors', ...)
+  fs <- scores(x, display = 'factors', ...)
+  df <- as.data.frame(rbind(vs, fs)) |> as_tibble()
+  df <- tibble::add_column(
+    df,
+    label = c(rownames(vs), rownames(fs)),
+    type = rep(c('Vector', 'Centroid'), times = c(NROW(vs), NROW(fs))),
+    .before = 1L
+  )
   df
 }

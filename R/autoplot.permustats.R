@@ -72,7 +72,7 @@
       df,
       aes(
         x = .data[["term"]],
-        y = .data[["permutations"]],
+        y = .data[["permutation"]],
         fill = .data[["term"]],
         colour = .data[["term"]]
       )
@@ -80,7 +80,7 @@
     "density" = ggplot(
       df,
       aes(
-        x = .data[["permutations"]],
+        x = .data[["permutation"]],
         fill = .data[["term"]],
         colour = .data[["term"]]
       )
@@ -88,7 +88,7 @@
     "qqnorm" = ggplot(
       df,
       aes(
-        sample = .data[["permutations"]],
+        sample = .data[["permutation"]],
         colour = .data[["term"]]
       )
     )

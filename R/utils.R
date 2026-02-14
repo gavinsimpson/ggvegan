@@ -65,7 +65,7 @@
 #'
 #' @author Gavin L. Simpson
 #'
-#' @importFrom ggplot2 geom_text geom_label aes_string
+#' @importFrom ggplot2 geom_text geom_label aes
 #' @importFrom ggrepel geom_text_repel geom_label_repel
 #'
 `label_fun` <- function(
@@ -77,34 +77,34 @@
     geom,
     label = geom_label(
       data = data,
-      mapping = aes_string(
-        x = vars[1],
-        y = vars[2],
-        label = 'label'
+      mapping = aes(
+        x = .data[[vars[1]]],
+        y = .data[[vars[2]]],
+        label = .data[["label"]]
       )
     ),
     text = geom_text(
       data = data,
-      mapping = aes_string(
-        x = vars[1],
-        y = vars[2],
-        label = 'label'
+      mapping = aes(
+        x = .data[[vars[1]]],
+        y = .data[[vars[2]]],
+        label = .data[["label"]]
       )
     ),
     label_repel = geom_label_repel(
       data = data,
-      mapping = aes_string(
-        x = vars[1],
-        y = vars[2],
-        label = 'label'
+      mapping = aes(
+        x = .data[[vars[1]]],
+        y = .data[[vars[2]]],
+        label = .data[["label"]]
       )
     ),
     text_repel = geom_text_repel(
       data = data,
-      mapping = aes_string(
-        x = vars[1],
-        y = vars[2],
-        label = 'label'
+      mapping = aes(
+        x = .data[[vars[1]]],
+        y = .data[[vars[2]]],
+        label = .data[["label"]]
       )
     )
   )
@@ -200,7 +200,7 @@
         plt <- plt +
           geom_point(
             data = object[take, , drop = FALSE],
-            mapping = aes_string(
+            mapping = aes(
               x = vars[1],
               y = vars[2],
               shape = "score",
@@ -211,7 +211,7 @@
         plt <- plt +
           geom_text(
             data = object[take, , drop = FALSE],
-            mapping = aes_string(
+            mapping = aes(
               x = vars[1],
               y = vars[2],
               label = 'label',
@@ -228,7 +228,7 @@
           plt <- plt +
             geom_point(
               data = object[take, , drop = FALSE],
-              mapping = aes_string(
+              mapping = aes(
                 x = vars[1],
                 y = vars[2],
                 shape = 'score',
@@ -239,7 +239,7 @@
           plt <- plt +
             geom_text(
               data = object[take, , drop = FALSE],
-              mapping = aes_string(
+              mapping = aes(
                 x = vars[1],
                 y = vars[2],
                 label = 'label',
@@ -255,7 +255,7 @@
           plt <- plt +
             geom_point(
               data = object[take, , drop = FALSE],
-              mapping = aes_string(
+              mapping = aes(
                 x = vars[1],
                 y = vars[2],
                 shape = "score",
@@ -266,7 +266,7 @@
           plt <- plt +
             geom_text(
               data = object[take, , drop = FALSE],
-              mapping = aes_string(
+              mapping = aes(
                 x = vars[1],
                 y = vars[2],
                 label = "label",
@@ -287,11 +287,11 @@
     plt <- plt +
       geom_segment(
         data = pdat,
-        mapping = aes_string(
+        mapping = aes(
           x = 0,
           y = 0,
-          xend = vars[1],
-          yend = vars[2]
+          xend = .data[[vars[1]]],
+          yend = .data[[vars[2]]]
         ),
         arrow = arrow(length = unit(0.2, "cm")),
         colour = col
@@ -300,10 +300,10 @@
     plt <- plt +
       geom_text(
         data = pdat,
-        mapping = aes_string(
-          x = vars[1],
-          y = vars[2],
-          label = 'label'
+        mapping = aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]]
         ),
         size = 4
       )
@@ -311,4 +311,22 @@
 
   ## return
   plt
+}
+
+#' @importFrom tibble as_tibble
+`prep_tidy_scores_tbl` <- function(x) {
+  nr <- vapply(x, FUN = NROW, FUN.VALUE = integer(1L))
+  scr_labs <- unlist(lapply(x, rownames), use.names = FALSE)
+  df <- do.call("rbind", x)
+  rownames(df) <- NULL
+  colnames(df) <- tolower(colnames(df))
+  df <- df |>
+    as.data.frame() |>
+    tibble::as_tibble() |>
+    tibble::add_column(
+      score = factor(rep(names(x), times = nr)),
+      label = scr_labs,
+      .before = 1L
+    )
+  df
 }

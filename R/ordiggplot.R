@@ -75,7 +75,7 @@
 #'                   formula = ~ N + Ca + Al + Humdepth + pH)
 #'
 #' @importFrom stats weights
-#' @importFrom ggplot2 ggplot coord_fixed aes_string ggproto
+#' @importFrom ggplot2 ggplot coord_fixed aes ggproto
 #'
 #' @param arrowmul Multiplier to arrow length. If missing, the arrow
 #'     length are adjusted to fit to other scores, but if some score
@@ -130,7 +130,11 @@
   dlab <- colnames(df)[3:4]
   pl <- ggplot(
     data = df,
-    mapping = aes_string(dlab[1], dlab[2], label = "label")
+    mapping = aes(
+      x = .data[[dlab[1]]],
+      y = .data[[dlab[2]]],
+      label = .data[["label"]]
+    )
   )
   pl <- pl + coord_fixed(ratio = 1)
   pl

@@ -31,7 +31,7 @@
 #'
 #' @importFrom grid arrow unit
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment labs
-#'   coord_fixed aes_string
+#'   coord_fixed aes
 #'
 #' @examples
 #'
@@ -40,12 +40,12 @@
 #'
 #' sol <- decorana(dune)
 #' autoplot(sol)
-#' autoplot(sol, display = "species", geom = "text")
+#' autoplot(sol, layers = "species", geom = "text")
 `autoplot.decorana` <- function(
   object,
   axes = c(1, 2),
   geom = c("point", "text"),
-  layers = c("species", "sites"),
+  layers = c("sites", "species"),
   legend.position = "right",
   title = NULL,
   subtitle = NULL,
@@ -55,7 +55,7 @@
   ...
 ) {
   axes <- rep(axes, length.out = 2L)
-  obj <- fortify(object, axes = axes, ...)
+  obj <- fortify(object, axes = axes, display = layers, ...)
   LAYERS <- levels(obj$score)
   ## sort out x, y aesthetics
   vars <- get_dimension_names(obj)
@@ -78,13 +78,23 @@
     plt <- plt +
       geom_point(
         data = obj[want, , drop = FALSE],
-        aes_string(x = vars[1], y = vars[2], shape = 'score', colour = 'score')
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          shape = .data[["score"]],
+          colour = .data[["score"]]
+        )
       )
   } else {
     plt <- plt +
       geom_text(
         data = obj[want, , drop = FALSE],
-        aes_string(x = vars[1], y = vars[2], label = 'label', colour = 'score')
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]],
+          colour = .data[["score"]]
+        )
       )
   }
   if (missing(xlab)) {

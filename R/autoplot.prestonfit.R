@@ -15,7 +15,7 @@
 #'   draw outlines around bars.
 #' @param bar.fill fill colour for the bars.
 #' @param line.col colour for Preston's log-normal curve.
-#' @param size numeric; size aesthetic for the log-normal curve.
+#' @param linewidth numeric; size aesthetic for the log-normal curve.
 #' @param ... additional arguments passed to other methods.
 #' @return A ggplot object.
 #' @author Gavin L. Simpson
@@ -23,7 +23,7 @@
 #' @export
 #'
 #' @importFrom ggplot2 ggplot autoplot geom_bar geom_segment scale_x_continuous
-#'   stat_function aes_string labs fortify
+#'   stat_function aes labs fortify
 #'
 #' @examples
 #'
@@ -43,47 +43,59 @@
   bar.col = NA,
   bar.fill = "grey35",
   line.col = "red",
-  size = 1,
+  linewidth = 0.7,
   ...
 ) {
-  presfun <- function(x, mode, width, S0) {
+  pres_fun <- function(x, mode, width, S0) {
     S0 * exp(-(x - mode)^2 / 2 / width^2)
   }
   df <- fortify(object)
   noct <- nrow(df)
   brks <- seq(0, nrow(df))
-  df[['OctaveMinusOne']] <- df[['Octave']] - 0.5
+  df[["octave_minus_one"]] <- df[["octave"]] - 0.5
   plt <- ggplot(
     df,
-    aes_string(x = 'OctaveMinusOne', y = 'Abundance')
+    aes(
+      x = .data[["octave_minus_one"]],
+      y = .data[["abundance"]]
+    )
   ) +
-    geom_bar(stat = 'identity', colour = bar.col, fill = bar.fill)
+    geom_bar(
+      stat = "identity",
+      colour = bar.col,
+      fill = bar.fill
+    )
   coefs <- coef(object)
   lineSegs <- data.frame(
-    x1 = c(coefs['mode'], coefs['mode'] - coefs['width']),
-    y1 = c(0, coefs['S0'] * exp(-0.5)),
-    x2 = c(coefs['mode'], coefs['mode'] + coefs['width']),
-    y2 = c(coefs['S0'], coefs['S0'] * exp(-0.5))
+    x1 = c(coefs["mode"], coefs["mode"] - coefs["width"]),
+    y1 = c(0, coefs["S0"] * exp(-0.5)),
+    x2 = c(coefs["mode"], coefs["mode"] + coefs["width"]),
+    y2 = c(coefs["S0"], coefs["S0"] * exp(-0.5))
   )
   if (show.fitted) {
     plt <- plt +
       stat_function(
-        fun = presfun,
+        fun = pres_fun,
         args = list(
-          mode = coefs['mode'],
-          width = coefs['width'],
-          S0 = coefs['S0']
+          mode = coefs["mode"],
+          width = coefs["width"],
+          S0 = coefs["S0"]
         ),
         colour = line.col,
-        size = size
+        linewidth = linewidth
       )
   }
   plt <- plt +
     geom_segment(
       data = lineSegs,
-      mapping = aes_string(x = 'x1', y = 'y1', xend = 'x2', yend = 'y2'),
+      mapping = aes(
+        x = .data[["x1"]],
+        y = .data[["y1"]],
+        xend = .data[["x2"]],
+        yend = .data[["y2"]]
+      ),
       colour = line.col,
-      size = size
+      linewidth = linewidth
     ) +
     scale_x_continuous(breaks = brks, labels = 2^brks) +
     labs(

@@ -21,7 +21,7 @@
 #'
 #' @export
 #'
-#' @importFrom ggplot2 ggplot autoplot geom_boxplot aes_string labs fortify
+#' @importFrom ggplot2 ggplot autoplot geom_boxplot aes labs fortify
 #'
 #' @examples
 #'
@@ -49,7 +49,7 @@
 
   plt <- ggplot(
     df,
-    aes_string(x = "Class", y = "Rank")
+    aes(x = .data[["class"]], y = .data[["rank"]])
   ) +
     geom_boxplot(notch = notch, varwidth = varwidth)
 

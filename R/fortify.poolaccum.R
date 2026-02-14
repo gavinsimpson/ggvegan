@@ -3,7 +3,7 @@
 #' @description Prepares a fortified version of results from
 #'   [vegan::poolaccum()] objects.
 #'
-#' @param model an object of class [vegan::poolaccum()].
+#' @param model,x an object of class [vegan::poolaccum()].
 #' @param data original data set. Currently ignored.
 #' @param alpha level of quantiles for envelopes shown (default 0.05).
 #' @param ... additional arguments passed to [vegan::summary.poolaccum()],
@@ -38,6 +38,33 @@
 #'     facet_wrap(~ index)
 `fortify.poolaccum` <- function(model, data, alpha = 0.05, ...) {
   m <- summary(model, alpha = alpha, ...)
+  lens <- vapply(
+    m,
+    FUN = NROW,
+    FUN.VALUE = numeric(1),
+    USE.NAMES = FALSE
+  )
+  vars <- vapply(
+    m,
+    FUN = \(x) colnames(x)[2],
+    FUN.VALUE = character(1),
+    USE.NAMES = FALSE
+  )
+  df <- do.call("rbind", m) |>
+    as.data.frame() |>
+    setNames(c("size", "richness", "lower", "upper", "std_dev")) |>
+    as_tibble()
+  df <- vec_cbind(
+    index = factor(rep(vars, times = lens)),
+    df
+  )
+  df
+}
+
+#' @export
+#' @rdname fortify.poolaccum
+`tidy.poolaccum` <- function(x, data, alpha = 0.05, ...) {
+  m <- summary(x, alpha = alpha, ...)
   lens <- vapply(
     m,
     FUN = NROW,

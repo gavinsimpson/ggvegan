@@ -27,7 +27,7 @@
 #'
 #' @export
 #'
-#' @importFrom ggplot2 ggplot autoplot geom_line geom_ribbon aes_string labs
+#' @importFrom ggplot2 ggplot autoplot geom_line geom_ribbon aes labs
 #'   fortify facet_wrap
 #'
 #' @examples
@@ -58,12 +58,24 @@
   df <- fortify(object, ...)
 
   ## base plot
-  plt <- ggplot(df, aes_string(x = "size", y = "richness", colour = "index"))
+  plt <- ggplot(
+    df,
+    aes(
+      x = .data[["size"]],
+      y = .data[["richness"]],
+      colour = .data[["index"]]
+    )
+  )
 
   if (isTRUE(ribbon)) {
     plt <- plt +
       geom_ribbon(
-        aes_string(ymin = "lower", ymax = "upper", x = "size", fill = "index"),
+        aes(
+          ymin = .data[["lower"]],
+          ymax = .data[["upper"]],
+          x = .data[["size"]],
+          fill = .data[["index"]]
+        ),
         alpha = ribbon.alpha,
         inherit.aes = FALSE
       )

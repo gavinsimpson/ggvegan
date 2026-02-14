@@ -22,7 +22,7 @@
 #'
 #' @export
 #'
-#' @importFrom ggplot2 ggplot autoplot geom_point geom_segment aes_string labs
+#' @importFrom ggplot2 ggplot autoplot geom_point geom_segment aes labs
 #'   fortify coord_fixed
 #'
 #' @examples
@@ -53,18 +53,24 @@
   pts <- fortify(object, axes = axes)
   net <- fortify(object, axes = axes, what = "network")
 
-  vars <- paste0("Dim", axes)
-  plt <- ggplot(pts, aes_string(x = vars[1], y = vars[2]))
+  vars <- paste0("dim", axes)
+  plt <- ggplot(
+    pts,
+    aes(
+      x = .data[[vars[1]]],
+      y = .data[[vars[2]]]
+    )
+  )
 
   if (isTRUE(network)) {
     plt <- plt +
       geom_segment(
         data = net,
-        mapping = aes_string(
-          x = "xfrom",
-          y = "yfrom",
-          xend = "xto",
-          yend = "yto"
+        mapping = aes(
+          x = .data[["xfrom"]],
+          y = .data[["yfrom"]],
+          xend = .data[["xto"]],
+          yend = .data[["yto"]]
         ),
         colour = line.col,
         size = size
@@ -81,7 +87,10 @@
   plt <- if (point) {
     plt + geom_point()
   } else {
-    plt + geom_text(aes_string(label = "label"))
+    plt +
+      geom_text(
+        mapping = aes(label = .data[["label"]])
+      )
   }
 
   if (is.null(xlab)) {
