@@ -1,7 +1,8 @@
 # ggvegan; ggplot2-based plots for vegan
 
 <!-- badges: start -->
-[![R build status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/ggvegan/actions)
+[![R build
+status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/ggvegan/actions)
 [![codecov](https://codecov.io/gh/gavinsimpson/ggvegan/branch/main/graph/badge.svg?token=pwoTNmIfOg)](https://codecov.io/gh/gavinsimpson/ggvegan)
 [![CRAN version](http://www.r-pkg.org/badges/version/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](http://cran.rstudio.com/web/packages/ggvegan/index.html)
