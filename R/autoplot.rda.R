@@ -35,7 +35,6 @@
 #'
 #' @export
 #'
-#' @importFrom grid arrow unit
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment labs
 #'   coord_fixed aes
 #'
@@ -56,13 +55,13 @@
   geom = c("point", "text"),
   layers = c("species", "sites", "biplot", "centroids"),
   arrows = TRUE,
-  legend.position = "right",
+  legend.position = "none",
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  ylab,
-  xlab,
-  const,
+  ylab = NULL,
+  xlab = NULL,
+  const = NULL,
   ...
 ) {
   ## determine which layers to plot
@@ -115,62 +114,18 @@
   }
 
   if (isTRUE(draw_list["biplot"])) {
-    want <- obj[["score"]] == "biplot"
-    if (any(want)) {
-      if (length(layer_names) > 1) {
-        mul <- arrow_mul(
-          obj[want, vars, drop = FALSE],
-          obj[!want, vars, drop = FALSE]
-        )
-        obj[want, vars] <- mul * obj[want, vars]
-      }
-      col <- "navy"
-      plt <- plt +
-        geom_segment(
-          data = obj[want, , drop = FALSE],
-          aes(
-            x = 0,
-            y = 0,
-            xend = .data[[vars[1]]],
-            yend = .data[[vars[2]]]
-          ),
-          arrow = arrow(length = unit(0.2, "cm")),
-          colour = col
-        )
-      obj[want, vars] <- 1.1 * obj[want, vars]
-      plt <- plt +
-        geom_text(
-          data = obj[want, , drop = FALSE],
-          aes(
-            x = .data[[vars[1]]],
-            y = .data[[vars[2]]],
-            label = .data[["label"]]
-          )
-        )
-    }
+    plt <- add_biplot_arrows(object = obj, plt = plt, vars = vars)
   }
 
   if (isTRUE(draw_list["centroids"])) {
-    want <- obj[["score"]] == "centroids"
-    if (any(want)) {
-      plt <- plt +
-        geom_text(
-          data = obj[want, , drop = FALSE],
-          aes(
-            x = .data[[vars[1]]],
-            y = .data[[vars[2]]],
-            label = .data[["label"]]
-          ),
-          colour = "navy"
-        )
-    }
+    plt <- add_biplot_centroids(object = obj, plt = plt, vars = vars)
   }
 
-  if (missing(xlab)) {
-    xlab <- vars[1]
+  if (is.null(xlab)) {
+    xlab <- toupper(vars[1])
   }
-  if (missing(ylab)) {
-    ylab <- vars[2]
+  if (is.null(ylab)) {
+    ylab <- toupper(vars[2])
   }
   plt <- plt +
     labs(

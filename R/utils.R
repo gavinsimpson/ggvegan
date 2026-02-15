@@ -201,10 +201,10 @@
           geom_point(
             data = object[take, , drop = FALSE],
             mapping = aes(
-              x = vars[1],
-              y = vars[2],
-              shape = "score",
-              colour = "score"
+              x = .data[[vars[1]]],
+              y = .data[[vars[2]]],
+              shape = .data[["score"]],
+              colour = .data[["score"]]
             )
           )
       } else {
@@ -212,10 +212,10 @@
           geom_text(
             data = object[take, , drop = FALSE],
             mapping = aes(
-              x = vars[1],
-              y = vars[2],
-              label = 'label',
-              colour = 'score'
+              x = .data[[vars[1]]],
+              y = .data[[vars[2]]],
+              label = .data[["label"]],
+              colour = .data[["score"]]
             ),
             size = 3
           )
@@ -229,10 +229,10 @@
             geom_point(
               data = object[take, , drop = FALSE],
               mapping = aes(
-                x = vars[1],
-                y = vars[2],
-                shape = 'score',
-                colour = 'score'
+                x = .data[[vars[1]]],
+                y = .data[[vars[2]]],
+                shape = .data[["score"]],
+                colour = .data[["score"]]
               )
             )
         } else {
@@ -240,10 +240,10 @@
             geom_text(
               data = object[take, , drop = FALSE],
               mapping = aes(
-                x = vars[1],
-                y = vars[2],
-                label = 'label',
-                colour = 'score'
+                x = .data[[vars[1]]],
+                y = .data[[vars[2]]],
+                label = .data[["label"]],
+                colour = .data[["score"]]
               ),
               size = 3
             )
@@ -256,10 +256,10 @@
             geom_point(
               data = object[take, , drop = FALSE],
               mapping = aes(
-                x = vars[1],
-                y = vars[2],
-                shape = "score",
-                colour = "score"
+                x = .data[[vars[1]]],
+                y = .data[[vars[2]]],
+                shape = .data[["score"]],
+                colour = .data[["score"]]
               )
             )
         } else {
@@ -267,10 +267,10 @@
             geom_text(
               data = object[take, , drop = FALSE],
               mapping = aes(
-                x = vars[1],
-                y = vars[2],
-                label = "label",
-                colour = "score"
+                x = .data[[vars[1]]],
+                y = .data[[vars[2]]],
+                label = .data[["label"]],
+                colour = .data[["score"]]
               ),
               size = 3
             )
@@ -329,4 +329,101 @@
       .before = 1L
     )
   df
+}
+
+`rda_constant` <- function(x, const) {
+  stopifnot(inherits(x, "rda"))
+  # handle const because it has to be missing in scores
+  nr <- if (is.null(x$CCA)) {
+    nrow(x$CA$u)
+  } else {
+    nrow(x$CCA$u)
+  }
+  if (is.null(const)) {
+    const <- sqrt(sqrt((nr - 1) * x$tot.chi))
+  }
+  if (identical(length(const), 1L)) {
+    const <- rep(const, length.out = 2L)
+  }
+  const
+}
+
+#' @title Adds a biplot arrow layer to an existing plot
+#'
+#' @param object a fortified ordination object.
+#' @param plt a ggplot object.
+#' @param vars character; length 2 vector of dimension names.
+#'
+#' @importFrom ggplot2 geom_segment geom_text aes
+#' @importFrom grid unit arrow
+`add_biplot_arrows` <- function(
+  object,
+  plt,
+  vars,
+  colour = "navy"
+) {
+  want <- object[["score"]] == "biplot"
+  if (any(want)) {
+    #if (length(layer_names) > 1) {
+    mul <- arrow_mul(
+      object[want, vars, drop = FALSE],
+      object[!want, vars, drop = FALSE]
+    )
+    object[want, vars] <- mul * object[want, vars]
+    #}
+    #col <- "navy"
+    plt <- plt +
+      geom_segment(
+        data = object[want, , drop = FALSE],
+        aes(
+          x = 0,
+          y = 0,
+          xend = .data[[vars[1]]],
+          yend = .data[[vars[2]]]
+        ),
+        arrow = arrow(length = unit(0.2, "cm")),
+        colour = colour
+      )
+    object[want, vars] <- 1.1 * object[want, vars]
+    plt <- plt +
+      geom_text(
+        data = object[want, , drop = FALSE],
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]]
+        )
+      )
+  }
+  plt
+}
+
+#' @title Adds a biplot arrow layer to an existing plot
+#'
+#' @param object a fortified ordination object.
+#' @param plt a ggplot object.
+#' @param vars character; length 2 vector of dimension names.
+#'
+#' @importFrom ggplot2 geom_segment geom_text aes
+#' @importFrom grid unit arrow
+`add_biplot_centroids` <- function(
+  object,
+  plt,
+  vars,
+  colour = "navy"
+) {
+  want <- object[["score"]] == "centroids"
+  if (any(want)) {
+    plt <- plt +
+      geom_text(
+        data = object[want, , drop = FALSE],
+        aes(
+          x = .data[[vars[1]]],
+          y = .data[[vars[2]]],
+          label = .data[["label"]]
+        ),
+        colour = colour
+      )
+  }
+  plt
 }
