@@ -4,6 +4,8 @@
 <url><loc>/authors.html</loc></url>
 <url><loc>/index.html</loc></url>
 <url><loc>/news/index.html</loc></url>
+<url><loc>/reference/add_biplot_arrows.html</loc></url>
+<url><loc>/reference/add_biplot_centroids.html</loc></url>
 <url><loc>/reference/add_spp_site_scores.html</loc></url>
 <url><loc>/reference/arrow_mul.html</loc></url>
 <url><loc>/reference/autoplot.anosim.html</loc></url>
@@ -30,6 +32,7 @@
 <url><loc>/reference/fortify.poolaccum.html</loc></url>
 <url><loc>/reference/fortify.prc.html</loc></url>
 <url><loc>/reference/fortify.prestonfit.html</loc></url>
+<url><loc>/reference/fortify.rda.html</loc></url>
 <url><loc>/reference/fortify.renyiaccum.html</loc></url>
 <url><loc>/reference/geom_ordi_arrow.html</loc></url>
 <url><loc>/reference/geom_ordi_axis.html</loc></url>
