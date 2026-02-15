@@ -13,8 +13,8 @@
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  ylab,
-  xlab,
+  ylab = NULL,
+  xlab = NULL,
   ...
 )
 }

@@ -10,13 +10,13 @@
   geom = c("point", "text"),
   layers = c("species", "sites", "biplot", "centroids"),
   arrows = TRUE,
-  legend.position = "right",
+  legend.position = "none",
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  ylab,
-  xlab,
-  const,
+  ylab = NULL,
+  xlab = NULL,
+  const = NULL,
   ...
 )
 }
