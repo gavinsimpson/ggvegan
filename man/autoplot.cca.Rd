@@ -15,6 +15,7 @@
   caption = NULL,
   ylab = NULL,
   xlab = NULL,
+  arrow.col = "navy",
   ...
 )
 }
@@ -34,15 +35,17 @@ element of \code{type} refers to the \emph{i}th element of \code{display}.}
 position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"}
 to not draw the legend.}
 
-\item{title}{character; subtitle for the plot}
+\item{title}{character; subtitle for the plot.}
 
-\item{subtitle}{character; subtitle for the plot}
+\item{subtitle}{character; subtitle for the plot.}
 
-\item{caption}{character; caption for the plot}
+\item{caption}{character; caption for the plot.}
 
-\item{ylab}{character; label for the y-axis}
+\item{ylab}{character; label for the y-axis.}
 
-\item{xlab}{character; label for the x-axis}
+\item{xlab}{character; label for the x-axis.}
+
+\item{arrow.col}{colour specification for biplot arrows and their labels.}
 
 \item{...}{Additional arguments passed to \code{\link[vegan:dbrda]{vegan::capscale()}}.}
 }

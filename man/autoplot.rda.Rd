@@ -17,6 +17,7 @@
   ylab = NULL,
   xlab = NULL,
   const = NULL,
+  arrow.col = "navy",
   ...
 )
 }
@@ -52,6 +53,8 @@ not draw the legend.}
 
 \item{const}{General scaling constant to \code{rda} scores. See
 \code{\link[vegan:plot.cca]{vegan::scores.rda()}} for details.}
+
+\item{arrow.col}{colour specification for biplot arrows and their labels.}
 
 \item{...}{Additional arguments passed to \verb{\link{fortify.cca}}.}
 }

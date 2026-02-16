@@ -4,14 +4,16 @@
 \alias{add_biplot_centroids}
 \title{Adds a biplot arrow layer to an existing plot}
 \usage{
-add_biplot_centroids(object, plt, vars, colour = "navy")
+add_biplot_centroids(object, plt, vars, arrow.col = "navy")
 }
 \arguments{
-\item{object}{a fortified ordination object.}
+\item{object}{an ordination object.}
 
 \item{plt}{a ggplot object.}
 
 \item{vars}{character; length 2 vector of dimension names.}
+
+\item{arrow.col}{colour specification for biplot arrows and their labels.}
 }
 \description{
 Adds a biplot arrow layer to an existing plot
