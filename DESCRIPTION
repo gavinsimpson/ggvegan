@@ -15,6 +15,7 @@ Imports:
     generics
 Suggests:
     testthat (>= 3.0.0),
+    vdiffr (>= 1.0.0),
     permute,
     withr
 Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
