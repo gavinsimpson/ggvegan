@@ -27,6 +27,7 @@
 #' @param caption character; caption for the plot
 #' @param const General scaling constant to `rda` scores. See
 #'   [vegan::scores.rda()] for details.
+#' @param arrow.col colour specification for biplot arrows and their labels.
 #' @param ... Additional arguments passed to `\link{fortify.cca}`.
 #'
 #' @return Returns a ggplot object.
@@ -62,6 +63,7 @@
   ylab = NULL,
   xlab = NULL,
   const = NULL,
+  arrow.col = "navy",
   ...
 ) {
   ## determine which layers to plot
@@ -114,11 +116,21 @@
   }
 
   if (isTRUE(draw_list["biplot"])) {
-    plt <- add_biplot_arrows(object = obj, plt = plt, vars = vars)
+    plt <- add_biplot_arrows(
+      object = obj,
+      plt = plt,
+      vars = vars,
+      arrow.col = arrow.col
+    )
   }
 
   if (isTRUE(draw_list["centroids"])) {
-    plt <- add_biplot_centroids(object = obj, plt = plt, vars = vars)
+    plt <- add_biplot_centroids(
+      object = obj,
+      plt = plt,
+      vars = vars,
+      arrow.col = arrow.col
+    )
   }
 
   if (is.null(xlab)) {

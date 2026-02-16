@@ -350,9 +350,8 @@
 
 #' @title Adds a biplot arrow layer to an existing plot
 #'
-#' @param object a fortified ordination object.
-#' @param plt a ggplot object.
-#' @param vars character; length 2 vector of dimension names.
+#' @inheritParams add_spp_site_scores
+#' @param arrow.col colour specification for biplot arrows and their labels.
 #'
 #' @importFrom ggplot2 geom_segment geom_text aes
 #' @importFrom grid unit arrow
@@ -360,7 +359,7 @@
   object,
   plt,
   vars,
-  colour = "navy"
+  arrow.col = "navy"
 ) {
   want <- object[["score"]] == "biplot"
   if (any(want)) {
@@ -382,7 +381,7 @@
           yend = .data[[vars[2]]]
         ),
         arrow = arrow(length = unit(0.2, "cm")),
-        colour = colour
+        colour = arrow.col
       )
     object[want, vars] <- 1.1 * object[want, vars]
     plt <- plt +
@@ -392,7 +391,8 @@
           x = .data[[vars[1]]],
           y = .data[[vars[2]]],
           label = .data[["label"]]
-        )
+        ),
+        colour = arrow.col
       )
   }
   plt
@@ -400,9 +400,8 @@
 
 #' @title Adds a biplot arrow layer to an existing plot
 #'
-#' @param object a fortified ordination object.
-#' @param plt a ggplot object.
-#' @param vars character; length 2 vector of dimension names.
+#' @inheritParams add_spp_site_scores
+#' @inheritParams add_biplot_arrows
 #'
 #' @importFrom ggplot2 geom_segment geom_text aes
 #' @importFrom grid unit arrow
@@ -410,7 +409,7 @@
   object,
   plt,
   vars,
-  colour = "navy"
+  arrow.col = "navy"
 ) {
   want <- object[["score"]] == "centroids"
   if (any(want)) {
@@ -422,7 +421,7 @@
           y = .data[[vars[2]]],
           label = .data[["label"]]
         ),
-        colour = colour
+        colour = arrow.col
       )
   }
   plt

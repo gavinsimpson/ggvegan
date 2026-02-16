@@ -17,12 +17,14 @@
 #' @param legend.position character or two-element numeric vector; where to
 #'   position the legend. See [ggplot2::theme()] for details. Use `"none"`
 #'   to not draw the legend.
-#' @param xlab character; label for the x-axis
-#' @param ylab character; label for the y-axis
-#' @param title character; subtitle for the plot
-#' @param subtitle character; subtitle for the plot
-#' @param caption character; caption for the plot
+#' @param xlab character; label for the x-axis.
+#' @param ylab character; label for the y-axis.
+#' @param title character; subtitle for the plot.
+#' @param subtitle character; subtitle for the plot.
+#' @param caption character; caption for the plot.
+#' @param arrow.col colour specification for biplot arrows and their labels.
 #' @param ... Additional arguments passed to [vegan::capscale()].
+#'
 #' @return Returns a ggplot object.
 #' @author Gavin L. Simpson
 #'
@@ -51,6 +53,7 @@
   caption = NULL,
   ylab = NULL,
   xlab = NULL,
+  arrow.col = "navy",
   ...
 ) {
   ## determine which layers to plot
@@ -103,11 +106,21 @@
   }
 
   if (isTRUE(draw_list["biplot"])) {
-    plt <- add_biplot_arrows(object = obj, plt = plt, vars = vars)
+    plt <- add_biplot_arrows(
+      object = obj,
+      plt = plt,
+      vars = vars,
+      arrow.col = arrow.col
+    )
   }
 
   if (isTRUE(draw_list["centroids"])) {
-    plt <- add_biplot_centroids(object = obj, plt = plt, vars = vars)
+    plt <- add_biplot_centroids(
+      object = obj,
+      plt = plt,
+      vars = vars,
+      arrow.col = arrow.col
+    )
   }
 
   if (is.null(xlab)) {
