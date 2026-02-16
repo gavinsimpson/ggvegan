@@ -10,6 +10,7 @@
 <url><loc>/reference/arrow_mul.html</loc></url>
 <url><loc>/reference/autoplot.anosim.html</loc></url>
 <url><loc>/reference/autoplot.cca.html</loc></url>
+<url><loc>/reference/autoplot.dbrda.html</loc></url>
 <url><loc>/reference/autoplot.decorana.html</loc></url>
 <url><loc>/reference/autoplot.envfit.html</loc></url>
 <url><loc>/reference/autoplot.fisherfit.html</loc></url>
@@ -20,9 +21,11 @@
 <url><loc>/reference/autoplot.prc.html</loc></url>
 <url><loc>/reference/autoplot.prestonfit.html</loc></url>
 <url><loc>/reference/autoplot.rda.html</loc></url>
+<url><loc>/reference/autoplot.vegan_pco.html</loc></url>
 <url><loc>/reference/check_user_layers.html</loc></url>
 <url><loc>/reference/fortify.anosim.html</loc></url>
 <url><loc>/reference/fortify.cca.html</loc></url>
+<url><loc>/reference/fortify.dbrda.html</loc></url>
 <url><loc>/reference/fortify.decorana.html</loc></url>
 <url><loc>/reference/fortify.envfit.html</loc></url>
 <url><loc>/reference/fortify.fisherfit.html</loc></url>
@@ -34,6 +37,7 @@
 <url><loc>/reference/fortify.prestonfit.html</loc></url>
 <url><loc>/reference/fortify.rda.html</loc></url>
 <url><loc>/reference/fortify.renyiaccum.html</loc></url>
+<url><loc>/reference/fortify.vegan_pco.html</loc></url>
 <url><loc>/reference/geom_ordi_arrow.html</loc></url>
 <url><loc>/reference/geom_ordi_axis.html</loc></url>
 <url><loc>/reference/geom_ordi_label.html</loc></url>

@@ -59,7 +59,7 @@ log-series superimposed.</p>
 <span>  bar.col <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  bar.fill <span class="op">=</span> <span class="st">"grey35"</span>,</span>
 <span>  line.col <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>  size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  linewidth <span class="op">=</span> <span class="fl">0.7</span>,</span>
 <span>  subtitle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  caption <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -104,8 +104,8 @@ draw outlines around bars.</p></dd>
 <dd><p>colour for Fisher's log-series curve.</p></dd>
 
 
-<dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
-<dd><p>numeric; size aesthetic for the log-series curve.</p></dd>
+<dt id="arg-linewidth">linewidth<a class="anchor" aria-label="anchor" href="#arg-linewidth"></a></dt>
+<dd><p>numeric; linewidth aesthetic for the log-series curve.</p></dd>
 
 
 <dt id="arg-subtitle">subtitle<a class="anchor" aria-label="anchor" href="#arg-subtitle"></a></dt>
@@ -137,10 +137,6 @@ draw outlines around bars.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/fisherfit.html" class="external-link">fisherfit</a></span><span class="op">(</span><span class="va">BCI</span><span class="op">[</span><span class="fl">5</span>,<span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">ggvegan</span> package.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   Please report the issue to the authors.</span>
 <span class="r-plt img"><img src="autoplot.fisherfit-1.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

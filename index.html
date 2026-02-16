@@ -66,43 +66,43 @@
 <div class="section level2">
 <h2 id="what-is-ggvegan">What is ggvegan?<a class="anchor" aria-label="anchor" href="#what-is-ggvegan"></a>
 </h2>
-<p><strong>ggvegan</strong> is a package for the R statistical software and environment. It aims to implement <strong>ggplot</strong>-based versions of the plots produced by the <strong>vegan</strong> package. Initially, ggvegan will provide <code>fortify</code> and <code>autoplot</code> methods for objects created in vegan, with the aim of providing full replacement plots via <code>autoplot</code>. The <code>fortify</code> methods allow the data contained within objects created by vegan to be converted into a format suitable for use with <code>ggplot</code> directly.</p>
+<p><em>ggvegan</em> is a package for the R statistical software and environment. It aims to implement <em>ggplot</em>-based versions of the plots produced by the <em>vegan</em> package. Initially, <em>ggvegan</em> provides <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> methods for objects created in <em>vegan</em>, with the aim of providing full replacement plots via <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code>. The <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> methods allow the data contained within objects created by <em>vegan</em> to be converted into a format suitable for use with <code>ggplot()</code> directly.</p>
 </div>
 <div class="section level2">
 <h2 id="licence">Licence<a class="anchor" aria-label="anchor" href="#licence"></a>
 </h2>
-<p>ggvegan is released under the <a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GNU General Public Licence, version 2</a>.</p>
+<p><em>ggvegan</em> is released under the <a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GNU General Public Licence, version 2</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="development--contributions">Development &amp; contributions<a class="anchor" aria-label="anchor" href="#development--contributions"></a>
 </h2>
-<p>ggvegan uses the <strong>roxygen2</strong> system to document package functions alongside the code itself.</p>
-<p>ggvegan is very much alpha code at the moment. Comments and feedback on the approach taken are welcome, as are code contributions. See <strong>Design decisions</strong> below for two important areas for consideration</p>
+<p><em>ggvegan</em> uses the <em>roxygen2</em> system to document package functions alongside the code itself.</p>
+<p><em>ggvegan</em> is very much beta code at the moment. Comments and feedback on the approach taken are welcome, as are code contributions. See <strong>Design decisions</strong> below for two important areas for consideration</p>
 </div>
 <div class="section level2">
 <h2 id="design-decisions">Design decisions<a class="anchor" aria-label="anchor" href="#design-decisions"></a>
 </h2>
 <div class="section level3">
 <h3 id="autoplot">
-<code>autoplot</code><a class="anchor" aria-label="anchor" href="#autoplot"></a>
+<code>autoplot()</code><a class="anchor" aria-label="anchor" href="#autoplot"></a>
 </h3>
-<p>The <code>autoplot</code> concept is somewhat poorly defined at the moment — at least in public. I have taken it to mean that a full ggplot object is returned, which can then be augmented with additional layers and changes to the scales etc. This means that the aesthetics for the scores are hard-coded in the <code>autoplot</code> methods. If you want greater control over these aesthetics, use <code>fortify</code> to return the scores in a suitable format and build the plot up yourself. I hope to include at least one example of this, where applicable, in the help pages for each <code>autoplot</code> method.</p>
+<p>The <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> concept is somewhat poorly defined at the moment — at least in public. I have taken it to mean that a full ggplot object is returned, which can then be augmented with additional layers and changes to the scales etc. This means that the aesthetics for the scores are hard-coded in the <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> methods. If you want greater control over these aesthetics, use <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> to return the scores in a suitable format and build the plot up yourself. I hope to include at least one example of this, where applicable, in the help pages for each <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> method.</p>
 </div>
 <div class="section level3">
 <h3 id="fortify">
-<code>fortify</code><a class="anchor" aria-label="anchor" href="#fortify"></a>
+<code>fortify()</code><a class="anchor" aria-label="anchor" href="#fortify"></a>
 </h3>
-<p><code>fortify</code> methods are supposed to return a data frame but this is not necessarily the most convenient representation for vegan’s ordination objects where several data frames representing the various sets of ordination scores would be more natural. Currently, ggvegan follows the existing <code>fortify</code> convention of returning a single data frame so returns the ordination scores in long format with variables <code>Score</code> indicating the type of score and <code>Label</code> the label/rowname for each score.</p>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> methods are supposed to return a data frame but this is not necessarily the most convenient representation for vegan’s ordination objects where several data frames representing the various sets of ordination scores would be more natural. Currently, <em>ggvegan</em> follows the existing <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> convention of returning a single data frame so returns the ordination scores in long format with variables <code>score</code> indicating the type of score and <code>label</code> the label/rowname for each score.</p>
 <div class="section level4">
 <h4 id="standard-ordination-methods">Standard ordination methods<a class="anchor" aria-label="anchor" href="#standard-ordination-methods"></a>
 </h4>
-<p>From version 0.0-9, I changed the representation of <em>fortified</em> ordination objects. The first two columns will now be <code>Score</code> and <code>Label</code>. The remaining columns will be the requested ordination dimensions, named as per the <code>scores</code> method from <strong>vegan</strong>. For example, a PCA will have columns named <code>'PC1'</code>, <code>'PC2'</code>, etc. How many and their numbering depending on the <code>axes</code> argument; the default is <code>1:6</code>. Consequently, the <code>'dimLables'</code> attribute is no longer necessary.</p>
-<p>A further design decision is that ggvegan <code>fortify</code> methods for ordination objects will return all possible sets of scores and the set returned can not be chosen by the user. Instead, the sets of scores to be plotted should be chosen at the <code>autoplot</code> stage.</p>
+<p>The first two columns will now be <code>score</code> and <code>label</code>. The remaining columns will be the requested ordination dimensions, named as per the <code>scores</code> method from <strong>vegan</strong>. For example, a PCA will have columns named <code>pc1</code>, <code>pc2</code>, etc. How many and their numbering depending on the <code>axes</code> argument; the default is <code>1:6</code>.</p>
+<p>A further design decision is that <em>ggvegan</em>’s <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> methods for ordination objects will return all possible sets of scores by default, but the set returned can not be chosen by the user using the <code>layers</code> argument. Additionally, the sets of scores to be plotted can be chosen at the <code><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot()</a></code> stage.</p>
 </div>
 <div class="section level4">
 <h4 id="more-specialised-objects">More specialised objects<a class="anchor" aria-label="anchor" href="#more-specialised-objects"></a>
 </h4>
-<p>The components returned for more specialised objects will typically vary as needed for a sensible, tidy data representation. Such <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> methods will return suitable components. For example, <code><a href="reference/fortify.prc.html">fortify.prc()</a></code> returns components <code>Time</code>, <code>Treatment</code>, and <code>Response</code> corresponding to the two-way factors defining the experiment and the regression coefficients on RDA axis 1 respectively.</p>
+<p>The components returned for more specialised objects will typically vary as needed for a sensible, tidy data representation. Such <code><a href="https://ggplot2.tidyverse.org/reference/fortify.html" class="external-link">fortify()</a></code> methods will return suitable components. For example, <code><a href="reference/fortify.prc.html">fortify.prc()</a></code> returns components <code>time</code>, <code>treatment</code>, and <code>response</code> corresponding to the two-way factors defining the experiment and the regression coefficients on RDA axis 1 respectively.</p>
 </div>
 </div>
 </div>
@@ -131,11 +131,35 @@
 <li>
 <code>autoplot.fisherfit</code> — for objects of class <code>"fisherfit"</code>
 </li>
+<li>
+<code>autoplot.envfit</code> — for objects of class <code>"envfit"</code>
+</li>
+<li>
+<code>autoplot.isomap</code> — for objects of class <code>"isomap"</code>
+</li>
+<li>
+<code>autoplot.permustats</code> — for objects of class <code>"permustats"</code>
+</li>
+<li>
+<code>autoplot.poolaccum</code> — for objects of class <code>"poolaccum"</code>
+</li>
+<li>
+<code>autoplot.anosim</code> — for objects of class <code>"anosim"</code>
+</li>
+<li>
+<code>autoplot.vegan_pco</code> — for objects of class <code>"vegan_pco"</code>
+</li>
+<li>
+<code>autoplot.dbrda</code> — for objects of class <code>"dbrda"</code>
+</li>
 </ol>
 <p>The following <code>fortify</code> method are currently available</p>
 <ol style="list-style-type: decimal">
 <li>
-<code>fortify.cca</code> — for objects of classes <code>"cca"</code>, <code>"rda"</code>, and <code>"capscale"</code>
+<code>fortify.cca</code> — for objects of classes <code>"cca"</code>, and <code>"capscale"</code>
+</li>
+<li>
+<code>fortify.rda</code> — for objects of classes <code>"rda"</code>
 </li>
 <li>
 <code>fortify.metaMDS</code> — for objects of class <code>"metaMDS"</code>
@@ -146,29 +170,51 @@
 <li>
 <code>fortify.decorana</code> — for objects of class <code>"decorana"</code> (AKA DCA)</li>
 <li>
-<code>autoplot.prestonfit</code> — for objects of class <code>"prestonfit"</code>
+<code>fortify.prestonfit</code> — for objects of class <code>"prestonfit"</code>
 </li>
 <li>
-<code>autoplot.fisherfit</code> — for objects of class <code>"fisherfit"</code>
+<code>fortify.fisherfit</code> — for objects of class <code>"fisherfit"</code>
+</li>
+<li>
+<code>fortify.anosim</code> — for objects of class <code>"anosim"</code>
+</li>
+<li>
+<code>fortify.isomap</code> — for objects of class <code>"isomap"</code>
+</li>
+<li>
+<code>fortify.permustats</code> — for objects of class <code>"permustats"</code>
+</li>
+<li>
+<code>fortify.poolaccum</code> — for objects of class <code>"poolaccum"</code>
+</li>
+<li>
+<code>fortify.renyiaccum</code> — for objects of class <code>"renyiaccum"</code>
+</li>
+<li>
+<code>fortify.vegan_pco</code> — for objects of class <code>"vegan_pco"</code>
+</li>
+<li>
+<code>fortify.dbrda</code> — for objects of class <code>"dbrda"</code>
 </li>
 </ol>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>No binary packages are currently available via CRAN for ggvegan. If you have the correct development tools you can compile the package yourself after downloading the source code from github.</p>
 <p>You can install ggvegan directly from GitHub using functions that the <strong>remotes</strong> package provides. To do this, install <strong>remotes</strong> from CRAN via</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span></code></pre></div>
 <p>then run</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"gavinsimpson/ggvegan"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"gavinsimpson/ggvegan"</span><span class="op">)</span></span></code></pre></div>
 <p>If that doesn’t work or you prefer to install from binaries, the R Universe service run by rOpenSci now provides binaries. Instruction on how to install ggvegan from that repository are:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Enable repository from gavinsimpson</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>  gavinsimpson <span class="op">=</span> <span class="st">'https://gavinsimpson.r-universe.dev'</span>,</span>
-<span>  CRAN <span class="op">=</span> <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span>
+<span>  gavinsimpson <span class="op">=</span> <span class="st">"https://gavinsimpson.r-universe.dev"</span>,</span>
+<span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># Download and install ggvegan in R</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'ggvegan'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ggvegan"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </div>
