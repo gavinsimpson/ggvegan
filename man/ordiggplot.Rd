@@ -5,7 +5,7 @@
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
-ordiggplot(model, axes = c(1, 2), arrowmul, ...)
+ordiggplot(model, axes = c(1, 2), arrow.mul, ...)
 
 ggscores(score)
 }
@@ -14,7 +14,7 @@ ggscores(score)
 
 \item{axes}{Two axes to be plotted}
 
-\item{arrowmul}{Multiplier to arrow length. If missing, the arrow
+\item{arrow.mul}{Multiplier to arrow length. If missing, the arrow
 length are adjusted to fit to other scores, but if some score
 types are not displayed, the arrows may be badly scaled, and
 manual adjustment can be useful.}

@@ -16,7 +16,7 @@ stat_vectorfit(
   inherit.aes = TRUE,
   edata = NULL,
   formula = NULL,
-  arrowmul = NULL,
+  arrow.mul = NULL,
   ...
 )
 }
@@ -88,7 +88,7 @@ found.}
 \item{formula}{Formula to select variables from \code{edata}. If
 missing, all continuos variables of \code{edata} are used.}
 
-\item{arrowmul}{Multiplier to arrow length. If missing, the
+\item{arrow.mul}{Multiplier to arrow length. If missing, the
 multiplier is selected automatically so that arrows fit the
 current graph.}
 

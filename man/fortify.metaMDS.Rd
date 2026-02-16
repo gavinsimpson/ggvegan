@@ -5,15 +5,18 @@
 \alias{tidy.metaMDS}
 \title{Fortify a \code{"mataMDS"} object.}
 \usage{
-\method{fortify}{metaMDS}(model, data, ...)
+\method{fortify}{metaMDS}(model, data, layers = c("sites", "species"), ...)
 
-\method{tidy}{metaMDS}(x, data, ...)
+\method{tidy}{metaMDS}(x, data, layers = c("sites", "species"), ...)
 }
 \arguments{
 \item{model, x}{an object of class \code{"metaMDS"}, the result of a call
 to \code{\link[vegan:metaMDS]{vegan::metaMDS()}}.}
 
 \item{data}{currently ignored.}
+
+\item{layers}{character; the scores to extract in the fortified object.
+Passed to \code{display} in the respective \code{\link[vegan:scores]{vegan::scores()}} method.}
 
 \item{...}{additional arguments passed to
 \code{\link[vegan:metaMDS]{vegan::scores.metaMDS()}}. Note you can't use \code{display}.}

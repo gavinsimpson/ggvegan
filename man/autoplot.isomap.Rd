@@ -10,7 +10,7 @@
   geom = c("point", "text"),
   network = TRUE,
   line.col = "grey85",
-  size = 0.7,
+  linewidth = 0.7,
   xlab = NULL,
   ylab = NULL,
   title = "Isometric feature mapping",
@@ -31,7 +31,7 @@
 
 \item{line.col}{colour with which to draw the network edges.}
 
-\item{size}{numeric; size aesthetic for the log-series curve.}
+\item{linewidth}{numeric; linewidth aesthetic for the log-series curve.}
 
 \item{xlab}{character; label for the x-axis.}
 

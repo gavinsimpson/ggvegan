@@ -5,15 +5,9 @@
 \alias{tidy.cca}
 \title{Fortify a \code{"cca"} object.}
 \usage{
-\method{fortify}{cca}(
-  model,
-  data,
-  axes = 1:6,
-  display = c("sp", "wa", "lc", "bp", "cn"),
-  ...
-)
+\method{fortify}{cca}(model, data, axes = 1:6, layers = c("sp", "wa", "lc", "bp", "cn"), ...)
 
-\method{tidy}{cca}(x, data, axes = 1:6, display = c("sp", "wa", "lc", "bp", "cn"), ...)
+\method{tidy}{cca}(x, data, axes = 1:6, layers = c("sp", "wa", "lc", "bp", "cn"), ...)
 }
 \arguments{
 \item{model, x}{an object of class \code{"cca"}, the result of a call to
@@ -23,10 +17,10 @@
 
 \item{axes}{numeric; which axes to extract scores for.}
 
-\item{display}{numeric; the scores to extract in the fortified object.}
+\item{layers}{character; the scores to extract in the fortified object.
+Passed to \code{display} in the respective \code{\link[vegan:scores]{vegan::scores()}} method.}
 
-\item{...}{additional arguments passed to \code{\link[vegan:plot.cca]{vegan::scores.cca()}},
-and \code{\link[vegan:plot.cca]{vegan::scores.rda()}}.}
+\item{...}{additional arguments passed to \code{\link[vegan:plot.cca]{vegan::scores.cca()}}.}
 }
 \value{
 A data frame (tibble) in long format containing the ordination

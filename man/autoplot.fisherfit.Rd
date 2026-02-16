@@ -13,7 +13,7 @@
   bar.col = NA,
   bar.fill = "grey35",
   line.col = "red",
-  size = 1,
+  linewidth = 0.7,
   subtitle = NULL,
   caption = NULL,
   ...
@@ -38,7 +38,7 @@ draw outlines around bars.}
 
 \item{line.col}{colour for Fisher's log-series curve.}
 
-\item{size}{numeric; size aesthetic for the log-series curve.}
+\item{linewidth}{numeric; linewidth aesthetic for the log-series curve.}
 
 \item{subtitle}{character; subtitle for the plot.}
 

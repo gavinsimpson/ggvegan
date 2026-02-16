@@ -4,6 +4,7 @@
 \alias{valid_layers}
 \alias{valid_layers.rda}
 \alias{valid_layers.cca}
+\alias{valid_layers.dbrda}
 \title{Valid layers for vegan objects}
 \usage{
 valid_layers(object, ...)
@@ -11,6 +12,8 @@ valid_layers(object, ...)
 \method{valid_layers}{rda}(object, ...)
 
 \method{valid_layers}{cca}(object, ...)
+
+\method{valid_layers}{dbrda}(object, ...)
 }
 \arguments{
 \item{object}{An R object.}

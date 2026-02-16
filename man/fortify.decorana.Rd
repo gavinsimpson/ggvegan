@@ -5,9 +5,9 @@
 \alias{tidy.decorana}
 \title{Fortify a \code{"decorana"} object.}
 \usage{
-\method{fortify}{decorana}(model, data, axes = 1:4, display = c("sites", "species"), ...)
+\method{fortify}{decorana}(model, data, axes = 1:4, layers = c("sites", "species"), ...)
 
-\method{tidy}{decorana}(x, data, axes = 1:4, display = c("sites", "species"), ...)
+\method{tidy}{decorana}(x, data, axes = 1:4, layers = c("sites", "species"), ...)
 }
 \arguments{
 \item{model, x}{an object of class \code{"decorana"}, the result of a call to
@@ -17,7 +17,7 @@
 
 \item{axes}{numeric; which axis scores are required?}
 
-\item{display}{character; the scores to extract in the fortified object.}
+\item{layers}{character; the scores to extract in the fortified object.}
 
 \item{...}{additional arguments passed to \code{\link[vegan:decorana]{vegan::scores.decorana()}}.}
 }
@@ -41,7 +41,7 @@ data(dune)
 
 sol <- decorana(dune)
 head(fortify(sol))
-head(fortify(sol, display = "species"))
+head(fortify(sol, layers = "species"))
 }
 \author{
 Gavin L. Simpson

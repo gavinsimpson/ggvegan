@@ -27,36 +27,34 @@
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
-\item{geom}{character; which geom to use for the layers. Can be a vector of
-up to length 2, in which case, the first element of \code{geom} will be
-used for any site scores (both weighted sum or linear combination scores),
-and the second element will be used for species scores. The latter will be
-ignored if \code{arrows = TRUE}.}
+\item{geom}{character; which geom to use for the species (variables) and
+sites (samples) layers. A vector of length 2; if a vector of length 1,
+\code{geom} is extended to the required length.}
 
 \item{layers}{character; which scores to plot as layers}
 
 \item{arrows}{logical; represent species (variables) using vectors?}
 
 \item{legend.position}{character or two-element numeric vector; where to
-position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"} to
-not draw the legend.}
+position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"}
+to not draw the legend.}
 
-\item{title}{character; subtitle for the plot}
+\item{title}{character; subtitle for the plot.}
 
-\item{subtitle}{character; subtitle for the plot}
+\item{subtitle}{character; subtitle for the plot.}
 
-\item{caption}{character; caption for the plot}
+\item{caption}{character; caption for the plot.}
 
-\item{ylab}{character; label for the y-axis}
+\item{ylab}{character; label for the y-axis.}
 
-\item{xlab}{character; label for the x-axis}
+\item{xlab}{character; label for the x-axis.}
 
 \item{const}{General scaling constant to \code{rda} scores. See
 \code{\link[vegan:plot.cca]{vegan::scores.rda()}} for details.}
 
 \item{arrow.col}{colour specification for biplot arrows and their labels.}
 
-\item{...}{Additional arguments passed to \verb{\link{fortify.cca}}.}
+\item{...}{Additional arguments passed to the \code{\link[=fortify]{fortify()}} method.}
 }
 \value{
 Returns a ggplot object.

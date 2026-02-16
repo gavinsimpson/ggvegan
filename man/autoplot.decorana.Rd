@@ -24,26 +24,25 @@
 
 \item{axes}{numeric; which axes to plot, given as a vector of length 2.}
 
-\item{geom}{character; which geom to use for the layers. Can be a
-vector of length equal to \code{length(display)}, in which case the
-\emph{i}th element of \code{type} refers to the _i_th element
-of \code{display}.}
+\item{geom}{character; which geom to use for the species (variables) and
+sites (samples) layers. A vector of length 2; if a vector of length 1,
+\code{geom} is extended to the required length.}
 
 \item{layers}{character; which scores to plot as layers}
 
 \item{legend.position}{character or two-element numeric vector; where to
-position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"} to
-not draw the legend.}
+position the legend. See \code{\link[ggplot2:theme]{ggplot2::theme()}} for details. Use \code{"none"}
+to not draw the legend.}
 
-\item{title}{character; subtitle for the plot}
+\item{title}{character; subtitle for the plot.}
 
-\item{subtitle}{character; subtitle for the plot}
+\item{subtitle}{character; subtitle for the plot.}
 
-\item{caption}{character; caption for the plot}
+\item{caption}{character; caption for the plot.}
 
-\item{ylab}{character; label for the y-axis}
+\item{ylab}{character; label for the y-axis.}
 
-\item{xlab}{character; label for the x-axis}
+\item{xlab}{character; label for the x-axis.}
 
 \item{...}{Additional arguments passed to \code{\link[=fortify.decorana]{fortify.decorana()}}.}
 }
