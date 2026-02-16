@@ -120,3 +120,12 @@ bci_renyi_raw <- withr::with_seed(
   seed,
   renyiaccum(BCI, raw = TRUE)
 )
+
+# pco
+dune_pco <- pco(dune)
+
+# dbrda
+dune_dbrda <- dbrda(
+  dune ~ A1 + Moisture + Use + Management,
+  data = dune.env
+)

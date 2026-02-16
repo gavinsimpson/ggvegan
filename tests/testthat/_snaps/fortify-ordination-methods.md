@@ -1,4 +1,4 @@
-# fortify works for cca objects
+# fortify works for cca like objects
 
     Code
       fortify(dune_pca)
@@ -78,7 +78,56 @@
       10 species Comapalu -2.01  -0.351 -2.28    0.110  -0.485   1.20  
       # i 80 more rows
 
-# tidy works for cca objects
+---
+
+    Code
+      fortify(dune_pco)
+    Output
+      # A tibble: 20 x 8
+         score label     mds1   mds2   mds3   mds4    mds5    mds6
+         <fct> <chr>    <dbl>  <dbl>  <dbl>  <dbl>   <dbl>   <dbl>
+       1 sites 1     -0.857    0.172 -2.61   1.13  -0.451   2.49  
+       2 sites 2     -1.64     1.23  -0.887  0.986 -2.03   -1.81  
+       3 sites 3     -0.440    2.38  -0.930  0.460  1.03    0.0518
+       4 sites 4      0.0479   2.05  -1.27   0.974  0.642   0.721 
+       5 sites 5     -1.62    -0.290  1.59  -1.54  -1.86    2.21  
+       6 sites 6     -1.97    -1.08   1.15  -3.35   1.52   -0.0313
+       7 sites 7     -1.79    -0.322  0.220 -1.47  -0.0125  0.426 
+       8 sites 8      0.890    1.09  -0.925 -0.516  1.09   -0.948 
+       9 sites 9      0.00904  1.66   0.466  0.283  0.108   2.17  
+      10 sites 10    -1.91    -0.494 -0.706 -0.268 -1.37   -2.62  
+      11 sites 11    -1.04    -1.21  -1.42   0.957  2.72   -1.11  
+      12 sites 12     1.02     1.46   3.25   0.325  1.75   -1.02  
+      13 sites 13     0.699    2.18   2.21   0.423 -1.07   -0.656 
+      14 sites 14     1.49    -0.977 -0.545 -0.273 -2.39   -2.48  
+      15 sites 15     1.89    -1.13  -0.727 -0.773 -0.221   0.318 
+      16 sites 16     2.85     0.208 -0.704 -2.10  -0.293   0.0812
+      17 sites 17     0.0467  -1.73   0.914  1.67  -1.80    1.56  
+      18 sites 18    -0.269   -1.72  -0.165  0.577  2.10   -0.339 
+      19 sites 19     0.281   -2.19   1.99   3.23   0.458   0.0239
+      20 sites 20     2.34    -1.30  -0.903 -0.718  0.0757  0.969 
+
+---
+
+    Code
+      fortify(dune_dbrda)
+    Output
+      # A tibble: 69 x 8
+         score label  dbrda1   dbrda2 dbrda3 dbrda4 dbrda5 dbrda6
+         <fct> <chr>   <dbl>    <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+       1 sites 1     -0.980   0.00752 -1.73   1.12   2.75   2.35 
+       2 sites 2     -1.73   -0.845   -1.80   0.409 -2.33  -3.44 
+       3 sites 3     -0.597  -2.49    -1.58   0.989  1.22   0.711
+       4 sites 4     -0.0978 -2.15    -1.93   1.05   2.34  -0.873
+       5 sites 5     -1.72    0.329    3.40  -0.987  1.73  -2.40 
+       6 sites 6     -2.11    0.831    2.75  -2.75  -0.481  2.33 
+       7 sites 7     -1.91    0.305    0.812 -1.46   0.562  0.955
+       8 sites 8      0.811  -1.27    -1.23  -1.47  -0.894  0.227
+       9 sites 9     -0.0647 -1.75     2.16   1.63  -1.84  -0.109
+      10 sites 10    -1.97    0.718   -1.87  -1.08  -1.78  -2.89 
+      # i 59 more rows
+
+# tidy works for cca like objects
 
     Code
       tidy(dune_pca)
@@ -123,7 +172,7 @@
     Code
       tidy(dune_rda)
     Output
-      # A tibble: 90 x 8
+      # A tibble: 99 x 8
          score   label       rda1     rda2       rda3    rda4    rda5     rda6
          <fct>   <chr>      <dbl>    <dbl>      <dbl>   <dbl>   <dbl>    <dbl>
        1 species Achimill  0.598  -0.111    0.0923     0.0490 -0.0751  0.272  
@@ -136,7 +185,7 @@
        8 species Chenalbu -0.0333  0.0454   0.0000779  0.0106  0.0194  0.0362 
        9 species Cirsarve  0.0205  0.0912   0.0664    -0.0236  0.0943  0.00858
       10 species Comapalu -0.198  -0.107   -0.00589    0.183  -0.0969 -0.0371 
-      # i 80 more rows
+      # i 89 more rows
 
 ---
 
@@ -158,10 +207,59 @@
       10 species Comapalu -2.01  -0.351 -2.28    0.110  -0.485   1.20  
       # i 80 more rows
 
-# fortify works for cca with display length 1
+---
 
     Code
-      fortify(dune_cca, display = "sites")
+      tidy(dune_pco)
+    Output
+      # A tibble: 20 x 8
+         score label     mds1   mds2   mds3   mds4    mds5    mds6
+         <fct> <chr>    <dbl>  <dbl>  <dbl>  <dbl>   <dbl>   <dbl>
+       1 sites 1     -0.857    0.172 -2.61   1.13  -0.451   2.49  
+       2 sites 2     -1.64     1.23  -0.887  0.986 -2.03   -1.81  
+       3 sites 3     -0.440    2.38  -0.930  0.460  1.03    0.0518
+       4 sites 4      0.0479   2.05  -1.27   0.974  0.642   0.721 
+       5 sites 5     -1.62    -0.290  1.59  -1.54  -1.86    2.21  
+       6 sites 6     -1.97    -1.08   1.15  -3.35   1.52   -0.0313
+       7 sites 7     -1.79    -0.322  0.220 -1.47  -0.0125  0.426 
+       8 sites 8      0.890    1.09  -0.925 -0.516  1.09   -0.948 
+       9 sites 9      0.00904  1.66   0.466  0.283  0.108   2.17  
+      10 sites 10    -1.91    -0.494 -0.706 -0.268 -1.37   -2.62  
+      11 sites 11    -1.04    -1.21  -1.42   0.957  2.72   -1.11  
+      12 sites 12     1.02     1.46   3.25   0.325  1.75   -1.02  
+      13 sites 13     0.699    2.18   2.21   0.423 -1.07   -0.656 
+      14 sites 14     1.49    -0.977 -0.545 -0.273 -2.39   -2.48  
+      15 sites 15     1.89    -1.13  -0.727 -0.773 -0.221   0.318 
+      16 sites 16     2.85     0.208 -0.704 -2.10  -0.293   0.0812
+      17 sites 17     0.0467  -1.73   0.914  1.67  -1.80    1.56  
+      18 sites 18    -0.269   -1.72  -0.165  0.577  2.10   -0.339 
+      19 sites 19     0.281   -2.19   1.99   3.23   0.458   0.0239
+      20 sites 20     2.34    -1.30  -0.903 -0.718  0.0757  0.969 
+
+---
+
+    Code
+      tidy(dune_dbrda)
+    Output
+      # A tibble: 69 x 8
+         score label  dbrda1   dbrda2 dbrda3 dbrda4 dbrda5 dbrda6
+         <fct> <chr>   <dbl>    <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
+       1 sites 1     -0.980   0.00752 -1.73   1.12   2.75   2.35 
+       2 sites 2     -1.73   -0.845   -1.80   0.409 -2.33  -3.44 
+       3 sites 3     -0.597  -2.49    -1.58   0.989  1.22   0.711
+       4 sites 4     -0.0978 -2.15    -1.93   1.05   2.34  -0.873
+       5 sites 5     -1.72    0.329    3.40  -0.987  1.73  -2.40 
+       6 sites 6     -2.11    0.831    2.75  -2.75  -0.481  2.33 
+       7 sites 7     -1.91    0.305    0.812 -1.46   0.562  0.955
+       8 sites 8      0.811  -1.27    -1.23  -1.47  -0.894  0.227
+       9 sites 9     -0.0647 -1.75     2.16   1.63  -1.84  -0.109
+      10 sites 10    -1.97    0.718   -1.87  -1.08  -1.78  -2.89 
+      # i 59 more rows
+
+# fortify works for cca with layers length 1
+
+    Code
+      fortify(dune_cca, layers = "sites")
     Output
       # A tibble: 20 x 8
          score label    cca1   cca2    cca3    cca4    cca5   cca6
@@ -190,7 +288,7 @@
 ---
 
     Code
-      tidy(dune_cca, display = "sites")
+      tidy(dune_cca, layers = "sites")
     Output
       # A tibble: 20 x 8
          score label    cca1   cca2    cca3    cca4    cca5   cca6
