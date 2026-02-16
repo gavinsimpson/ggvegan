@@ -1,15 +1,17 @@
-#' @title ggplot-based plot for objects of class `"metaMDS"`
+#' @title ggplot-based plot for objects of class `"vegan_pco"`
 #'
 #' @description
 #' Produces a multi-layer ggplot object representing the output of
-#' objects produced by [vegan::metaMDS()].
+#' objects produced by [vegan::pco()].
 #'
 #' @details
 #' TODO
 #'
-#' @param object an object of class `"metaMDS"`, the result of a call
-#' to [vegan::metaMDS()].
-#' @param ... Additional arguments passed to `\link{fortify.metaMDS}`.
+#' @param object an object of class `"vegan_pco"`, the result of a call
+#' to [vegan::pco()].
+#' @param geom character; which geom to use for the site (sample) scores. One
+#'   of `"point"`, or `"text"`.
+#' @param ... Additional arguments passed to the [fortify()] method.
 #'
 #' @inheritParams autoplot.cca
 #' @return Returns a ggplot object.
@@ -18,7 +20,6 @@
 #'
 #' @export
 #'
-#' @importFrom grid arrow unit
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text labs coord_fixed
 #'   aes
 #'
@@ -28,27 +29,24 @@
 #'
 #' data(dune)
 #'
-#' sol <- metaMDS(dune)
+#' sol <- pco(dune)
 #' autoplot(sol)
-`autoplot.metaMDS` <- function(
+`autoplot.vegan_pco` <- function(
   object,
-  geom = c("point", "text"),
-  layers = c("species", "sites"),
+  geom = "point",
   legend.position = "right",
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  ylab,
-  xlab,
+  ylab = NULL,
+  xlab = NULL,
   ...
 ) {
-  obj <- fortify(object, layers = layers, ...)
-  obj <- obj[obj$score %in% layers, ]
+  obj <- fortify(object, ...)
   ## sort out x, y aesthetics
   vars <- get_dimension_names(obj)
   ## skeleton layer
   plt <- ggplot()
-  geom <- match.arg(geom)
   point <- TRUE
   if (isTRUE(all.equal(geom, "text"))) {
     point <- FALSE
@@ -76,10 +74,10 @@
         )
       )
   }
-  if (missing(xlab)) {
+  if (is.null(xlab)) {
     xlab <- vars[1]
   }
-  if (missing(ylab)) {
+  if (is.null(ylab)) {
     ylab <- vars[2]
   }
   plt <- plt +

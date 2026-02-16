@@ -17,12 +17,14 @@
 #' The first two components are the axis scores.
 #' @author Gavin L. Simpson
 #'
+#' @inheritParams fortify.cca
 #' @export
 #'
 #' @importFrom ggplot2 fortify
 #' @importFrom vegan scores
 #' @importFrom tibble tibble as_tibble
 #' @importFrom dplyr bind_cols
+#' @importFrom vctrs vec_slice
 #'
 #' @examples
 #'
@@ -32,7 +34,17 @@
 #'
 #' ord <- metaMDS(dune)
 #' head(fortify(ord))
-`fortify.metaMDS` <- function(model, data, ...) {
+`fortify.metaMDS` <- function(
+  model,
+  data,
+  layers = c("sites", "species"),
+  ...
+) {
+  layers <- match.arg(
+    layers,
+    c("sites", "species"),
+    several.ok = TRUE
+  )
   samp <- scores(model, display = "sites", ...)
   spp <- tryCatch(scores(model, display = "species", ...), error = function(c) {
     NULL
@@ -54,6 +66,8 @@
       bind_cols(samp)
   }
   names(df) <- tolower(names(df))
+  # filter the scores we want
+  df <- vctrs::vec_slice(df, df$score %in% layers)
   df
 }
 
@@ -61,7 +75,17 @@
 #' @rdname fortify.metaMDS
 #' @importFrom tibble tibble as_tibble
 #' @importFrom dplyr bind_cols
-`tidy.metaMDS` <- function(x, data, ...) {
+`tidy.metaMDS` <- function(
+  x,
+  data,
+  layers = c("sites", "species"),
+  ...
+) {
+  layers <- match.arg(
+    layers,
+    c("sites", "species"),
+    several.ok = TRUE
+  )
   samp <- scores(x, display = "sites", ...)
   spp <- tryCatch(scores(x, display = "species", ...), error = function(c) {
     NULL
@@ -83,5 +107,7 @@
       bind_cols(samp)
   }
   names(df) <- tolower(names(df))
+  # filter the scores we want
+  df <- vctrs::vec_slice(df, df$score %in% layers)
   df
 }

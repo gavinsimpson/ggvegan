@@ -132,6 +132,11 @@
 `valid_layers.cca` <- function(object, ...) {
   c("species", "sites", "constraints", "biplot", "centroids", "regression")
 }
+#' @rdname valid_layers
+#' @export
+`valid_layers.dbrda` <- function(object, ...) {
+  c("sites", "constraints", "biplot", "centroids", "regression")
+}
 
 #' @title Check user-supplied layers against list of valid layers
 #'
@@ -425,4 +430,23 @@
       )
   }
   plt
+}
+
+`layers_to_display` <- function(x) {
+  scrs <- rep(c("sp", "wa", "lc", "bp", "cn", "reg"), 2)
+  names(scrs) <- c(
+    "sp",
+    "wa",
+    "lc",
+    "bp",
+    "cn",
+    "reg",
+    "species",
+    "sites",
+    "constraints",
+    "biplot",
+    "centroids",
+    "regression"
+  )
+  scrs[x]
 }

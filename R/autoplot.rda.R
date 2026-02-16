@@ -9,26 +9,11 @@
 #'
 #' @param object an object of class `"rda"`, the result of a call to
 #'   [vegan::rda()]
-#' @param axes numeric; which axes to plot, given as a vector of length 2.
-#' @param geom character; which geom to use for the layers. Can be a vector of
-#'   up to length 2, in which case, the first element of `geom` will be
-#'   used for any site scores (both weighted sum or linear combination scores),
-#'   and the second element will be used for species scores. The latter will be
-#'   ignored if \code{arrows = TRUE}.
-#' @param layers character; which scores to plot as layers
 #' @param arrows logical; represent species (variables) using vectors?
-#' @param legend.position character or two-element numeric vector; where to
-#'   position the legend. See [ggplot2::theme()] for details. Use `"none"` to
-#'   not draw the legend.
-#' @param xlab character; label for the x-axis
-#' @param ylab character; label for the y-axis
-#' @param title character; subtitle for the plot
-#' @param subtitle character; subtitle for the plot
-#' @param caption character; caption for the plot
 #' @param const General scaling constant to `rda` scores. See
 #'   [vegan::scores.rda()] for details.
-#' @param arrow.col colour specification for biplot arrows and their labels.
-#' @param ... Additional arguments passed to `\link{fortify.cca}`.
+#' @inheritParams autoplot.cca
+#' @param ... Additional arguments passed to the [fortify()] method.
 #'
 #' @return Returns a ggplot object.
 #'
@@ -82,8 +67,15 @@
     }
   }
 
-  obj <- fortify(object, axes = axes, const = const, ...) # grab some scores
-  available <- levels(obj[["score"]])
+  # grab some scores
+  available <- levels(object[["score"]])
+  obj <- fortify(
+    object,
+    axes = axes,
+    layers = layers_to_display(layers),
+    const = const,
+    ...
+  )
   draw_list <- layer_draw_list(valid, layers, available) # what are we drawing
   layer_names <- names(draw_list)[draw_list]
 

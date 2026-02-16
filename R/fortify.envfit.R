@@ -36,13 +36,13 @@
 #'
 #' fortify(fit)
 `fortify.envfit` <- function(model, data, ...) {
-  vs <- scores(model, display = 'vectors', ...)
-  fs <- scores(model, display = 'factors', ...)
+  vs <- scores(model, display = "vectors", ...)
+  fs <- scores(model, display = "factors", ...)
   df <- as.data.frame(rbind(vs, fs)) |> as_tibble()
   df <- tibble::add_column(
     df,
     label = c(rownames(vs), rownames(fs)),
-    type = rep(c('Vector', 'Centroid'), times = c(NROW(vs), NROW(fs))),
+    type = rep(c("Vector", "Centroid"), times = c(NROW(vs), NROW(fs))),
     .before = 1L
   )
   df
@@ -52,13 +52,13 @@
 #' @rdname fortify.envfit
 #' @importFrom tibble as_tibble add_column
 `tidy.envfit` <- function(x, data, ...) {
-  vs <- scores(x, display = 'vectors', ...)
-  fs <- scores(x, display = 'factors', ...)
+  vs <- scores(x, display = "vectors", ...)
+  fs <- scores(x, display = "factors", ...)
   df <- as.data.frame(rbind(vs, fs)) |> as_tibble()
   df <- tibble::add_column(
     df,
     label = c(rownames(vs), rownames(fs)),
-    type = rep(c('Vector', 'Centroid'), times = c(NROW(vs), NROW(fs))),
+    type = rep(c("Vector", "Centroid"), times = c(NROW(vs), NROW(fs))),
     .before = 1L
   )
   df

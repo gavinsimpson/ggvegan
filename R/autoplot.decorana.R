@@ -9,21 +9,10 @@
 #'
 #' @param object an object of class `"decorana"`, the result of a call to
 #'   [vegan::decorana()].
-#' @param axes numeric; which axes to plot, given as a vector of length 2.
-#' @param geom character; which geom to use for the layers. Can be a
-#' vector of length equal to `length(display)`, in which case the
-#' *i*th element of `type` refers to the _i_th element
-#' of `display`.
-#' @param layers character; which scores to plot as layers
-#' @param legend.position character or two-element numeric vector; where to
-#'   position the legend. See [ggplot2::theme()] for details. Use `"none"` to
-#'   not draw the legend.
-#' @param xlab character; label for the x-axis
-#' @param ylab character; label for the y-axis
-#' @param title character; subtitle for the plot
-#' @param subtitle character; subtitle for the plot
-#' @param caption character; caption for the plot
 #' @param ... Additional arguments passed to [fortify.decorana()].
+#'
+#' @inheritParams autoplot.cca
+#'
 #' @return Returns a ggplot object.
 #' @author Gavin L. Simpson
 #'
@@ -55,7 +44,7 @@
   ...
 ) {
   axes <- rep(axes, length.out = 2L)
-  obj <- fortify(object, axes = axes, display = layers, ...)
+  obj <- fortify(object, axes = axes, layers = layers, ...)
   LAYERS <- levels(obj$score)
   ## sort out x, y aesthetics
   vars <- get_dimension_names(obj)

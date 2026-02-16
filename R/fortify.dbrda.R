@@ -1,15 +1,15 @@
-#' @title Fortify a `"rda"` object.
+#' @title Fortify a `"dbrda"` object.
 #'
 #' @description
-#' Fortifies an object of class `"rda"` to produce a
+#' Fortifies an object of class `"dbrda"` to produce a
 #' data frame of the selected axis scores in long format, suitable for
 #' plotting with [ggplot2::ggplot()].
 #'
 #' @details
 #' TODO
 #'
-#' @param model,x an object of class `"rda"`, the result of a call to
-#' [vegan::rda()].
+#' @param model,x an object of class `"dbrda"`, the result of a call to
+#' [vegan::dbrda()].
 #' @param const NULL; General scaling constant to RDA scores. See
 #'   [vegan::scores.rda()] for the details.
 #' @param ... additional arguments passed to [vegan::scores.rda()].
@@ -34,13 +34,13 @@
 #' data(dune)
 #' data(dune.env)
 #'
-#' sol <- rda(dune ~ A1 + Management, data = dune.env)
+#' sol <- dbrda(dune ~ A1 + Management, data = dune.env)
 #' head(fortify(sol))
-`fortify.rda` <- function(
+`fortify.dbrda` <- function(
   model,
   data = NULL,
   axes = 1:6,
-  layers = c("sp", "wa", "lc", "bp", "cn"),
+  layers = c("wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 ) {
@@ -55,19 +55,19 @@
 }
 
 #' @export
-#' @rdname fortify.rda
-`tidy.rda` <- function(
+#' @rdname fortify.dbrda
+`tidy.dbrda` <- function(
   x,
   data = NULL,
   axes = 1:6,
-  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
+  layers = c("wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 ) {
   # handle const because it has to be missing in scores
   const <- rda_constant(x, const)
   ## extract scores
-  scrs <- scores(x, choices = axes, display = layers, ...)
+  scrs <- scores(x, choices = axes, display = layers_to_display(layers), ...)
   ## handle case of only 1 set of scores
   if (length(layers) == 1L) {
     scrs <- list(scrs)
@@ -80,7 +80,6 @@
       lc = "constraints",
       bp = "biplot",
       cn = "centroids",
-      reg = "regression",
       stop("Unknown value for 'layers'")
     )
     names(scrs) <- nam

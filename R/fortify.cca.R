@@ -12,9 +12,9 @@
 #' [vegan::cca()], [vegan::rda()], or [vegan::capscale()].
 #' @param data currently ignored.
 #' @param axes numeric; which axes to extract scores for.
-#' @param display numeric; the scores to extract in the fortified object.
-#' @param ... additional arguments passed to [vegan::scores.cca()],
-#'   and [vegan::scores.rda()].
+#' @param layers character; the scores to extract in the fortified object.
+#'   Passed to `display` in the respective [vegan::scores()] method.
+#' @param ... additional arguments passed to [vegan::scores.cca()].
 #' @return A data frame (tibble) in long format containing the ordination
 #'   scores. The first two components are `score` (the type of score in each
 #'   row) and `label` (the text label to use on plots for this row). The
@@ -39,16 +39,16 @@
   model,
   data,
   axes = 1:6,
-  display = c("sp", "wa", "lc", "bp", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "cn"),
   ...
 ) {
   ## extract scores
-  scrs <- scores(model, choices = axes, display = display, ...)
+  scrs <- scores(model, ..., choices = axes, display = layers)
   ## handle case of only 1 set of scores
-  if (length(display) == 1L) {
+  if (length(layers) == 1L) {
     scrs <- list(scrs)
     nam <- switch(
-      display,
+      layers,
       sp = "species",
       species = "species",
       wa = "sites",
@@ -56,7 +56,7 @@
       lc = "constraints",
       bp = "biplot",
       cn = "centroids",
-      stop("Unknown value for 'display'")
+      stop("Unknown value for 'layers'")
     )
     names(scrs) <- nam
   }
@@ -73,16 +73,16 @@
   x,
   data,
   axes = 1:6,
-  display = c("sp", "wa", "lc", "bp", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "cn"),
   ...
 ) {
   ## extract scores
-  scrs <- scores(x, choices = axes, display = display, ...)
+  scrs <- scores(x, choices = axes, display = layers, ...)
   ## handle case of only 1 set of scores
-  if (length(display) == 1L) {
+  if (length(layers) == 1L) {
     scrs <- list(scrs)
     nam <- switch(
-      display,
+      layers,
       sp = "species",
       species = "species",
       wa = "sites",
@@ -90,7 +90,7 @@
       lc = "constraints",
       bp = "biplot",
       cn = "centroids",
-      stop("Unknown value for 'display'")
+      stop("Unknown value for 'layers'")
     )
     names(scrs) <- nam
   }

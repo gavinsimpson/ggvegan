@@ -10,7 +10,7 @@
 #' @param geom character; which geom to use for the MDS scores layer.
 #' @param network logical; should the edges of the ISOMAP network be drawn?
 #' @param line.col colour with which to draw the network edges.
-#' @param size numeric; size aesthetic for the log-series curve.
+#' @param linewidth numeric; linewidth aesthetic for the log-series curve.
 #' @param xlab character; label for the x-axis.
 #' @param ylab character; label for the y-axis.
 #' @param title character; subtitle for the plot.
@@ -42,7 +42,7 @@
   geom = c("point", "text"),
   network = TRUE,
   line.col = "grey85",
-  size = 0.7,
+  linewidth = 0.7,
   xlab = NULL,
   ylab = NULL,
   title = "Isometric feature mapping",
@@ -73,7 +73,7 @@
           yend = .data[["yto"]]
         ),
         colour = line.col,
-        size = size
+        linewidth = linewidth
       )
   }
 

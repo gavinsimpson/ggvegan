@@ -11,7 +11,7 @@
 #' [vegan::decorana()].
 #' @param data currently ignored.
 #' @param axes numeric; which axis scores are required?
-#' @param display character; the scores to extract in the fortified object.
+#' @param layers character; the scores to extract in the fortified object.
 #' @param ... additional arguments passed to [vegan::scores.decorana()].
 #' @return A data frame in long format containing the ordination scores. The
 #'   first two components are the axis scores.
@@ -31,25 +31,24 @@
 #'
 #' sol <- decorana(dune)
 #' head(fortify(sol))
-#' head(fortify(sol, display = "species"))
+#' head(fortify(sol, layers = "species"))
 `fortify.decorana` <- function(
   model,
   data,
   axes = 1:4,
-  display = c("sites", "species"),
+  layers = c("sites", "species"),
   ...
 ) {
   ## work around the fact that scores.decorana handles only one type of scores
   ## at a time
   scrs <- lapply(
-    display,
-    function(display, x, ...) scores(x, display = display, ...),
+    layers,
+    function(layers, x, ...) scores(x, display = layers, ...),
     x = model,
     choices = axes,
     ...
   )
-  names(scrs) <- display
-  # scrs <- scores(model, choices = axes, display = display, ...)
+  names(scrs) <- layers
   miss <- vapply(scrs, function(x) all(is.na(x)), logical(1L))
   scrs <- scrs[!miss]
 
@@ -64,20 +63,19 @@
   x,
   data,
   axes = 1:4,
-  display = c("sites", "species"),
+  layers = c("sites", "species"),
   ...
 ) {
   ## work around the fact that scores.decorana handles only one type of scores
   ## at a time
   scrs <- lapply(
-    display,
-    function(display, x, ...) scores(x, display = display, ...),
+    layers,
+    function(layers, x, ...) scores(x, display = layers, ...),
     x = x,
     choices = axes,
     ...
   )
-  names(scrs) <- display
-  #scrs <- scores(x, choices = axes, display = display, ...)
+  names(scrs) <- layers
   miss <- vapply(scrs, function(x) all(is.na(x)), logical(1L))
   scrs <- scrs[!miss]
 

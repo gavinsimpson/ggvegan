@@ -1,58 +1,52 @@
-#' @title ggplot-based plot for objects of class `"cca"`
+#' @title ggplot-based plot for objects of class `"dbrda"`
 #'
 #' @description
 #' Produces a multi-layer ggplot object representing the output of objects
-#'   produced by [vegan::cca()] or [vegan::capscale()].
+#'   produced by [vegan::dbrda()].
 #'
 #' @details
 #' TODO
 #'
-#' @param object an object of class `"cca"`, the result of a call to
-#'   [vegan::cca()] or [vegan::capscale()].
-#' @param axes numeric; which axes to plot, given as a vector of length 2.
-#' @param geom character; which geom to use for the species (variables) and
-#'   sites (samples) layers. A vector of length 2; if a vector of length 1,
-#'   `geom` is extended to the required length.
-#' @param layers character; which scores to plot as layers
-#' @param legend.position character or two-element numeric vector; where to
-#'   position the legend. See [ggplot2::theme()] for details. Use `"none"`
-#'   to not draw the legend.
-#' @param xlab character; label for the x-axis.
-#' @param ylab character; label for the y-axis.
-#' @param title character; subtitle for the plot.
-#' @param subtitle character; subtitle for the plot.
-#' @param caption character; caption for the plot.
-#' @param arrow.col colour specification for biplot arrows and their labels.
+#' @param object an object of class `"dbrda"`, the result of a call to
+#'   [vegan::dbrda()]
+#' @param const General scaling constant to `dbrda` scores. See
+#'   [vegan::scores.rda()] for details.
+#' @inheritParams autoplot.vegan_pco
+#' @inheritParams autoplot.cca
 #' @param ... Additional arguments passed to the [fortify()] method.
 #'
 #' @return Returns a ggplot object.
+#'
 #' @author Gavin L. Simpson
 #'
 #' @export
 #'
-#' @importFrom grid arrow unit
 #' @importFrom ggplot2 autoplot ggplot geom_point geom_text geom_segment labs
 #'   coord_fixed aes
 #'
 #' @examples
 #'
 #' library("vegan")
-#' data(dune)
-#' data(dune.env)
 #'
-#' sol <- cca(dune ~ A1 + Management, data = dune.env)
-#' autoplot(sol)
-`autoplot.cca` <- function(
+#' data(dune, dune.env)
+#'
+#' dune_dbrda <- dbrda(
+#'   dune ~ A1 + Moisture + Use + Management,
+#'   data = dune.env
+#' )
+#' autoplot(dune_dbrda)
+`autoplot.dbrda` <- function(
   object,
   axes = c(1, 2),
   geom = c("point", "text"),
-  layers = c("species", "sites", "biplot", "centroids"),
-  legend.position = "right",
+  layers = c("sites", "biplot", "centroids"),
+  legend.position = "none",
   title = NULL,
   subtitle = NULL,
   caption = NULL,
   ylab = NULL,
   xlab = NULL,
+  const = NULL,
   arrow.col = "navy",
   ...
 ) {
@@ -73,8 +67,14 @@
   }
 
   # grab some scores
-  obj <- fortify(object, axes = axes, layers = layers_to_display(layers), ...)
-  available <- levels(obj[["score"]])
+  available <- levels(object[["score"]])
+  obj <- fortify(
+    object,
+    axes = axes,
+    layers = layers_to_display(layers),
+    const = const,
+    ...
+  )
   draw_list <- layer_draw_list(valid, layers, available) # what are we drawing
   layer_names <- names(draw_list)[draw_list]
 
@@ -82,8 +82,7 @@
   vars <- get_dimension_names(obj)
 
   ## process geom arg
-  geom <- match.arg(geom, several.ok = TRUE)
-  geom <- unique(geom) # simplify geom if elements are the same
+  geom <- match.arg(geom, several.ok = FALSE) # only 1
 
   ## subset out the layers wanted
   obj <- obj[obj[["score"]] %in% layer_names, , drop = FALSE]

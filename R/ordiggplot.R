@@ -77,12 +77,12 @@
 #' @importFrom stats weights
 #' @importFrom ggplot2 ggplot coord_fixed aes ggproto
 #'
-#' @param arrowmul Multiplier to arrow length. If missing, the arrow
+#' @param arrow.mul Multiplier to arrow length. If missing, the arrow
 #'     length are adjusted to fit to other scores, but if some score
 #'     types are not displayed, the arrows may be badly scaled, and
 #'     manual adjustment can be useful.
 #' @export
-`ordiggplot` <- function(model, axes = c(1, 2), arrowmul, ...) {
+`ordiggplot` <- function(model, axes = c(1, 2), arrow.mul, ...) {
   if (length(axes) > 2) {
     stop("only two-dimensional plots made: too many axes defined")
   }
@@ -102,13 +102,13 @@
     }
     if (any(isBip)) {
       # isBip may have changed
-      if (missing(arrowmul)) {
-        arrowmul <- arrow_mul(
+      if (missing(arrow.mul)) {
+        arrow.mul <- arrow_mul(
           df[isBip, 3:4, drop = FALSE],
           df[!isBip, 3:4, drop = FALSE]
         )
       }
-      df[isBip, 3:4] <- df[isBip, 3:4] * arrowmul
+      df[isBip, 3:4] <- df[isBip, 3:4] * arrow.mul
     }
   }
   ## weights are needed in some statistics
@@ -277,8 +277,8 @@
 }
 
 ## envfit, separately for vectorfit & factorfit as these imply
-## different geometries. 'edata', 'formula' and 'arrowmul' can be
-## given as parameters, and 'arrowmul' is calculated in
+## different geometries. 'edata', 'formula' and 'arrow.mul' can be
+## given as parameters, and 'arrow.mul' is calculated in
 ## StatVectorfit$setup_params if not given.
 #' @importFrom stats model.frame
 #' @importFrom vegan vectorfit
@@ -289,7 +289,7 @@
   vars = c("x", "y"),
   edata,
   formula,
-  arrowmul
+  arrow.mul
 ) {
   if (!missing(formula) && !is.null(formula)) {
     edata <- model.frame(formula, data)
@@ -301,7 +301,7 @@
   wts <- data$weight
   fit <- vectorfit(as.matrix(data[, vars]), edata, permutations = 0, w = wts)
   fit <- sqrt(fit$r) * fit$arrows
-  fit <- arrowmul * fit
+  fit <- arrow.mul * fit
   fit <- as.data.frame(fit) # as_tibble? FIXME
   fit$label = rownames(fit)
   fit
@@ -324,7 +324,7 @@
     },
     ## same scaling of arrows in all panels
     setup_params = function(data, params) {
-      if (!is.null(params$arrowmul)) {
+      if (!is.null(params$arrow.mul)) {
         return(params)
       }
       if (!is.null(params$formula)) {
@@ -345,7 +345,7 @@
         v <- vectorfit(as.matrix(sxy[[i]]), as.matrix(ed[[i]]), w = w[[i]])
         ggvegan:::arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
       })
-      params$arrowmul <- min(arrs)
+      params$arrow.mul <- min(arrs)
       params
     }
   )
@@ -366,7 +366,7 @@
 #'     found.
 #' @param formula Formula to select variables from `edata`. If
 #'     missing, all continuos variables of `edata` are used.
-#' @param arrowmul Multiplier to arrow length. If missing, the
+#' @param arrow.mul Multiplier to arrow length. If missing, the
 #'     multiplier is selected automatically so that arrows fit the
 #'     current graph.
 #' @param ... Other arguments passed to the functions.
@@ -399,7 +399,7 @@
   inherit.aes = TRUE,
   edata = NULL,
   formula = NULL,
-  arrowmul = NULL,
+  arrow.mul = NULL,
   ...
 ) {
   layer(
@@ -414,7 +414,7 @@
       edata = edata,
       formula = formula,
       na.rm = na.rm,
-      arrowmul = arrowmul
+      arrow.mul = arrow.mul
     )
   )
 }

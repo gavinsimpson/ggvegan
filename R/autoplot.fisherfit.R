@@ -15,7 +15,7 @@
 #'   draw outlines around bars.
 #' @param bar.fill fill colour for the bars.
 #' @param line.col colour for Fisher's log-series curve.
-#' @param size numeric; size aesthetic for the log-series curve.
+#' @param linewidth numeric; linewidth aesthetic for the log-series curve.
 #' @param ... additional arguments passed to other methods.
 #' @return A ggplot object.
 #' @author Gavin L. Simpson
@@ -41,7 +41,7 @@
   bar.col = NA,
   bar.fill = "grey35",
   line.col = "red",
-  size = 1,
+  linewidth = 0.7,
   subtitle = NULL,
   caption = NULL,
   ...
@@ -66,7 +66,7 @@
         fun = fishfun,
         args = list(k = k, alpha = alpha),
         colour = line.col,
-        size = size
+        linewidth = linewidth
       )
   }
   plt <- plt +
