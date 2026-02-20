@@ -56,6 +56,8 @@ test_that("autoplot method for poolaccum works", {
 })
 
 test_that("autoplot method for prc works", {
+  skip("skipping: eigenvalue sign diffs")
+
   p <- pyrifos_prc |> autoplot()
   expect_doppelganger("prc autoplot", p)
 })
