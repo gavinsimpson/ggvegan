@@ -37,6 +37,7 @@
 `fortify.metaMDS` <- function(
   model,
   data,
+  axes = 1:2,
   layers = c("sites", "species"),
   ...
 ) {
@@ -45,10 +46,13 @@
     c("sites", "species"),
     several.ok = TRUE
   )
-  samp <- scores(model, display = "sites", ...)
-  spp <- tryCatch(scores(model, display = "species", ...), error = function(c) {
-    NULL
-  })
+  samp <- scores(model, display = "sites", choices = axes, ...)
+  spp <- tryCatch(
+    scores(model, display = "species", choices = axes, ...),
+    error = function(c) {
+      NULL
+    }
+  )
   if (length(spp) > 0L) {
     df <- rbind(samp, spp)
     df <- tibble::as_tibble(as.data.frame(df))
