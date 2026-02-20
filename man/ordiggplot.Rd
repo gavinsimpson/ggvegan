@@ -23,6 +23,9 @@ manual adjustment can be useful.}
 
 \item{score}{Ordination score to be added to the plot.}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
 result. You can add new graphical elements to this plot with

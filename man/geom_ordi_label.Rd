@@ -14,6 +14,9 @@ instead of \code{score}.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Add a label layer to an ordiggplot
 }

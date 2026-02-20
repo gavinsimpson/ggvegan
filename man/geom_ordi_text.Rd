@@ -14,6 +14,9 @@ instead of \code{score}.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Add a text layer to an ordiggplot
 }
