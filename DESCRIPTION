@@ -1,7 +1,7 @@
 Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
-Version: 0.1.9992
+Version: 0.2
 Depends: R (>= 4.1.0)
 Imports:
     vegan (>= 2.3-0),
@@ -26,7 +26,9 @@ Authors@R: c(person("Gavin L.", "Simpson", role = c("aut", "cre"),
 	         person("Didzis", "Elferts", role = "ctb",
                     comment = c(ORCID = "0000-0002-9401-1231")))
 Description: Functions to produce 'ggplot2'-based plots of objects produced by
-    functions in the vegan package.
+    functions in the 'vegan' package. Provides 'fortify()', 'autoplot()', and
+    'tidy()' methods for many of 'vegan''s functions. The aim of 'ggvegan' is to
+    make it easier to work within the 'tidyverse' with 'vegan'.
 License: GPL-2
 ByteCompile: true
 Roxygen: list(markdown = TRUE)
