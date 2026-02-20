@@ -116,6 +116,9 @@
 #' @param object An R object.
 #' @param ... Additional arguments passed to methods.
 #'
+#' @return A character vector of valid ordination layers for the provided
+#'   `object`.
+#'
 #' @rdname valid_layers
 #' @export
 `valid_layers` <- function(object, ...) {

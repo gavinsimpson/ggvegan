@@ -26,6 +26,8 @@
 #' @importFrom utils modifyList
 #' @importFrom dplyr .data
 #'
+#' @return Returns a ggplot object.
+#'
 #' @rdname autoplot.permustats
 #' @export
 #' @examples
