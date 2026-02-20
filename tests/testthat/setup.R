@@ -129,3 +129,52 @@ dune_dbrda <- dbrda(
   dune ~ A1 + Moisture + Use + Management,
   data = dune.env
 )
+
+# ## Example code for ordiggplot
+# library("vegan")
+# library("ggplot2")
+# data(dune, dune.env, varespec, varechem)
+# m <- cca(dune ~ Management + A1, dune.env)
+
+# ## use geom_ordi_* functions
+# ordiggplot(m) +
+#   geom_ordi_axis() +
+#   geom_ordi_point("sites") +
+#   geom_ordi_text(
+#     "species",
+#     col = "darkblue",
+#     mapping = aes(fontface = "italic")
+#   ) +
+#   geom_ordi_label("centroids") +
+#   geom_ordi_arrow("biplot")
+
+# ## use ggscores + standard geom_* functions
+# ordiggplot(m, scaling = "sites") +
+#   geom_point(data = ggscores("sites")) +
+#   geom_text(data = ggscores("species"), mapping = aes(fontface = "italic")) +
+#   geom_label(data = ggscores("centroids"), fill = "yellow") +
+#   geom_ordi_arrow("biplot")
+
+# ## Messy arrow biplot for PCA
+# m <- rda(dune)
+# ordiggplot(m) +
+#   geom_ordi_axis() +
+#   geom_ordi_point("sites") +
+#   geom_ordi_arrow("species")
+
+# ## Fitted vectors, selecting variables with formula
+# if (requireNamespace("withr")) {
+#   m <- withr::with_seed(
+#     seed = 1,
+#     metaMDS(varespec, trace = FALSE)
+#   )
+#   ## plot
+#   ordiggplot(m) +
+#     geom_ordi_point("sites") +
+#     geom_ordi_arrow(
+#       "sites",
+#       stat = "vectorfit",
+#       edata = varechem,
+#       formula = ~ N + Ca + Al + Humdepth + pH
+#     )
+# }
