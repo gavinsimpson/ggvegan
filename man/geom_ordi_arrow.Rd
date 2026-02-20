@@ -30,6 +30,9 @@ their text labels.}
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}},
 \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}, or \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Add a biplot arrow layer to an ordiggplot
 }

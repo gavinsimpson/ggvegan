@@ -36,6 +36,8 @@
 #' @param score Ordination score to be added to the plot.
 #' @param ... Parameters passed to underlying functions.
 #'
+#' @return Returns a ggplot object.
+#'
 #' @examples
 #' library("vegan")
 #' library("ggplot2")
@@ -151,6 +153,8 @@
 #'     instead of `score`.
 #' @param ... other arguments passed to [ggplot2::geom_point()]
 #'
+#' @return Returns a ggplot object.
+#'
 #' @export
 `geom_ordi_point` <- function(score, data, ...) {
   if (missing(score) && missing(data)) {
@@ -172,6 +176,8 @@
 #' @param ... other arguments passed to [ggplot2::geom_text()]
 #' @importFrom ggplot2 geom_text
 #'
+#' @return Returns a ggplot object.
+#'
 #' @export
 `geom_ordi_text` <- function(score, data, ...) {
   if (missing(score) && missing(data)) {
@@ -189,6 +195,8 @@
 #' @param data Alternative data to the function that will be used
 #'     instead of `score`.
 #' @param ... other arguments passed to [ggplot2::geom_label()]
+#'
+#' @return Returns a ggplot object.
 #'
 #' @importFrom ggplot2 geom_label
 #' @export
@@ -217,6 +225,8 @@
 #' @importFrom ggplot2 geom_segment geom_label geom_text aes
 #' @importFrom grid arrow
 #' @importFrom utils modifyList
+#'
+#' @return Returns a ggplot object.
 #'
 #' @export
 `geom_ordi_arrow` <- function(
@@ -268,6 +278,8 @@
 #' @importFrom ggplot2 geom_hline geom_vline
 #' @param lty Linetype.
 #'
+#' @return Returns a ggplot object.
+#'
 #' @export
 `geom_ordi_axis` <- function(lty = 3, ...) {
   list(
@@ -282,7 +294,6 @@
 ## StatVectorfit$setup_params if not given.
 #' @importFrom stats model.frame
 #' @importFrom vegan vectorfit
-
 `calculate_vectorfit` <- function(
   data = data,
   scales,
@@ -343,7 +354,7 @@
       ed <- split(ed, data$PANEL)
       arrs <- sapply(seq_len(length(sxy)), function(i) {
         v <- vectorfit(as.matrix(sxy[[i]]), as.matrix(ed[[i]]), w = w[[i]])
-        ggvegan:::arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
+        ggvegan::arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
       })
       params$arrow.mul <- min(arrs)
       params

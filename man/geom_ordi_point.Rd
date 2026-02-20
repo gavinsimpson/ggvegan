@@ -14,6 +14,9 @@ instead of \code{score}.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Add a point layer to an ordiggplot
 }

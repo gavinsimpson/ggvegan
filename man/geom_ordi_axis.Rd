@@ -12,6 +12,9 @@ geom_ordi_axis(lty = 3, ...)
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_abline]{ggplot2::geom_hline()}} and
 \code{\link[ggplot2:geom_abline]{ggplot2::geom_vline()}}}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Crosshair for axes in eigenvector methods
 }

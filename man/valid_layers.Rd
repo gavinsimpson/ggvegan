@@ -20,6 +20,10 @@ valid_layers(object, ...)
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+A character vector of valid ordination layers for the provided
+\code{object}.
+}
 \description{
 Valid layers for vegan objects
 }

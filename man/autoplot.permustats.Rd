@@ -29,6 +29,9 @@ object. Depending on argument \code{plot} the parameters are passed to
 
 \item{...}{Other parameters passed to functions (ignored).}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 Alternatives for \pkg{lattice} graphics functions
 \code{\link[vegan:permustats]{vegan::densityplot.permustats()}},
