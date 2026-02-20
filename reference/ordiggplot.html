@@ -21,7 +21,7 @@ as their data argument."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ggvegan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
       </span>
     </div>
 
@@ -149,21 +149,30 @@ scaling of ordination axes.</p>
 <span class="r-plt img"><img src="ordiggplot-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Fitted vectors, selecting variables with formula</span></span></span>
-<span class="r-in"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/metaMDS.html" class="external-link">metaMDS</a></span><span class="op">(</span><span class="va">varespec</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"withr"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_seed.html" class="external-link">with_seed</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    seed <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/metaMDS.html" class="external-link">metaMDS</a></span><span class="op">(</span><span class="va">varespec</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co">## plot</span></span></span>
 <span class="r-in"><span><span class="fu">ordiggplot</span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="geom_ordi_point.html">geom_ordi_point</a></span><span class="op">(</span><span class="st">"sites"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="geom_ordi_arrow.html">geom_ordi_arrow</a></span><span class="op">(</span><span class="st">"sites"</span>, stat <span class="op">=</span> <span class="st">"vectorfit"</span>, edata <span class="op">=</span> <span class="va">varechem</span>,</span></span>
 <span class="r-in"><span>                  formula <span class="op">=</span> <span class="op">~</span> <span class="va">N</span> <span class="op">+</span> <span class="va">Ca</span> <span class="op">+</span> <span class="va">Al</span> <span class="op">+</span> <span class="va">Humdepth</span> <span class="op">+</span> <span class="va">pH</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Arguments in `...` must be used.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Problematic argument:</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> axes = axes</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you misspell an argument name?</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in geom_segment(data = ~.x[.x$score == score, ], mapping = structure(list(    xend = 0, yend = 0), class = c("ggplot2::mapping", "uneval", "gg", "S7_object"), S7_class = structure(function (x = list(),     ..., env = globalenv()) {    warn_dots_empty()    check_object(x, is.list, "a {.cls list}")    x &lt;- lapply(x, new_aesthetic, env = env)    x &lt;- S7::new_object(x)    class(x) &lt;- union(c("ggplot2::mapping", "uneval"), class(x))    x}, name = "mapping", parent = structure(list(class = "gg", constructor = function (.data) {    stop(sprintf("S3 class &lt;%s&gt; doesn't have a constructor",         class[[1]]), call. = FALSE)}, validator = NULL), class = "S7_S3_class"), package = "ggplot2", properties = list(), abstract = FALSE, constructor = function (x = list(),     ..., env = globalenv()) {    warn_dots_empty()    check_object(x, is.list, "a {.cls list}")    x &lt;- lapply(x, new_aesthetic, env = env)    x &lt;- S7::new_object(x)    class(x) &lt;- union(c("ggplot2::mapping", "uneval"), class(x))    x}, class = c("S7_class", "S7_object"))), arrow = structure(list(    angle = 30, length = structure(0.2, unit = 1L, class = c("simpleUnit",     "unit", "unit_v2")), ends = 1L, type = 1L), class = "arrow"),     stat = "vectorfit", edata = varechem, formula = ~N + Ca +         Al + Humdepth + pH):</span> Problem while computing stat.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Error occurred in the 2nd layer.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> 'arrow_mul' is not an exported object from 'namespace:ggvegan'</span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">N</span>, <span style="color: #00BB00;">P</span>,</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">K</span>, <span style="color: #00BB00;">Ca</span>, <span style="color: #00BB00;">Mg</span>, <span style="color: #00BB00;">S</span>, <span style="color: #00BB00;">Al</span>, <span style="color: #00BB00;">Fe</span>, <span style="color: #00BB00;">Mn</span>, <span style="color: #00BB00;">Zn</span>, <span style="color: #00BB00;">Mo</span>, <span style="color: #00BB00;">Baresoil</span>, <span style="color: #00BB00;">Humdepth</span>, and <span style="color: #00BB00;">pH</span>.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">N</span>, <span style="color: #00BB00;">P</span>,</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">K</span>, <span style="color: #00BB00;">Ca</span>, <span style="color: #00BB00;">Mg</span>, <span style="color: #00BB00;">S</span>, <span style="color: #00BB00;">Al</span>, <span style="color: #00BB00;">Fe</span>, <span style="color: #00BB00;">Mn</span>, <span style="color: #00BB00;">Zn</span>, <span style="color: #00BB00;">Mo</span>, <span style="color: #00BB00;">Baresoil</span>, <span style="color: #00BB00;">Humdepth</span>, and <span style="color: #00BB00;">pH</span>.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
+<span class="r-plt img"><img src="ordiggplot-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
