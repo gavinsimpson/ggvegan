@@ -5,7 +5,7 @@
 \alias{tidy.metaMDS}
 \title{Fortify a \code{"mataMDS"} object.}
 \usage{
-\method{fortify}{metaMDS}(model, data, layers = c("sites", "species"), ...)
+\method{fortify}{metaMDS}(model, data, axes = 1:2, layers = c("sites", "species"), ...)
 
 \method{tidy}{metaMDS}(x, data, layers = c("sites", "species"), ...)
 }
@@ -14,6 +14,8 @@
 to \code{\link[vegan:metaMDS]{vegan::metaMDS()}}.}
 
 \item{data}{currently ignored.}
+
+\item{axes}{numeric; which axes to extract scores for.}
 
 \item{layers}{character; the scores to extract in the fortified object.
 Passed to \code{display} in the respective \code{\link[vegan:scores]{vegan::scores()}} method.}
