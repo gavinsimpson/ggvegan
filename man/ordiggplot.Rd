@@ -87,12 +87,15 @@ ordiggplot(m) +
   geom_ordi_arrow("species")
 
 ## Fitted vectors, selecting variables with formula
-\dontshow{set.seed(1)}
-m <- metaMDS(varespec, trace = FALSE)
+if(requireNamespace("withr")){
+  m <- withr::with_seed(
+    seed = 1,
+    metaMDS(varespec, trace = FALSE)
+  )
 ## plot
 ordiggplot(m) +
   geom_ordi_point("sites") +
   geom_ordi_arrow("sites", stat = "vectorfit", edata = varechem,
                   formula = ~ N + Ca + Al + Humdepth + pH)
-
+}
 }

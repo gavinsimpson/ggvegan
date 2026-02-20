@@ -94,6 +94,10 @@ current graph.}
 
 \item{...}{Other arguments passed to the functions.}
 }
+\value{
+Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
+object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+}
 \description{
 Fits arrows to show the direction of fastest increase
 in continuous environmental variables in ordination space.The

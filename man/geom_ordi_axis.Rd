@@ -13,7 +13,8 @@ geom_ordi_axis(lty = 3, ...)
 \code{\link[ggplot2:geom_abline]{ggplot2::geom_vline()}}}
 }
 \value{
-Returns a ggplot object.
+Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
+object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
 }
 \description{
 Crosshair for axes in eigenvector methods

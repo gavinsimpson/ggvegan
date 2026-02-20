@@ -35,6 +35,14 @@
 #' @param axes Two axes to be plotted
 #' @param score Ordination score to be added to the plot.
 #' @param ... Parameters passed to underlying functions.
+#' @param arrow.mul Multiplier to arrow length. If missing, the arrow
+#'     length are adjusted to fit to other scores, but if some score
+#'     types are not displayed, the arrows may be badly scaled, and
+#'     manual adjustment can be useful.
+#'
+#' @importFrom stats weights
+#' @importFrom ggplot2 ggplot coord_fixed aes ggproto
+#' @export
 #'
 #' @return Returns a ggplot object.
 #'
@@ -68,22 +76,17 @@
 #'   geom_ordi_arrow("species")
 #'
 #' ## Fitted vectors, selecting variables with formula
-#' \dontshow{set.seed(1)}
-#' m <- metaMDS(varespec, trace = FALSE)
+#' if(requireNamespace("withr")){
+#'   m <- withr::with_seed(
+#'     seed = 1,
+#'     metaMDS(varespec, trace = FALSE)
+#'   )
 #' ## plot
 #' ordiggplot(m) +
 #'   geom_ordi_point("sites") +
 #'   geom_ordi_arrow("sites", stat = "vectorfit", edata = varechem,
 #'                   formula = ~ N + Ca + Al + Humdepth + pH)
-#'
-#' @importFrom stats weights
-#' @importFrom ggplot2 ggplot coord_fixed aes ggproto
-#'
-#' @param arrow.mul Multiplier to arrow length. If missing, the arrow
-#'     length are adjusted to fit to other scores, but if some score
-#'     types are not displayed, the arrows may be badly scaled, and
-#'     manual adjustment can be useful.
-#' @export
+#' }
 `ordiggplot` <- function(model, axes = c(1, 2), arrow.mul, ...) {
   if (length(axes) > 2) {
     stop("only two-dimensional plots made: too many axes defined")
@@ -153,7 +156,8 @@
 #'     instead of `score`.
 #' @param ... other arguments passed to [ggplot2::geom_point()]
 #'
-#' @return Returns a ggplot object.
+#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
+#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
 #'
 #' @export
 `geom_ordi_point` <- function(score, data, ...) {
@@ -176,7 +180,8 @@
 #' @param ... other arguments passed to [ggplot2::geom_text()]
 #' @importFrom ggplot2 geom_text
 #'
-#' @return Returns a ggplot object.
+#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
+#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
 #'
 #' @export
 `geom_ordi_text` <- function(score, data, ...) {
@@ -196,7 +201,8 @@
 #'     instead of `score`.
 #' @param ... other arguments passed to [ggplot2::geom_label()]
 #'
-#' @return Returns a ggplot object.
+#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
+#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
 #'
 #' @importFrom ggplot2 geom_label
 #' @export
@@ -226,7 +232,8 @@
 #' @importFrom grid arrow
 #' @importFrom utils modifyList
 #'
-#' @return Returns a ggplot object.
+#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
+#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
 #'
 #' @export
 `geom_ordi_arrow` <- function(
@@ -278,7 +285,8 @@
 #' @importFrom ggplot2 geom_hline geom_vline
 #' @param lty Linetype.
 #'
-#' @return Returns a ggplot object.
+#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
+#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
 #'
 #' @export
 `geom_ordi_axis` <- function(lty = 3, ...) {
@@ -354,7 +362,7 @@
       ed <- split(ed, data$PANEL)
       arrs <- sapply(seq_len(length(sxy)), function(i) {
         v <- vectorfit(as.matrix(sxy[[i]]), as.matrix(ed[[i]]), w = w[[i]])
-        ggvegan::arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
+        arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
       })
       params$arrow.mul <- min(arrs)
       params
@@ -382,6 +390,11 @@
 #'     current graph.
 #' @param ... Other arguments passed to the functions.
 #'
+#' @export
+#'
+#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
+#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#'
 #' @examples
 #'
 #' library("vegan")
@@ -399,7 +412,6 @@
 #' ordiggplot(m) + geom_ordi_point("sites") +
 #'   geom_ordi_arrow("sites", stat = "vectorfit", edata = mite.env) +
 #'   facet_wrap(mite.env$Topo)
-#' @export
 `stat_vectorfit` <- function(
   mapping = NULL,
   data = NULL,
