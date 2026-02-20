@@ -147,32 +147,6 @@ scaling of ordination axes.</p>
 <span class="r-in"><span>  <span class="fu"><a href="geom_ordi_point.html">geom_ordi_point</a></span><span class="op">(</span><span class="st">"sites"</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="geom_ordi_arrow.html">geom_ordi_arrow</a></span><span class="op">(</span><span class="st">"species"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="ordiggplot-3.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Fitted vectors, selecting variables with formula</span></span></span>
-<span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"withr"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu">withr</span><span class="fu">::</span><span class="fu"><a href="https://withr.r-lib.org/reference/with_seed.html" class="external-link">with_seed</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    seed <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/metaMDS.html" class="external-link">metaMDS</a></span><span class="op">(</span><span class="va">varespec</span>, trace <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co">## plot</span></span></span>
-<span class="r-in"><span><span class="fu">ordiggplot</span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="geom_ordi_point.html">geom_ordi_point</a></span><span class="op">(</span><span class="st">"sites"</span><span class="op">)</span> <span class="op">+</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="geom_ordi_arrow.html">geom_ordi_arrow</a></span><span class="op">(</span><span class="st">"sites"</span>, stat <span class="op">=</span> <span class="st">"vectorfit"</span>, edata <span class="op">=</span> <span class="va">varechem</span>,</span></span>
-<span class="r-in"><span>                  formula <span class="op">=</span> <span class="op">~</span> <span class="va">N</span> <span class="op">+</span> <span class="va">Ca</span> <span class="op">+</span> <span class="va">Al</span> <span class="op">+</span> <span class="va">Humdepth</span> <span class="op">+</span> <span class="va">pH</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">N</span>, <span style="color: #00BB00;">P</span>,</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">K</span>, <span style="color: #00BB00;">Ca</span>, <span style="color: #00BB00;">Mg</span>, <span style="color: #00BB00;">S</span>, <span style="color: #00BB00;">Al</span>, <span style="color: #00BB00;">Fe</span>, <span style="color: #00BB00;">Mn</span>, <span style="color: #00BB00;">Zn</span>, <span style="color: #00BB00;">Mo</span>, <span style="color: #00BB00;">Baresoil</span>, <span style="color: #00BB00;">Humdepth</span>, and <span style="color: #00BB00;">pH</span>.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The following aesthetics were dropped during statistical transformation: <span style="color: #00BB00;">N</span>, <span style="color: #00BB00;">P</span>,</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">K</span>, <span style="color: #00BB00;">Ca</span>, <span style="color: #00BB00;">Mg</span>, <span style="color: #00BB00;">S</span>, <span style="color: #00BB00;">Al</span>, <span style="color: #00BB00;">Fe</span>, <span style="color: #00BB00;">Mn</span>, <span style="color: #00BB00;">Zn</span>, <span style="color: #00BB00;">Mo</span>, <span style="color: #00BB00;">Baresoil</span>, <span style="color: #00BB00;">Humdepth</span>, and <span style="color: #00BB00;">pH</span>.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> This can happen when ggplot fails to infer the correct grouping structure in</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   the data.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you forget to specify a `group` aesthetic or to convert a numerical</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span>   variable into a factor?</span>
-<span class="r-plt img"><img src="ordiggplot-4.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
   </div>
