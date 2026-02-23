@@ -22,7 +22,7 @@ status](https://gavinsimpson.r-universe.dev/ggvegan/badges/checks)](https://gavi
 
 *ggvegan* uses the *roxygen2* system to document package functions alongside the code itself.
 
-*ggvegan* is very much beta code at the moment. Comments and feedback on the approach taken are welcome, as are code contributions. See **Design decisions** below for two important areas for consideration
+*ggvegan* is very much beta code at the moment. Comments and feedback on the approach taken are welcome, as are code contributions. See **Design decisions** below for some important areas for consideration.
 
 ## Design decisions
 

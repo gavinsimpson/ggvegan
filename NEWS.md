@@ -12,8 +12,8 @@ package upon first submission.
 
 # ggvegan 0.2
 
-This is the first release to CRAN. *ggvegan** is under active development, and
-comments and contributions are welcome.
+This [was intended as] the first release to CRAN. *ggvegan** is under active
+development, and comments and contributions are welcome.
 
 ## New features
 
