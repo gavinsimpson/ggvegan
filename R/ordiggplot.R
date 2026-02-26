@@ -298,14 +298,15 @@
   arrow.mul
 ) {
   if (!missing(formula) && !is.null(formula)) {
-    edata <- model.frame(formula, data)
-  } else {
-    edata <- data[, names(edata)]
+    edata <- model.frame(formula, edata)
   }
   vecs <- sapply(edata, is.numeric)
-  edata <- edata[, vecs, drop = FALSE]
+  ed <- edata[, vecs, drop=FALSE]
+  if (NROW(ed) != NROW(data)) {
+      ed <- ed[data$label, , drop = FALSE]
+  }
   wts <- data$weight
-  fit <- vectorfit(as.matrix(data[, vars]), edata, permutations = 0, w = wts)
+  fit <- vectorfit(as.matrix(data[, vars]), ed, permutations = 0, w = wts)
   fit <- sqrt(fit$r) * fit$arrows
   fit <- arrow.mul * fit
   fit <- as.data.frame(fit) # as_tibble? FIXME
@@ -324,10 +325,6 @@
     Stat,
     required_aes = c("x", "y"),
     compute_group = calculate_vectorfit,
-    setup_data = function(data, params) {
-      data <- cbind(data, params$edata)
-      data
-    },
     ## same scaling of arrows in all panels
     setup_params = function(data, params) {
       if (!is.null(params$arrow.mul)) {
