@@ -324,6 +324,7 @@
     "StatVectorfit",
     Stat,
     required_aes = c("x", "y"),
+    extra_params = c("na.rm", "edata", "formula", "arrow.mul"),
     compute_group = calculate_vectorfit,
     ## same scaling of arrows in all panels
     setup_params = function(data, params) {
@@ -421,7 +422,8 @@
       edata = edata,
       formula = formula,
       na.rm = na.rm,
-      arrow.mul = arrow.mul
+      arrow.mul = arrow.mul,
+      ...
     )
   )
 }
