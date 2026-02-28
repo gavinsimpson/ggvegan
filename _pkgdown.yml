@@ -14,6 +14,12 @@ reference:
   contents:
   - starts_with("tidy.")
   - starts_with("fortify.")
+- title: "Manually plotting ordination diagrams"
+  desc: >
+    More control over plotting of ordination diagrams can be achieved using
+    `ordiggplot()` and the custom *geoms* provided by *ggvegan*
+  contents:
+  - ordiggplot
 - title: "Geoms"
   desc: "geoms for use with `ordiggplot()`."
   contents:
@@ -32,5 +38,6 @@ reference:
   - check_user_layers
   - get_dimension_names
   - label_fun
+  - layer_draw_list
   - scores_length
   - valid_layers
