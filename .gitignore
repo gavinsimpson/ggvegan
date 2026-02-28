@@ -14,3 +14,18 @@ vignettes/*.pdf
 
 # no backup files
 *~
+
+## skip revdep
+revdep/
+
+## skip the .vscode folder with local editor stuff
+.vscode/
+
+## ignore
+CRAN-SUBMISSION
+/doc/
+/Meta/
+docs
+
+# Apple stuff
+.DS_Store
