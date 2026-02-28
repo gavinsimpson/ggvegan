@@ -1,7 +1,7 @@
 Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
-Version: 0.2.1.2
+Version: 0.2.1.3
 Depends: R (>= 4.1.0)
 Imports:
     vegan (>= 2.3-0),
@@ -36,3 +36,4 @@ RoxygenNote: 7.3.3
 Encoding: UTF-8
 Config/testthat/edition: 3
 Language: en-GB
+URL: https://gavinsimpson.github.io/ggvegan/

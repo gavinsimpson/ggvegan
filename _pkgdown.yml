@@ -1,0 +1,16 @@
+url: https://gavinsimpson.github.io/ggvegan/
+template:
+  bootstrap: 5
+  bootswatch: zephyr
+
+reference:
+- title: "Automatic plotting with `autoplot()`"
+  desc: >
+    Functions for producing complete plots of *vegan* objects using *ggplot2*
+  contents: 
+  - starts_with("autoplot.")
+- title: "Tidy *vegan* objects"
+  desc: "Functions tidying *vegan* objects with `tidy()` or `fortify()`."
+  contents:
+  - starts_with("tidy.")
+  - starts_with("fortify.")
