@@ -1,3 +1,10 @@
+# ggvegan (development version)
+
+## Bug fixes
+
+* *ggplot2* would report a warning about dropped aesthetics when `StatVectorfit`
+  was run #43 Fixed by @jarioksa in #44
+
 # ggvegan 0.2.1
 
 Patch release to address issued raised by CRAN during manual inspection of the
