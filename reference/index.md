@@ -1,0 +1,211 @@
+# Package index
+
+## Automatic plotting with `autoplot()`
+
+Functions for producing complete plots of *vegan* objects using
+*ggplot2*
+
+- [`autoplot(`*`<anosim>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.anosim.md)
+  :
+
+  ggplot-based plot for objects of class `"anosim"`
+
+- [`autoplot(`*`<cca>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.cca.md)
+  :
+
+  ggplot-based plot for objects of class `"cca"`
+
+- [`autoplot(`*`<dbrda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.dbrda.md)
+  :
+
+  ggplot-based plot for objects of class `"dbrda"`
+
+- [`autoplot(`*`<decorana>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.decorana.md)
+  :
+
+  ggplot-based plot for objects of class `"decorana"`
+
+- [`autoplot(`*`<envfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.envfit.md)
+  :
+
+  ggplot-based plot for `envfit` objects
+
+- [`autoplot(`*`<fisherfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.fisherfit.md)
+  : Plot Fisher's log-series
+
+- [`autoplot(`*`<isomap>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.isomap.md)
+  :
+
+  ggplot-based plot for objects of class `"isomap"`
+
+- [`autoplot(`*`<metaMDS>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.metaMDS.md)
+  :
+
+  ggplot-based plot for objects of class `"metaMDS"`
+
+- [`autoplot(`*`<permustats>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.permustats.md)
+  : Autoplot Graphics for vegan permustats Objects
+
+- [`autoplot(`*`<poolaccum>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.poolaccum.md)
+  :
+
+  ggplot-based plot for objects of class `"poolaccum"`
+
+- [`autoplot(`*`<prc>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.prc.md)
+  :
+
+  ggplot-based plot for objects of class `"prc"`
+
+- [`autoplot(`*`<prestonfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.prestonfit.md)
+  : Plot Preston's log-normal model of species abundance
+
+- [`autoplot(`*`<rda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.rda.md)
+  :
+
+  ggplot-based plot for objects of class `'rda'`
+
+- [`autoplot(`*`<vegan_pco>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.vegan_pco.md)
+  :
+
+  ggplot-based plot for objects of class `"vegan_pco"`
+
+## Tidy *vegan* objects
+
+Functions tidying *vegan* objects with
+[`tidy()`](https://generics.r-lib.org/reference/tidy.html) or
+[`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html).
+
+- [`fortify(`*`<anosim>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.anosim.md)
+  [`tidy(`*`<anosim>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.anosim.md)
+  : Fortify analysis of similarities (ANOSIM) results
+
+- [`fortify(`*`<cca>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.cca.md)
+  [`tidy(`*`<cca>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.cca.md)
+  :
+
+  Fortify a `"cca"` object.
+
+- [`fortify(`*`<dbrda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.dbrda.md)
+  [`tidy(`*`<dbrda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.dbrda.md)
+  :
+
+  Fortify a `"dbrda"` object.
+
+- [`fortify(`*`<decorana>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.decorana.md)
+  [`tidy(`*`<decorana>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.decorana.md)
+  :
+
+  Fortify a `"decorana"` object.
+
+- [`fortify(`*`<envfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.envfit.md)
+  [`tidy(`*`<envfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.envfit.md)
+  :
+
+  Fortify method for `envfit` objects
+
+- [`fortify(`*`<fisherfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.fisherfit.md)
+  [`tidy(`*`<fisherfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.fisherfit.md)
+  : Tidied species rank abundance data and estimated Fisher's log-series
+
+- [`fortify(`*`<isomap>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.isomap.md)
+  [`tidy(`*`<isomap>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.isomap.md)
+  : Fortify isometric feature mapping results
+
+- [`fortify(`*`<metaMDS>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.metaMDS.md)
+  [`tidy(`*`<metaMDS>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.metaMDS.md)
+  :
+
+  Fortify a `"mataMDS"` object.
+
+- [`fortify(`*`<permustats>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.permustats.md)
+  [`tidy(`*`<permustats>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.permustats.md)
+  : Fortify permutation statistics
+
+- [`fortify(`*`<poolaccum>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.poolaccum.md)
+  [`tidy(`*`<poolaccum>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.poolaccum.md)
+  : Fortify extrapolated species richness of a species pool
+
+- [`fortify(`*`<prc>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.prc.md)
+  [`tidy(`*`<prc>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.prc.md)
+  :
+
+  Fortify a `"prc"` object
+
+- [`fortify(`*`<prestonfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.prestonfit.md)
+  [`tidy(`*`<prestonfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.prestonfit.md)
+  : Tidied species octave abundance data
+
+- [`fortify(`*`<rda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.rda.md)
+  [`tidy(`*`<rda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.rda.md)
+  :
+
+  Fortify a `"rda"` object.
+
+- [`fortify(`*`<renyiaccum>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.renyiaccum.md)
+  [`tidy(`*`<renyiaccum>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.renyiaccum.md)
+  : Fortify Rényi accumulation curves
+
+- [`fortify(`*`<vegan_pco>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.vegan_pco.md)
+  [`tidy(`*`<vegan_pco>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.vegan_pco.md)
+  :
+
+  Fortify a `"vegan_pco"` object.
+
+## Manually plotting ordination diagrams
+
+More control over plotting of ordination diagrams can be achieved using
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md)
+and the custom *geoms* provided by *ggvegan*
+
+- [`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md)
+  [`ggscores()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md)
+  : Create a ggplot Object
+
+## Geoms
+
+geoms for use with
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md).
+
+- [`geom_ordi_arrow()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_arrow.md)
+  : Add a biplot arrow layer to an ordiggplot
+- [`geom_ordi_axis()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_axis.md)
+  : Crosshair for axes in eigenvector methods
+- [`geom_ordi_label()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_label.md)
+  : Add a label layer to an ordiggplot
+- [`geom_ordi_point()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_point.md)
+  : Add a point layer to an ordiggplot
+- [`geom_ordi_text()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_text.md)
+  : Add a text layer to an ordiggplot
+
+## Stats
+
+stats for use with
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md).
+
+- [`stat_vectorfit()`](https://gavinsimpson.github.io/ggvegan/reference/stat_vectorfit.md)
+  : Add Fitted Vectors to Ordination plots
+
+## Utility functions
+
+Functions that provide utilities or helpers.
+
+- [`add_biplot_arrows()`](https://gavinsimpson.github.io/ggvegan/reference/add_biplot_arrows.md)
+  : Adds a biplot arrow layer to an existing plot
+- [`add_biplot_centroids()`](https://gavinsimpson.github.io/ggvegan/reference/add_biplot_centroids.md)
+  : Adds a biplot arrow layer to an existing plot
+- [`add_spp_site_scores()`](https://gavinsimpson.github.io/ggvegan/reference/add_spp_site_scores.md)
+  : Adds species and site score layers to an existing plot
+- [`arrow_mul()`](https://gavinsimpson.github.io/ggvegan/reference/arrow_mul.md)
+  : Scale Vectors to Data
+- [`check_user_layers()`](https://gavinsimpson.github.io/ggvegan/reference/check_user_layers.md)
+  : Check user-supplied layers against list of valid layers
+- [`get_dimension_names()`](https://gavinsimpson.github.io/ggvegan/reference/get_dimension_names.md)
+  : Extract the names of the dimensions to plot as a character vector
+- [`label_fun()`](https://gavinsimpson.github.io/ggvegan/reference/label_fun.md)
+  : Adds a label layer using one of a set of common geoms
+- [`layer_draw_list()`](https://gavinsimpson.github.io/ggvegan/reference/layer_draw_list.md)
+  : List of layers to draw for a given vegan object
+- [`scores_length()`](https://gavinsimpson.github.io/ggvegan/reference/scores_length.md)
+  : Number of scores
+- [`valid_layers()`](https://gavinsimpson.github.io/ggvegan/reference/valid_layers.md)
+  : Valid layers for vegan objects
