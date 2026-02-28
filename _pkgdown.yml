@@ -14,3 +14,23 @@ reference:
   contents:
   - starts_with("tidy.")
   - starts_with("fortify.")
+- title: "Geoms"
+  desc: "geoms for use with `ordiggplot()`."
+  contents:
+  - starts_with("geom_ordi_")
+- title: "Stats"
+  desc: "stats for use with `ordiggplot()`."
+  contents:
+  - starts_with("Stat")
+- title: "Utility functions"
+  desc: "Functions that provide utilities or helpers."
+  contents:
+  - add_biplot_arrows
+  - add_biplot_centroids
+  - add_spp_site_scores
+  - arrow_mul
+  - check_user_layers
+  - get_dimension_names
+  - label_fun
+  - scores_length
+  - valid_layers
