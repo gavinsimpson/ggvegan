@@ -14,6 +14,8 @@
 #' be used to produce the graphics.
 #'
 #' @examples
+#' library(vegan)
+#' library(ggplot2)
 #' data(mite)
 #' m1 <- radfit(mite[1,])
 #' ## With logarithmic y-axis (default) Pre-emption model is a line
