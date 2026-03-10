@@ -46,7 +46,7 @@
 #'     \code{\link[ggplot2]{geom_line}}).
 #' @param ... Additional arguments passed to the functions.
 #'
-#' @importFrom ggplot2 ggplot aes_ scale_y_log10 facet_wrap geom_point
+#' @importFrom ggplot2 ggplot aes scale_y_log10 facet_wrap geom_point
 #'     geom_line fortify autoplot
 #' @importFrom scales oob_squish_infinite
 #' @importFrom utils modifyList
@@ -58,11 +58,12 @@
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+    point.params <- modifyList(list(mapping=aes(y = .data[["Abundance"]])),
                                point.params)
-    line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~ Model)),
+    line.params <- modifyList(list(mapping=aes(y = .data[["Fit"]],
+                                               colour = .data[["Model"]])),
                                    line.params)
-    pl <- ggplot(df, aes_(~Rank)) +
+    pl <- ggplot(df, aes(.data[["Rank"]])) +
         scale_y_log10(limit=c(ymin,NA), oob = oob_squish_infinite) +
         do.call("geom_point", point.params) +
         do.call("geom_line", line.params)
@@ -72,7 +73,7 @@
 }
 
 #'
-#' @importFrom ggplot2 fortify aes_ scale_y_log10 geom_point geom_line
+#' @importFrom ggplot2 fortify aes scale_y_log10 geom_point geom_line
 #'     facet_wrap
 #' @importFrom scales oob_squish_infinite
 #' @importFrom utils modifyList
@@ -84,18 +85,19 @@
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+    point.params <- modifyList(list(mapping=aes(y = .data[["Abundance"]])),
                                point.params)
-    line.params <- modifyList(list(mapping=aes_(y = ~Fit, colour = ~Model)),
+    line.params <- modifyList(list(mapping=aes(y = .data[["Fit"]],
+                                               colour = .data[["Model"]])),
                               line.params)
-    ggplot(df, aes_(~Rank)) +
+    ggplot(df, aes(.data[["Rank"]])) +
         scale_y_log10(limit=c(ymin,NA), oob = oob_squish_infinite) +
         do.call("geom_point", point.params) +
         do.call("geom_line", line.params) +
         facet_wrap(~Site)
 }
 
-#' @importFrom ggplot2 ggplot scale_y_log10 geom_point geom_line aes_
+#' @importFrom ggplot2 ggplot scale_y_log10 geom_point geom_line aes
 #'     fortify
 #' @importFrom utils modifyList
 #' @rdname autoplot.radfit
@@ -105,11 +107,11 @@
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+    point.params <- modifyList(list(mapping=aes(y = .data[["Abundance"]])),
                                point.params)
-    line.params <- modifyList(list(mapping=aes_(y = ~ Fit)),
+    line.params <- modifyList(list(mapping=aes(y = .data[["Fit"]])),
                               line.params)
-    ggplot(df, aes_(~Rank)) +
+    ggplot(df, aes(.data[["Rank"]])) +
         scale_y_log10() +  # no lower limit for a single line
         do.call("geom_point", point.params) +
         do.call("geom_line", line.params)
@@ -118,7 +120,7 @@
 ### Methods for rad: only points, no lines from vegan::as.rad()
 
 #' @importFrom utils modifyList
-#' @importFrom ggplot2 aes_ scale_y_log10 geom_point
+#' @importFrom ggplot2 aes scale_y_log10 geom_point
 #' @rdname autoplot.radfit
 #' @export
 `autoplot.rad` <-
@@ -126,9 +128,9 @@
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+    point.params <- modifyList(list(mapping=aes(y = .data[["Abundance"]])),
                                point.params)
-    ggplot(df, aes_(~Rank)) +
+    ggplot(df, aes(.data[["Rank"]])) +
         scale_y_log10() +  # no lower limit for a single line
         do.call("geom_point", point.params)
 }
@@ -136,7 +138,7 @@
 #' @param highlight Names of species that should be highlighted as
 #'     coloured points.
 #' @importFrom utils modifyList
-#' @importFrom ggplot2 aes_ scale_colour_discrete scale_y_log10
+#' @importFrom ggplot2 aes scale_colour_discrete scale_y_log10
 #'     geom_point facet_wrap
 #' @rdname autoplot.radfit
 #' @export
@@ -145,9 +147,9 @@
 {
     df <- fortify(object, ...)
     ymin <- min(1, df$Abundance)
-    point.params <- modifyList(list(mapping=aes_(y = ~ Abundance)),
+    point.params <- modifyList(list(mapping=aes(y = .data[["Abundance"]])),
                                point.params)
-    pl <- ggplot(df, aes_(~Rank)) +
+    pl <- ggplot(df, aes(.data[["Rank"]])) +
         scale_y_log10(limit=c(ymin,NA)) +
         do.call("geom_point", point.params) +
         facet_wrap(~Site)
@@ -155,7 +157,8 @@
         highlight <- factor(highlight, levels=highlight)
         for(sp in highlight)
             pl <- pl + geom_point(data=df[df$Species == sp, ,drop=FALSE],
-                                  aes_(y = ~Abundance, colour = sp))
+                                  aes(y = .data[["Abundance"]],
+                                      colour = .data[["Species"]]))
         pl <- pl + scale_colour_discrete(highlight, name = "Species")
     }
     pl
