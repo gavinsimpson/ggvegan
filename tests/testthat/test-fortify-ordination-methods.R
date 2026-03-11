@@ -1,4 +1,4 @@
-# Tests for fortify.cca()
+# Tests for fortify.cca() etc
 
 test_that("fortify works for cca like objects", {
   expect_snapshot(fortify(dune_pca))
@@ -35,4 +35,8 @@ test_that("tidy works for cca like objects", {
 test_that("fortify works for cca with layers length 1", {
   expect_snapshot(fortify(dune_cca, layers = "sites"))
   expect_snapshot(tidy(dune_cca, layers = "sites"))
+})
+
+test_that("fortify works for dbrda with 1 set of scores", {
+  expect_snapshot(fortify(dune_dbrda, layers = "sites"))
 })
