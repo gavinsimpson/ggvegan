@@ -1,8 +1,8 @@
 # Autoplot Graphics for vegan permustats Objects
 
 Alternatives for lattice graphics functions
-[`vegan::densityplot.permustats()`](https://vegandevs.github.io/vegan/reference/permustats.html),
-[`vegan::densityplot.permustats()`](https://vegandevs.github.io/vegan/reference/permustats.html)
+[`vegan::densityplot.permustats()`](https://vegandevs.github.io/vegan/reference/vegan-deprecated-lattice.html),
+[`vegan::densityplot.permustats()`](https://vegandevs.github.io/vegan/reference/vegan-deprecated-lattice.html)
 and
 [`vegan::boxplot.permustats()`](https://vegandevs.github.io/vegan/reference/permustats.html).
 
