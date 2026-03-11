@@ -34,8 +34,8 @@ Returns a ggplot object.
 }
 \description{
 Alternatives for \pkg{lattice} graphics functions
-\code{\link[vegan:permustats]{vegan::densityplot.permustats()}},
-\code{\link[vegan:permustats]{vegan::densityplot.permustats()}} and
+\code{\link[vegan:vegan-deprecated-lattice]{vegan::densityplot.permustats()}},
+\code{\link[vegan:vegan-deprecated-lattice]{vegan::densityplot.permustats()}} and
 \code{\link[vegan:permustats]{vegan::boxplot.permustats()}}.
 }
 \details{
