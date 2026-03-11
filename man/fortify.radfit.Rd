@@ -6,6 +6,11 @@
 \alias{fortify.radline}
 \alias{fortify.rad}
 \alias{fortify.rad.frame}
+\alias{tidy.radfit}
+\alias{tidy.radfit.frame}
+\alias{tidy.radline}
+\alias{tidy.rad}
+\alias{tidy.rad.frame}
 \title{Fortify results of ranked abundance distribution models}
 \usage{
 \method{fortify}{radfit}(model, data, pick = NULL, ...)
@@ -17,6 +22,16 @@
 \method{fortify}{rad}(model, data, ...)
 
 \method{fortify}{rad.frame}(model, data, order.by = NULL, ...)
+
+\method{tidy}{radfit}(x, data, pick = NULL, ...)
+
+\method{tidy}{radfit.frame}(x, data, pick = "AIC", order.by = NULL, ...)
+
+\method{tidy}{radline}(x, data, ...)
+
+\method{tidy}{rad}(x, data, ...)
+
+\method{tidy}{rad.frame}(x, data, order.by = NULL, ...)
 }
 \arguments{
 \item{model}{model or other R object to convert to data frame}
@@ -31,6 +46,8 @@ returns all fitted models.}
 \item{...}{Arguments passed to methods.}
 
 \item{order.by}{A vector used for ordering site panels.}
+
+\item{x}{An object to be converted into a tidy \code{\link[tibble:tibble]{tibble::tibble()}}.}
 }
 \description{
 Prepares a fortified version of results from

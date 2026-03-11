@@ -4,6 +4,7 @@
 #'     [vegan::radfit()] or [vegan::as.rad()].
 #'
 #' @inheritParams ggplot2::fortify
+#' @inheritParams generics::tidy
 #'
 #' @param pick Pick or several models. Allowed values are \code{"AIC"}
 #'     and \code{"BIC"} for selecting the best model by AIC or BIC, or
@@ -138,3 +139,33 @@
         "Abundance" = unlist(abu, use.names=FALSE)
     )
 }
+
+### tidy() as fortify() synonyms
+
+#' @importFrom tibble as_tibble
+
+#' @rdname fortify.radfit
+#' @export
+`tidy.radfit` <- function(x, data, pick = NULL, ...)
+    as_tibble(fortify(model = x, data = data , pick = pick, ...))
+
+#' @rdname fortify.radfit
+#' @export
+`tidy.radfit.frame` <- function(x, data, pick = "AIC", order.by = NULL, ...)
+    as_tibble(
+        fortify(model = x, data = data, pick = pick, order.by = order.by, ...))
+
+#' @rdname fortify.radfit
+#' @export
+`tidy.radline` <- function(x, data, ...)
+    as_tibble(fortify(model = x, data = data, ...))
+
+#' @rdname fortify.radfit
+#' @export
+`tidy.rad` <- function(x, data, ...)
+    as_tibble(fortify(model = x, data = data, ...))
+
+#' @rdname fortify.radfit
+#' @export
+`tidy.rad.frame` <- function(x, data, order.by = NULL, ...)
+    as_tibble(fortify(model = x, data = data, order.by = order.by, ...))
