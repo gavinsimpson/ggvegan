@@ -5,7 +5,10 @@
 ### Bug fixes
 
 - *ggplot2* would report a warning about dropped aesthetics when
-  `StatVectorfit` was run \#43 Fixed by @jarioksa in \#44
+  `StatVectorfit` was run
+  [\#43](https://github.com/gavinsimpson/ggvegan/issues/43) Fixed by
+  [@jarioksa](https://github.com/jarioksa) in
+  [\#44](https://github.com/gavinsimpson/ggvegan/issues/44)
 
 ## ggvegan 0.2.1
 
@@ -42,5 +45,6 @@ under active development, and comments and contributions are welcome.
 
 ### Bug Fixes
 
-- `const` was not being passed to `scores.rda` in `autoplot.rda`. \#26
-  Reported by Richard Telford
+- `const` was not being passed to `scores.rda` in `autoplot.rda`.
+  [\#26](https://github.com/gavinsimpson/ggvegan/issues/26) Reported by
+  Richard Telford
