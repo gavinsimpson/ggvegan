@@ -4,6 +4,8 @@
 [![R build
 status](https://github.com/gavinsimpson/ggvegan/workflows/R-CMD-check/badge.svg)](https://github.com/gavinsimpson/ggvegan/actions)
 [![codecov](https://codecov.io/gh/gavinsimpson/ggvegan/branch/main/graph/badge.svg?token=pwoTNmIfOg)](https://app.codecov.io/gh/gavinsimpson/ggvegan)
+[![CRAN version](https://www.r-pkg.org/badges/version/ggvegan)]()
+[![](https://cranlogs.r-pkg.org/badges/grand-total/ggvegan)](https://cran.rstudio.com/package=ggvegan)
 [![r-universe
 version](https://gavinsimpson.r-universe.dev/ggvegan/badges/version)](https://gavinsimpson.r-universe.dev/ggvegan)
 [![r-universe
