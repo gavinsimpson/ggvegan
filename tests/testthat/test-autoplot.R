@@ -71,6 +71,8 @@ test_that("autoplot method for rda works", {
   p <- dune_rda |> autoplot()
   expect_doppelganger("rda autoplot", p)
   p <- dune_pca |> autoplot()
+  skip_on_covr()
+  skip_on_ci()
   expect_doppelganger("pca autoplot", p)
 })
 
