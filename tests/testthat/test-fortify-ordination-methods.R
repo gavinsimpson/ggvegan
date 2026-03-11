@@ -39,4 +39,5 @@ test_that("fortify works for cca with layers length 1", {
 
 test_that("fortify works for dbrda with 1 set of scores", {
   expect_snapshot(fortify(dune_dbrda, layers = "sites"))
+  expect_snapshot(tidy(dune_dbrda, layers = "sites"))
 })
