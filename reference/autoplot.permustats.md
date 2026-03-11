@@ -88,10 +88,10 @@ mod <- cca(dune ~ A1 + Management + Moisture, dune.env)
 #> A1            1   0.22476 2.7632  0.009 ** 
 #> ManagementHF  1   0.13890 1.7076  0.054 .  
 #> ManagementNM  1   0.28099 3.4545  0.001 ***
-#> ManagementSF  1   0.13512 1.6612  0.077 .  
+#> ManagementSF  1   0.13512 1.6612  0.076 .  
 #> Moisture.L    1   0.21976 2.7017  0.002 ** 
 #> Moisture.Q    1   0.05769 0.7093  0.722    
-#> Moisture.C    1   0.08193 1.0073  0.358    
+#> Moisture.C    1   0.08193 1.0073  0.360    
 #> Residual     12   0.97610                  
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
@@ -100,12 +100,12 @@ head(fortify(pstat))
 #> # A tibble: 6 × 2
 #>   term  permutation
 #>   <fct>       <dbl>
-#> 1 A1          -2.10
-#> 2 A1          -2.06
-#> 3 A1          -2.21
-#> 4 A1          -2.00
-#> 5 A1          -2.06
-#> 6 A1          -1.74
+#> 1 A1          -2.06
+#> 2 A1          -1.65
+#> 3 A1          -1.90
+#> 4 A1          -2.16
+#> 5 A1          -1.84
+#> 6 A1          -1.99
 autoplot(pstat, "box")
 
 

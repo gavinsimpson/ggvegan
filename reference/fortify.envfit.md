@@ -51,33 +51,34 @@ ord <- metaMDS(varespec)
 #> Square root transformation
 #> Wisconsin double standardization
 #> Run 0 stress 0.1843196 
-#> Run 1 stress 0.1843196 
-#> ... Procrustes: rmse 0.0001319991  max resid 0.0005352859 
+#> Run 1 stress 0.18458 
+#> ... Procrustes: rmse 0.04934384  max resid 0.1574557 
+#> Run 2 stress 0.1948413 
+#> Run 3 stress 0.2109614 
+#> Run 4 stress 0.1974421 
+#> Run 5 stress 0.18584 
+#> Run 6 stress 0.2212139 
+#> Run 7 stress 0.2104991 
+#> Run 8 stress 0.2085949 
+#> Run 9 stress 0.1843196 
+#> ... Procrustes: rmse 4.017075e-05  max resid 0.0001549597 
 #> ... Similar to previous best
-#> Run 2 stress 0.2265716 
-#> Run 3 stress 0.2244976 
-#> Run 4 stress 0.2357179 
-#> Run 5 stress 0.2173475 
-#> Run 6 stress 0.2370315 
-#> Run 7 stress 0.2088293 
-#> Run 8 stress 0.1948413 
-#> Run 9 stress 0.1982376 
-#> Run 10 stress 0.2110414 
-#> Run 11 stress 0.1825658 
+#> Run 10 stress 0.2102718 
+#> Run 11 stress 0.1967393 
+#> Run 12 stress 0.1955836 
+#> Run 13 stress 0.22964 
+#> Run 14 stress 0.1825658 
 #> ... New best solution
-#> ... Procrustes: rmse 0.04162616  max resid 0.1518042 
-#> Run 12 stress 0.1843196 
-#> Run 13 stress 0.1825658 
-#> ... Procrustes: rmse 1.175466e-05  max resid 3.169968e-05 
-#> ... Similar to previous best
-#> Run 14 stress 0.2178549 
-#> Run 15 stress 0.2109612 
-#> Run 16 stress 0.215148 
-#> Run 17 stress 0.2327977 
-#> Run 18 stress 0.2225663 
-#> Run 19 stress 0.18458 
-#> Run 20 stress 0.214431 
-#> *** Best solution repeated 1 times
+#> ... Procrustes: rmse 0.04162943  max resid 0.1518165 
+#> Run 15 stress 0.1852397 
+#> Run 16 stress 0.1843196 
+#> Run 17 stress 0.2447739 
+#> Run 18 stress 0.1948414 
+#> Run 19 stress 0.1967393 
+#> Run 20 stress 0.2199834 
+#> *** Best solution was not repeated -- monoMDS stopping criteria:
+#>     19: stress ratio > sratmax
+#>      1: scale factor of the gradient < sfgrmin
 fit <- envfit(ord, varechem, perm = 199)
 
 fortify(fit)

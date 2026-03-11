@@ -91,42 +91,50 @@ data(dune)
 
 sol <- metaMDS(dune)
 #> Run 0 stress 0.1192678 
-#> Run 1 stress 0.1192679 
-#> ... Procrustes: rmse 8.334982e-05  max resid 0.0002500859 
-#> ... Similar to previous best
-#> Run 2 stress 0.1808911 
-#> Run 3 stress 0.119268 
-#> ... Procrustes: rmse 0.0002168593  max resid 0.0006648345 
-#> ... Similar to previous best
-#> Run 4 stress 0.1183186 
+#> Run 1 stress 0.1192678 
 #> ... New best solution
-#> ... Procrustes: rmse 0.02027  max resid 0.06495852 
-#> Run 5 stress 0.1192679 
+#> ... Procrustes: rmse 5.475398e-06  max resid 1.631124e-05 
+#> ... Similar to previous best
+#> Run 2 stress 0.1192679 
+#> ... Procrustes: rmse 9.156903e-05  max resid 0.0002801513 
+#> ... Similar to previous best
+#> Run 3 stress 0.1183186 
+#> ... New best solution
+#> ... Procrustes: rmse 0.02027291  max resid 0.06497703 
+#> Run 4 stress 0.1192678 
+#> Run 5 stress 0.1183186 
+#> ... Procrustes: rmse 1.154542e-06  max resid 2.883052e-06 
+#> ... Similar to previous best
 #> Run 6 stress 0.1192678 
 #> Run 7 stress 0.1192678 
-#> Run 8 stress 0.1886532 
-#> Run 9 stress 0.1192678 
-#> Run 10 stress 0.1192679 
-#> Run 11 stress 0.1192678 
-#> Run 12 stress 0.1183186 
+#> Run 8 stress 0.1183186 
 #> ... New best solution
-#> ... Procrustes: rmse 4.231201e-05  max resid 0.0001362627 
+#> ... Procrustes: rmse 2.730997e-06  max resid 8.755205e-06 
 #> ... Similar to previous best
-#> Run 13 stress 0.1992852 
+#> Run 9 stress 0.2045511 
+#> Run 10 stress 0.1183186 
+#> ... Procrustes: rmse 2.864314e-06  max resid 6.507562e-06 
+#> ... Similar to previous best
+#> Run 11 stress 0.1192679 
+#> Run 12 stress 0.1183186 
+#> ... Procrustes: rmse 4.75061e-06  max resid 1.483607e-05 
+#> ... Similar to previous best
+#> Run 13 stress 0.1183186 
+#> ... Procrustes: rmse 1.209316e-05  max resid 3.823555e-05 
+#> ... Similar to previous best
 #> Run 14 stress 0.1183186 
 #> ... New best solution
-#> ... Procrustes: rmse 3.977954e-05  max resid 0.0001292582 
+#> ... Procrustes: rmse 5.606702e-06  max resid 1.793249e-05 
 #> ... Similar to previous best
-#> Run 15 stress 0.1982888 
-#> Run 16 stress 0.1183186 
-#> ... Procrustes: rmse 4.966779e-06  max resid 1.575898e-05 
+#> Run 15 stress 0.1192678 
+#> Run 16 stress 0.1812933 
+#> Run 17 stress 0.1183186 
+#> ... New best solution
+#> ... Procrustes: rmse 1.13932e-06  max resid 2.133106e-06 
 #> ... Similar to previous best
-#> Run 17 stress 0.1192679 
-#> Run 18 stress 0.1192679 
-#> Run 19 stress 0.1183186 
-#> ... Procrustes: rmse 8.11016e-06  max resid 2.61696e-05 
-#> ... Similar to previous best
+#> Run 18 stress 0.1192678 
+#> Run 19 stress 0.1192679 
 #> Run 20 stress 0.1192679 
-#> *** Best solution repeated 3 times
+#> *** Best solution repeated 1 times
 autoplot(sol)
 ```
