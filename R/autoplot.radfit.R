@@ -38,6 +38,9 @@
 #' dominants <- names(sort(colSums(mite), decreasing=TRUE))[1:6]
 #' autoplot(m0, highlight = dominants)
 
+#' @return Returns a ggplot object.
+#' @author Jari Oksanen
+#'
 #' @param object Result object from \code{\link[vegan]{radfit}}.
 #' @param facet Draw each fitted model to a separate facet or (if
 #'     \code{FALSE}) all fitted lines to a single graph.

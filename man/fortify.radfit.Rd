@@ -49,7 +49,18 @@ returns all fitted models.}
 
 \item{x}{An object to be converted into a tidy \code{\link[tibble:tibble]{tibble::tibble()}}.}
 }
+\value{
+A data frame or tibble which in all cases has columns
+\code{Species} (character), for species names, with \code{Rank} and
+\code{Abundance} for data, and may also have columns \code{Site} (factor)
+for site names when several sites were analysed, \code{Fit} of
+fitted abundances when evaluated, and \code{Model} (factor) when
+several models were fitted.
+}
 \description{
 Prepares a fortified version of results from
 \code{\link[vegan:radfit]{vegan::radfit()}} or \code{\link[vegan:radfit]{vegan::as.rad()}}.
+}
+\author{
+Jari Oksanen
 }

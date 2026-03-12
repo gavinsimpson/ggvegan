@@ -39,6 +39,9 @@ lines (passed to \code{\link[ggplot2]{geom_point}} and
 \item{highlight}{Names of species that should be highlighted as
 coloured points.}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 \pkg{ggplot2} graphics for Rank-Abundance Distribution models
 fitted with \pkg{vegan} functions \code{\link[vegan:radfit]{vegan::radfit()}} or produced
@@ -75,4 +78,7 @@ autoplot(m, pick="BIC", order.by = diversity(mite[1:12,])) +
 m0 <- as.rad(mite[1:12,])
 dominants <- names(sort(colSums(mite), decreasing=TRUE))[1:6]
 autoplot(m0, highlight = dominants)
+}
+\author{
+Jari Oksanen
 }

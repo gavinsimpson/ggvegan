@@ -11,6 +11,15 @@
 #'     (a vector of) model names that can be abbreviated. The default
 #'     returns all fitted models.
 #'
+#' @return A data frame or tibble which in all cases has columns
+#'     `Species` (character), for species names, with `Rank` and
+#'     `Abundance` for data, and may also have columns `Site` (factor)
+#'     for site names when several sites were analysed, `Fit` of
+#'     fitted abundances when evaluated, and `Model` (factor) when
+#'     several models were fitted.
+#'
+#' @author Jari Oksanen
+#'
 #' @importFrom stats AIC fitted
 #' @importFrom ggplot2 fortify
 #'
