@@ -12,7 +12,9 @@ Imports:
     grid,
     tidyr,
     ggrepel,
-    generics
+    generics,
+    scales,
+    rlang
 Suggests:
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.0),
