@@ -3,6 +3,7 @@
 # load vegan
 library("vegan")
 library("permute")
+library("dplyr")
 
 # load data
 data(dune, dune.env, BCI, pyrifos, package = "vegan")
