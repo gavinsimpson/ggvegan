@@ -13,7 +13,8 @@ Imports:
     tidyr,
     ggrepel,
     generics,
-    scales
+    scales,
+    rlang
 Suggests:
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.0),
