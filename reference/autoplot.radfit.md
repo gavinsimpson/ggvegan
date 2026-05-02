@@ -87,32 +87,32 @@ m1 <- radfit(mite[1, ])
 ## With logarithmic y-axis (default) Pre-emption model is a line
 autoplot(m1) +
   labs(title="log-Abundance: Pre-emption model is a line")
-#> Error in !point.params: invalid argument type
+
 
 ## With log-log scale, Zipf model is a line
 autoplot(m1) +
   scale_x_log10() +
   labs(title="log-log Scale: Zipf model is a line")
-#> Error in !point.params: invalid argument type
+
 
 ## Show only the best model
 autoplot(m1, pick = "AIC")
-#> Error in !point.params: invalid argument type
+
 
 ## Show selected models in one frame
 autoplot(m1, pick = c("Z","M","L"), facet=FALSE)
-#> Error in !point.params: invalid argument type
+
 
 ## plot best models for several sites
 m <- radfit(mite[1:12,])
 autoplot(m) +
   labs(title = "Model Selection AIC (Default)")
-#> Error in !point.params: invalid argument type
+
 
 ## use BIC and reorder sites by their diversity
 autoplot(m, pick="BIC", order.by = diversity(mite[1:12,])) +
    labs(title="Model Selection BIC, Ordered by Increasing Diversity")
-#> Error in !point.params: invalid argument type
+
 
 ## Plot RAD models without fits highlighting most abundant species in the
 ## whole data.
