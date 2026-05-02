@@ -48,7 +48,7 @@ fitted with \pkg{vegan} functions \code{\link[vegan:radfit]{vegan::radfit()}} or
 with \code{\link[vegan:radfit]{vegan::as.rad()}}.
 }
 \details{
-The \code{autoplot} function draws graphics which are \pkg{ggplot2}
+The \code{\link[ggplot2:autoplot]{ggplot2::autoplot()}} function draws graphics which are \pkg{ggplot2}
 alternatives for \CRANpkg{lattice} graphics in \pkg{vegan}. In
 addition, there are functions for \code{\link[vegan:radfit]{vegan::as.rad()}}
 results which do not have dedicated graphics in\pkg{vegan}.
@@ -57,26 +57,36 @@ results which do not have dedicated graphics in\pkg{vegan}.
 library(vegan)
 library(ggplot2)
 data(mite)
-m1 <- radfit(mite[1,])
+m1 <- radfit(mite[1, ])
+
 ## With logarithmic y-axis (default) Pre-emption model is a line
-autoplot(m1) + labs(title="log-Abundance: Pre-emption model is a line")
+autoplot(m1) +
+  labs(title="log-Abundance: Pre-emption model is a line")
+
 ## With log-log scale, Zipf model is a line
-autoplot(m1) + scale_x_log10() +
-   labs(title="log-log Scale: Zipf model is a line")
+autoplot(m1) +
+  scale_x_log10() +
+  labs(title="log-log Scale: Zipf model is a line")
+
 ## Show only the best model
 autoplot(m1, pick = "AIC")
+
 ## Show selected models in one frame
 autoplot(m1, pick = c("Z","M","L"), facet=FALSE)
+
 ## plot best models for several sites
 m <- radfit(mite[1:12,])
-autoplot(m) + labs(title="Model Selection AIC (Default)")
-## use BIC and reoreder sites by their diversity
+autoplot(m) +
+  labs(title = "Model Selection AIC (Default)")
+
+## use BIC and reorder sites by their diversity
 autoplot(m, pick="BIC", order.by = diversity(mite[1:12,])) +
    labs(title="Model Selection BIC, Ordered by Increasing Diversity")
+
 ## Plot RAD models without fits highlighting most abundant species in the
 ## whole data.
 m0 <- as.rad(mite[1:12,])
-dominants <- names(sort(colSums(mite), decreasing=TRUE))[1:6]
+dominants <- names(sort(colSums(mite), decreasing = TRUE))[1:6]
 autoplot(m0, highlight = dominants)
 }
 \author{

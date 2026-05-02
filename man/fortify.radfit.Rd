@@ -51,10 +51,10 @@ returns all fitted models.}
 }
 \value{
 A data frame or tibble which in all cases has columns
-\code{Species} (character), for species names, with \code{Rank} and
-\code{Abundance} for data, and may also have columns \code{Site} (factor)
-for site names when several sites were analysed, \code{Fit} of
-fitted abundances when evaluated, and \code{Model} (factor) when
+\code{species} (character), for species names, with \code{rank} and
+\code{abundance} for data, and may also have columns \code{site} (factor)
+for site names when several sites were analysed, \code{fit} of
+fitted abundances when evaluated, and \code{model} (factor) when
 several models were fitted.
 }
 \description{
