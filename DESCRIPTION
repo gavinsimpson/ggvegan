@@ -1,7 +1,7 @@
 Package: ggvegan
 Type: Package
 Title: 'ggplot2' Plots for the 'vegan' Package 
-Version: 0.2.1.8
+Version: 0.2.1.9
 Depends: R (>= 4.1.0)
 Imports:
     vegan (>= 2.3-0),
@@ -13,8 +13,7 @@ Imports:
     tidyr,
     ggrepel,
     generics,
-    scales,
-    rlang
+    scales
 Suggests:
     testthat (>= 3.0.0),
     vdiffr (>= 1.0.0),
