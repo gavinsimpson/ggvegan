@@ -27,7 +27,6 @@
 #'     geom_line fortify autoplot
 #' @importFrom scales oob_squish_infinite
 #' @importFrom utils modifyList
-#' @importFrom rlang !!!
 #'
 #' @export
 #' @examples
@@ -79,17 +78,17 @@
     point.params
   )
   line.params <- modifyList(
-    list(mapping = aes(y = .data[["Fit"]], colour = .data[["Model"]])),
+    list(mapping = aes(y = .data[["fit"]], colour = .data[["model"]])),
     line.params
   )
-  pl <- ggplot(df, aes(.data[["Rank"]])) +
+  pl <- ggplot(df, aes(.data[["rank"]])) +
     scale_y_log10(limit = c(ymin, NA), oob = oob_squish_infinite) +
-    #do.call("geom_point", point.params) +
-    #do.call("geom_line", line.params)
-    geom_point(!!!point.params) +
-    geom_line(!!!line.params)
+    do.call("geom_point", point.params) +
+    do.call("geom_line", line.params)
+  #geom_point(!!!point.params) +
+  #geom_line(!!!line.params)
   if (facet) {
-    pl <- pl + facet_wrap(~Model)
+    pl <- pl + facet_wrap(~model)
   }
   pl
 }
@@ -98,7 +97,6 @@
 #'     facet_wrap
 #' @importFrom scales oob_squish_infinite
 #' @importFrom utils modifyList
-#' @importFrom rlang !!!
 #'
 #' @rdname autoplot.radfit
 #' @export
@@ -120,15 +118,16 @@
   )
   ggplot(df, aes(.data[["rank"]])) +
     scale_y_log10(limit = c(ymin, NA), oob = oob_squish_infinite) +
-    geom_point(!!!point.params) +
-    geom_line(!!!line.params) +
-    facet_wrap(~Site)
+    do.call("geom_point", point.params) +
+    do.call("geom_line", line.params) +
+    #geom_point(!!!point.params) +
+    #geom_line(!!!line.params) +
+    facet_wrap(~site)
 }
 
 #' @importFrom ggplot2 ggplot scale_y_log10 geom_point geom_line aes
 #'   fortify
 #' @importFrom utils modifyList
-#' @importFrom rlang !!!
 #' @rdname autoplot.radfit
 #' @export
 `autoplot.radline` <- function(
@@ -149,15 +148,16 @@
   )
   ggplot(df, aes(.data[["rank"]])) +
     scale_y_log10() + # no lower limit for a single line
-    geom_point(!!!point.params) +
-    geom_line(!!!line.params)
+    do.call("geom_point", point.params) +
+    do.call("geom_line", line.params)
+  #geom_point(!!!point.params) +
+  #geom_line(!!!line.params)
 }
 
 ### Methods for rad: only points, no lines from vegan::as.rad()
 
 #' @importFrom utils modifyList
 #' @importFrom ggplot2 aes scale_y_log10 geom_point
-#' @importFrom rlang !!!
 #' @rdname autoplot.radfit
 #' @export
 `autoplot.rad` <- function(
@@ -174,8 +174,8 @@
   )
   ggplot(df, aes(.data[["rank"]])) +
     scale_y_log10() + # no lower limit for a single line
-    # do.call("geom_point", point.params)
-    geom_point(!!!point.params)
+    do.call("geom_point", point.params)
+  # geom_point(!!!point.params)
 }
 
 #' @param highlight Names of species that should be highlighted as
