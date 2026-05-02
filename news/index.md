@@ -2,6 +2,13 @@
 
 ## ggvegan (development version)
 
+### New features
+
+- `fortify.radfit` and `autoplot.radfit` methods implemented providing
+  support for
+  [`vegan::radfit()`](https://vegandevs.github.io/vegan/reference/radfit.html)
+  and `vegan::as_rad()`.
+
 ### Bug fixes
 
 - *ggplot2* would report a warning about dropped aesthetics when
