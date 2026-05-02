@@ -139,6 +139,7 @@ object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
 ## Examples
 
 ``` r
+
 library("vegan")
 library("ggplot2")
 data(mite, mite.env)

@@ -59,6 +59,13 @@ Functions for producing complete plots of *vegan* objects using
 - [`autoplot(`*`<prestonfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.prestonfit.md)
   : Plot Preston's log-normal model of species abundance
 
+- [`autoplot(`*`<radfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.radfit.md)
+  [`autoplot(`*`<radfit.frame>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.radfit.md)
+  [`autoplot(`*`<radline>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.radfit.md)
+  [`autoplot(`*`<rad>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.radfit.md)
+  [`autoplot(`*`<rad.frame>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.radfit.md)
+  : Autoplot graphics for vegan rank-abundance models
+
 - [`autoplot(`*`<rda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autoplot.rda.md)
   :
 
@@ -134,6 +141,18 @@ Functions tidying *vegan* objects with
 - [`fortify(`*`<prestonfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.prestonfit.md)
   [`tidy(`*`<prestonfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.prestonfit.md)
   : Tidied species octave abundance data
+
+- [`fortify(`*`<radfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`fortify(`*`<radfit.frame>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`fortify(`*`<radline>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`fortify(`*`<rad>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`fortify(`*`<rad.frame>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`tidy(`*`<radfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`tidy(`*`<radfit.frame>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`tidy(`*`<radline>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`tidy(`*`<rad>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  [`tidy(`*`<rad.frame>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.radfit.md)
+  : Fortify results of ranked abundance distribution models
 
 - [`fortify(`*`<rda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.rda.md)
   [`tidy(`*`<rda>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/fortify.rda.md)

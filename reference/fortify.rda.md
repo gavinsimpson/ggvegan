@@ -79,6 +79,7 @@ Gavin L. Simpson
 ## Examples
 
 ``` r
+
 library("vegan")
 
 data(dune)

@@ -73,6 +73,7 @@ objects with limited flexibility.
 ## Examples
 
 ``` r
+
 library("vegan")
 
 data(dune, dune.env)

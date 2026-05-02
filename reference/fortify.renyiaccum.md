@@ -51,6 +51,7 @@ Gavin L. Simpson much rewritten from an original by Didzis Elferts.
 ## Examples
 
 ``` r
+
 library("vegan")
 library("ggplot2")
 data(BCI)

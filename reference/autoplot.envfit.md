@@ -72,6 +72,7 @@ Gavin L. Simpson
 ## Examples
 
 ``` r
+
 library("vegan")
 data(varespec, varechem)
 ord1 <- metaMDS(varespec)

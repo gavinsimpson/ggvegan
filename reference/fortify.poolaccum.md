@@ -49,6 +49,7 @@ Gavin L. Simpson & Didzis Elferts
 ## Examples
 
 ``` r
+
 library("vegan")
 library("ggplot2")
 data(BCI)

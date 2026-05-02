@@ -42,6 +42,7 @@ Gavin L. Simpson.
 ## Examples
 
 ``` r
+
 library("vegan")
 
 library("ggplot2")

@@ -130,12 +130,14 @@ You can install ggvegan directly from GitHub using functions that the
 via
 
 ``` r
+
 install.packages("remotes")
 ```
 
 then run
 
 ``` r
+
 remotes::install_github("gavinsimpson/ggvegan")
 ```
 
@@ -144,6 +146,7 @@ Universe service run by rOpenSci now provides binaries. Instruction on
 how to install ggvegan from that repository are:
 
 ``` r
+
 # Enable repository from gavinsimpson
 options(repos = c(
   gavinsimpson = "https://gavinsimpson.r-universe.dev",

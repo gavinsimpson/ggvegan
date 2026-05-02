@@ -88,6 +88,7 @@ Didzis Elferts & Gavin L. Simpson
 ## Examples
 
 ``` r
+
 library("vegan")
 
 data(BCI)

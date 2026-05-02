@@ -72,6 +72,7 @@ Didzis Elferts. Modifications by Gavin L. Simpson.
 ## Examples
 
 ``` r
+
 library("vegan")
 #> Loading required package: permute
 
