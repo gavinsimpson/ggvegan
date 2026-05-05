@@ -3,7 +3,7 @@
 \name{autoplot.renyi}
 \alias{autoplot.renyi}
 \alias{fortify.renyi}
-\title{Autoplot Graphics for vegan renyi and renyiaccum Objects}
+\title{Autoplot Graphics for vegan Rényi and Tsallis diversity Objects}
 \usage{
 \method{autoplot}{renyi}(
   object,
@@ -30,13 +30,10 @@ parameters passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
 \item{data}{original dataset, if needed}
 }
 \description{
-Alternatives to \pkg{lattice} graphics functions in
-\pkg{vegan}.
-}
-\details{
-\code{autoplot} for \code{\link[vegan:renyi]{vegan::renyi()}} and \code{\link[vegan:tsallis]{vegan::tsallis()}} plots the
-diversites against alpha as dots over a ribbon of data extremes in
-the graph and line of data median, faceted by sites.
+\code{autoplot} for \code{\link[vegan:renyi]{vegan::renyi()}} and \code{\link[vegan:tsallis]{vegan::tsallis()}} plots
+the diversites against diversity salce as dots over a ribbon of
+data extremes in the graph and line of data median, faceted by
+sites.
 }
 \examples{
 ## Rényi
@@ -44,6 +41,5 @@ library(vegan)
 data(BCI)
 mod <- renyi(BCI[sample(50, 16),])
 autoplot(mod)
-
 
 }

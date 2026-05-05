@@ -3,7 +3,7 @@
 \name{fortify.renyiaccum}
 \alias{fortify.renyiaccum}
 \alias{tidy.renyiaccum}
-\title{Fortify \enc{Rényi}{Renyi} accumulation curves}
+\title{Fortify \enc{Rényi}{Renyi} and Tsallis accumulation curves}
 \usage{
 \method{fortify}{renyiaccum}(model, data, ...)
 
@@ -18,22 +18,22 @@
 method.}
 }
 \value{
-A data frame (tibble) is returned. What is returned depends on how
-\code{\link[vegan:renyi]{vegan::renyiaccum()}} was called.
-If \code{raw = FALSE}, then a data frame with columns \code{site}, \code{scale}, \code{mean},
-\code{std_dev}, \code{min}, \code{max}, \code{q2.5}, and \code{q97.5}, containing the accumulated
-sites, the \enc{Rényi}{Renyi} scale, and summary statistics of the
-\enc{Rényi}{Renyi} accumulation curves. An additional column \code{collector}
-will be present if \code{collector = TRUE} was used in the \code{\link[vegan:renyi]{vegan::renyiaccum()}}
-call.
-If \code{raw = TRUE}, then a data frame with columns \code{site}, \code{permutation},
-\code{scale}, and \code{diversity}, containing the \code{site} and \code{permutation}
-identifiers, \enc{Rényi}{Renyi} scale, and the \enc{Rényi}{Renyi}
-diversity, respectively.
+A data frame (tibble) is returned. What is returned depends
+on how \code{\link[vegan:renyi]{vegan::renyiaccum()}} was called.  If \code{raw = FALSE},
+then a data frame with columns \code{site}, \code{scale}, \code{mean},
+\code{std_dev}, \code{min}, \code{max}, \code{q2.5}, and \code{q97.5}, containing the
+accumulated sites, the \enc{Rényi}{Renyi} or Tsallis scale, and
+summary statistics of the \enc{Rényi}{Renyi} or Tsallis
+accumulation curves. An additional column \code{collector} will be
+present if \code{collector = TRUE} was used in the
+\code{\link[vegan:renyi]{vegan::renyiaccum()}} or \code{\link[vegan:tsallis]{vegan::tsallisaccum()}} call.  If \code{raw = TRUE}, then a data frame with columns \code{site}, \code{permutation},
+\code{scale}, and \code{diversity}, containing the \code{site} and
+\code{permutation} identifiers, \enc{Rényi}{Renyi} or Tsallis scale,
+and the \enc{Rényi}{Renyi} or Tsallis diversity, respectively.
 }
 \description{
 Prepares a fortified version of results from
-\code{\link[vegan:renyi]{vegan::renyiaccum()}} objects.
+\code{\link[vegan:renyi]{vegan::renyiaccum()}} and \code{\link[vegan:tsallis]{vegan::tsallisaccum()}} objects.
 }
 \examples{
 

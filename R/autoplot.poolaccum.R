@@ -1,11 +1,12 @@
 #' @title ggplot-based plot for objects of class `"poolaccum"`
 #'
-#' @description
-#' Produces a multi-layer ggplot object representing the output of objects
-#' produced by [vegan::poolaccum()].
+#' @description Produces a multi-layer ggplot object representing the
+#'     output of objects produced by [vegan::poolaccum()] or
+#'     [vegan::estaccumR()], both returning objects of class
+#'     `"poolaccum"`.
 #'
 #' @param object an object of class `"poolaccum"`, the result of a call to
-#'   [vegan::poolaccum()].
+#'   [vegan::poolaccum()] or [vegan::estaccumR()].
 #' @param facet logical; should extrapolated richness estimators be shown in
 #'   separate facets?
 #' @param ribbon logical; show the quantile-based uncertainty interval? Uses
