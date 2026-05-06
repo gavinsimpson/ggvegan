@@ -2,8 +2,8 @@
 % Please edit documentation in R/autoplot.renyi.R
 \name{autoplot.renyi}
 \alias{autoplot.renyi}
-\alias{fortify.renyi}
-\title{Autoplot Graphics for vegan Rényi and Tsallis diversity Objects}
+\title{Autoplot Graphics for vegan \code{renyi()} and \code{tsallis()} diversity
+Objects}
 \usage{
 \method{autoplot}{renyi}(
   object,
@@ -12,22 +12,15 @@
   ribbon.params = list(),
   ...
 )
-
-\method{fortify}{renyi}(model, data, ...)
 }
 \arguments{
-\item{object}{Result from \code{\link[vegan:renyi]{vegan::renyi()}} or \code{\link[vegan:tsallis]{vegan::tsallis()}}
-functions.}
+\item{object}{an object, whose class will determine the behaviour of autoplot}
 
 \item{point.params, line.params, ribbon.params}{List of graphical
 parameters passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
 \code{\link[ggplot2:geom_path]{ggplot2::geom_line()}} or \code{\link[ggplot2:geom_ribbon]{ggplot2::geom_ribbon()}}.}
 
-\item{...}{Arguments passed to methods.}
-
-\item{model}{model or other R object to convert to data frame}
-
-\item{data}{original dataset, if needed}
+\item{...}{other arguments passed to specific methods}
 }
 \description{
 \code{autoplot} for \code{\link[vegan:renyi]{vegan::renyi()}} and \code{\link[vegan:tsallis]{vegan::tsallis()}} plots
@@ -39,7 +32,7 @@ sites.
 ## Rényi
 library(vegan)
 data(BCI)
-mod <- renyi(BCI[sample(50, 16),])
+mod <- renyi(BCI[1:16,])
 autoplot(mod)
 
 }
