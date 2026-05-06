@@ -15,6 +15,9 @@
 #' mod <- renyi(BCI[1:16,])
 #' autoplot(mod)
 #'
+#' @author Jari Oksanen
+#' @return Returns a ggplot object.
+#'
 #' @inheritParams ggplot2::autoplot
 #' #'
 #' @param point.params,line.params,ribbon.params List of graphical

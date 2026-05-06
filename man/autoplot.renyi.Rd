@@ -22,6 +22,9 @@ parameters passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}},
 
 \item{...}{other arguments passed to specific methods}
 }
+\value{
+Returns a ggplot object.
+}
 \description{
 \code{autoplot} for \code{\link[vegan:renyi]{vegan::renyi()}} and \code{\link[vegan:tsallis]{vegan::tsallis()}} plots
 the diversities against diversity scale as dots separately for each
@@ -35,4 +38,7 @@ data(BCI)
 mod <- renyi(BCI[1:16,])
 autoplot(mod)
 
+}
+\author{
+Jari Oksanen
 }

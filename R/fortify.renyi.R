@@ -6,6 +6,10 @@
 #' @description Prepares a fortified version of result objects from
 #'     [vegan::renyi()] and [vegan::tsallis()].
 #'
+#' @author Jari Oksanen
+#' @return Returns a data frame or tibble in long format with columns
+#'     `diversity`, `scale`, `site`, `median`, `lo`, `hi`.
+#'
 #' @importFrom stats median
 #'
 #' @rdname fortify.renyi

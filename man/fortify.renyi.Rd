@@ -18,7 +18,14 @@
 
 \item{x}{An object to be converted into a tidy \code{\link[tibble:tibble]{tibble::tibble()}}.}
 }
+\value{
+Returns a data frame or tibble in long format with columns
+\code{diversity}, \code{scale}, \code{site}, \code{median}, \code{lo}, \code{hi}.
+}
 \description{
 Prepares a fortified version of result objects from
 \code{\link[vegan:renyi]{vegan::renyi()}} and \code{\link[vegan:tsallis]{vegan::tsallis()}}.
+}
+\author{
+Jari Oksanen
 }
