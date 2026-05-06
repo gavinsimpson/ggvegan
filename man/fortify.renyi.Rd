@@ -19,6 +19,6 @@
 \item{x}{An object to be converted into a tidy \code{\link[tibble:tibble]{tibble::tibble()}}.}
 }
 \description{
-Prepares a fortified versionof results from
+Prepares a fortified version of result objects from
 \code{\link[vegan:renyi]{vegan::renyi()}} and \code{\link[vegan:tsallis]{vegan::tsallis()}}.
 }

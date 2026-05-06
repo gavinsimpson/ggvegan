@@ -4,9 +4,9 @@
 #' Objects
 #'
 #' \code{autoplot} for [vegan::renyi()] and [vegan::tsallis()] plots
-#' the diversites against diversity salce as dots over a ribbon of
-#' data extremes in the graph and line of data median, faceted by
-#' sites.
+#' the diversities against diversity scale as dots separately for each
+#' site. As a background it uses a ribbon of data extremes and a line of
+#' data median in all sites.
 #'
 #' @examples
 #' ## Rényi

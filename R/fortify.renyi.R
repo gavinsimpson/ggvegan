@@ -3,7 +3,7 @@
 #'
 #' @title Fortify vegan `renyi()` or `tsallis()` diversity results
 #'
-#' @description Prepares a fortified versionof results from
+#' @description Prepares a fortified version of result objects from
 #'     [vegan::renyi()] and [vegan::tsallis()].
 #'
 #' @importFrom stats median
