@@ -228,6 +228,7 @@
   data,
   text = TRUE,
   box = FALSE,
+  arrow.mul = 1,
   arrow.params = list(),
   text.params = list(),
   ...
@@ -237,6 +238,13 @@
   }
   if (missing(data)) {
     data <- ggscores(score)
+  } else if (inherits(data, "envfit")) {
+    data <- fortify(data)
+    colnames(data) <- tolower(colnames(data))
+    vars <- get_dimension_names(data)
+    want <- data[["type"]] == "Vector"
+    data <- data[want, ]
+    data[, vars] <- arrow.mul * data[, vars]
   }
   ## default params & possible modification
   arrowdefs <- list(arrow = arrow(ends = "first", length = unit(0.2, "cm")))
