@@ -176,7 +176,13 @@
     stop("either score or data must be defined")
   }
   if (missing(data)) {
-    data <- ~ .x[.x$score == score, ]
+    data <- ggscores(score)
+  } else if (inherits(data, "envfit")) {
+    data <- fortify(data)
+    colnames(data) <- tolower(colnames(data))
+    vars <- get_dimension_names(data)
+    want <- data[["type"]] == "Centroid"
+    data <- data[want,]
   }
   geom_text(data = data, ...)
 }
@@ -198,7 +204,13 @@
     stop("either score or data must be defined")
   }
   if (missing(data)) {
-    data <- ~ .x[.x$score == score, ]
+    data <- ggscores(score)
+  } else if (inherits(data, "envfit")) {
+    data <- fortify(data)
+    colnames(data) <- tolower(colnames(data))
+    vars <- get_dimension_names(data)
+    want <- data[["type"]] == "Centroid"
+    data <- data[want,]
   }
   geom_label(data = data, ...)
 }
