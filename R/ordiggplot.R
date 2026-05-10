@@ -163,7 +163,8 @@
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
-#'     instead of `score`.
+#'   instead of `score`. This can be a [vegan::envfit()] result object
+#'   which is used to plot centroids of factor levels.
 #' @param ... other arguments passed to [ggplot2::geom_text()]
 #' @importFrom ggplot2 geom_text
 #'
@@ -191,7 +192,8 @@
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
-#'     instead of `score`.
+#'   instead of `score`. This can be a [vegan::envfit()] result object
+#'   which is used to plot centroids of factor levels.
 #' @param ... other arguments passed to [ggplot2::geom_label()]
 #'
 #' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
@@ -219,9 +221,11 @@
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
-#'     instead of `score`.
+#'   instead of `score`. This can be a [vegan::envfit] result object
+#'   which is used to draw arrows to fitted vectors.
 #' @param text Add text labels to the plot.
 #' @param box Draw a box behind the text (logical).
+#' @param arrow.mul Arrow multiplier.
 #' @param arrow.params,text.params Parameters to modify arrows or
 #'   their text labels.
 #' @param ... other arguments passed to [ggplot2::geom_segment()],
@@ -301,6 +305,77 @@
     geom_hline(yintercept = 0, lty = lty, ...),
     geom_vline(xintercept = 0, lty = lty, ...)
   )
+}
+
+## add precalculated envfit object as arrows & text
+
+#' Add envfit Results to Ordination
+#'
+#' Function adds fitted vector arrays via [geom_ordi_arrow] and factor
+#' centroids via [geom_ordi_text] or [geom_ordi_label].
+#'
+#' @param data [vegan::envfit()] result object
+#' @param text add text to plot.
+#' @param box write text on a non-transparent label.
+#' @param arrow.mul arro multiplier.
+#' @param arrow.params,text.params List of additional parameters to
+#'   arrows and text.
+#' @param ... Other parameters passed to all graphical functions
+#'   [geom_ordi_arrow], [geom_ordi_text] and [geom_ordi_label].
+#'
+#' @importFrom utils modifyList
+#' @rdname geom_envfit
+#' @export
+`geom_envfit` <- function(
+   data,
+   text = TRUE,
+   box = FALSE,
+   arrow.mul = 1,
+   arrow.params = list(),
+   text.params = list(),
+   ...
+) {
+  if (!inherits(data, "envfit"))
+    stop("'data' must be an 'envfit()' object", call. = FALSE)
+  if (!is.null(data$vectors)) {
+    colnames(data$vectors$arrows) <-
+      tolower(colnames(data$vectors$arrows))
+  }
+  if (!is.null(data$factors)) {
+    colnames(data$factors$centroids) <-
+      tolower(colnames(data$factors$centroids))
+  }
+  dots <- match.call(expand.dots = FALSE)$...
+  if (!is.null(dots)) {
+    if (!is.null(arrow.params))
+      arrow.params <- modifyList(arrow.params, dots)
+    if (!is.null(text.params))
+      text.params <- modifyList(text.params, dots)
+  }
+  pvec <- pfac <- NULL
+  if (!is.null(data$vectors)) {
+    pvec <- geom_ordi_arrow(
+        data=data,
+        text = text,
+        box = box,
+        arrow.mul = arrow.mul,
+        arrow.params = arrow.params,
+        text.params = text.params,
+        ...
+    )
+  }
+  if (!is.null(data$factors) && text) {
+    textcall <- list(data=data)
+    if (!is.null(text.params)) {
+      textcall <- modifyList(textcall, text.params)
+    }
+    if (box) {
+      pfac <- do.call("geom_ordi_label", textcall)
+    } else {
+      pfac <- do.call("geom_ordi_text", textcall)
+    }
+  }
+  c(pvec, pfac)
 }
 
 ## envfit, separately for vectorfit & factorfit as these imply

@@ -10,7 +10,8 @@ geom_ordi_text(score, data, ...)
 \item{score}{Ordination score to be added to the plot.}
 
 \item{data}{Alternative data to the function that will be used
-instead of \code{score}.}
+instead of \code{score}. This can be a \code{\link[vegan:envfit]{vegan::envfit()}} result object
+which is used to plot centroids of factor levels.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }

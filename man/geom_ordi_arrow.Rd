@@ -9,6 +9,7 @@ geom_ordi_arrow(
   data,
   text = TRUE,
   box = FALSE,
+  arrow.mul = 1,
   arrow.params = list(),
   text.params = list(),
   ...
@@ -18,11 +19,14 @@ geom_ordi_arrow(
 \item{score}{Ordination score to be added to the plot.}
 
 \item{data}{Alternative data to the function that will be used
-instead of \code{score}.}
+instead of \code{score}. This can be a \link[vegan:envfit]{vegan::envfit} result object
+which is used to draw arrows to fitted vectors.}
 
 \item{text}{Add text labels to the plot.}
 
 \item{box}{Draw a box behind the text (logical).}
+
+\item{arrow.mul}{Arrow multiplier.}
 
 \item{arrow.params, text.params}{Parameters to modify arrows or
 their text labels.}
