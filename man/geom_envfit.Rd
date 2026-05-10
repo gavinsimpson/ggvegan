@@ -33,3 +33,16 @@ arrows and text.}
 Function adds fitted vector arrays via \link{geom_ordi_arrow} and factor
 centroids via \link{geom_ordi_text} or \link{geom_ordi_label}.
 }
+\examples{
+library(vegan)
+library(ggplot2)
+data(mite, mite.env, package = "vegan")
+mod <- cca(mite)
+ef <- envfit(mod ~ Shrub+Topo+WatrCont+SubsDens, mite.env)
+ordiggplot(mod, scaling="sites") +
+  geom_ordi_axis() +
+  geom_ordi_point("sites") +
+  geom_envfit(ef, arrow.mul=1.3, col="navy", box=TRUE,
+    text.params=list(mapping=aes(fontface="bold")))
+
+}
