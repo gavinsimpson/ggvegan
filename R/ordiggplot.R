@@ -320,7 +320,7 @@
 #' Function adds fitted vector arrays via [geom_ordi_arrow] and factor
 #' centroids via [geom_ordi_text] or [geom_ordi_label].
 #'
-#' @param data [vegan::envfit()] result object
+#' @param object [vegan::envfit()] result object
 #' @param text add text to plot.
 #' @param box write text on a non-transparent label.
 #' @param arrow.mul arro multiplier.
@@ -338,14 +338,15 @@
 #' ordiggplot(mod, scaling="sites") +
 #'   geom_ordi_axis() +
 #'   geom_ordi_point("sites") +
-#'   geom_envfit(ef, arrow.mul=1.3, col="navy", box=TRUE,
+#'   autolayer(ef, arrow.mul=1.3, col="navy", box=TRUE,
 #'     text.params=list(mapping=aes(fontface="bold")))
 #'
+#' @importFrom ggplot2 autolayer
 #' @importFrom utils modifyList
-#' @rdname geom_envfit
+#' @rdname autolayer.envfit
 #' @export
-`geom_envfit` <- function(
-   data,
+`autolayer.envfit` <- function(
+   object,
    text = TRUE,
    box = FALSE,
    arrow.mul = 1,
@@ -353,8 +354,7 @@
    text.params = list(),
    ...
 ) {
-  if (!inherits(data, "envfit"))
-    stop("'data' must be an 'envfit()' object", call. = FALSE)
+  data <- object # would be prudent to change every 'data' to 'object'
   if (!is.null(data$vectors)) {
     colnames(data$vectors$arrows) <-
       tolower(colnames(data$vectors$arrows))
