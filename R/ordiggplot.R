@@ -313,6 +313,58 @@
   )
 }
 
+#' Add ordisurf Result as Contours in Ordination plot
+#'
+#' Function adds [vegan::ordisurf] result object
+#'
+#' @param object [vegan::ordisurf] result object.
+#' @param fill Use filled contours.
+#' @param ... Other arguments passed to [ggplot2::geom_contour] or
+#'   [ggplot2::geom_contour_filled].
+#'
+#' @author Jari Oksanen
+#' @examples
+#' library(vegan)
+#' library(ggplot2)
+#' data(mite, mite.env, package="vegan")
+#' mod <- cca(mite)
+#' surf <- ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)
+#' ordiggplot(mod) +
+#'   geom_ordi_point("sites") +
+#'   autolayer(surf) +
+#'   autolayer(envfit(mod ~ WatrCont, mite.env, permutations=0),
+#'     arrow.mul = 1.3)
+#'
+#' @return A ggplot() layer.
+#'
+#' @importFrom ggplot2 autolayer geom_contour geom_contour_filled
+#' @importFrom stats complete.cases
+#'
+#' @export
+`autolayer.ordisurf` <- function(object, fill = FALSE, ...) {
+  x <- object$grid$x
+  y <- object$grid$y
+  z <- as.vector(object$grid$z)
+  df <- expand.grid("x" = x, "y" = y)
+  df$label <- "surface"
+  df$weight = 1
+  df$z <- z
+  df <- df[complete.cases(df),] # warns on NA outside hull
+  if (fill) {
+    geom_contour_filled(mapping = aes(
+                            .data[["x"]],
+                            .data[["y"]],
+                            z = .data[["z"]]),
+                        data = df, ...)
+  } else {
+    geom_contour(mapping=aes(
+                     .data[["x"]],
+                     .data[["y"]],
+                     z = .data[["z"]]),
+                 data = df, ...)
+  }
+}
+
 ## add precalculated envfit object as arrows & text
 
 #' Add envfit Results to Ordination
