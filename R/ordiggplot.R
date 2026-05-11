@@ -118,6 +118,8 @@
       wts[want] <- cw
     }
     df$weight <- wts
+  } else {
+    df$weight <- 1
   }
   dlab <- colnames(df)[3:4]
   pl <- ggplot(
@@ -125,7 +127,8 @@
     mapping = aes(
       x = .data[[dlab[1]]],
       y = .data[[dlab[2]]],
-      label = .data[["label"]]
+      label = .data[["label"]],
+      weight = .data[["weight"]]
     )
   )
   pl <- pl + coord_fixed(ratio = 1)
@@ -180,6 +183,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
+    data$weight <- NA
     colnames(data) <- tolower(colnames(data))
     vars <- get_dimension_names(data)
     want <- data[["type"]] == "Centroid"
@@ -209,6 +213,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
+    data$weight <- NA
     colnames(data) <- tolower(colnames(data))
     vars <- get_dimension_names(data)
     want <- data[["type"]] == "Centroid"
@@ -256,6 +261,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
+    data$weight <- NA
     colnames(data) <- tolower(colnames(data))
     vars <- get_dimension_names(data)
     want <- data[["type"]] == "Vector"
@@ -412,7 +418,7 @@
   if (NROW(ed) != NROW(data)) {
       ed <- ed[data$label, , drop = FALSE]
   }
-  wts <- data$weight
+  wts <- data[["weight"]]
   fit <- vectorfit(as.matrix(data[, vars]), ed, permutations = 0, w = wts)
   fit <- sqrt(fit$r) * fit$arrows
   fit <- arrow.mul * fit
@@ -430,7 +436,8 @@
   ggproto(
     "StatVectorfit",
     Stat,
-    required_aes = c("x", "y"),
+    required_aes = c("x", "y", "weight"),
+    dropped_aes = c("weight"),
     extra_params = c("na.rm", "edata", "formula", "arrow.mul"),
     compute_group = calculate_vectorfit,
     ## same scaling of arrows in all panels
