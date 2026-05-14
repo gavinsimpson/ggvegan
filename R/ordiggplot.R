@@ -34,6 +34,8 @@
 #' @param model An ordination result object from \CRANpkg{vegan}.
 #' @param axes Two axes to be plotted
 #' @param score Ordination score to be added to the plot.
+#' @param legend.position Legend position: see [ggplot2::theme()] for
+#'   details. Use `"none"` to not draw the legend.
 #' @param ... Parameters passed to underlying functions.
 
 #' @importFrom stats weights
@@ -73,6 +75,7 @@
 `ordiggplot` <- function(
   model,
   axes = c(1, 2),
+  legend.position = "right",
   ...
 ) {
   if (length(axes) > 2) {
@@ -138,10 +141,13 @@
       x = .data[[dlab[1]]],
       y = .data[[dlab[2]]],
       label = .data[["label"]],
-      weight = .data[["weight"]]
+      weight = .data[["weight"]],
+      colour = .data[["score"]]
     )
   )
-  pl <- pl + coord_fixed(ratio = 1)
+  pl <- pl +
+    coord_fixed(ratio = 1) +
+    theme(legend.position = legend.position)
   pl
 }
 
@@ -194,8 +200,8 @@
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
     data$weight <- NA
+    data$score <- "gradient"
     colnames(data) <- tolower(colnames(data))
-    vars <- get_dimension_names(data)
     want <- data[["type"]] == "Centroid"
     data <- data[want,]
   }
@@ -224,8 +230,8 @@
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
     data$weight <- NA
+    data$score <- "gradient"
     colnames(data) <- tolower(colnames(data))
-    vars <- get_dimension_names(data)
     want <- data[["type"]] == "Centroid"
     data <- data[want,]
   }
@@ -272,10 +278,11 @@
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
     data$weight <- NA
+    data$score <- "gradient"
     colnames(data) <- tolower(colnames(data))
-    vars <- get_dimension_names(data)
     want <- data[["type"]] == "Vector"
     data <- data[want, ]
+    vars <- 3:4
     data[, vars] <- arrow.mul * data[, vars]
   }
   ## default params & possible modification
@@ -357,6 +364,7 @@
   z <- as.vector(object$grid$z)
   df <- expand.grid("x" = x, "y" = y)
   df$label <- "surface"
+  df$score <- "surface"
   df$weight = 1
   df$z <- z
   df <- df[complete.cases(df),] # warns on NA outside hull

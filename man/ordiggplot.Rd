@@ -5,7 +5,7 @@
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
-ordiggplot(model, axes = c(1, 2), ...)
+ordiggplot(model, axes = c(1, 2), legend.position = "right", ...)
 
 ggscores(score)
 }
@@ -13,6 +13,9 @@ ggscores(score)
 \item{model}{An ordination result object from \CRANpkg{vegan}.}
 
 \item{axes}{Two axes to be plotted}
+
+\item{legend.position}{Legend position: see \code{\link[ggplot2:theme]{ggplot2::theme()}} for
+details. Use \code{"none"} to not draw the legend.}
 
 \item{...}{Parameters passed to underlying functions.}
 
