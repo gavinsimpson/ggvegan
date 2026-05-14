@@ -35,11 +35,7 @@
 #' @param axes Two axes to be plotted
 #' @param score Ordination score to be added to the plot.
 #' @param ... Parameters passed to underlying functions.
-#' @param arrow.mul Multiplier to arrow length. If missing, the arrow
-#'     length are adjusted to fit to other scores, but if some score
-#'     types are not displayed, the arrows may be badly scaled, and
-#'     manual adjustment can be useful.
-#'
+
 #' @importFrom stats weights
 #' @importFrom ggplot2 ggplot coord_fixed aes ggproto
 #' @export
@@ -74,14 +70,19 @@
 #'   geom_ordi_axis() +
 #'   geom_ordi_point("sites") +
 #'   geom_ordi_arrow("species")
-`ordiggplot` <- function(model, axes = c(1, 2), arrow.mul, ...) {
+`ordiggplot` <- function(model, axes = c(1, 2), ...) {
   if (length(axes) > 2) {
     stop("only two-dimensional plots made: too many axes defined")
   }
   df <- fortify(model, axes = axes, ...)
-  ## I don't currently know a way of adjusting arrows to the final
-  ## plot frame, so try to scale them to fit the data points at
-  ## least
+  ## I don't currently know a way of adjusting biplot arrows to the
+  ## final axis dimensions on plot. However, constraints (lc scores)
+  ## are found from regression coefficients and biplots are fitted to
+  ## the constraints: it is prudent to adjust arrow lengths to lc
+  ## scores. The following will be skipped for non-CCA family of
+  ## methods which do not have any of these items (but we may need to
+  ## add if(inherits(model, "cca")) block to be sure with future
+  ## methods.
   isBip <- df$score == "biplot"
   if (any(isBip)) {
     ## remove biplot scores that have equal centroid
@@ -90,19 +91,19 @@
       if (any(dup)) {
         df <- df[!dup, ]
       }
-      isBip <- df$score == "biplot"
     }
+    ## Same scaling with all biplot-like arrows
+    isBip <- df$score %in% c("biplot", "regression", "factorbiplot")
     if (any(isBip)) {
-      # isBip may have changed
-      if (missing(arrow.mul)) {
-        arrow.mul <- arrow_mul(
+      arrow.mul <- arrow_mul(
           df[isBip, 3:4, drop = FALSE],
-          df[!isBip, 3:4, drop = FALSE]
-        )
-      }
-      df[isBip, 3:4] <- df[isBip, 3:4] * arrow.mul
+          df[df$score == "constraints", 3:4, drop = FALSE]
+      )
     }
+    arrow.mul <- max(arrow.mul, 1)
+    df[isBip, 3:4] <- df[isBip, 3:4] * arrow.mul
   }
+
   ## weights are needed in some statistics
   if (inherits(model, c("cca", "wcmdscale", "decorana"))) {
     rw <- weights(model)
