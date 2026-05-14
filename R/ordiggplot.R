@@ -70,11 +70,20 @@
 #'   geom_ordi_axis() +
 #'   geom_ordi_point("sites") +
 #'   geom_ordi_arrow("species")
-`ordiggplot` <- function(model, axes = c(1, 2), ...) {
+`ordiggplot` <- function(
+  model,
+  axes = c(1, 2),
+  ...
+) {
   if (length(axes) > 2) {
     stop("only two-dimensional plots made: too many axes defined")
   }
-  df <- fortify(model, axes = axes, ...)
+  if (is.data.frame(model) &&
+      all(c("score", "label") %in% colnames(model))) {
+    df <- model
+  } else {
+    df <- fortify(model, axes = axes, ...)
+  }
   ## I don't currently know a way of adjusting biplot arrows to the
   ## final axis dimensions on plot. However, constraints (lc scores)
   ## are found from regression coefficients and biplots are fitted to
