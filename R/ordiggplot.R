@@ -311,6 +311,72 @@
   pl
 }
 
+#' Add points and their labels to the plot. The labels are repelled
+#' from other pitems to minimize overplotting.
+#'
+#' Function adds points to the exact position of the ordination score
+#' with a label, but labels are repelled from each other to avoid
+#' over-plotting. In very congested areas, the labels are completely
+#' omitted.
+#'
+#' @param score Ordination score added to the plot.
+#' @param data Alternative data to the function that will be used
+#'   instead of `score`. This function does *not* handle
+#'   [vegan::envfit()] results.
+#' @param box Draw a box behind the text (logical).
+#' @param points Draw points (logical).
+#' @param point.params,text.params Parameters to modify points or
+#'   their repelled text labels.
+#' @param ... other arguments passed to [ggrepel::geom_text_repel()]
+#'   and [ggrepel::geom_label_repel()].
+#'
+#' @examples
+#' library(vegan)
+#' data(mite, mite.env, package = "vegan")
+#' mod <- cca(mite)
+#' ordiggplot(mod) +
+#'   geom_ordi_axis() +
+#'   geom_ordi_point("sites")
+#'   geom_ordi_repel("species",
+#'     text.params = list(size=3, fontface = "italic"))
+#'
+#' @importFrom utils modifyList
+#' @importFrom ggrepel geom_text_repel geom_label_repel
+#'
+#' @export
+`geom_ordi_repel` <- function(
+  score,
+  data,
+  box = FALSE,
+  points = TRUE,
+  point.params = list(),
+  text.params = list(),
+  ...
+) {
+  if (missing(score) && missing(data)) {
+      stop("either score or data must be defined")
+  }
+  if (missing(data)) {
+    data <- ggscores(score)
+  }
+  dots <- match.call(expand.dots = FALSE)$...
+  layerdef <- list(data = data)
+  if (!is.null(dots)) {
+    layerdef <- modifyList(layerdef, dots)
+  }
+  pp <- pt <- NULL
+  if (points) {
+    pp <- do.call("geom_point", modifyList(layerdef, point.params))
+  }
+  layerdef <- modifyList(layerdef, list(size = 3))
+  if (box) {
+    pt <- do.call("geom_label_repel", modifyList(layerdef, text.params))
+  } else {
+    pt <- do.call("geom_text_repel", modifyList(layerdef, text.params))
+  }
+  c(pp, pt)
+}
+
 #' Crosshair for axes in eigenvector methods
 #'
 #' @param ... other arguments passed to [ggplot2::geom_hline()] and
