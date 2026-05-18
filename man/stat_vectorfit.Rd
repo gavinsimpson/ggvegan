@@ -95,8 +95,8 @@ current graph.}
 \item{...}{Other arguments passed to the functions.}
 }
 \value{
-Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
-object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+Returns a layer that containts a StatVectorfit object that
+is responsible for rendering the fitted vectors in the plot.
 }
 \description{
 Fits arrows to show the direction of fastest increase

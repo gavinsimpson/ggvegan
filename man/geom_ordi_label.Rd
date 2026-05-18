@@ -16,8 +16,7 @@ which is used to plot centroids of factor levels.}
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}}
 }
 \value{
-Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
-object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+Returns a ggplot2 layer \code{geom_label}.
 }
 \description{
 Add a label layer to an ordiggplot

@@ -35,8 +35,8 @@ their text labels.}
 \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}, or \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }
 \value{
-Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
-object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+Returns ggplot2 layers \code{geom_segment} for arrows and
+\code{geom_text} or \code{geom_label} (optionally) for their names.
 }
 \description{
 Add a biplot arrow layer to an ordiggplot

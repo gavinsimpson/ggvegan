@@ -29,6 +29,10 @@ arrows and text.}
 \item{...}{Other parameters passed to all graphical functions
 \link{geom_ordi_arrow}, \link{geom_ordi_text} and \link{geom_ordi_label}.}
 }
+\value{
+Returns ggplot2 layers \code{geom_segment} for arrows (when
+appropriate), and \code{geom_text} or \code{geom_label} for text.
+}
 \description{
 Function adds fitted vector arrays via \link{geom_ordi_arrow} and factor
 centroids via \link{geom_ordi_text} or \link{geom_ordi_label}.

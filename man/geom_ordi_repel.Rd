@@ -32,6 +32,10 @@ their repelled text labels.}
 \item{...}{other arguments passed to \code{\link[ggrepel:geom_text_repel]{ggrepel::geom_text_repel()}}
 and \code{\link[ggrepel:geom_text_repel]{ggrepel::geom_label_repel()}}.}
 }
+\value{
+Returns ggrepel layers \code{geom_text_repel} or
+\code{geom_label_repel} and  ggplot2 layer \code{geom_point} (optionally).
+}
 \description{
 Function adds points to the exact position of the ordination score
 with a label, but labels are repelled from each other to avoid

@@ -42,7 +42,11 @@
 #' @importFrom ggplot2 ggplot coord_fixed aes ggproto
 #' @export
 #'
-#' @return Returns a ggplot object.
+#' @return Returns a ggplot object with slot `data` for full
+#'   ordination scores and mapping `x` and `y` for ordination scores,
+#'   `label` for text labels for scores, factor `score` for score type
+#'   used as `colour` and `weight` needed in computing some
+#'   statistics.
 #'
 #' @examples
 #' library("vegan")
@@ -162,8 +166,7 @@
 #'     instead of `score`.
 #' @param ... other arguments passed to [ggplot2::geom_point()]
 #'
-#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#' @return Returns a ggplot2 layer `geom_point`.
 #'
 #' @export
 `geom_ordi_point` <- function(score, data, ...) {
@@ -187,8 +190,7 @@
 #' @param ... other arguments passed to [ggplot2::geom_text()]
 #' @importFrom ggplot2 geom_text
 #'
-#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#' @return Returns a ggplot2 layer `geom_text`.
 #'
 #' @export
 `geom_ordi_text` <- function(score, data, ...) {
@@ -216,8 +218,7 @@
 #'   which is used to plot centroids of factor levels.
 #' @param ... other arguments passed to [ggplot2::geom_label()]
 #'
-#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#' @return Returns a ggplot2 layer `geom_label`.
 #'
 #' @importFrom ggplot2 geom_label
 #' @export
@@ -256,8 +257,8 @@
 #' @importFrom grid arrow
 #' @importFrom utils modifyList
 #'
-#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#' @return Returns ggplot2 layers `geom_segment` for arrows and
+#'   `geom_text` or `geom_label` (optionally) for their names.
 #'
 #' @export
 `geom_ordi_arrow` <- function(
@@ -330,6 +331,9 @@
 #' @param ... other arguments passed to [ggrepel::geom_text_repel()]
 #'   and [ggrepel::geom_label_repel()].
 #'
+#' @return Returns ggrepel layers `geom_text_repel` or
+#'   `geom_label_repel` and  ggplot2 layer `geom_point` (optionally).
+#'
 #' @examples
 #' library(vegan)
 #' data(mite, mite.env, package = "vegan")
@@ -385,8 +389,7 @@
 #' @importFrom ggplot2 geom_hline geom_vline
 #' @param lty Linetype.
 #'
-#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#' @return Returns  ggplot2 layers `geom_hline` and `geom_vline`.
 #'
 #' @export
 `geom_ordi_axis` <- function(lty = 3, ...) {
@@ -418,7 +421,7 @@
 #'   autolayer(envfit(mod ~ WatrCont, mite.env, permutations=0),
 #'     arrow.mul = 1.3)
 #'
-#' @return ggplot() layers `geom_contour` and `geom_raster`
+#' @return Returns ggplot2 layers `geom_contour` and `geom_raster`
 #'   (optionally).
 #'
 #' @importFrom ggplot2 autolayer geom_contour geom_raster
@@ -469,6 +472,9 @@
 #'   arrows and text.
 #' @param ... Other parameters passed to all graphical functions
 #'   [geom_ordi_arrow], [geom_ordi_text] and [geom_ordi_label].
+#'
+#' @return Returns ggplot2 layers `geom_segment` for arrows (when
+#'   appropriate), and `geom_text` or `geom_label` for text.
 #'
 #' @examples
 #' library(vegan)
@@ -632,8 +638,8 @@
 #'
 #' @export
 #'
-#' @return Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-#'   object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+#' @return Returns a layer that containts a StatVectorfit object that
+#'   is responsible for rendering the fitted vectors in the plot.
 #'
 #' @examples
 #'
