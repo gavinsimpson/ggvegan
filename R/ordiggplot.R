@@ -418,9 +418,10 @@
 #'   autolayer(envfit(mod ~ WatrCont, mite.env, permutations=0),
 #'     arrow.mul = 1.3)
 #'
-#' @return A ggplot() layer.
+#' @return ggplot() layers `geom_contour` and `geom_raster`
+#'   (optionally).
 #'
-#' @importFrom ggplot2 autolayer geom_contour geom_contour_filled
+#' @importFrom ggplot2 autolayer geom_contour geom_raster
 #' @importFrom stats complete.cases
 #'
 #' @export
@@ -434,19 +435,23 @@
   df$weight = 1
   df$z <- z
   df <- df[complete.cases(df),] # warns on NA outside hull
-  if (fill) {
-    geom_contour_filled(mapping = aes(
-                            .data[["x"]],
-                            .data[["y"]],
-                            z = .data[["z"]]),
-                        data = df, ...)
-  } else {
-    geom_contour(mapping=aes(
-                     .data[["x"]],
-                     .data[["y"]],
-                     z = .data[["z"]]),
-                 data = df, ...)
-  }
+  ## geom_contour_filled returns discrete coverclasses, geom_raster a
+  ## smooth surface
+  pf <- pl <- NULL
+  if (fill) { # should we have fill.params, contour.params lists?
+    pf <- geom_raster(mapping = aes(
+                          .data[["x"]],
+                          .data[["y"]],
+                          fill = .data[["z"]]),
+                      data = df, ...)
+    }
+    pl <- geom_contour(mapping=aes(
+                           .data[["x"]],
+                           .data[["y"]],
+                           z = .data[["z"]]),
+                       data = df, ...)
+
+  c(pf, pl)
 }
 
 ## add precalculated envfit object as arrows & text

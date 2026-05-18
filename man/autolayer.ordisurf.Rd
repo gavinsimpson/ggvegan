@@ -15,7 +15,8 @@
 \link[ggplot2:geom_contour]{ggplot2::geom_contour_filled}.}
 }
 \value{
-A ggplot() layer.
+ggplot() layers \code{geom_contour} and \code{geom_raster}
+(optionally).
 }
 \description{
 Function adds \link[vegan:ordisurf]{vegan::ordisurf} result object
