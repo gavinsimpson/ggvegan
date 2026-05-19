@@ -119,7 +119,7 @@
     stop("only two-dimensional plots made: too many axes defined")
   }
   if (is.data.frame(model) &&
-      all(c("score", "label") %in% colnames(model))) {
+      all(c("score", "label") %in% colnames(model[, 1:2]))) {
     df <- model
   } else {
     df <- fortify(model, axes = axes, ...)
@@ -133,6 +133,7 @@
   ## add if(inherits(model, "cca")) block to be sure with future
   ## methods.
   isBip <- df$score == "biplot"
+  arrow.mul <- 1
   if (any(isBip)) {
     ## remove biplot scores that have equal centroid
     if (any(cntr <- df$score == "centroids")) {
