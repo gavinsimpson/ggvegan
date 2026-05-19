@@ -21,32 +21,37 @@
 
 \item{box}{write text on a non-transparent label.}
 
-\item{arrow.mul}{arro multiplier.}
+\item{arrow.mul}{arrow multiplier.}
 
 \item{arrow.params, text.params}{List of additional parameters to
 arrows and text.}
 
 \item{...}{Other parameters passed to all graphical functions
-\link{geom_ordi_arrow}, \link{geom_ordi_text} and \link{geom_ordi_label}.}
+\code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}}, \code{\link[=geom_ordi_text]{geom_ordi_text()}} and \code{\link[=geom_ordi_label]{geom_ordi_label()}}.}
 }
 \value{
 Returns ggplot2 layers \code{geom_segment} for arrows (when
 appropriate), and \code{geom_text} or \code{geom_label} for text.
 }
 \description{
-Function adds fitted vector arrays via \link{geom_ordi_arrow} and factor
-centroids via \link{geom_ordi_text} or \link{geom_ordi_label}.
+Function adds layer of fitted vector arrays and factor
+centroids of factor levels in an \code{\link[=ordiggplot]{ordiggplot()}} graph.
 }
 \examples{
 library(vegan)
 library(ggplot2)
 data(mite, mite.env, package = "vegan")
 mod <- cca(mite)
-ef <- envfit(mod ~ Shrub+Topo+WatrCont+SubsDens, mite.env)
+## you must have same scaling in envfit() and ordiggplot()
+ef <- envfit(mod ~ Shrub+Topo+WatrCont+SubsDens, mite.env,
+  scaling = "sites")
 ordiggplot(mod, scaling="sites") +
   geom_ordi_axis() +
   geom_ordi_point("sites") +
   autolayer(ef, arrow.mul=1.3, col="navy", box=TRUE,
     text.params=list(mapping=aes(fontface="bold")))
 
+}
+\author{
+Jari Oksanen
 }

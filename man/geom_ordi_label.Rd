@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_label}
 \alias{geom_ordi_label}
-\title{Add a label layer to an ordiggplot}
+\title{Add a Label Layer to an ordiggplot Graph}
 \usage{
 geom_ordi_label(score, data, ...)
 }
@@ -19,5 +19,29 @@ which is used to plot centroids of factor levels.}
 Returns a ggplot2 layer \code{geom_label}.
 }
 \description{
-Add a label layer to an ordiggplot
+Function adds \dQuote{labels} or text in a box of a white
+background using \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} to an \code{\link[=ordiggplot]{ordiggplot()}}
+graph. These can help in congested plot since uppermost labels are
+readable (but cover lower ones), or to emphasize text. Some
+\emph{ggvegan} functions call \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} with argument \code{box = TRUE}.
+}
+\examples{
+library(vegan)
+library(ggplot2)
+data(dune, dune.env, package = "vegan")
+mod <- cca(dune ~ Moisture, dune.env)
+ordiggplot(mod) +
+  geom_ordi_axis() +
+  geom_ordi_point("sites") +
+  geom_ordi_label("species", size = 3,
+    mapping = aes(fontface = "italic")) +
+  geom_ordi_label("centroids", size = 5,
+    mapping = aes(fontface = "bold"))
+
+}
+\seealso{
+\code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}.
+}
+\author{
+Jari Oksanen
 }

@@ -10,33 +10,63 @@
 #'
 #' The \pkg{ggvegan} package has two contrasting approaches to draw
 #' ordination plots. The `autoplot` functions (e.g. [autoplot.rda()],
-#' [autoplot.cca()], and [autoplot.metaMDS]) draw a complete plot with one
-#' command, but the design is hard-coded in the function. However, you
-#' can add new elements to the graph.
+#' [autoplot.cca()], and [autoplot.metaMDS()]) draw a complete plot
+#' with one command, but the design is hard-coded in the
+#' function, and it may be difficult to add new layers to the graph.
 #'
 #' In contrast, function `ordiggplot()` only sets up an ordination
-#' plot, and does not draw anything. It allows you to add layers to the plot
-#' one by one with full flexibility of the \CRANpkg{ggplot2} functions.
-#' There are some specific functions `geom_ordi_*`
-#' functions that are similar as similarly named `geom_*`
-#' functions. For these you need to give the type of ordination scores
-#' to be added, and in addition, you can give any `geom_*`
-#' function arguments to modify the plot. Alternatively, you can use
-#' any \pkg{ggplot2} function and in its `data` argument use
-#' `ggscores()` function to select the data elements for the
-#' function.
+#' plot, but allows you to add layers to the graph one by one with
+#' full flexibility of the \CRANpkg{ggplot2} functions. It initializes
+#' the \pkg{ggplot2} graph with idiom `ggplot(data, mapping)` which
+#' allows other functions to use the ordination `data` and axis
+#' `mapping` in adding new layers. The included mapping specifies
+#' coordinates `x` and `y` and variables `label` for text labels and a
+#' score-type specific `colour`. Any \pkg{ggplot2} function that can
+#' use this mapping will work automatically. Support function
+#' `ggscores` selects a slice of ordination scores that can be used as
+#' a `data` argument in the `geom` function. To plot the site scores
+#' of ordination result `mod` as points, you can use idiom
+#' `ordiggplot(mod) + geom_point(data = ggscores("sites"))`.
 #'
-#' The `ordiggplot()` function extracts results using
-#' `fortify()` functions of this package, and it accepts the
-#' arguments of those functions. This allows setting, e.g., the
-#' scaling of ordination axes.
+#' There are specific functions to ease adding layers to an ordination
+#' graph. See the documentation of [geom_ordi_arrow()],
+#' [geom_ordi_label()], [geom_ordi_point()], [geom_ordi_repel()],
+#' [geom_ordi_text()]. These are in general similar to similarly named
+#' `geom_*` functions. For instance, `geom_ordi_point` adds very
+#' little to `geom_point`, and you can use all arguments of the
+#' standard `geom` function. These functions are of type
+#' `geom_ordi_*(score, ...)` which is similar to `geom_*(data =
+#' ggscores(score), ...)`. Some functions were adapted to typical
+#' ordination data and return compound geometries. For instance,
+#' [geom_ordi_arrow()] returns layers `geom_segment` for the arrows,
+#' and `geom_text` for their name labels. In addition, there are
+#' functions to add previously fitted results of [vegan::envfit()] and
+#' [vegan::ordisurf()] (see [autolayer.envfit()],
+#' [autolayer.ordisurf()]).
+#'
+#' The `ordiggplot()` function extracts results using `fortify()`
+#' functions of this package, and it accepts the arguments of those
+#' functions. This allows setting, e.g., the scaling of ordination
+#' axes. Alternatively, `ordiggplot()` can use a compatible data
+#' frame, such as those created by `vegan::scores(..., tidy =
+#' TRUE)`. The `ordiggplot` skeleton sets up `data` used in plotting,
+#' and you should define axis scaling, axes _etc_ in the `ordiggplot`
+#' call and they will be used in all added layers.
 #'
 #' @param model An ordination result object from \CRANpkg{vegan}.
 #' @param axes Two axes to be plotted
 #' @param score Ordination score to be added to the plot.
 #' @param legend.position Legend position: see [ggplot2::theme()] for
 #'   details. Use `"none"` to not draw the legend.
-#' @param ... Parameters passed to underlying functions.
+#' @param ... Parameters passed to `fortify` functions to extract
+#'   ordination scores. You can define `scores` arguments such as
+#'   `scaling`.
+#'
+#' @seealso [geom_ordi_arrow()], [geom_ordi_axis()],
+#'   [geom_ordi_label()], [geom_ordi_point()], [geom_ordi_repel()],
+#'   [geom_ordi_text()], [autolayer.envfit()], [autolayer.ordisurf()].
+#'
+#' @author Jari Oksanen
 
 #' @importFrom stats weights
 #' @importFrom ggplot2 ggplot coord_fixed aes ggproto
@@ -53,10 +83,14 @@
 #' data(dune, dune.env, varespec, varechem)
 #' m <- cca(dune ~ Management + A1, dune.env)
 #'
+#' ## data and mapping of the ordiggplot object
+#' ordiggplot(m)@data
+#' ordiggplot(m)@mapping
+#'
 #' ## use geom_ordi_* functions
 #' ordiggplot(m) + geom_ordi_axis() +
 #'   geom_ordi_point("sites") +
-#'   geom_ordi_text("species", col = "darkblue",
+#'   geom_ordi_repel("species", col = "darkblue",
 #'                  mapping = aes(fontface = "italic")) +
 #'   geom_ordi_label("centroids") +
 #'   geom_ordi_arrow("biplot")
@@ -71,7 +105,7 @@
 #'
 #' ## Messy arrow biplot for PCA
 #' m <- rda(dune)
-#' ordiggplot(m) +
+#' ordiggplot(m, corr = TRUE) +
 #'   geom_ordi_axis() +
 #'   geom_ordi_point("sites") +
 #'   geom_ordi_arrow("species")
@@ -155,7 +189,10 @@
 
 ### add points to the skeleton
 
-#' Add a point layer to an ordiggplot
+#' Add a Point Layer to an ordiggplot Graph
+#'
+#' Function adds a point layer using [ggplot2::geom_point()] to an
+#' [ordiggplot()] graph.
 #'
 #' @importFrom ggplot2 geom_point
 #'
@@ -165,6 +202,24 @@
 #' @param ... other arguments passed to [ggplot2::geom_point()]
 #'
 #' @return Returns a ggplot2 layer `geom_point`.
+#'
+#' @seealso [ggplot2::geom_point()].
+#'
+#' @author Jari Oksanen
+#'
+#' @examples
+#' library(vegan)
+#' library(ggplot2)
+#' data(mite, mite.env, package = "vegan")
+#' mod <- metaMDS(mite, trace = 0)
+#' surf <- vegan::ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)
+#' ef <- vegan::envfit(mod ~ WatrCont + Topo, mite.env)
+#' ## Change sizes and colours of points
+#' ordiggplot(mod) +
+#'   geom_ordi_point("sites",
+#'     mapping=aes(colour = mite.env$Topo, size=mite.env$WatrCont/10)) +
+#'   autolayer(surf) +
+#'   autolayer(ef, box = TRUE)
 #'
 #' @export
 `geom_ordi_point` <- function(score, data, ...) {
@@ -179,13 +234,29 @@
 
 ### add text to the plot
 
-#' Add a text layer to an ordiggplot
+#' Add a Text Layer to an ordiggplot Graph
+#'
+#' Function adds a text layer to an [ordiggplot()] graph using
+#' [ggplot2::geom_text()].
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
 #'   instead of `score`. This can be a [vegan::envfit()] result object
 #'   which is used to plot centroids of factor levels.
 #' @param ... other arguments passed to [ggplot2::geom_text()]
+#'
+#' @seealso [ggplot2::geom_text()].
+#' @author Jari Oksanen
+#'
+#' @examples
+#' library(vegan)
+#' library(ggplot2)
+#' data(dune, package = "vegan")
+#' mod <- metaMDS(dune, trace = 0)
+#' ordiggplot(mod) +
+#'   geom_ordi_text("sites", size=3) +
+#'   geom_ordi_text("species", mapping=aes(fontface="italic"))
+#'
 #' @importFrom ggplot2 geom_text
 #'
 #' @return Returns a ggplot2 layer `geom_text`.
@@ -199,7 +270,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$score <- "gradient"
+    data$score <- "centroids"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Centroid"
     data <- data[want,]
@@ -207,7 +278,14 @@
   geom_text(data = data, ...)
 }
 
-#' Add a label layer to an ordiggplot
+#' Add a Label Layer to an ordiggplot Graph
+#'
+#' Function adds \dQuote{labels} or text in a box of a white
+#' background using [ggplot2::geom_label()] to an [ordiggplot()]
+#' graph. These can help in congested plot since uppermost labels are
+#' readable (but cover lower ones), or to emphasize text. Some
+#' *ggvegan* functions call [ggplot2::geom_label()] with argument `box
+#' = TRUE`.
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
@@ -216,6 +294,23 @@
 #' @param ... other arguments passed to [ggplot2::geom_label()]
 #'
 #' @return Returns a ggplot2 layer `geom_label`.
+#'
+#' @seealso [ggplot2::geom_label()].
+#'
+#' @author Jari Oksanen
+#'
+#' @examples
+#' library(vegan)
+#' library(ggplot2)
+#' data(dune, dune.env, package = "vegan")
+#' mod <- cca(dune ~ Moisture, dune.env)
+#' ordiggplot(mod) +
+#'   geom_ordi_axis() +
+#'   geom_ordi_point("sites") +
+#'   geom_ordi_label("species", size = 3,
+#'     mapping = aes(fontface = "italic")) +
+#'   geom_ordi_label("centroids", size = 5,
+#'     mapping = aes(fontface = "bold"))
 #'
 #' @importFrom ggplot2 geom_label
 #' @export
@@ -227,7 +322,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$score <- "gradient"
+    data$score <- "centroids"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Centroid"
     data <- data[want,]
@@ -235,25 +330,57 @@
   geom_label(data = data, ...)
 }
 
-#' Add a biplot arrow layer to an ordiggplot
+#' Add an Arrow Layer to an ordiggplot graph.
+#'
+#' Function adds layers of arrows ([ggplot2::geom_segment()]) and
+#' (optionally) their text labels ([ggplot2::geom_text()] or
+#' [ggplot2::geom_label()]) to an [ordiggplot()] graph. Typically
+#' these arrows are `biplot` or `regression` scores, but the function
+#' allows drawing species arrows for PCA biplots, or adding fitted
+#' environmental vectors of [vegan::envfit()].
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
 #'   instead of `score`. This can be a [vegan::envfit] result object
 #'   which is used to draw arrows to fitted vectors.
-#' @param text Add text labels to the plot.
+#' @param text Add text labels to the plot (logical).
 #' @param box Draw a box behind the text (logical).
-#' @param arrow.mul Arrow multiplier.
+#' @param arrow.mul Arrow multiplier when arrows end points are given
+#'   in `data`. Ignored for `biplot` and `regression` scores which are
+#'   scaled similarly as `constraints` in constrained ordination
+#'   methods, and for arrows of `species` scores which are scaled by
+#'   `scaling` given in the [ordiggplot()] command.
 #' @param arrow.params,text.params Parameters to modify arrows or
 #'   their text labels.
 #' @param ... other arguments passed to [ggplot2::geom_segment()],
-#'   [ggplot2::geom_label()], or [ggplot2::geom_text()]
+#'   [ggplot2::geom_label()] and [ggplot2::geom_text()]
+#'
+#' @author Jari Oksanen
+#'
+#' @examples
+#' library(vegan)
+#' data(varespec, varechem, package="vegan")
+#' ## PCA biplot
+#' mod <- rda(varespec)
+#' ordiggplot(mod, scaling = "sites", corr = TRUE) +
+#'   geom_ordi_axis() +
+#'   geom_ordi_point("sites") +
+#'   geom_ordi_arrow("species")
+#' ## RDA
+#' mod <- rda(varespec ~ N + K + Al + Baresoil, varechem)
+#' ordiggplot(mod) +
+#'   geom_ordi_axis() +
+#'   geom_ordi_point("sites") +
+#'   geom_ordi_arrow("biplot", box = TRUE)
 #'
 #' @importFrom ggplot2 geom_segment geom_label geom_text aes
 #' @importFrom grid arrow
 #' @importFrom utils modifyList
 #'
-#' @return Returns ggplot2 layers `geom_segment` for arrows and
+#' @seealso Underlying functions are [ggplot2::geom_segment()],
+#'   [ggplot2::geom_text()] and [ggplot2::geom_label()].
+#'
+#' @return Returns ggplot2 layers `geom_segment` for arrows, and
 #'   `geom_text` or `geom_label` (optionally) for their names.
 #'
 #' @export
@@ -384,7 +511,16 @@
   c(pp, pt)
 }
 
-#' Crosshair for axes in eigenvector methods
+#' Crosshair for Axes in Eigenvector Methods.
+#'
+#' The origin (coordinates 0,0) has a special interpretation in
+#' eigenvector methods: sites, species or variables at the centroid
+#' are average cases, and the point is more exceptional the further it
+#' is from the origin. Therefore crosshair of axes through the origin
+#' should be added to the ordination graph with eigenvector
+#' methods. Often it is forgotten, though. See the Example in
+#' [geom_ordi_arrow()] where the length of PCA biplot arrow shows how
+#' exceptional the species is in ordination.
 #'
 #' @param ... other arguments passed to [ggplot2::geom_hline()] and
 #' [ggplot2::geom_vline()]
@@ -393,6 +529,21 @@
 #' @param lty Linetype.
 #'
 #' @return Returns  ggplot2 layers `geom_hline` and `geom_vline`.
+#'
+#' @seealso The underlying functions are [ggplot2::geom_hline()] and
+#'   [ggplot2::geom_vline()].
+#'
+#' @author Jari Oksanen
+#'
+#' @examples
+#' library(vegan)
+#' library(ggplot2)
+#' data(dune, package = "vegan")
+#' mod <- cca(dune)
+#' ## simple "autoplot" using ggplot2::geom_text
+#' ordiggplot(mod) +
+#'   geom_ordi_axis() +
+#'   geom_text()
 #'
 #' @export
 `geom_ordi_axis` <- function(lty = 3, ...) {
@@ -404,12 +555,24 @@
 
 #' Add ordisurf Result as Contours in Ordination plot
 #'
-#' Function adds [vegan::ordisurf] result object
+#' Function adds [vegan::ordisurf()] results to an graph.
 #'
-#' @param object [vegan::ordisurf] result object.
-#' @param fill Use filled contours.
-#' @param ... Other arguments passed to [ggplot2::geom_contour] or
-#'   [ggplot2::geom_contour_filled].
+#' Function draws contours of fitted [vegan::ordisurf()] surface and
+#' (optionally) a raster of the surface using [ggplot2::geom_contour()]
+#' and [ggplot2::geom_raster()].
+#'
+#' Function uses gridded values of ordination plane saved within the
+#' [vegan::ordisurf()] result instead of scores data from an
+#' ordination object. Therefore its results can be added to any
+#' ordination graph, also from `autoplot` methods. However, you must
+#' be careful with using exactly the same axes and scaling in
+#' [vegan::ordisurf()] object and ordination.
+#'
+#' @param object [vegan::ordisurf()] result object.
+#' @param fill Use filled ordination space where raster colour match
+#'   the fitted values of the surface.
+#' @param ... Other arguments passed to [ggplot2::geom_contour()] or
+#'   [ggplot2::geom_raster()].
 #'
 #' @author Jari Oksanen
 #' @examples
@@ -463,27 +626,30 @@
 
 #' Add envfit Results to Ordination
 #'
-#' Function adds fitted vector arrays via [geom_ordi_arrow] and factor
-#' centroids via [geom_ordi_text] or [geom_ordi_label].
+#' Function adds layer of fitted vector arrays and factor
+#' centroids of factor levels in an [ordiggplot()] graph.
 #'
 #' @param object [vegan::envfit()] result object
 #' @param text add text to plot.
 #' @param box write text on a non-transparent label.
-#' @param arrow.mul arro multiplier.
+#' @param arrow.mul arrow multiplier.
 #' @param arrow.params,text.params List of additional parameters to
 #'   arrows and text.
 #' @param ... Other parameters passed to all graphical functions
-#'   [geom_ordi_arrow], [geom_ordi_text] and [geom_ordi_label].
+#'   [geom_ordi_arrow()], [geom_ordi_text()] and [geom_ordi_label()].
 #'
 #' @return Returns ggplot2 layers `geom_segment` for arrows (when
 #'   appropriate), and `geom_text` or `geom_label` for text.
+#' @author Jari Oksanen
 #'
 #' @examples
 #' library(vegan)
 #' library(ggplot2)
 #' data(mite, mite.env, package = "vegan")
 #' mod <- cca(mite)
-#' ef <- envfit(mod ~ Shrub+Topo+WatrCont+SubsDens, mite.env)
+#' ## you must have same scaling in envfit() and ordiggplot()
+#' ef <- envfit(mod ~ Shrub+Topo+WatrCont+SubsDens, mite.env,
+#'   scaling = "sites")
 #' ordiggplot(mod, scaling="sites") +
 #'   geom_ordi_axis() +
 #'   geom_ordi_point("sites") +

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_text}
 \alias{geom_ordi_text}
-\title{Add a text layer to an ordiggplot}
+\title{Add a Text Layer to an ordiggplot Graph}
 \usage{
 geom_ordi_text(score, data, ...)
 }
@@ -19,5 +19,22 @@ which is used to plot centroids of factor levels.}
 Returns a ggplot2 layer \code{geom_text}.
 }
 \description{
-Add a text layer to an ordiggplot
+Function adds a text layer to an \code{\link[=ordiggplot]{ordiggplot()}} graph using
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
+}
+\examples{
+library(vegan)
+library(ggplot2)
+data(dune, package = "vegan")
+mod <- metaMDS(dune, trace = 0)
+ordiggplot(mod) +
+  geom_ordi_text("sites", size=3) +
+  geom_ordi_text("species", mapping=aes(fontface="italic"))
+
+}
+\seealso{
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
+}
+\author{
+Jari Oksanen
 }

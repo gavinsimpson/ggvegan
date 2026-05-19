@@ -7,19 +7,32 @@
 \method{autolayer}{ordisurf}(object, fill = FALSE, ...)
 }
 \arguments{
-\item{object}{\link[vegan:ordisurf]{vegan::ordisurf} result object.}
+\item{object}{\code{\link[vegan:ordisurf]{vegan::ordisurf()}} result object.}
 
-\item{fill}{Use filled contours.}
+\item{fill}{Use filled ordination space where raster colour match
+the fitted values of the surface.}
 
-\item{...}{Other arguments passed to \link[ggplot2:geom_contour]{ggplot2::geom_contour} or
-\link[ggplot2:geom_contour]{ggplot2::geom_contour_filled}.}
+\item{...}{Other arguments passed to \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}} or
+\code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}}.}
 }
 \value{
 Returns ggplot2 layers \code{geom_contour} and \code{geom_raster}
 (optionally).
 }
 \description{
-Function adds \link[vegan:ordisurf]{vegan::ordisurf} result object
+Function adds \code{\link[vegan:ordisurf]{vegan::ordisurf()}} results to an graph.
+}
+\details{
+Function draws contours of fitted \code{\link[vegan:ordisurf]{vegan::ordisurf()}} surface and
+(optionally) a raster of the surface using \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}
+and \code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}}.
+
+Function uses gridded values of ordination plane saved within the
+\code{\link[vegan:ordisurf]{vegan::ordisurf()}} result instead of scores data from an
+ordination object. Therefore its results can be added to any
+ordination graph, also from \code{autoplot} methods. However, you must
+be careful with using exactly the same axes and scaling in
+\code{\link[vegan:ordisurf]{vegan::ordisurf()}} object and ordination.
 }
 \examples{
 library(vegan)

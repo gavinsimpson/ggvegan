@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_arrow}
 \alias{geom_ordi_arrow}
-\title{Add a biplot arrow layer to an ordiggplot}
+\title{Add an Arrow Layer to an ordiggplot graph.}
 \usage{
 geom_ordi_arrow(
   score,
@@ -22,22 +22,55 @@ geom_ordi_arrow(
 instead of \code{score}. This can be a \link[vegan:envfit]{vegan::envfit} result object
 which is used to draw arrows to fitted vectors.}
 
-\item{text}{Add text labels to the plot.}
+\item{text}{Add text labels to the plot (logical).}
 
 \item{box}{Draw a box behind the text (logical).}
 
-\item{arrow.mul}{Arrow multiplier.}
+\item{arrow.mul}{Arrow multiplier when arrows end points are given
+in \code{data}. Ignored for \code{biplot} and \code{regression} scores which are
+scaled similarly as \code{constraints} in constrained ordination
+methods, and for arrows of \code{species} scores which are scaled by
+\code{scaling} given in the \code{\link[=ordiggplot]{ordiggplot()}} command.}
 
 \item{arrow.params, text.params}{Parameters to modify arrows or
 their text labels.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}},
-\code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}, or \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
+\code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} and \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }
 \value{
-Returns ggplot2 layers \code{geom_segment} for arrows and
+Returns ggplot2 layers \code{geom_segment} for arrows, and
 \code{geom_text} or \code{geom_label} (optionally) for their names.
 }
 \description{
-Add a biplot arrow layer to an ordiggplot
+Function adds layers of arrows (\code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}) and
+(optionally) their text labels (\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} or
+\code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}) to an \code{\link[=ordiggplot]{ordiggplot()}} graph. Typically
+these arrows are \code{biplot} or \code{regression} scores, but the function
+allows drawing species arrows for PCA biplots, or adding fitted
+environmental vectors of \code{\link[vegan:envfit]{vegan::envfit()}}.
+}
+\examples{
+library(vegan)
+data(varespec, varechem, package="vegan")
+## PCA biplot
+mod <- rda(varespec)
+ordiggplot(mod, scaling = "sites", corr = TRUE) +
+  geom_ordi_axis() +
+  geom_ordi_point("sites") +
+  geom_ordi_arrow("species")
+## RDA
+mod <- rda(varespec ~ N + K + Al + Baresoil, varechem)
+ordiggplot(mod) +
+  geom_ordi_axis() +
+  geom_ordi_point("sites") +
+  geom_ordi_arrow("biplot", box = TRUE)
+
+}
+\seealso{
+Underlying functions are \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}},
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}} and \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}.
+}
+\author{
+Jari Oksanen
 }
