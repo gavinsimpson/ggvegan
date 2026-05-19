@@ -343,7 +343,7 @@
 #' mod <- cca(mite)
 #' ordiggplot(mod) +
 #'   geom_ordi_axis() +
-#'   geom_ordi_point("sites")
+#'   geom_ordi_point("sites") +
 #'   geom_ordi_repel("species",
 #'     text.params = list(size=3, fontface = "italic"))
 #'
