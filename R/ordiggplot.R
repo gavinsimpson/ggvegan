@@ -47,9 +47,7 @@
 #' The `ordiggplot()` function extracts results using `fortify()`
 #' functions of this package, and it accepts the arguments of those
 #' functions. This allows setting, e.g., the scaling of ordination
-#' axes. Alternatively, `ordiggplot()` can use a compatible data
-#' frame, such as those created by `vegan::scores(..., tidy =
-#' TRUE)`. The `ordiggplot` skeleton sets up `data` used in plotting,
+#' axes. The `ordiggplot` skeleton sets up `data` used in plotting,
 #' and you should define axis scaling, axes _etc_ in the `ordiggplot`
 #' call and they will be used in all added layers.
 #'

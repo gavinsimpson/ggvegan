@@ -20,11 +20,6 @@
 * `ordiggplot()` adds mapping `score` to `colour` for automatic
   colouring of layers analogously to `autoplot` methods.
 
-* `ordiggplot()` accepts directly `fortify` compatible data frames as
-  an alternative to an ordination object. Such data frames can be
-  generated with `vegan::scores(..., tidy = TRUE)`. This allows using
-  ordination results without `ggvegan::fortify` support.
-
 * `geom_ordi_text()` and `geom_ordi_label()` accept `vegan::envfit()`
   result as an argument `data=` to draw locations of centroids of
   factor levels in an `ordiggplot()` layer.

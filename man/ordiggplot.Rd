@@ -75,8 +75,7 @@ functions to add previously fitted results of \code{\link[vegan:envfit]{vegan::e
 The \code{ordiggplot()} function extracts results using \code{fortify()}
 functions of this package, and it accepts the arguments of those
 functions. This allows setting, e.g., the scaling of ordination
-axes. Alternatively, \code{ordiggplot()} can use a compatible data
-frame, such as those created by \code{vegan::scores(..., tidy = TRUE)}. The \code{ordiggplot} skeleton sets up \code{data} used in plotting,
+axes. The \code{ordiggplot} skeleton sets up \code{data} used in plotting,
 and you should define axis scaling, axes \emph{etc} in the \code{ordiggplot}
 call and they will be used in all added layers.
 }
