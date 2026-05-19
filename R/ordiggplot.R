@@ -43,10 +43,9 @@
 #' @export
 #'
 #' @return Returns a ggplot object with slot `data` for full
-#'   ordination scores and mapping `x` and `y` for ordination scores,
-#'   `label` for text labels for scores, factor `score` for score type
-#'   used as `colour` and `weight` needed in computing some
-#'   statistics.
+#'   ordination data and slot mapping where ordination axes are mapped
+#'   to `x` and `y`, `label` for text labels for each row and factor
+#'   `score` type mapped to `colour`.
 #'
 #' @examples
 #' library("vegan")
@@ -145,7 +144,6 @@
       x = .data[[dlab[1]]],
       y = .data[[dlab[2]]],
       label = .data[["label"]],
-      weight = .data[["weight"]],
       colour = .data[["score"]]
     )
   )
@@ -201,7 +199,6 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$weight <- NA
     data$score <- "gradient"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Centroid"
@@ -230,7 +227,6 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$weight <- NA
     data$score <- "gradient"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Centroid"
@@ -278,7 +274,6 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$weight <- NA
     data$score <- "gradient"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Vector"
@@ -295,6 +290,14 @@
   if (!is.null(dots)) {
     arrowdefs <- modifyList(arrowdefs, dots)
     textdefs <- modifyList(textdefs, dots)
+    ## calculated stat "vectorfit" needs weight that is in .data but
+    ## not mapped by default
+    if (!is.null(dots$stat) && dots$stat == "vectorfit") {
+      arrowdefs <- modifyList(arrowdefs,
+                              list(mapping = aes(weight = .data[["weight"]])))
+      textdefs <- modifyList(textdefs,
+                             list(mapping = aes(weight = .data[["weight"]])))
+    }
   }
   ## graphics
   pl <- do.call(
@@ -435,7 +438,6 @@
   df <- expand.grid("x" = x, "y" = y)
   df$label <- "surface"
   df$score <- "surface"
-  df$weight = 1
   df$z <- z
   df <- df[complete.cases(df),] # warns on NA outside hull
   ## geom_contour_filled returns discrete coverclasses, geom_raster a

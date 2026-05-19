@@ -23,10 +23,9 @@ details. Use \code{"none"} to not draw the legend.}
 }
 \value{
 Returns a ggplot object with slot \code{data} for full
-ordination scores and mapping \code{x} and \code{y} for ordination scores,
-\code{label} for text labels for scores, factor \code{score} for score type
-used as \code{colour} and \code{weight} needed in computing some
-statistics.
+ordination data and slot mapping where ordination axes are mapped
+to \code{x} and \code{y}, \code{label} for text labels for each row and factor
+\code{score} type mapped to \code{colour}.
 }
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
