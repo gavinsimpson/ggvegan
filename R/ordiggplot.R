@@ -89,7 +89,7 @@
 #' ordiggplot(m) + geom_ordi_axis() +
 #'   geom_ordi_point("sites") +
 #'   geom_ordi_repel("species", col = "darkblue",
-#'                  mapping = aes(fontface = "italic")) +
+#'                  text.params = list(mapping = aes(fontface = "italic"))) +
 #'   geom_ordi_label("centroids") +
 #'   geom_ordi_arrow("biplot")
 #'
@@ -567,11 +567,19 @@
 #' be careful with using exactly the same axes and scaling in
 #' [vegan::ordisurf()] object and ordination.
 #'
+#' Surface `fill` is non-transparent and will paint over all previous
+#' layers. Filled surface should be used before other visible layers,
+#' or fill should be made transparent with `alpha` in argument
+#' `fill.params` passed to [ggplot2::geom_raster()].
+#'
 #' @param object [vegan::ordisurf()] result object.
 #' @param fill Use filled ordination space where raster colour match
 #'   the fitted values of the surface.
-#' @param ... Other arguments passed to [ggplot2::geom_contour()] or
-#'   [ggplot2::geom_raster()].
+#' @param contour.params,fill.params Arguments passed to
+#'   [ggplot2::geom_contour()] or to [ggplot2::geom_raster()],
+#'   respectively.
+#' @param ... Other arguments passed both to [ggplot2::geom_contour()]
+#'   and [ggplot2::geom_raster()].
 #'
 #' @author Jari Oksanen
 #' @examples
@@ -581,7 +589,7 @@
 #' mod <- cca(mite)
 #' surf <- ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)
 #' ordiggplot(mod) +
-#'   geom_ordi_point("sites") +
+#'   geom_ordi_point("sites", size = mite.env$WatrCont/100) +
 #'   autolayer(surf) +
 #'   autolayer(envfit(mod ~ WatrCont, mite.env, permutations=0),
 #'     arrow.mul = 1.3)
@@ -591,9 +599,16 @@
 #'
 #' @importFrom ggplot2 autolayer geom_contour geom_raster
 #' @importFrom stats complete.cases
+#' @importFrom utils modifyList
 #'
 #' @export
-`autolayer.ordisurf` <- function(object, fill = FALSE, ...) {
+`autolayer.ordisurf` <- function(
+  object,
+  fill = FALSE,
+  contour.params = list(),
+  fill.params = list(),
+  ...
+) {
   x <- object$grid$x
   y <- object$grid$y
   z <- as.vector(object$grid$z)
@@ -602,22 +617,34 @@
   df$score <- "surface"
   df$z <- z
   df <- df[complete.cases(df),] # warns on NA outside hull
-  ## geom_contour_filled returns discrete coverclasses, geom_raster a
-  ## smooth surface
+  ## geom_contour_filled returns discrete colour classes, geom_raster
+  ## a smooth surface
+  dots <- match.call(expand.dots = FALSE)$...
+  contcall <- list(mapping = aes(.data[["x"]],
+                                 .data[["y"]],
+                                 z = .data[["z"]]),
+                   data = df)
+  fillcall <- list(mapping = aes(.data[["x"]],
+                                 .data[["y"]],
+                                 fill = .data[["z"]]),
+                   data = df)
+  if (!is.null(dots)) {
+    contcall <- modifyList(contcall, dots)
+    fillcall <- modifyList(fillcall, dots)
+  }
+  if (!is.null(contour.params)) {
+    contcall <- modifyList(contcall, contour.params)
+  }
+  if (!is.null(fill.params)) {
+    fillcall <- modifyList(fillcall, fill.params)
+  }
   pf <- pl <- NULL
-  if (fill) { # should we have fill.params, contour.params lists?
-    pf <- geom_raster(mapping = aes(
-                          .data[["x"]],
-                          .data[["y"]],
-                          fill = .data[["z"]]),
-                      data = df, ...)
-    }
-    pl <- geom_contour(mapping=aes(
-                           .data[["x"]],
-                           .data[["y"]],
-                           z = .data[["z"]]),
-                       data = df, ...)
-
+  if (fill) {
+    pf <- do.call("geom_raster", fillcall)
+  }
+  ## always geom_contour
+  pl <- do.call("geom_contour", contcall)
+  ## return layers
   c(pf, pl)
 }
 

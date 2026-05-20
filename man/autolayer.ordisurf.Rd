@@ -4,7 +4,13 @@
 \alias{autolayer.ordisurf}
 \title{Add ordisurf Result as Contours in Ordination plot}
 \usage{
-\method{autolayer}{ordisurf}(object, fill = FALSE, ...)
+\method{autolayer}{ordisurf}(
+  object,
+  fill = FALSE,
+  contour.params = list(),
+  fill.params = list(),
+  ...
+)
 }
 \arguments{
 \item{object}{\code{\link[vegan:ordisurf]{vegan::ordisurf()}} result object.}
@@ -12,8 +18,12 @@
 \item{fill}{Use filled ordination space where raster colour match
 the fitted values of the surface.}
 
-\item{...}{Other arguments passed to \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}} or
-\code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}}.}
+\item{contour.params, fill.params}{Arguments passed to
+\code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}} or to \code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}},
+respectively.}
+
+\item{...}{Other arguments passed both to \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}}
+and \code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}}.}
 }
 \value{
 Returns ggplot2 layers \code{geom_contour} and \code{geom_raster}
@@ -33,6 +43,11 @@ ordination object. Therefore its results can be added to any
 ordination graph, also from \code{autoplot} methods. However, you must
 be careful with using exactly the same axes and scaling in
 \code{\link[vegan:ordisurf]{vegan::ordisurf()}} object and ordination.
+
+Surface \code{fill} is non-transparent and will paint over all previous
+layers. Filled surface should be used before other visible layers,
+or fill should be made transparent with \code{alpha} in argument
+\code{fill.params} passed to \code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}}.
 }
 \examples{
 library(vegan)
@@ -41,7 +56,7 @@ data(mite, mite.env, package="vegan")
 mod <- cca(mite)
 surf <- ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)
 ordiggplot(mod) +
-  geom_ordi_point("sites") +
+  geom_ordi_point("sites", size = mite.env$WatrCont/100) +
   autolayer(surf) +
   autolayer(envfit(mod ~ WatrCont, mite.env, permutations=0),
     arrow.mul = 1.3)

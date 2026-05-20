@@ -93,7 +93,7 @@ ordiggplot(m)@mapping
 ordiggplot(m) + geom_ordi_axis() +
   geom_ordi_point("sites") +
   geom_ordi_repel("species", col = "darkblue",
-                 mapping = aes(fontface = "italic")) +
+                 text.params = list(mapping = aes(fontface = "italic"))) +
   geom_ordi_label("centroids") +
   geom_ordi_arrow("biplot")
 
