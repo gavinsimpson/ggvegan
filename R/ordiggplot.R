@@ -269,7 +269,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$score <- "centroids"
+    data$score <- "envfit"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Centroid"
     data <- data[want,]
@@ -321,7 +321,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$score <- "centroids"
+    data$score <- "envfit"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Centroid"
     data <- data[want,]
@@ -400,7 +400,7 @@
     data <- ggscores(score)
   } else if (inherits(data, "envfit")) {
     data <- fortify(data)
-    data$score <- "gradient"
+    data$score <- "envfit"
     colnames(data) <- tolower(colnames(data))
     want <- data[["type"]] == "Vector"
     data <- data[want, ]
@@ -655,17 +655,26 @@
 #' Function adds layer of fitted vector arrays and factor
 #' centroids of factor levels in an [ordiggplot()] graph.
 #'
+#' Function adds a previosly fitted [vegan::envfit()] model. This does
+#' not adapt to changes in the [ordiggplot()] object, for instance in
+#' `scaling` or `axes`, but it must re-fitted for a changed model.
+#'
 #' @param object [vegan::envfit()] result object
 #' @param text add text to plot.
 #' @param box write text on a non-transparent label.
 #' @param arrow.mul arrow multiplier.
 #' @param arrow.params,text.params List of additional parameters to
-#'   arrows and text.
+#'   [ggplot2::geom_segment()] for arrows, and to text labels of both
+#'   arrows and centroids of factor levels ([ggplot2::geom_text()],
+#'   [ggplot2::geom_label()]).
 #' @param ... Other parameters passed to all graphical functions
 #'   [geom_ordi_arrow()], [geom_ordi_text()] and [geom_ordi_label()].
 #'
-#' @return Returns ggplot2 layers `geom_segment` for arrows (when
-#'   appropriate), and `geom_text` or `geom_label` for text.
+#' @return Returns ggplot2 layers `geom_segment` for arrows and
+#'   `geom_text` or `geom_label` for their text labels (when
+#'   appropriate), and another layer of `geom_text` or `geom_label`
+#'   for the centroids of factor leves (when appropriate). The `score`
+#'   type is called `envfit`.
 #' @author Jari Oksanen
 #'
 #' @examples

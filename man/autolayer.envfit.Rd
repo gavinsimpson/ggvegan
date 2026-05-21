@@ -24,18 +24,28 @@
 \item{arrow.mul}{arrow multiplier.}
 
 \item{arrow.params, text.params}{List of additional parameters to
-arrows and text.}
+\code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}} for arrows, and to text labels of both
+arrows and centroids of factor levels (\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}},
+\code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}).}
 
 \item{...}{Other parameters passed to all graphical functions
 \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}}, \code{\link[=geom_ordi_text]{geom_ordi_text()}} and \code{\link[=geom_ordi_label]{geom_ordi_label()}}.}
 }
 \value{
-Returns ggplot2 layers \code{geom_segment} for arrows (when
-appropriate), and \code{geom_text} or \code{geom_label} for text.
+Returns ggplot2 layers \code{geom_segment} for arrows and
+\code{geom_text} or \code{geom_label} for their text labels (when
+appropriate), and another layer of \code{geom_text} or \code{geom_label}
+for the centroids of factor leves (when appropriate). The \code{score}
+type is called \code{envfit}.
 }
 \description{
 Function adds layer of fitted vector arrays and factor
 centroids of factor levels in an \code{\link[=ordiggplot]{ordiggplot()}} graph.
+}
+\details{
+Function adds a previosly fitted \code{\link[vegan:envfit]{vegan::envfit()}} model. This does
+not adapt to changes in the \code{\link[=ordiggplot]{ordiggplot()}} object, for instance in
+\code{scaling} or \code{axes}, but it must re-fitted for a changed model.
 }
 \examples{
 library(vegan)
