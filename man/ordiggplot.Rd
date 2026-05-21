@@ -10,12 +10,14 @@ ordiggplot(model, axes = c(1, 2), legend.position = "right", ...)
 ggscores(score)
 }
 \arguments{
-\item{model}{An ordination result object from \CRANpkg{vegan}.}
+\item{model}{An ordination result object with a compatible
+\code{fortify()} meethods (typically from \CRANpkg{vegan}).}
 
 \item{axes}{Two axes to be plotted}
 
 \item{legend.position}{Legend position: see \code{\link[ggplot2:theme]{ggplot2::theme()}} for
-details. Use \code{"none"} to not draw the legend.}
+details. Use \code{"none"} to not draw the legend. Some
+\code{\link[ggplot2:theme]{ggplot2::theme()}} can ignore this argument.}
 
 \item{...}{Parameters passed to \code{fortify} functions to extract
 ordination scores. You can define \code{scores} arguments such as
@@ -25,16 +27,16 @@ ordination scores. You can define \code{scores} arguments such as
 }
 \value{
 Returns a ggplot object with slot \code{data} for full
-ordination data and slot mapping where ordination axes are mapped
-to \code{x} and \code{y}, \code{label} for text labels for each row and factor
+ordination data and slot \code{mapping} with ordination axes mapped to
+\code{x} and \code{y}, \code{label} to text labels for each row and factor
 \code{score} type mapped to \code{colour}.
 }
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
 result. You can add new graphical elements to this plot with
-\verb{geom_ordi_*} function of this package, or you can use standard
-\CRANpkg{ggplot2} \verb{geom_*} functions and use \code{ggscores}
-as their \code{data} argument.
+\verb{geom_ordi_*} functions of this package, or you can use standard
+\CRANpkg{ggplot2} \verb{geom_*} functions and use \code{ggscores} as their
+\code{data} argument.
 }
 \details{
 The \pkg{ggvegan} package has two contrasting approaches to draw
@@ -60,17 +62,17 @@ of ordination result \code{mod} as points, you can use idiom
 There are specific functions to ease adding layers to an ordination
 graph. See the documentation of \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}},
 \code{\link[=geom_ordi_label]{geom_ordi_label()}}, \code{\link[=geom_ordi_point]{geom_ordi_point()}}, \code{\link[=geom_ordi_repel]{geom_ordi_repel()}},
-\code{\link[=geom_ordi_text]{geom_ordi_text()}}. These are in general similar to similarly named
-\verb{geom_*} functions. For instance, \code{geom_ordi_point} adds very
-little to \code{geom_point}, and you can use all arguments of the
-standard \code{geom} function. These functions are of type
-\verb{geom_ordi_*(score, ...)} which is similar to \verb{geom_*(data = ggscores(score), ...)}. Some functions were adapted to typical
-ordination data and return compound geometries. For instance,
-\code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}} returns layers \code{geom_segment} for the arrows,
-and \code{geom_text} for their name labels. In addition, there are
-functions to add previously fitted results of \code{\link[vegan:envfit]{vegan::envfit()}} and
-\code{\link[vegan:ordisurf]{vegan::ordisurf()}} (see \code{\link[=autolayer.envfit]{autolayer.envfit()}},
-\code{\link[=autolayer.ordisurf]{autolayer.ordisurf()}}).
+\code{\link[=geom_ordi_text]{geom_ordi_text()}}. These correspond to similarly named \verb{geom_*}
+functions. For instance, \code{geom_ordi_point} adds very little to
+\code{geom_point}, and you can use all arguments of the standard \code{geom}
+function. These functions are of type \verb{geom_ordi_*(score, ...)}
+which is similar to \verb{geom_*(data = ggscores(score), ...)}. Some
+functions were adapted to typical ordination data and return
+compound geometries. For instance, \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}} returns
+layers \code{geom_segment} for the arrows, and \code{geom_text} for their
+name labels. In addition, there are functions to add previously
+fitted results of \code{\link[vegan:envfit]{vegan::envfit()}} and \code{\link[vegan:ordisurf]{vegan::ordisurf()}} (see
+\code{\link[=autolayer.envfit]{autolayer.envfit()}}, \code{\link[=autolayer.ordisurf]{autolayer.ordisurf()}}).
 
 The \code{ordiggplot()} function extracts results using \code{fortify()}
 functions of this package, and it accepts the arguments of those

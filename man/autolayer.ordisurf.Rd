@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{autolayer.ordisurf}
 \alias{autolayer.ordisurf}
-\title{Add ordisurf Result as Contours in Ordination plot}
+\title{Add ordisurf Result as Contours to an Ordination Graph}
 \usage{
 \method{autolayer}{ordisurf}(
   object,
@@ -16,7 +16,7 @@
 \item{object}{\code{\link[vegan:ordisurf]{vegan::ordisurf()}} result object.}
 
 \item{fill}{Use filled ordination space where raster colour match
-the fitted values of the surface.}
+the fitted values of the surface (logical).}
 
 \item{contour.params, fill.params}{Arguments passed to
 \code{\link[ggplot2:geom_contour]{ggplot2::geom_contour()}} or to \code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}},

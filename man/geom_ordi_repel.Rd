@@ -2,8 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_repel}
 \alias{geom_ordi_repel}
-\title{Add points and their labels to the plot. The labels are repelled
-from other pitems to minimize overplotting.}
+\title{Add Points and their Replled Labels to an ordiggplot Graph}
 \usage{
 geom_ordi_repel(
   score,
@@ -22,7 +21,7 @@ geom_ordi_repel(
 instead of \code{score}. This function does \emph{not} handle
 \code{\link[vegan:envfit]{vegan::envfit()}} results.}
 
-\item{box}{Draw a box behind the text (logical).}
+\item{box}{Draw a non-transparent box behind the text (logical).}
 
 \item{points}{Draw points (logical).}
 

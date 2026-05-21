@@ -4,9 +4,9 @@
 #'
 #' Function `ordiggplot` sets up an ordination graph but draws no
 #' result. You can add new graphical elements to this plot with
-#' `geom_ordi_*` function of this package, or you can use standard
-#' \CRANpkg{ggplot2} `geom_*` functions and use `ggscores`
-#' as their `data` argument.
+#' `geom_ordi_*` functions of this package, or you can use standard
+#' \CRANpkg{ggplot2} `geom_*` functions and use `ggscores` as their
+#' `data` argument.
 #'
 #' The \pkg{ggvegan} package has two contrasting approaches to draw
 #' ordination plots. The `autoplot` functions (e.g. [autoplot.rda()],
@@ -31,18 +31,17 @@
 #' There are specific functions to ease adding layers to an ordination
 #' graph. See the documentation of [geom_ordi_arrow()],
 #' [geom_ordi_label()], [geom_ordi_point()], [geom_ordi_repel()],
-#' [geom_ordi_text()]. These are in general similar to similarly named
-#' `geom_*` functions. For instance, `geom_ordi_point` adds very
-#' little to `geom_point`, and you can use all arguments of the
-#' standard `geom` function. These functions are of type
-#' `geom_ordi_*(score, ...)` which is similar to `geom_*(data =
-#' ggscores(score), ...)`. Some functions were adapted to typical
-#' ordination data and return compound geometries. For instance,
-#' [geom_ordi_arrow()] returns layers `geom_segment` for the arrows,
-#' and `geom_text` for their name labels. In addition, there are
-#' functions to add previously fitted results of [vegan::envfit()] and
-#' [vegan::ordisurf()] (see [autolayer.envfit()],
-#' [autolayer.ordisurf()]).
+#' [geom_ordi_text()]. These correspond to similarly named `geom_*`
+#' functions. For instance, `geom_ordi_point` adds very little to
+#' `geom_point`, and you can use all arguments of the standard `geom`
+#' function. These functions are of type `geom_ordi_*(score, ...)`
+#' which is similar to `geom_*(data = ggscores(score), ...)`. Some
+#' functions were adapted to typical ordination data and return
+#' compound geometries. For instance, [geom_ordi_arrow()] returns
+#' layers `geom_segment` for the arrows, and `geom_text` for their
+#' name labels. In addition, there are functions to add previously
+#' fitted results of [vegan::envfit()] and [vegan::ordisurf()] (see
+#' [autolayer.envfit()], [autolayer.ordisurf()]).
 #'
 #' The `ordiggplot()` function extracts results using `fortify()`
 #' functions of this package, and it accepts the arguments of those
@@ -51,11 +50,13 @@
 #' and you should define axis scaling, axes _etc_ in the `ordiggplot`
 #' call and they will be used in all added layers.
 #'
-#' @param model An ordination result object from \CRANpkg{vegan}.
+#' @param model An ordination result object with a compatible
+#'   `fortify()` meethods (typically from \CRANpkg{vegan}).
 #' @param axes Two axes to be plotted
 #' @param score Ordination score to be added to the plot.
 #' @param legend.position Legend position: see [ggplot2::theme()] for
-#'   details. Use `"none"` to not draw the legend.
+#'   details. Use `"none"` to not draw the legend. Some
+#'   [ggplot2::theme()] can ignore this argument.
 #' @param ... Parameters passed to `fortify` functions to extract
 #'   ordination scores. You can define `scores` arguments such as
 #'   `scaling`.
@@ -71,8 +72,8 @@
 #' @export
 #'
 #' @return Returns a ggplot object with slot `data` for full
-#'   ordination data and slot mapping where ordination axes are mapped
-#'   to `x` and `y`, `label` for text labels for each row and factor
+#'   ordination data and slot `mapping` with ordination axes mapped to
+#'   `x` and `y`, `label` to text labels for each row and factor
 #'   `score` type mapped to `colour`.
 #'
 #' @examples
@@ -279,12 +280,12 @@
 
 #' Add a Label Layer to an ordiggplot Graph
 #'
-#' Function adds \dQuote{labels} or text in a box of a white
+#' Function adds \dQuote{labels} or text in a box with non-transparent
 #' background using [ggplot2::geom_label()] to an [ordiggplot()]
 #' graph. These can help in congested plot since uppermost labels are
 #' readable (but cover lower ones), or to emphasize text. Some
-#' *ggvegan* functions call [ggplot2::geom_label()] with argument `box
-#' = TRUE`.
+#' \pkg{ggvegan} functions call [ggplot2::geom_label()] with argument
+#' `box = TRUE`.
 #'
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
@@ -329,7 +330,7 @@
   geom_label(data = data, ...)
 }
 
-#' Add an Arrow Layer to an ordiggplot graph.
+#' Add an Arrow Layer to an ordiggplot Graph.
 #'
 #' Function adds layers of arrows ([ggplot2::geom_segment()]) and
 #' (optionally) their text labels ([ggplot2::geom_text()] or
@@ -341,14 +342,13 @@
 #' @param score Ordination score to be added to the plot.
 #' @param data Alternative data to the function that will be used
 #'   instead of `score`. This can be a [vegan::envfit] result object
-#'   which is used to draw arrows to fitted vectors.
+#'   which is used to draw arrows of fitted vectors.
 #' @param text Add text labels to the plot (logical).
-#' @param box Draw a box behind the text (logical).
+#' @param box Draw a non-transparent box behind the text (logical).
 #' @param arrow.mul Arrow multiplier when arrows end points are given
-#'   in `data`. Ignored for `biplot` and `regression` scores which are
-#'   scaled similarly as `constraints` in constrained ordination
-#'   methods, and for arrows of `species` scores which are scaled by
-#'   `scaling` given in the [ordiggplot()] command.
+#'   in `data`. Ignored for `biplot` and `regression` scores or
+#'   `species` scores which are already scaled in constrained
+#'   ordination methods when calling [ordiggplot()].
 #' @param arrow.params,text.params Parameters to modify arrows or
 #'   their text labels.
 #' @param ... other arguments passed to [ggplot2::geom_segment()],
@@ -441,8 +441,7 @@
   pl
 }
 
-#' Add points and their labels to the plot. The labels are repelled
-#' from other pitems to minimize overplotting.
+#' Add Points and their Replled Labels to an ordiggplot Graph
 #'
 #' Function adds points to the exact position of the ordination score
 #' with a label, but labels are repelled from each other to avoid
@@ -453,7 +452,7 @@
 #' @param data Alternative data to the function that will be used
 #'   instead of `score`. This function does *not* handle
 #'   [vegan::envfit()] results.
-#' @param box Draw a box behind the text (logical).
+#' @param box Draw a non-transparent box behind the text (logical).
 #' @param points Draw points (logical).
 #' @param point.params,text.params Parameters to modify points or
 #'   their repelled text labels.
@@ -553,7 +552,7 @@
   )
 }
 
-#' Add ordisurf Result as Contours in Ordination plot
+#' Add ordisurf Result as Contours to an Ordination Graph
 #'
 #' Function adds [vegan::ordisurf()] results to an graph.
 #'
@@ -575,7 +574,7 @@
 #'
 #' @param object [vegan::ordisurf()] result object.
 #' @param fill Use filled ordination space where raster colour match
-#'   the fitted values of the surface.
+#'   the fitted values of the surface (logical).
 #' @param contour.params,fill.params Arguments passed to
 #'   [ggplot2::geom_contour()] or to [ggplot2::geom_raster()],
 #'   respectively.
@@ -651,18 +650,18 @@
 
 ## add precalculated envfit object as arrows & text
 
-#' Add envfit Results to Ordination
+#' Add envfit Results to an ordiggplot Graph
 #'
-#' Function adds layer of fitted vector arrays and factor
-#' centroids of factor levels in an [ordiggplot()] graph.
+#' Function adds layers of fitted vectors and centroids of factor
+#' levels in an [ordiggplot()] graph.
 #'
 #' Function adds a previosly fitted [vegan::envfit()] model. This does
 #' not adapt to changes in the [ordiggplot()] object, for instance in
 #' `scaling` or `axes`, but it must re-fitted for a changed model.
 #'
 #' @param object [vegan::envfit()] result object
-#' @param text add text to plot.
-#' @param box write text on a non-transparent label.
+#' @param text add text to plot (logical).
+#' @param box write text on a non-transparent label (logical).
 #' @param arrow.mul arrow multiplier.
 #' @param arrow.params,text.params List of additional parameters to
 #'   [ggplot2::geom_segment()] for arrows, and to text labels of both
@@ -828,6 +827,14 @@
 #'  in continuous environmental variables in ordination space.The
 #'  arrows are scaled relative to their correlation coefficient,
 #'  and they can be added to an ordination plot with [geom_ordi_arrow()].
+#'
+#'  The arrows are fitted to the `data` and `mapping` of
+#'  [ordiggplot()], and they will adapt to changes in the parameters
+#'  of `ordiggplot()`.  This is in contrast to similar
+#'  [autolayer.envfit()] command or to
+#'  `geom_ordi_arrow(data=<envfit-object>)` which will use a
+#'  previously fitted `<envfit-object>` and will not not change if the
+#'  `ordiggplot()` definitions change.
 #'
 #' @inheritParams ggplot2::layer
 #' @param na.rm Remove missing values (Not Yet Implemented).

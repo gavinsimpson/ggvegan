@@ -19,11 +19,12 @@ which is used to plot centroids of factor levels.}
 Returns a ggplot2 layer \code{geom_label}.
 }
 \description{
-Function adds \dQuote{labels} or text in a box of a white
+Function adds \dQuote{labels} or text in a box with non-transparent
 background using \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} to an \code{\link[=ordiggplot]{ordiggplot()}}
 graph. These can help in congested plot since uppermost labels are
 readable (but cover lower ones), or to emphasize text. Some
-\emph{ggvegan} functions call \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} with argument \code{box = TRUE}.
+\pkg{ggvegan} functions call \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}} with argument
+\code{box = TRUE}.
 }
 \examples{
 library(vegan)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{autolayer.envfit}
 \alias{autolayer.envfit}
-\title{Add envfit Results to Ordination}
+\title{Add envfit Results to an ordiggplot Graph}
 \usage{
 \method{autolayer}{envfit}(
   object,
@@ -17,9 +17,9 @@
 \arguments{
 \item{object}{\code{\link[vegan:envfit]{vegan::envfit()}} result object}
 
-\item{text}{add text to plot.}
+\item{text}{add text to plot (logical).}
 
-\item{box}{write text on a non-transparent label.}
+\item{box}{write text on a non-transparent label (logical).}
 
 \item{arrow.mul}{arrow multiplier.}
 
@@ -39,8 +39,8 @@ for the centroids of factor leves (when appropriate). The \code{score}
 type is called \code{envfit}.
 }
 \description{
-Function adds layer of fitted vector arrays and factor
-centroids of factor levels in an \code{\link[=ordiggplot]{ordiggplot()}} graph.
+Function adds layers of fitted vectors and centroids of factor
+levels in an \code{\link[=ordiggplot]{ordiggplot()}} graph.
 }
 \details{
 Function adds a previosly fitted \code{\link[vegan:envfit]{vegan::envfit()}} model. This does

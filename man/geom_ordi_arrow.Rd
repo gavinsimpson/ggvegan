@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_arrow}
 \alias{geom_ordi_arrow}
-\title{Add an Arrow Layer to an ordiggplot graph.}
+\title{Add an Arrow Layer to an ordiggplot Graph.}
 \usage{
 geom_ordi_arrow(
   score,
@@ -20,17 +20,16 @@ geom_ordi_arrow(
 
 \item{data}{Alternative data to the function that will be used
 instead of \code{score}. This can be a \link[vegan:envfit]{vegan::envfit} result object
-which is used to draw arrows to fitted vectors.}
+which is used to draw arrows of fitted vectors.}
 
 \item{text}{Add text labels to the plot (logical).}
 
-\item{box}{Draw a box behind the text (logical).}
+\item{box}{Draw a non-transparent box behind the text (logical).}
 
 \item{arrow.mul}{Arrow multiplier when arrows end points are given
-in \code{data}. Ignored for \code{biplot} and \code{regression} scores which are
-scaled similarly as \code{constraints} in constrained ordination
-methods, and for arrows of \code{species} scores which are scaled by
-\code{scaling} given in the \code{\link[=ordiggplot]{ordiggplot()}} command.}
+in \code{data}. Ignored for \code{biplot} and \code{regression} scores or
+\code{species} scores which are already scaled in constrained
+ordination methods when calling \code{\link[=ordiggplot]{ordiggplot()}}.}
 
 \item{arrow.params, text.params}{Parameters to modify arrows or
 their text labels.}

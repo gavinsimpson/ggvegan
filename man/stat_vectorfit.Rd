@@ -103,6 +103,14 @@ Fits arrows to show the direction of fastest increase
 in continuous environmental variables in ordination space.The
 arrows are scaled relative to their correlation coefficient,
 and they can be added to an ordination plot with \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}}.
+
+The arrows are fitted to the \code{data} and \code{mapping} of
+\code{\link[=ordiggplot]{ordiggplot()}}, and they will adapt to changes in the parameters
+of \code{ordiggplot()}.  This is in contrast to similar
+\code{\link[=autolayer.envfit]{autolayer.envfit()}} command or to
+\verb{geom_ordi_arrow(data=<envfit-object>)} which will use a
+previously fitted \verb{<envfit-object>} and will not not change if the
+\code{ordiggplot()} definitions change.
 }
 \examples{
 
