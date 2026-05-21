@@ -462,6 +462,7 @@
 #'
 #' @return Returns ggrepel layers `geom_text_repel` or
 #'   `geom_label_repel` and  ggplot2 layer `geom_point` (optionally).
+#' @author Jari Oksanen
 #'
 #' @examples
 #' library(vegan)
@@ -839,10 +840,9 @@
 #'     current graph.
 #' @param ... Other arguments passed to the functions.
 #'
-#' @export
-#'
 #' @return Returns a layer that containts a StatVectorfit object that
 #'   is responsible for rendering the fitted vectors in the plot.
+#' @author Jari Oksanen
 #'
 #' @examples
 #'
@@ -861,6 +861,7 @@
 #' ordiggplot(m) + geom_ordi_point("sites") +
 #'   geom_ordi_arrow("sites", stat = "vectorfit", edata = mite.env) +
 #'   facet_wrap(mite.env$Topo)
+#' @export
 `stat_vectorfit` <- function(
   mapping = NULL,
   data = NULL,

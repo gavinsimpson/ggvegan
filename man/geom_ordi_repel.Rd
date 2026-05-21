@@ -53,3 +53,6 @@ ordiggplot(mod) +
     text.params = list(size=3, fontface = "italic"))
 
 }
+\author{
+Jari Oksanen
+}

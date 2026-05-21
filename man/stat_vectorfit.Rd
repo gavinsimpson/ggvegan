@@ -122,4 +122,7 @@ ordiggplot(m) + geom_ordi_point("sites") +
   geom_ordi_arrow("sites", stat = "vectorfit", edata = mite.env) +
   facet_wrap(mite.env$Topo)
 }
+\author{
+Jari Oksanen
+}
 \keyword{datasets}
