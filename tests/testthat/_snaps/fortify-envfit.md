@@ -4,7 +4,7 @@
       fortify(dune_envfit)
     Output
       # A tibble: 5 x 4
-        label     type        CA1     CA2
+        label     type        ca1     ca2
         <chr>     <chr>     <dbl>   <dbl>
       1 A1        Vector   -0.556 -0.0338
       2 Moisture1 Centroid  0.748  0.142 
@@ -18,7 +18,7 @@
       tidy(dune_envfit)
     Output
       # A tibble: 5 x 4
-        label     type        CA1     CA2
+        label     type        ca1     ca2
         <chr>     <chr>     <dbl>   <dbl>
       1 A1        Vector   -0.556 -0.0338
       2 Moisture1 Centroid  0.748  0.142 
