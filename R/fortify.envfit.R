@@ -36,16 +36,7 @@
 #'
 #' fortify(fit)
 `fortify.envfit` <- function(model, data, ...) {
-  vs <- scores(model, display = "vectors", ...)
-  fs <- scores(model, display = "factors", ...)
-  df <- as.data.frame(rbind(vs, fs)) |> as_tibble()
-  df <- tibble::add_column(
-    df,
-    label = c(rownames(vs), rownames(fs)),
-    type = rep(c("Vector", "Centroid"), times = c(NROW(vs), NROW(fs))),
-    .before = 1L
-  )
-  df
+  tidy(model, data, ...)
 }
 
 #' @export
@@ -55,6 +46,7 @@
   vs <- scores(x, display = "vectors", ...)
   fs <- scores(x, display = "factors", ...)
   df <- as.data.frame(rbind(vs, fs)) |> as_tibble()
+  names(df) <- tolower(names(df))
   df <- tibble::add_column(
     df,
     label = c(rownames(vs), rownames(fs)),
