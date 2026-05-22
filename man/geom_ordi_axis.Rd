@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_axis}
 \alias{geom_ordi_axis}
-\title{Crosshair for axes in eigenvector methods}
+\title{Crosshair for Axes in Eigenvector Methods.}
 \usage{
 geom_ordi_axis(lty = 3, ...)
 }
@@ -13,9 +13,33 @@ geom_ordi_axis(lty = 3, ...)
 \code{\link[ggplot2:geom_abline]{ggplot2::geom_vline()}}}
 }
 \value{
-Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
-object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+Returns  ggplot2 layers \code{geom_hline} and \code{geom_vline}.
 }
 \description{
-Crosshair for axes in eigenvector methods
+The origin (coordinates 0,0) has a special interpretation in
+eigenvector methods: sites, species or variables at the centroid
+are average cases, and the point is more exceptional the further it
+is from the origin. Therefore crosshair of axes through the origin
+should be added to the ordination graph with eigenvector
+methods. Often it is forgotten, though. See the Example in
+\code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}} where the length of PCA biplot arrow shows how
+exceptional the species is in ordination.
+}
+\examples{
+library(vegan)
+library(ggplot2)
+data(dune, package = "vegan")
+mod <- cca(dune)
+## simple "autoplot" using ggplot2::geom_text
+ordiggplot(mod) +
+  geom_ordi_axis() +
+  geom_text()
+
+}
+\seealso{
+The underlying functions are \code{\link[ggplot2:geom_abline]{ggplot2::geom_hline()}} and
+\code{\link[ggplot2:geom_abline]{ggplot2::geom_vline()}}.
+}
+\author{
+Jari Oksanen
 }

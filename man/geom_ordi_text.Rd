@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_text}
 \alias{geom_ordi_text}
-\title{Add a text layer to an ordiggplot}
+\title{Add a Text Layer to an ordiggplot Graph}
 \usage{
 geom_ordi_text(score, data, ...)
 }
@@ -10,14 +10,31 @@ geom_ordi_text(score, data, ...)
 \item{score}{Ordination score to be added to the plot.}
 
 \item{data}{Alternative data to the function that will be used
-instead of \code{score}.}
+instead of \code{score}. This can be a \code{\link[vegan:envfit]{vegan::envfit()}} result object
+which is used to plot centroids of factor levels.}
 
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}}
 }
 \value{
-Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
-object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+Returns a ggplot2 layer \code{geom_text}.
 }
 \description{
-Add a text layer to an ordiggplot
+Function adds a text layer to an \code{\link[=ordiggplot]{ordiggplot()}} graph using
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
+}
+\examples{
+library(vegan)
+library(ggplot2)
+data(dune, package = "vegan")
+mod <- metaMDS(dune, trace = 0)
+ordiggplot(mod) +
+  geom_ordi_text("sites", size=3) +
+  geom_ordi_text("species", mapping=aes(fontface="italic"))
+
+}
+\seealso{
+\code{\link[ggplot2:geom_text]{ggplot2::geom_text()}}.
+}
+\author{
+Jari Oksanen
 }

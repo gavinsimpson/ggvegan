@@ -2,7 +2,7 @@
 % Please edit documentation in R/ordiggplot.R
 \name{geom_ordi_point}
 \alias{geom_ordi_point}
-\title{Add a point layer to an ordiggplot}
+\title{Add a Point Layer to an ordiggplot Graph}
 \usage{
 geom_ordi_point(score, data, ...)
 }
@@ -15,9 +15,30 @@ instead of \code{score}.}
 \item{...}{other arguments passed to \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}}
 }
 \value{
-Returns a ggplot2 layer or a list of such layers: a \code{"LayerInstance"}
-object that inherits from classes \code{"Layer"}, \code{"ggproto"}, and \code{"gg"}.
+Returns a ggplot2 layer \code{geom_point}.
 }
 \description{
-Add a point layer to an ordiggplot
+Function adds a point layer using \code{\link[ggplot2:geom_point]{ggplot2::geom_point()}} to an
+\code{\link[=ordiggplot]{ordiggplot()}} graph.
+}
+\examples{
+library(vegan)
+library(ggplot2)
+data(mite, mite.env, package = "vegan")
+mod <- metaMDS(mite, trace = 0)
+surf <- vegan::ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)
+ef <- vegan::envfit(mod ~ WatrCont + Topo, mite.env)
+## Change sizes and colours of points
+ordiggplot(mod) +
+  geom_ordi_point("sites",
+    mapping=aes(colour = mite.env$Topo, size=mite.env$WatrCont/10)) +
+  autolayer(surf) +
+  autolayer(ef, box = TRUE)
+
+}
+\seealso{
+\code{\link[ggplot2:geom_point]{ggplot2::geom_point()}}.
+}
+\author{
+Jari Oksanen
 }

@@ -5,57 +5,81 @@
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
-ordiggplot(model, axes = c(1, 2), arrow.mul, ...)
+ordiggplot(model, axes = c(1, 2), legend.position = "right", ...)
 
 ggscores(score)
 }
 \arguments{
-\item{model}{An ordination result object from \CRANpkg{vegan}.}
+\item{model}{An ordination result object with a compatible
+\code{fortify()} meethods (typically from \CRANpkg{vegan}).}
 
 \item{axes}{Two axes to be plotted}
 
-\item{arrow.mul}{Multiplier to arrow length. If missing, the arrow
-length are adjusted to fit to other scores, but if some score
-types are not displayed, the arrows may be badly scaled, and
-manual adjustment can be useful.}
+\item{legend.position}{Legend position: see \code{\link[ggplot2:theme]{ggplot2::theme()}} for
+details. Use \code{"none"} to not draw the legend. Some
+\code{\link[ggplot2:theme]{ggplot2::theme()}} can ignore this argument.}
 
-\item{...}{Parameters passed to underlying functions.}
+\item{...}{Parameters passed to \code{fortify} functions to extract
+ordination scores. You can define \code{scores} arguments such as
+\code{scaling}.}
 
 \item{score}{Ordination score to be added to the plot.}
 }
 \value{
-Returns a ggplot object.
+Returns a ggplot object with slot \code{data} for full
+ordination data and slot \code{mapping} with ordination axes mapped to
+\code{x} and \code{y}, \code{label} to text labels for each row and factor
+\code{score} type mapped to \code{colour}.
 }
 \description{
 Function \code{ordiggplot} sets up an ordination graph but draws no
 result. You can add new graphical elements to this plot with
-\verb{geom_ordi_*} function of this package, or you can use standard
-\CRANpkg{ggplot2} \verb{geom_*} functions and use \code{ggscores}
-as their \code{data} argument.
+\verb{geom_ordi_*} functions of this package, or you can use standard
+\CRANpkg{ggplot2} \verb{geom_*} functions and use \code{ggscores} as their
+\code{data} argument.
 }
 \details{
 The \pkg{ggvegan} package has two contrasting approaches to draw
 ordination plots. The \code{autoplot} functions (e.g. \code{\link[=autoplot.rda]{autoplot.rda()}},
-\code{\link[=autoplot.cca]{autoplot.cca()}}, and \link{autoplot.metaMDS}) draw a complete plot with one
-command, but the design is hard-coded in the function. However, you
-can add new elements to the graph.
+\code{\link[=autoplot.cca]{autoplot.cca()}}, and \code{\link[=autoplot.metaMDS]{autoplot.metaMDS()}}) draw a complete plot
+with one command, but the design is hard-coded in the
+function, and it may be difficult to add new layers to the graph.
 
 In contrast, function \code{ordiggplot()} only sets up an ordination
-plot, and does not draw anything. It allows you to add layers to the plot
-one by one with full flexibility of the \CRANpkg{ggplot2} functions.
-There are some specific functions \verb{geom_ordi_*}
-functions that are similar as similarly named \verb{geom_*}
-functions. For these you need to give the type of ordination scores
-to be added, and in addition, you can give any \verb{geom_*}
-function arguments to modify the plot. Alternatively, you can use
-any \pkg{ggplot2} function and in its \code{data} argument use
-\code{ggscores()} function to select the data elements for the
-function.
+plot, but allows you to add layers to the graph one by one with
+full flexibility of the \CRANpkg{ggplot2} functions. It initializes
+the \pkg{ggplot2} graph with idiom \code{ggplot(data, mapping)} which
+allows other functions to use the ordination \code{data} and axis
+\code{mapping} in adding new layers. The included mapping specifies
+coordinates \code{x} and \code{y} and variables \code{label} for text labels and a
+score-type specific \code{colour}. Any \pkg{ggplot2} function that can
+use this mapping will work automatically. Support function
+\code{ggscores} selects a slice of ordination scores that can be used as
+a \code{data} argument in the \code{geom} function. To plot the site scores
+of ordination result \code{mod} as points, you can use idiom
+\code{ordiggplot(mod) + geom_point(data = ggscores("sites"))}.
 
-The \code{ordiggplot()} function extracts results using
-\code{fortify()} functions of this package, and it accepts the
-arguments of those functions. This allows setting, e.g., the
-scaling of ordination axes.
+There are specific functions to ease adding layers to an ordination
+graph. See the documentation of \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}},
+\code{\link[=geom_ordi_label]{geom_ordi_label()}}, \code{\link[=geom_ordi_point]{geom_ordi_point()}}, \code{\link[=geom_ordi_repel]{geom_ordi_repel()}},
+\code{\link[=geom_ordi_text]{geom_ordi_text()}}. These correspond to similarly named \verb{geom_*}
+functions. For instance, \code{geom_ordi_point} adds very little to
+\code{geom_point}, and you can use all arguments of the standard \code{geom}
+function. These functions are of type \verb{geom_ordi_*(score, ...)}
+which is similar to \verb{geom_*(data = ggscores(score), ...)}. Some
+functions were adapted to typical ordination data and return
+compound geometries. For instance, \code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}} returns
+layers \code{geom_segment} for the arrows, and \code{geom_text} for their
+name labels. In addition, there are functions to add previously
+fitted results of \code{\link[vegan:envfit]{vegan::envfit()}} and \code{\link[vegan:ordisurf]{vegan::ordisurf()}} (see
+\code{\link[=autolayer.envfit]{autolayer.envfit()}}, \code{\link[=autolayer.ordisurf]{autolayer.ordisurf()}}).
+
+The \code{ordiggplot()} function extracts results using \code{fortify()}
+functions of this package, and it accepts the arguments of those
+functions. This allows setting, e.g., the scaling of ordination
+axes. The \code{ordiggplot} skeleton sets up \code{data} used in plotting,
+and you should define axis scaling, axes \emph{etc} in the \code{ordiggplot}
+call and they will be used in all added layers.
 }
 \examples{
 library("vegan")
@@ -63,11 +87,15 @@ library("ggplot2")
 data(dune, dune.env, varespec, varechem)
 m <- cca(dune ~ Management + A1, dune.env)
 
+## data and mapping of the ordiggplot object
+ordiggplot(m)@data
+ordiggplot(m)@mapping
+
 ## use geom_ordi_* functions
 ordiggplot(m) + geom_ordi_axis() +
   geom_ordi_point("sites") +
-  geom_ordi_text("species", col = "darkblue",
-                 mapping = aes(fontface = "italic")) +
+  geom_ordi_repel("species", col = "darkblue",
+                 text.params = list(mapping = aes(fontface = "italic"))) +
   geom_ordi_label("centroids") +
   geom_ordi_arrow("biplot")
 
@@ -81,8 +109,16 @@ ordiggplot(m, scaling = "sites") +
 
 ## Messy arrow biplot for PCA
 m <- rda(dune)
-ordiggplot(m) +
+ordiggplot(m, corr = TRUE) +
   geom_ordi_axis() +
   geom_ordi_point("sites") +
   geom_ordi_arrow("species")
+}
+\seealso{
+\code{\link[=geom_ordi_arrow]{geom_ordi_arrow()}}, \code{\link[=geom_ordi_axis]{geom_ordi_axis()}},
+\code{\link[=geom_ordi_label]{geom_ordi_label()}}, \code{\link[=geom_ordi_point]{geom_ordi_point()}}, \code{\link[=geom_ordi_repel]{geom_ordi_repel()}},
+\code{\link[=geom_ordi_text]{geom_ordi_text()}}, \code{\link[=autolayer.envfit]{autolayer.envfit()}}, \code{\link[=autolayer.ordisurf]{autolayer.ordisurf()}}.
+}
+\author{
+Jari Oksanen
 }

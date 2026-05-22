@@ -1,14 +1,40 @@
 # ggvegan (development version)
 
+## New Functions
+
+* `autolayer.envfit` is a new function to add `vegan::envfit()`
+  results to an `ordiggplot()` graph.
+
+* `autolayer.ordisurf` is a new function to add `vegan::ordisurf()`
+  contours and raster surface (optional) to any ordination graph.
+
+* `geom_ordi_repel` is a new layer function for `ordiggplot()` to draw
+  points (optionally) at the ordination scores and repel their text
+  labels to avoid over-plotting.
+
 ## New features
 
-* `fortify.radfit` and `autoplot.radfit` methods implemented providing support
-  for `vegan::radfit()` and `vegan::as_rad()`.
+* `fortify.radfit` and `autoplot.radfit` methods implemented providing
+  support for `vegan::radfit()` and `vegan::as.rad()`.
+
+* `ordiggplot()` adds mapping `score` to `colour` for automatic
+  colouring of layers analogously to `autoplot` methods.
+
+* `geom_ordi_text()` and `geom_ordi_label()` accept `vegan::envfit()`
+  result as an argument `data=` to draw locations of centroids of
+  factor levels in an `ordiggplot()` layer.
+
+* `geom_ordi_arrow()` accepts `vegan::envfit()` result as an argument
+  `data=` for labelled (optionally) arrows of fitted vectors in an
+  `ordiggplot()` layer.
 
 ## Bug fixes
 
-* *ggplot2* would report a warning about dropped aesthetics when `StatVectorfit`
-  was run #43 Fixed by @jarioksa in #44
+* *ggplot2* would report a warning about dropped aesthetics when
+  `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
+
+* `geom_ordi_arrow` did not pass weights of CCA or other weighted
+  ordination methods to `StatVectorfit`.
 
 # ggvegan 0.2.1
 

@@ -9,3 +9,8 @@ ggplot2::fortify
 #' @export
 #' @importFrom generics tidy
 generics::tidy
+
+#' @export
+#' @importFrom ggplot2 autolayer
+ggplot2::autolayer
+

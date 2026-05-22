@@ -6,6 +6,7 @@
 \alias{autoplot}
 \alias{fortify}
 \alias{tidy}
+\alias{autolayer}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -15,6 +16,6 @@ below to see their documentation.
 \describe{
   \item{generics}{\code{\link[generics]{tidy}}}
 
-  \item{ggplot2}{\code{\link[ggplot2]{autoplot}}, \code{\link[ggplot2]{fortify}}}
+  \item{ggplot2}{\code{\link[ggplot2]{autolayer}}, \code{\link[ggplot2]{autoplot}}, \code{\link[ggplot2]{fortify}}}
 }}
 
