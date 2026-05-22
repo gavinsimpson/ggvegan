@@ -26,8 +26,7 @@ reference:
   - starts_with("geom_ordi_")
 - title: "Autolayers"
   desc: "Autolayers of compound geoms with `ordiggplot()`."
-  - autolayer.envfit
-  - autolayer.ordisurf
+  - starts_with("autolayer.")
 - title: "Stats"
   desc: "stats for use with `ordiggplot()`."
   contents:
