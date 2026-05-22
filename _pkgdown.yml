@@ -25,7 +25,8 @@ reference:
   contents:
   - starts_with("geom_ordi_")
 - title: "Autolayers"
-  desc: "Autolayers of compound geoms with `ordiggplot()`."
+  desc: "Autolayers complex objects for use with `ordiggplot()`."
+  contents:
   - starts_with("autolayer.")
 - title: "Stats"
   desc: "stats for use with `ordiggplot()`."
