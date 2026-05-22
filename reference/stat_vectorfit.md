@@ -6,6 +6,17 @@ relative to their correlation coefficient, and they can be added to an
 ordination plot with
 [`geom_ordi_arrow()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_arrow.md).
 
+The arrows are fitted to the `data` and `mapping` of
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md),
+and they will adapt to changes in the parameters of
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md).
+This is in contrast to similar
+[`autolayer.envfit()`](https://gavinsimpson.github.io/ggvegan/reference/autolayer.envfit.md)
+command or to `geom_ordi_arrow(data=<envfit-object>)` which will use a
+previously fitted `<envfit-object>` and will not not change if the
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md)
+definitions change.
+
 ## Usage
 
 ``` r
@@ -133,8 +144,12 @@ stat_vectorfit(
 
 ## Value
 
-Returns a ggplot2 layer or a list of such layers: a `"LayerInstance"`
-object that inherits from classes `"Layer"`, `"ggproto"`, and `"gg"`.
+Returns a layer that containts a StatVectorfit object that is
+responsible for rendering the fitted vectors in the plot.
+
+## Author
+
+Jari Oksanen
 
 ## Examples
 

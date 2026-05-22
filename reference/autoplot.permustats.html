@@ -118,13 +118,13 @@ flexibility.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model: cca(formula = dune ~ A1 + Management + Moisture, data = dune.env)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              Df ChiSquare      F Pr(&gt;F)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A1            1   0.22476 2.7632  0.009 ** </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ManagementHF  1   0.13890 1.7076  0.054 .  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A1            1   0.22476 2.7632  0.006 ** </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ManagementHF  1   0.13890 1.7076  0.053 .  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ManagementNM  1   0.28099 3.4545  0.001 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ManagementSF  1   0.13512 1.6612  0.076 .  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Moisture.L    1   0.21976 2.7017  0.002 ** </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Moisture.Q    1   0.05769 0.7093  0.722    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Moisture.C    1   0.08193 1.0073  0.360    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ManagementSF  1   0.13512 1.6612  0.072 .  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Moisture.L    1   0.21976 2.7017  0.004 ** </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Moisture.Q    1   0.05769 0.7093  0.750    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Moisture.C    1   0.08193 1.0073  0.410    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual     12   0.97610                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
@@ -133,12 +133,12 @@ flexibility.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   term  permutation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A1          -<span style="color: #BB0000;">2.06</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A1          -<span style="color: #BB0000;">1.65</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A1          -<span style="color: #BB0000;">1.90</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A1          -<span style="color: #BB0000;">2.16</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A1          -<span style="color: #BB0000;">1.84</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> A1          -<span style="color: #BB0000;">1.99</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> A1         -<span style="color: #BB0000;">1.76</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A1         -<span style="color: #BB0000;">1.81</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> A1         -<span style="color: #BB0000;">1.95</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> A1         -<span style="color: #BB0000;">0.364</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> A1         -<span style="color: #BB0000;">1.85</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> A1         -<span style="color: #BB0000;">2.10</span> </span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html" class="external-link">autoplot</a></span><span class="op">(</span><span class="va">pstat</span>, <span class="st">"box"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="autoplot.permustats-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>

@@ -35,14 +35,22 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="ggvegan-development-version">ggvegan (development version)<a class="anchor" aria-label="anchor" href="#ggvegan-development-version"></a></h2>
 <div class="section level3">
+<h3 id="new-functions-development-version">New Functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h3>
+<ul><li><p><code>autolayer.envfit</code> is a new function to add <code><a href="https://vegandevs.github.io/vegan/reference/envfit.html" class="external-link">vegan::envfit()</a></code> results to an <code><a href="../reference/ordiggplot.html">ordiggplot()</a></code> graph.</p></li>
+<li><p><code>autolayer.ordisurf</code> is a new function to add <code><a href="https://vegandevs.github.io/vegan/reference/ordisurf.html" class="external-link">vegan::ordisurf()</a></code> contours and raster surface (optional) to any ordination graph.</p></li>
+<li><p><code>geom_ordi_repel</code> is a new layer function for <code><a href="../reference/ordiggplot.html">ordiggplot()</a></code> to draw points (optionally) at the ordination scores and repel their text labels to avoid over-plotting.</p></li>
+</ul></div>
+<div class="section level3">
 <h3 id="new-features-development-version">New features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>
-<code>fortify.radfit</code> and <code>autoplot.radfit</code> methods implemented providing support for <code><a href="https://vegandevs.github.io/vegan/reference/radfit.html" class="external-link">vegan::radfit()</a></code> and <code>vegan::as_rad()</code>.</li>
+<ul><li><p><code>fortify.radfit</code> and <code>autoplot.radfit</code> methods implemented providing support for <code><a href="https://vegandevs.github.io/vegan/reference/radfit.html" class="external-link">vegan::radfit()</a></code> and <code><a href="https://vegandevs.github.io/vegan/reference/radfit.html" class="external-link">vegan::as.rad()</a></code>.</p></li>
+<li><p><code><a href="../reference/ordiggplot.html">ordiggplot()</a></code> adds mapping <code>score</code> to <code>colour</code> for automatic colouring of layers analogously to <code>autoplot</code> methods.</p></li>
+<li><p><code><a href="../reference/geom_ordi_text.html">geom_ordi_text()</a></code> and <code><a href="../reference/geom_ordi_label.html">geom_ordi_label()</a></code> accept <code><a href="https://vegandevs.github.io/vegan/reference/envfit.html" class="external-link">vegan::envfit()</a></code> result as an argument <code>data=</code> to draw locations of centroids of factor levels in an <code><a href="../reference/ordiggplot.html">ordiggplot()</a></code> layer.</p></li>
+<li><p><code><a href="../reference/geom_ordi_arrow.html">geom_ordi_arrow()</a></code> accepts <code><a href="https://vegandevs.github.io/vegan/reference/envfit.html" class="external-link">vegan::envfit()</a></code> result as an argument <code>data=</code> for labelled (optionally) arrows of fitted vectors in an <code><a href="../reference/ordiggplot.html">ordiggplot()</a></code> layer.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>
-<em>ggplot2</em> would report a warning about dropped aesthetics when <code>StatVectorfit</code> was run <a href="https://github.com/gavinsimpson/ggvegan/issues/43" class="external-link">#43</a> Fixed by <a href="https://github.com/jarioksa" class="external-link">@jarioksa</a> in <a href="https://github.com/gavinsimpson/ggvegan/issues/44" class="external-link">#44</a></li>
+<ul><li><p><em>ggplot2</em> would report a warning about dropped aesthetics when <code>StatVectorfit</code> was run. <a href="https://github.com/gavinsimpson/ggvegan/issues/43" class="external-link">#43</a> Fixed by <a href="https://github.com/jarioksa" class="external-link">@jarioksa</a> in <a href="https://github.com/gavinsimpson/ggvegan/issues/44" class="external-link">#44</a>.</p></li>
+<li><p><code>geom_ordi_arrow</code> did not pass weights of CCA or other weighted ordination methods to <code>StatVectorfit</code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">

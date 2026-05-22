@@ -52,41 +52,37 @@ ord <- metaMDS(varespec)
 #> Square root transformation
 #> Wisconsin double standardization
 #> Run 0 stress 0.1843196 
-#> Run 1 stress 0.18458 
-#> ... Procrustes: rmse 0.04934384  max resid 0.1574557 
-#> Run 2 stress 0.1948413 
-#> Run 3 stress 0.2109614 
-#> Run 4 stress 0.1974421 
-#> Run 5 stress 0.18584 
-#> Run 6 stress 0.2212139 
-#> Run 7 stress 0.2104991 
-#> Run 8 stress 0.2085949 
-#> Run 9 stress 0.1843196 
-#> ... Procrustes: rmse 4.017075e-05  max resid 0.0001549597 
-#> ... Similar to previous best
-#> Run 10 stress 0.2102718 
-#> Run 11 stress 0.1967393 
-#> Run 12 stress 0.1955836 
-#> Run 13 stress 0.22964 
+#> Run 1 stress 0.2173475 
+#> Run 2 stress 0.1955836 
+#> Run 3 stress 0.215148 
+#> Run 4 stress 0.2302984 
+#> Run 5 stress 0.1955836 
+#> Run 6 stress 0.1974409 
+#> Run 7 stress 0.2420471 
+#> Run 8 stress 0.229138 
+#> Run 9 stress 0.3011761 
+#> Run 10 stress 0.2104574 
+#> Run 11 stress 0.195049 
+#> Run 12 stress 0.2085949 
+#> Run 13 stress 0.2109004 
 #> Run 14 stress 0.1825658 
 #> ... New best solution
-#> ... Procrustes: rmse 0.04162943  max resid 0.1518165 
-#> Run 15 stress 0.1852397 
-#> Run 16 stress 0.1843196 
-#> Run 17 stress 0.2447739 
-#> Run 18 stress 0.1948414 
-#> Run 19 stress 0.1967393 
-#> Run 20 stress 0.2199834 
+#> ... Procrustes: rmse 0.04163494  max resid 0.1518448 
+#> Run 15 stress 0.1869637 
+#> Run 16 stress 0.18584 
+#> Run 17 stress 0.1843196 
+#> Run 18 stress 0.2120074 
+#> Run 19 stress 0.2094754 
+#> Run 20 stress 0.2290578 
 #> *** Best solution was not repeated -- monoMDS stopping criteria:
-#>     19: stress ratio > sratmax
-#>      1: scale factor of the gradient < sfgrmin
+#>     20: stress ratio > sratmax
 fit <- envfit(ord, varechem, perm = 199)
 
 fortify(fit)
 #> # A tibble: 14 × 4
 #>    label    type     nmds1  nmds2
 #>    <chr>    <chr>    <dbl>  <dbl>
-#>  1 N        Vector -0.0289 -0.503
+#>  1 N        Vector -0.0288 -0.503
 #>  2 P        Vector  0.273   0.346
 #>  3 K        Vector  0.326   0.273
 #>  4 Ca       Vector  0.440   0.467

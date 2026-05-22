@@ -9,6 +9,8 @@
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/add_biplot_centroids.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/add_spp_site_scores.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/arrow_mul.html</loc></url>
+<url><loc>https://gavinsimpson.github.io/ggvegan/reference/autolayer.envfit.html</loc></url>
+<url><loc>https://gavinsimpson.github.io/ggvegan/reference/autolayer.ordisurf.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/autoplot.anosim.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/autoplot.cca.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/autoplot.dbrda.html</loc></url>
@@ -45,6 +47,7 @@
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_axis.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_label.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_point.html</loc></url>
+<url><loc>https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_repel.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_text.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/get_dimension_names.html</loc></url>
 <url><loc>https://gavinsimpson.github.io/ggvegan/reference/index.html</loc></url>

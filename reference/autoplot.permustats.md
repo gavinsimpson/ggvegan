@@ -86,13 +86,13 @@ mod <- cca(dune ~ A1 + Management + Moisture, dune.env)
 #> 
 #> Model: cca(formula = dune ~ A1 + Management + Moisture, data = dune.env)
 #>              Df ChiSquare      F Pr(>F)    
-#> A1            1   0.22476 2.7632  0.009 ** 
-#> ManagementHF  1   0.13890 1.7076  0.054 .  
+#> A1            1   0.22476 2.7632  0.006 ** 
+#> ManagementHF  1   0.13890 1.7076  0.053 .  
 #> ManagementNM  1   0.28099 3.4545  0.001 ***
-#> ManagementSF  1   0.13512 1.6612  0.076 .  
-#> Moisture.L    1   0.21976 2.7017  0.002 ** 
-#> Moisture.Q    1   0.05769 0.7093  0.722    
-#> Moisture.C    1   0.08193 1.0073  0.360    
+#> ManagementSF  1   0.13512 1.6612  0.072 .  
+#> Moisture.L    1   0.21976 2.7017  0.004 ** 
+#> Moisture.Q    1   0.05769 0.7093  0.750    
+#> Moisture.C    1   0.08193 1.0073  0.410    
 #> Residual     12   0.97610                  
 #> ---
 #> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
@@ -101,12 +101,12 @@ head(fortify(pstat))
 #> # A tibble: 6 × 2
 #>   term  permutation
 #>   <fct>       <dbl>
-#> 1 A1          -2.06
-#> 2 A1          -1.65
-#> 3 A1          -1.90
-#> 4 A1          -2.16
-#> 5 A1          -1.84
-#> 6 A1          -1.99
+#> 1 A1         -1.76 
+#> 2 A1         -1.81 
+#> 3 A1         -1.95 
+#> 4 A1         -0.364
+#> 5 A1         -1.85 
+#> 6 A1         -2.10 
 autoplot(pstat, "box")
 
 

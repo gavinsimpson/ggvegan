@@ -74,7 +74,6 @@ Didzis Elferts. Modifications by Gavin L. Simpson.
 ``` r
 
 library("vegan")
-#> Loading required package: permute
 
 data(dune)
 data(dune.env)

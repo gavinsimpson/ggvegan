@@ -2,7 +2,7 @@ pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles: {}
-last_built: 2026-05-22T06:18Z
+last_built: 2026-05-22T08:24Z
 urls:
   reference: https://gavinsimpson.github.io/ggvegan/reference
   article: https://gavinsimpson.github.io/ggvegan/articles

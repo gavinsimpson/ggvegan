@@ -186,15 +186,27 @@ geoms for use with
 [`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md).
 
 - [`geom_ordi_arrow()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_arrow.md)
-  : Add a biplot arrow layer to an ordiggplot
+  : Add an Arrow Layer to an ordiggplot Graph.
 - [`geom_ordi_axis()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_axis.md)
-  : Crosshair for axes in eigenvector methods
+  : Crosshair for Axes in Eigenvector Methods.
 - [`geom_ordi_label()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_label.md)
-  : Add a label layer to an ordiggplot
+  : Add a Label Layer to an ordiggplot Graph
 - [`geom_ordi_point()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_point.md)
-  : Add a point layer to an ordiggplot
+  : Add a Point Layer to an ordiggplot Graph
+- [`geom_ordi_repel()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_repel.md)
+  : Add Points and their Replled Labels to an ordiggplot Graph
 - [`geom_ordi_text()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_text.md)
-  : Add a text layer to an ordiggplot
+  : Add a Text Layer to an ordiggplot Graph
+
+## Autolayers
+
+Autolayers complex objects for use with
+[`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md).
+
+- [`autolayer(`*`<envfit>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autolayer.envfit.md)
+  : Add envfit Results to an ordiggplot Graph
+- [`autolayer(`*`<ordisurf>`*`)`](https://gavinsimpson.github.io/ggvegan/reference/autolayer.ordisurf.md)
+  : Add ordisurf Result as Contours to an Ordination Graph
 
 ## Stats
 
