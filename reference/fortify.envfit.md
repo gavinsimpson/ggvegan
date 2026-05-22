@@ -84,7 +84,7 @@ fit <- envfit(ord, varechem, perm = 199)
 
 fortify(fit)
 #> # A tibble: 14 × 4
-#>    label    type     NMDS1  NMDS2
+#>    label    type     nmds1  nmds2
 #>    <chr>    <chr>    <dbl>  <dbl>
 #>  1 N        Vector -0.0289 -0.503
 #>  2 P        Vector  0.273   0.346
@@ -107,7 +107,7 @@ fit <- envfit(ord ~ Moisture + A1, dune.env, perm = 199)
 
 fortify(fit)
 #> # A tibble: 5 × 4
-#>   label     type        CA1     CA2
+#>   label     type        ca1     ca2
 #>   <chr>     <chr>     <dbl>   <dbl>
 #> 1 A1        Vector   -0.556 -0.0338
 #> 2 Moisture1 Centroid  0.748  0.142 
