@@ -36,6 +36,10 @@
 * `geom_ordi_arrow` did not pass weights of CCA or other weighted
   ordination methods to `StatVectorfit`.
 
+* `stat_vectorfit()` matches environmental data to site labels, even when rows
+  are reordered or sites are omitted. Unweighted fits no longer require a
+  weight mapping.
+
 # ggvegan 0.2.1
 
 Patch release to address issued raised by CRAN during manual inspection of the
