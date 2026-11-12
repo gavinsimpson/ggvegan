@@ -30,6 +30,10 @@
 
 ## Bug fixes
 
+* Fisher and Preston plots use one-unit bars even when bins are empty.
+  Preston plots also label the full range and hide fitted annotations
+  when `show.fitted = FALSE`.
+
 * Biplot arrows now scale to both axes and keep their original lengths when
   there are no other scores to scale to. `ordiggplot()` again accepts
   `arrow.mul` to set arrow lengths manually.
