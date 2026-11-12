@@ -33,7 +33,8 @@ the number of observations in the group (default)?}
 
 \item{subtitle}{character; subtitle for the plot.}
 
-\item{caption}{character; caption for the plot.}
+\item{caption}{character; caption for the plot. The default shows the
+observed statistic and the P-value if available.}
 
 \item{...}{additional arguments passed to other methods.}
 }

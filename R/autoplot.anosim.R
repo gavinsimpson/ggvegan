@@ -13,7 +13,8 @@
 #' @param ylab character; label for the y-axis.
 #' @param title character; title for the plot.
 #' @param subtitle character; subtitle for the plot.
-#' @param caption character; caption for the plot.
+#' @param caption character; caption for the plot. The default shows the
+#'   observed statistic and the P-value if available.
 #' @param ... additional arguments passed to other methods.
 #' @return A ggplot object.
 #'
@@ -54,10 +55,9 @@
     geom_boxplot(notch = notch, varwidth = varwidth)
 
   ## prepare stats for caption --- may not be used
-  p <- if (is.null(object$permutations)) {
-    "not assessed"
-  } else {
-    format.pval(object$signif)
+  p <- "not assessed"
+  if (isTRUE(object$permutations > 0) && isTRUE(is.finite(object$signif))) {
+    p <- format.pval(object$signif)
   }
   r <- round(object$statistic, 3)
 

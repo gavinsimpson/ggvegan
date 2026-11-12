@@ -30,6 +30,9 @@
 
 ## Bug fixes
 
+* ANOSIM plots say that significance was not assessed when no permutations
+  were run.
+
 * *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
 
