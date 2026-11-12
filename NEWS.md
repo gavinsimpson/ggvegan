@@ -34,6 +34,9 @@
   Preston plots also label the full range and hide fitted annotations
   when `show.fitted = FALSE`.
 
+* ANOSIM plots say that significance was not assessed when no permutations
+  were run.
+
 * Biplot arrows now scale to both axes and keep their original lengths when
   there are no other scores to scale to. `ordiggplot()` again accepts
   `arrow.mul` to set arrow lengths manually.
