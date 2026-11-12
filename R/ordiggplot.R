@@ -60,6 +60,10 @@
 #' @param ... Parameters passed to `fortify` functions to extract
 #'   ordination scores. You can define `scores` arguments such as
 #'   `scaling`.
+#' @param arrow.mul Multiplier for biplot arrows. By default, their lengths
+#'   are scaled to fit the constraint scores, or the other plotted scores
+#'   if there are no constraint scores. If only arrows are present, their
+#'   lengths are unchanged.
 #'
 #' @seealso [geom_ordi_arrow()], [geom_ordi_axis()],
 #'   [geom_ordi_label()], [geom_ordi_point()], [geom_ordi_repel()],
@@ -112,7 +116,8 @@
   model,
   axes = c(1, 2),
   legend.position = "right",
-  ...
+  ...,
+  arrow.mul = NULL
 ) {
   if (length(axes) > 2) {
     stop("only two-dimensional plots made: too many axes defined")
@@ -123,34 +128,24 @@
   } else {
     df <- fortify(model, axes = axes, ...)
   }
-  ## I don't currently know a way of adjusting biplot arrows to the
-  ## final axis dimensions on plot. However, constraints (lc scores)
-  ## are found from regression coefficients and biplots are fitted to
-  ## the constraints: it is prudent to adjust arrow lengths to lc
-  ## scores. The following will be skipped for non-CCA family of
-  ## methods which do not have any of these items (but we may need to
-  ## add if(inherits(model, "cca")) block to be sure with future
-  ## methods.
-  isBip <- df$score == "biplot"
-  arrow.mul <- 1
-  if (any(isBip)) {
-    ## remove biplot scores that have equal centroid
-    if (any(cntr <- df$score == "centroids")) {
-      dup <- isBip & df$label %in% df$label[cntr]
-      if (any(dup)) {
-        df <- df[!dup, ]
+  centroids <- df$score %in% "centroids"
+  duplicate_arrows <- df$score %in% "biplot" & df$label %in% df$label[centroids]
+  if (any(duplicate_arrows)) {
+    df <- df[!duplicate_arrows, , drop = FALSE]
+  }
+  arrows <- df$score %in% c("biplot", "regression", "factorbiplot")
+  if (any(arrows)) {
+    if (is.null(arrow.mul)) {
+      reference <- df$score %in% "constraints"
+      if (!any(reference)) {
+        reference <- !arrows
       }
-    }
-    ## Same scaling with all biplot-like arrows
-    isBip <- df$score %in% c("biplot", "regression", "factorbiplot")
-    if (any(isBip)) {
       arrow.mul <- arrow_mul(
-          df[isBip, 3:4, drop = FALSE],
-          df[df$score == "constraints", 3:4, drop = FALSE]
+        df[arrows, 3:4, drop = FALSE],
+        df[reference, 3:4, drop = FALSE]
       )
     }
-    arrow.mul <- max(arrow.mul, 1)
-    df[isBip, 3:4] <- df[isBip, 3:4] * arrow.mul
+    df[arrows, 3:4] <- df[arrows, 3:4] * arrow.mul
   }
 
   ## weights are needed in some statistics

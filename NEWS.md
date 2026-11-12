@@ -30,6 +30,10 @@
 
 ## Bug fixes
 
+* Biplot arrows now scale to both axes and keep their original lengths when
+  there are no other scores to scale to. `ordiggplot()` again accepts
+  `arrow.mul` to set arrow lengths manually.
+
 * RDA and dbRDA plots and score tables now use the requested scaling constant.
   CCA, RDA and dbRDA plots handle a single axis and draw factor centroids once.
 
