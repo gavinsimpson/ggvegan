@@ -43,6 +43,10 @@
 * `tidy()` respects the selected NMDS axes. Both `fortify()` and `tidy()`
   respect axis selection for isomap site scores.
 
+* `stat_vectorfit()` matches environmental data to site labels, even when rows
+  are reordered or sites are omitted. Unweighted fits no longer require a
+  weight mapping.
+
 * *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
 

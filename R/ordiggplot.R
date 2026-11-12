@@ -741,35 +741,38 @@
   c(pvec, pfac)
 }
 
-## envfit, separately for vectorfit & factorfit as these imply
-## different geometries. 'edata', 'formula' and 'arrow.mul' can be
-## given as parameters, and 'arrow.mul' is calculated in
-## StatVectorfit$setup_params if not given.
+## Align the environmental data before ggplot2 splits the scores into groups.
 #' @importFrom stats model.frame
+`align_vectorfit_data` <- function(data, edata, formula) {
+  edata <- as.data.frame(edata)
+  named <- .row_names_info(edata, 1L) > 0L
+  if (!is.null(formula)) {
+    edata <- model.frame(formula, edata, na.action = stats::na.pass)
+  }
+  numeric_vars <- vapply(edata, is.numeric, logical(1))
+  if (!any(numeric_vars)) {
+    stop("'edata' must contain at least one numeric variable")
+  }
+  edata <- edata[, numeric_vars, drop = FALSE]
+  if (named && !is.null(data$label)) {
+    rows <- match(data$label, rownames(edata))
+    if (anyNA(rows)) {
+      stop("Could not match all ordination labels to row names in 'edata'")
+    }
+    return(edata[rows, , drop = FALSE])
+  }
+  if (nrow(edata) != nrow(data)) {
+    stop("Use ordination labels and matching row names in 'edata' to fit a subset of sites")
+  }
+  edata
+}
+
 #' @importFrom vegan vectorfit
-`calculate_vectorfit` <- function(
-  data = data,
-  scales,
-  vars = c("x", "y"),
-  edata,
-  formula,
-  arrow.mul
-) {
-  if (!missing(formula) && !is.null(formula)) {
-    edata <- model.frame(formula, edata)
-  }
-  vecs <- sapply(edata, is.numeric)
-  ed <- edata[, vecs, drop=FALSE]
-  if (NROW(ed) != NROW(data)) {
-      ed <- ed[data$label, , drop = FALSE]
-  }
-  wts <- data[["weight"]]
-  fit <- vectorfit(as.matrix(data[, vars]), ed, permutations = 0, w = wts)
-  fit <- sqrt(fit$r) * fit$arrows
-  fit <- arrow.mul * fit
-  fit <- as.data.frame(fit) # as_tibble? FIXME
-  fit$label = rownames(fit)
-  fit
+`fit_vectorfit` <- function(data, edata) {
+  xy <- as.matrix(data[, c("x", "y")])
+  env <- edata[data$vectorfit_row, , drop = FALSE]
+  fit <- vectorfit(xy, env, permutations = 0, w = data$weight)
+  sqrt(fit$r) * fit$arrows
 }
 
 #' @rdname stat_vectorfit
@@ -781,35 +784,44 @@
   ggproto(
     "StatVectorfit",
     Stat,
-    required_aes = c("x", "y", "weight"),
-    dropped_aes = c("weight"),
+    required_aes = c("x", "y"),
+    optional_aes = c("label", "weight"),
+    non_missing_aes = "weight",
+    dropped_aes = c("weight", "vectorfit_row"),
     extra_params = c("na.rm", "edata", "formula", "arrow.mul"),
-    compute_group = calculate_vectorfit,
-    ## same scaling of arrows in all panels
+    compute_group = function(data, scales, edata, arrow.mul) {
+      fit <- as.data.frame(arrow.mul * fit_vectorfit(data, edata))
+      fit$label <- rownames(fit)
+      fit
+    },
     setup_params = function(data, params) {
+      params$edata <- align_vectorfit_data(data, params$edata, params$formula)
       if (!is.null(params$arrow.mul)) {
         return(params)
       }
-      if (!is.null(params$formula)) {
-        ed <- model.frame(params$formula, params$edata)
-      } else {
-        ed <- params$edata
+      ## Use the same rows, grouping and weights as compute_group(), and
+      ## one multiplier across all panels.
+      data$vectorfit_row <- seq_len(nrow(data))
+      keep <- is.finite(data$x) & is.finite(data$y)
+      if (!is.null(data$weight)) {
+        keep <- keep & is.finite(data$weight)
       }
-      vecs <- sapply(ed, is.numeric)
-      ed <- ed[, vecs, drop = FALSE]
-      xy <- data[, c("x", "y")]
-      if (is.null(data$weight)) {
-        data$weight <- 1
+      data <- data[keep, , drop = FALSE]
+      if (!nrow(data)) {
+        params$arrow.mul <- 1
+        return(params)
       }
-      w <- split(data$weight, data$PANEL)
-      sxy <- split(xy, data$PANEL)
-      ed <- split(ed, data$PANEL)
-      arrs <- sapply(seq_len(length(sxy)), function(i) {
-        v <- vectorfit(as.matrix(sxy[[i]]), as.matrix(ed[[i]]), w = w[[i]])
-        arrow_mul(sqrt(v$r) * v$arrows, as.matrix(xy))
-      })
-      params$arrow.mul <- min(arrs)
+      xy <- as.matrix(data[, c("x", "y")])
+      groups <- split(data, list(data$PANEL, data$group), drop = TRUE)
+      multipliers <- vapply(groups, function(group) {
+        arrow_mul(fit_vectorfit(group, params$edata), xy)
+      }, numeric(1))
+      params$arrow.mul <- min(multipliers)
       params
+    },
+    setup_data = function(data, params) {
+      data$vectorfit_row <- seq_len(nrow(data))
+      data
     }
   )
 
@@ -825,7 +837,10 @@
 #'
 #'  The arrows are fitted to the `data` and `mapping` of
 #'  [ordiggplot()], and they will adapt to changes in the parameters
-#'  of `ordiggplot()`.  This is in contrast to similar
+#'  of `ordiggplot()`. With `stat_vectorfit()` directly, map the `weight`
+#'  aesthetic to use observation weights. Otherwise observations have equal
+#'  weight. [geom_ordi_arrow()] supplies weights for ordination scores.
+#'  This is in contrast to similar
 #'  [autolayer.envfit()] command or to
 #'  `geom_ordi_arrow(data=<envfit-object>)` which will use a
 #'  previously fitted `<envfit-object>` and will not not change if the
@@ -833,10 +848,11 @@
 #'
 #' @inheritParams ggplot2::layer
 #' @param na.rm Remove missing values (Not Yet Implemented).
-#' @param edata Environmental data where the continuous variables are
-#'     found.
+#' @param edata Environmental data with continuous variables. When `edata`
+#'   has explicit row names and the `label` aesthetic is mapped, observations
+#'   are paired by name. Otherwise, supply one row per observation in plot order.
 #' @param formula Formula to select variables from `edata`. If
-#'     missing, all continuos variables of `edata` are used.
+#'     missing, all numeric variables in `edata` are used.
 #' @param arrow.mul Multiplier to arrow length. If missing, the
 #'     multiplier is selected automatically so that arrows fit the
 #'     current graph.
