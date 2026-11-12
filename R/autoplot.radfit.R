@@ -30,8 +30,8 @@
 #'
 #' @export
 #' @examples
-#' library(vegan)
-#' library(ggplot2)
+#' library("vegan")
+#' library("ggplot2")
 #' data(mite)
 #' m1 <- radfit(mite[1, ])
 #'
@@ -73,12 +73,17 @@
 ) {
   df <- fortify(object, ...)
   ymin <- min(1, df$abundance)
-  point.params <- modifyList(
-    list(mapping = aes(y = .data[["abundance"]])),
-    point.params
-  )
+  points <- list(mapping = aes(y = .data[["abundance"]]))
+  if (!facet) {
+    points$data <- df[!duplicated(df$rank), , drop = FALSE]
+  }
+  point.params <- modifyList(points, point.params)
   line.params <- modifyList(
-    list(mapping = aes(y = .data[["fit"]], colour = .data[["model"]])),
+    list(mapping = aes(
+      y = .data[["fit"]],
+      group = .data[["model"]],
+      colour = .data[["model"]]
+    )),
     line.params
   )
   pl <- ggplot(df, aes(.data[["rank"]])) +
@@ -206,7 +211,7 @@
     for (sp in highlight) {
       pl <- pl +
         geom_point(
-          data = df[df$species == sp, , drop = FALSE],
+          data = df[df$species %in% sp, , drop = FALSE],
           aes(y = .data[["abundance"]], colour = .data[["species"]])
         )
     }

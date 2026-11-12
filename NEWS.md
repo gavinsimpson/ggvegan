@@ -47,6 +47,10 @@
 * `tidy()` respects the selected NMDS axes. Both `fortify()` and `tidy()`
   respect axis selection for isomap site scores.
 
+* Rank-abundance plots handle unnamed species and sites with the same number
+  of species. Combined plots draw the observations once and keep fitted
+  lines separate when they share a colour.
+
 * `stat_vectorfit()` matches environmental data to site labels, even when rows
   are reordered or sites are omitted. Unweighted fits no longer require a
   weight mapping.
