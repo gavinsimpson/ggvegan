@@ -1,10 +1,11 @@
-# By default, if vdiffr is not installed, all visual tests are skipped unless
-# VDIFFR_RUN_TESTS is explicitly set to "true", which should be the case only on
-# a GitHub Actions CI runner with stable version of R.
-
-# From: https://github.com/tidyverse/ggplot2/blob/main/tests/testthat/helper-vdiffr.R
-
-if (
+# The coverage job sets VDIFFR_RUN_TESTS to "false" to skip visual tests.
+# Adapted from https://github.com/tidyverse/ggplot2/blob/main/tests/testthat/helper-vdiffr.R
+run_visual_tests <- Sys.getenv("VDIFFR_RUN_TESTS")
+if (identical(run_visual_tests, "false")) {
+  expect_doppelganger <- function(...) {
+    skip("Visual tests disabled by VDIFFR_RUN_TESTS.")
+  }
+} else if (
   requireNamespace("vdiffr", quietly = TRUE) &&
     utils::packageVersion("testthat") >= "3.0.3"
 ) {
@@ -12,10 +13,10 @@ if (
 } else {
   # If vdiffr is not available and visual tests are explicitly
   # requested, raise error.
-  if (identical(Sys.getenv("VDIFFR_RUN_TESTS"), "true")) {
-    abort("vdiffr is not installed")
+  if (identical(run_visual_tests, "true")) {
+    stop("Visual tests require vdiffr and testthat >= 3.0.3.", call. = FALSE)
   }
 
   # Otherwise, assign a dummy function
-  expect_doppelganger <- function(...) skip("vdiffr is not installed.")
+  expect_doppelganger <- function(...) skip("Visual test dependencies are unavailable.")
 }

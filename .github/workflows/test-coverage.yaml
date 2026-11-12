@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      # Runs vdiffr test only on MacOS
+      # Skip visual snapshots in the coverage job.
       VDIFFR_RUN_TESTS: "false"
       VDIFFR_LOG_PATH: "../vdiffr.Rout.fail"
 

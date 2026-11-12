@@ -1,5 +1,8 @@
+# Counts from a Zipf-Mandelbrot curve with a finite offset.
+rad_counts <- round(10000 / (seq_len(12) + 2)^2)
+
 test_that("rank-abundance methods accept unnamed counts", {
-  counts <- c(22, 13, 10, 7, 3, 1)
+  counts <- rad_counts
   objects <- list(as.rad(counts), radfit(counts), rad.preempt(counts))
 
   for (object in objects) {
@@ -12,7 +15,7 @@ test_that("rank-abundance methods accept unnamed counts", {
 })
 
 test_that("rank-abundance methods retain ranks for equal-richness sites", {
-  counts <- c(22, 13, 10, 7, 3, 1)
+  counts <- rad_counts
   communities <- rbind(A = counts, B = 2 * counts)
   objects <- list(as.rad(communities), radfit(communities))
 
@@ -25,11 +28,11 @@ test_that("rank-abundance methods retain ranks for equal-richness sites", {
   }
 
   unnamed <- fortify(as.rad(unname(communities)))
-  expect_equal(as.character(unnamed$site), rep(c("1", "2"), each = 6))
+  expect_equal(as.character(unnamed$site), rep(c("1", "2"), each = length(counts)))
 })
 
 test_that("combined rank-abundance plots keep fitted lines separate", {
-  counts <- c(22, 13, 10, 7, 3, 1)
+  counts <- rad_counts
   object <- radfit(counts)
   plot <- autoplot(object, facet = FALSE, line.params = list(colour = "grey"))
   layers <- ggplot2::ggplot_build(plot)$data

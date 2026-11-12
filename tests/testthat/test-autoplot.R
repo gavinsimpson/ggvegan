@@ -71,6 +71,14 @@ test_that("autoplot method for rda works", {
 
 test_that("autoplot method for pco works", {
   p <- dune_pco |> autoplot()
+  # Either sign is valid for an eigenvector. Orient each axis consistently
+  # for the snapshot by making the site farthest from zero positive.
+  sites <- p$layers[[1L]]$data
+  for (axis in c("mds1", "mds2")) {
+    scores <- sites[[axis]]
+    sites[[axis]] <- scores * sign(scores[which.max(abs(scores))])
+  }
+  p$layers[[1L]]$data <- sites
   expect_doppelganger("pco autoplot", p)
   #p <- dune_dbrda |> autoplot()
   #expect_doppelganger("dbrda autoplot", p)
