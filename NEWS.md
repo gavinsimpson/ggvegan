@@ -36,6 +36,10 @@
 * `geom_ordi_arrow` did not pass weights of CCA or other weighted
   ordination methods to `StatVectorfit`.
 
+* PRC plots accept numeric species selections and label their scores on the
+  right. The vertical axis describes the effect and the legend identifies
+  treatments.
+
 # ggvegan 0.2.1
 
 Patch release to address issued raised by CRAN during manual inspection of the

@@ -49,7 +49,9 @@ Produces a multi-layer ggplot object representing the output of
 objects produced by \code{\link[vegan:prc]{vegan::prc()}}.
 }
 \details{
-TODO
+The right-hand axis labels species at their scores. When \code{select} is
+omitted, overlapping labels may be hidden. Use \code{select} to choose which
+species to label, or an empty numeric vector to omit species scores.
 }
 \examples{
 
