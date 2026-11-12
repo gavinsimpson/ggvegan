@@ -71,7 +71,9 @@ Returns a ggplot object.
 
 ## Details
 
-TODO
+The right-hand axis labels species at their scores. When `select` is
+omitted, overlapping labels may be hidden. Use `select` to choose which
+species to label, or an empty numeric vector to omit species scores.
 
 ## Author
 

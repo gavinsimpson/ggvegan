@@ -79,8 +79,8 @@ Jari Oksanen
 ## Examples
 
 ``` r
-library(vegan)
-library(ggplot2)
+library("vegan")
+library("ggplot2")
 data(mite)
 m1 <- radfit(mite[1, ])
 

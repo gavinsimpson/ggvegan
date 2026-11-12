@@ -71,6 +71,7 @@ layers. Filled surface should be used before other visible layers, or
 fill should be made transparent with `alpha` in argument `fill.params`
 passed to
 [`ggplot2::geom_raster()`](https://ggplot2.tidyverse.org/reference/geom_tile.html).
+Contours and the raster use their own aesthetics by default.
 
 ## Author
 
@@ -79,8 +80,8 @@ Jari Oksanen
 ## Examples
 
 ``` r
-library(vegan)
-library(ggplot2)
+library("vegan")
+library("ggplot2")
 data(mite, mite.env, package="vegan")
 mod <- cca(mite)
 surf <- ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)

@@ -55,7 +55,8 @@ autoplot(
 
 - caption:
 
-  character; caption for the plot.
+  character; caption for the plot. The default shows the observed
+  statistic and the P-value if available.
 
 - ...:
 

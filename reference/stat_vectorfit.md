@@ -10,7 +10,10 @@ The arrows are fitted to the `data` and `mapping` of
 [`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md),
 and they will adapt to changes in the parameters of
 [`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md).
-This is in contrast to similar
+With `stat_vectorfit()` directly, map the `weight` aesthetic to use
+observation weights. Otherwise observations have equal weight.
+[`geom_ordi_arrow()`](https://gavinsimpson.github.io/ggvegan/reference/geom_ordi_arrow.md)
+supplies weights for ordination scores. This is in contrast to similar
 [`autolayer.envfit()`](https://gavinsimpson.github.io/ggvegan/reference/autolayer.envfit.md)
 command or to `geom_ordi_arrow(data=<envfit-object>)` which will use a
 previously fitted `<envfit-object>` and will not not change if the
@@ -126,12 +129,15 @@ stat_vectorfit(
 
 - edata:
 
-  Environmental data where the continuous variables are found.
+  Environmental data with continuous variables. When `edata` has
+  explicit row names and the `label` aesthetic is mapped, observations
+  are paired by name. Otherwise, supply one row per observation in plot
+  order.
 
 - formula:
 
-  Formula to select variables from `edata`. If missing, all continuos
-  variables of `edata` are used.
+  Formula to select variables from `edata`. If missing, all numeric
+  variables in `edata` are used.
 
 - arrow.mul:
 

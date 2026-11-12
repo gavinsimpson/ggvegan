@@ -62,7 +62,7 @@ Jari Oksanen
 ## Examples
 
 ``` r
-library(vegan)
+library("vegan")
 data(mite, mite.env, package = "vegan")
 mod <- cca(mite)
 ordiggplot(mod) +

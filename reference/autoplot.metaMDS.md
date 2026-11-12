@@ -101,7 +101,7 @@ sol <- metaMDS(dune)
 #> Run 5 stress 0.1192679 
 #> Run 6 stress 0.1183186 
 #> ... New best solution
-#> ... Procrustes: rmse 1.474997e-06  max resid 4.202898e-06 
+#> ... Procrustes: rmse 1.474993e-06  max resid 4.202898e-06 
 #> ... Similar to previous best
 #> Run 7 stress 0.1183186 
 #> ... Procrustes: rmse 3.438351e-06  max resid 8.87395e-06 
@@ -116,7 +116,7 @@ sol <- metaMDS(dune)
 #> Run 13 stress 0.1192679 
 #> Run 14 stress 0.2075713 
 #> Run 15 stress 0.1183186 
-#> ... Procrustes: rmse 6.827239e-06  max resid 2.164304e-05 
+#> ... Procrustes: rmse 6.82724e-06  max resid 2.164304e-05 
 #> ... Similar to previous best
 #> Run 16 stress 0.1192679 
 #> Run 17 stress 0.1192678 

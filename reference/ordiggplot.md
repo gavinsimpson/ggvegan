@@ -9,7 +9,13 @@ and use `ggscores` as their `data` argument.
 ## Usage
 
 ``` r
-ordiggplot(model, axes = c(1, 2), legend.position = "right", ...)
+ordiggplot(
+  model,
+  axes = c(1, 2),
+  legend.position = "right",
+  ...,
+  arrow.mul = NULL
+)
 
 ggscores(score)
 ```
@@ -39,6 +45,13 @@ ggscores(score)
 
   Parameters passed to `fortify` functions to extract ordination scores.
   You can define `scores` arguments such as `scaling`.
+
+- arrow.mul:
+
+  Multiplier for biplot arrows. By default, their lengths are scaled to
+  fit the constraint scores, or the other plotted scores if there are no
+  constraint scores. If only arrows are present, their lengths are
+  unchanged.
 
 - score:
 

@@ -71,10 +71,10 @@ tidy(x, data, order.by = NULL, ...)
 ## Value
 
 A data frame or tibble which in all cases has columns `species`
-(character), for species names, with `rank` and `abundance` for data,
-and may also have columns `site` (factor) for site names when several
-sites were analysed, `fit` of fitted abundances when evaluated, and
-`model` (factor) when several models were fitted.
+(character), for species names when available, with `rank` and
+`abundance` for data, and may also have columns `site` (factor) for site
+names when several sites were analysed, `fit` of fitted abundances when
+evaluated, and `model` (factor) when several models were fitted.
 
 ## Author
 

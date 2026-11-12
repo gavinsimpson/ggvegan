@@ -12,7 +12,7 @@ fortify(
   model,
   data = NULL,
   axes = 1:6,
-  layers = c("wa", "lc", "bp", "reg", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 )
@@ -22,7 +22,7 @@ tidy(
   x,
   data = NULL,
   axes = 1:6,
-  layers = c("wa", "lc", "bp", "reg", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 )
@@ -90,10 +90,10 @@ head(fortify(sol))
 #> # A tibble: 6 × 8
 #>   score label dbrda1 dbrda2 dbrda3 dbrda4   mds1   mds2
 #>   <fct> <chr>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
-#> 1 sites 1     -0.894 -0.447  -2.19 -1.92  -1.44   1.51 
-#> 2 sites 2     -2.24  -0.664  -2.07  3.03   0.151 -2.37 
-#> 3 sites 3     -1.87   1.98   -2.24 -0.589 -0.705 -0.910
-#> 4 sites 4     -1.08   2.03   -2.54 -0.448 -0.229 -0.666
-#> 5 sites 5     -1.45  -1.24    3.26 -1.18  -1.97  -0.216
-#> 6 sites 6     -1.77  -2.09    4.29 -0.632 -1.72   2.31 
+#> 1 sites 1     -0.894 -0.447   2.19 -1.92  -1.44   1.51 
+#> 2 sites 2     -2.24  -0.664   2.07  3.03   0.151 -2.37 
+#> 3 sites 3     -1.87   1.98    2.24 -0.589 -0.705 -0.910
+#> 4 sites 4     -1.08   2.03    2.54 -0.448 -0.229 -0.666
+#> 5 sites 5     -1.45  -1.24   -3.26 -1.18  -1.97  -0.216
+#> 6 sites 6     -1.77  -2.09   -4.29 -0.632 -1.72   2.31 
 ```

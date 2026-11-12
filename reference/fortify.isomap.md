@@ -27,8 +27,9 @@ tidy(x, data = NULL, axes = NULL, what = c("sites", "network"), ...)
 
 - axes:
 
-  numeric; which axes to return. For `what = "network"` this must be of
-  length two only.
+  numeric; which axes to return. Defaults to all axes for
+  `what = "sites"` and the first two axes for `what = "network"`.
+  Network scores require exactly two axes.
 
 - what:
 

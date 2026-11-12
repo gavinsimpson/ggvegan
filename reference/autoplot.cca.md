@@ -37,7 +37,8 @@ autoplot(
 
 - axes:
 
-  numeric; which axes to plot, given as a vector of length 2.
+  numeric; one or two axes to plot. If only one selected axis is
+  available, the scores are plotted along that axis.
 
 - geom:
 

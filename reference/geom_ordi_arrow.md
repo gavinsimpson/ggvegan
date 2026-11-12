@@ -88,7 +88,7 @@ Jari Oksanen
 ## Examples
 
 ``` r
-library(vegan)
+library("vegan")
 data(varespec, varechem, package="vegan")
 ## PCA biplot
 mod <- rda(varespec)

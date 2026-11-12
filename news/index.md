@@ -51,6 +51,49 @@
 
 ### Bug fixes
 
+- Fisher and Preston plots use one-unit bars even when bins are empty.
+  Preston plots also label the full range and hide fitted annotations
+  when `show.fitted = FALSE`.
+
+- ANOSIM plots say that significance was not assessed when no
+  permutations were run.
+
+- Biplot arrows now scale to both axes and keep their original lengths
+  when there are no other scores to scale to.
+  [`ordiggplot()`](https://gavinsimpson.github.io/ggvegan/reference/ordiggplot.md)
+  again accepts `arrow.mul` to set arrow lengths manually.
+
+- Ordination layers now accept arguments from the calling environment
+  and keep their required coordinates when custom aesthetics are added.
+  Surface layers use their own aesthetics, and repelled labels respect
+  the requested size.
+
+- RDA and dbRDA plots and score tables now use the requested scaling
+  constant. CCA, RDA and dbRDA plots handle a single axis and draw
+  factor centroids once.
+
+- dbRDA plots show species scores when available. Requesting just
+  biplot, regression or centroid scores now works.
+
+- [`tidy()`](https://generics.r-lib.org/reference/tidy.html) respects
+  the selected NMDS axes. Both
+  [`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
+  and [`tidy()`](https://generics.r-lib.org/reference/tidy.html) respect
+  axis selection for isomap site scores.
+
+- PRC plots accept numeric species selections and label their scores on
+  the right. The vertical axis describes the effect and the legend
+  identifies treatments.
+
+- Rank-abundance plots handle unnamed species and sites with the same
+  number of species. Combined plots draw the observations once and keep
+  fitted lines separate when they share a colour.
+
+- [`stat_vectorfit()`](https://gavinsimpson.github.io/ggvegan/reference/stat_vectorfit.md)
+  matches environmental data to site labels, even when rows are
+  reordered or sites are omitted. Unweighted fits no longer require a
+  weight mapping.
+
 - *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run.
   [\#43](https://github.com/gavinsimpson/ggvegan/issues/43) Fixed by

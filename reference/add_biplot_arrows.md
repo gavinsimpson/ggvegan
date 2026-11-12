@@ -5,7 +5,7 @@ Adds a biplot arrow layer to an existing plot
 ## Usage
 
 ``` r
-add_biplot_arrows(object, plt, vars, arrow.col = "navy")
+add_biplot_arrows(object, plt, vars, arrow.col = "navy", score = "biplot")
 ```
 
 ## Arguments
@@ -25,3 +25,7 @@ add_biplot_arrows(object, plt, vars, arrow.col = "navy")
 - arrow.col:
 
   colour specification for biplot arrows and their labels.
+
+- score:
+
+  score type to draw as arrows.

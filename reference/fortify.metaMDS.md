@@ -11,7 +11,14 @@ selected axis scores in long format, suitable for plotting with
 fortify(model, data, axes = 1:2, layers = c("sites", "species"), ...)
 
 # S3 method for class 'metaMDS'
-tidy(x, data, layers = c("sites", "species"), ...)
+tidy(
+  x,
+  data,
+  layers = c("sites", "species"),
+  ...,
+  axes = seq_len(x$ndim),
+  choices = axes
+)
 ```
 
 ## Arguments
@@ -27,7 +34,11 @@ tidy(x, data, layers = c("sites", "species"), ...)
 
 - axes:
 
-  numeric; which axes to extract scores for.
+  numeric; which axes to extract. By default
+  [`fortify()`](https://ggplot2.tidyverse.org/reference/fortify.html)
+  returns the first two axes and
+  [`tidy()`](https://generics.r-lib.org/reference/tidy.html) returns all
+  axes.
 
 - layers:
 
@@ -41,6 +52,11 @@ tidy(x, data, layers = c("sites", "species"), ...)
   additional arguments passed to
   [`vegan::scores.metaMDS()`](https://vegandevs.github.io/vegan/reference/metaMDS.html).
   Note you can't use `display`.
+
+- choices:
+
+  an alias for `axes` in
+  [`tidy()`](https://generics.r-lib.org/reference/tidy.html).
 
 ## Value
 
@@ -84,7 +100,7 @@ ord <- metaMDS(dune)
 #> Run 9 stress 0.1192679 
 #> Run 10 stress 0.1183186 
 #> ... New best solution
-#> ... Procrustes: rmse 7.701126e-06  max resid 1.83745e-05 
+#> ... Procrustes: rmse 7.701127e-06  max resid 1.83745e-05 
 #> ... Similar to previous best
 #> Run 11 stress 0.1183186 
 #> ... Procrustes: rmse 3.337356e-05  max resid 9.827007e-05 
@@ -101,7 +117,7 @@ ord <- metaMDS(dune)
 #> Run 17 stress 0.1192678 
 #> Run 18 stress 0.1192679 
 #> Run 19 stress 0.1183186 
-#> ... Procrustes: rmse 1.09579e-05  max resid 3.513228e-05 
+#> ... Procrustes: rmse 1.095789e-05  max resid 3.513228e-05 
 #> ... Similar to previous best
 #> Run 20 stress 0.1808911 
 #> *** Best solution repeated 5 times

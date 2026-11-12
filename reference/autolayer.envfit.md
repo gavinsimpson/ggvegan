@@ -79,9 +79,9 @@ Jari Oksanen
 ## Examples
 
 ``` r
-library(vegan)
+library("vegan")
 #> Loading required package: permute
-library(ggplot2)
+library("ggplot2")
 data(mite, mite.env, package = "vegan")
 mod <- cca(mite)
 ## you must have same scaling in envfit() and ordiggplot()
