@@ -346,7 +346,7 @@
 ---
 
     Code
-      f_dbrda
+      t_dbrda
     Output
       # A tibble: 20 x 8
          score label dbrda1  dbrda2 dbrda3 dbrda4 dbrda5 dbrda6

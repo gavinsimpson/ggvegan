@@ -4,7 +4,7 @@
 \alias{add_biplot_arrows}
 \title{Adds a biplot arrow layer to an existing plot}
 \usage{
-add_biplot_arrows(object, plt, vars, arrow.col = "navy")
+add_biplot_arrows(object, plt, vars, arrow.col = "navy", score = "biplot")
 }
 \arguments{
 \item{object}{an ordination object.}
@@ -14,6 +14,8 @@ add_biplot_arrows(object, plt, vars, arrow.col = "navy")
 \item{vars}{character; length 2 vector of dimension names.}
 
 \item{arrow.col}{colour specification for biplot arrows and their labels.}
+
+\item{score}{score type to draw as arrows.}
 }
 \description{
 Adds a biplot arrow layer to an existing plot

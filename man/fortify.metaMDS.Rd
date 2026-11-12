@@ -7,7 +7,14 @@
 \usage{
 \method{fortify}{metaMDS}(model, data, axes = 1:2, layers = c("sites", "species"), ...)
 
-\method{tidy}{metaMDS}(x, data, layers = c("sites", "species"), ...)
+\method{tidy}{metaMDS}(
+  x,
+  data,
+  layers = c("sites", "species"),
+  ...,
+  axes = seq_len(x$ndim),
+  choices = axes
+)
 }
 \arguments{
 \item{model, x}{an object of class \code{"metaMDS"}, the result of a call
@@ -15,13 +22,16 @@ to \code{\link[vegan:metaMDS]{vegan::metaMDS()}}.}
 
 \item{data}{currently ignored.}
 
-\item{axes}{numeric; which axes to extract scores for.}
+\item{axes}{numeric; which axes to extract. By default \code{fortify()} returns
+the first two axes and \code{tidy()} returns all axes.}
 
 \item{layers}{character; the scores to extract in the fortified object.
 Passed to \code{display} in the respective \code{\link[vegan:scores]{vegan::scores()}} method.}
 
 \item{...}{additional arguments passed to
 \code{\link[vegan:metaMDS]{vegan::scores.metaMDS()}}. Note you can't use \code{display}.}
+
+\item{choices}{an alias for \code{axes} in \code{tidy()}.}
 }
 \value{
 A data frame in long format containing the ordination scores.

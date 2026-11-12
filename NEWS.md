@@ -30,6 +30,15 @@
 
 ## Bug fixes
 
+* RDA and dbRDA plots and score tables now use the requested scaling constant.
+  CCA, RDA and dbRDA plots handle a single axis and draw factor centroids once.
+
+* dbRDA plots show species scores when available. Requesting just biplot,
+  regression or centroid scores now works.
+
+* `tidy()` respects the selected NMDS axes. Both `fortify()` and `tidy()`
+  respect axis selection for isomap site scores.
+
 * *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
 

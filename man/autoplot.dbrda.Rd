@@ -8,7 +8,7 @@
   object,
   axes = c(1, 2),
   geom = c("point", "text"),
-  layers = c("sites", "biplot", "centroids"),
+  layers = c("species", "sites", "biplot", "centroids"),
   legend.position = "none",
   title = NULL,
   subtitle = NULL,
@@ -24,10 +24,10 @@
 \item{object}{an object of class \code{"dbrda"}, the result of a call to
 \code{\link[vegan:dbrda]{vegan::dbrda()}}}
 
-\item{axes}{numeric; which axes to plot, given as a vector of length 2.}
+\item{axes}{numeric; one or two axes to plot. If only one selected axis is
+available, the scores are plotted along that axis.}
 
-\item{geom}{character; which geom to use for the site (sample) scores. One
-of \code{"point"}, or \code{"text"}.}
+\item{geom}{character; \code{"point"} or \code{"text"} for site and species scores.}
 
 \item{layers}{character; which scores to plot as layers}
 

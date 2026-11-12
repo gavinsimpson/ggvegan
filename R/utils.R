@@ -138,7 +138,7 @@
 #' @rdname valid_layers
 #' @export
 `valid_layers.dbrda` <- function(object, ...) {
-  c("sites", "constraints", "biplot", "centroids", "regression")
+  valid_layers.rda(object, ...)
 }
 
 #' @title Check user-supplied layers against list of valid layers
@@ -193,7 +193,9 @@
 #'
 #' @importFrom ggplot2 geom_point geom_text
 `add_spp_site_scores` <- function(object, plt, vars, geom, draw_list, arrows) {
-  wanted <- names(draw_list[c("species", "sites", "constraints")])
+  wanted <- intersect(
+    c("species", "sites", "constraints"), names(draw_list)[draw_list]
+  )
   ## if we're plotting species by arrows, drop species if in list
   if (isTRUE(arrows)) {
     wanted <- wanted[wanted != "species"]
@@ -288,7 +290,7 @@
   }
 
   ## now check if species should be added as arrows
-  if (isTRUE(arrows) && draw_list["species"]) {
+  if (isTRUE(arrows) && isTRUE(draw_list["species"])) {
     take <- object[["score"]] == "species"
     pdat <- object[take, , drop = FALSE]
     col <- "black"
@@ -339,27 +341,11 @@
   df
 }
 
-`rda_constant` <- function(x, const) {
-  stopifnot(inherits(x, "rda"))
-  # handle const because it has to be missing in scores
-  nr <- if (is.null(x$CCA)) {
-    nrow(x$CA$u)
-  } else {
-    nrow(x$CCA$u)
-  }
-  if (is.null(const)) {
-    const <- sqrt(sqrt((nr - 1) * x$tot.chi))
-  }
-  if (identical(length(const), 1L)) {
-    const <- rep(const, length.out = 2L)
-  }
-  const
-}
-
 #' @title Adds a biplot arrow layer to an existing plot
 #'
 #' @inheritParams add_spp_site_scores
 #' @param arrow.col colour specification for biplot arrows and their labels.
+#' @param score score type to draw as arrows.
 #'
 #' @importFrom ggplot2 geom_segment geom_text aes
 #' @importFrom grid unit arrow
@@ -367,18 +353,17 @@
   object,
   plt,
   vars,
-  arrow.col = "navy"
+  arrow.col = "navy",
+  score = "biplot"
 ) {
-  want <- object[["score"]] == "biplot"
+  want <- object[["score"]] == score
   if (any(want)) {
-    #if (length(layer_names) > 1) {
-    mul <- arrow_mul(
-      object[want, vars, drop = FALSE],
-      object[!want, vars, drop = FALSE]
-    )
-    object[want, vars] <- mul * object[want, vars]
-    #}
-    #col <- "navy"
+    reference <- !object[["score"]] %in% c("biplot", "regression")
+    coords <- object[want, vars, drop = FALSE]
+    if (any(reference) && any(as.matrix(coords) != 0, na.rm = TRUE)) {
+      mul <- arrow_mul(coords, object[reference, vars, drop = FALSE])
+      object[want, vars] <- mul * coords
+    }
     plt <- plt +
       geom_segment(
         data = object[want, , drop = FALSE],
@@ -451,5 +436,107 @@
     "centroids",
     "regression"
   )
-  scrs[x]
+  scrs <- c(scrs, all = "all")
+  x <- as.character(x)
+  display <- unname(scrs[x])
+  display[is.na(display)] <- x[is.na(display)]
+  display
+}
+
+`tidy_cca_scores` <- function(x, axes, layers, ..., const = NULL) {
+  display <- layers_to_display(layers)
+  if (!length(display)) {
+    stop("Select at least one ordination layer.", call. = FALSE)
+  }
+  args <- list(x = x, choices = axes, display = display, ...)
+  args$droplist <- FALSE
+  if (!is.null(const)) {
+    args$const <- const
+  }
+  scrs <- do.call(scores, args)
+
+  # Older vegan versions return a matrix when only one score type is available.
+  if (is.matrix(scrs)) {
+    score_names <- c(
+      sp = "species", wa = "sites", lc = "constraints", bp = "biplot",
+      cn = "centroids", reg = "regression"
+    )
+    if (length(display) > 1L || "all" %in% display) {
+      if ("all" %in% display) {
+        display <- names(score_names)
+      }
+      scrs <- lapply(display, function(layer) {
+        args$display <- layer
+        do.call(scores, args)
+      })
+    } else {
+      scrs <- list(scrs)
+    }
+    names(scrs) <- vapply(display, function(layer) {
+      score <- match.arg(layer, c(names(score_names), "sites", "species"))
+      if (score %in% c("sites", "species")) score else score_names[[score]]
+    }, character(1L))
+  }
+
+  scrs <- Filter(function(score) !all(is.na(score)), scrs)
+  if (!length(scrs)) {
+    stop("No scores are available for the requested layers and axes.", call. = FALSE)
+  }
+  prep_tidy_scores_tbl(scrs)
+}
+
+`plot_cca_scores` <- function(
+  object, axes, geom, layers, arrows, legend.position, title, subtitle, caption,
+  ylab, xlab, arrow.col, ...
+) {
+  valid <- valid_layers(object)
+  layers <- layers[check_user_layers(layers, valid, message = TRUE)]
+  if (!length(axes)) {
+    stop("Select at least one ordination axis.", call. = FALSE)
+  }
+  axes <- utils::head(axes, 2L)
+
+  obj <- fortify(object, axes = axes, layers = layers, ...)
+  draw_list <- layer_draw_list(valid, layers, levels(obj[["score"]]))
+  vars <- get_dimension_names(obj)
+  one_axis <- length(vars) == 1L
+  if (one_axis) {
+    obj[[".y"]] <- 0
+    vars <- c(vars, ".y")
+  }
+
+  # Draw a factor as a centroid when both representations were requested.
+  biplot <- obj[["score"]] == "biplot"
+  centroids <- obj[["score"]] == "centroids"
+  duplicate <- biplot & obj[["label"]] %in% obj[["label"]][centroids]
+  obj <- obj[!duplicate, , drop = FALSE]
+
+  plt <- ggplot()
+  if (any(draw_list[c("species", "sites", "constraints")])) {
+    plt <- add_spp_site_scores(obj, plt, vars, geom, draw_list, arrows)
+  }
+  for (score in c("biplot", "regression")) {
+    if (isTRUE(draw_list[score])) {
+      plt <- add_biplot_arrows(obj, plt, vars, arrow.col, score = score)
+    }
+  }
+  if (isTRUE(draw_list["centroids"])) {
+    plt <- add_biplot_centroids(obj, plt, vars, arrow.col)
+  }
+
+  if (is.null(xlab)) {
+    xlab <- toupper(vars[1L])
+  }
+  if (is.null(ylab) && !one_axis) {
+    ylab <- toupper(vars[2L])
+  }
+  plt <- plt +
+    labs(x = xlab, y = ylab, title = title, subtitle = subtitle, caption = caption) +
+    theme(legend.position = legend.position)
+  if (one_axis) {
+    plt <- plt + ggplot2::scale_y_continuous(breaks = NULL)
+  } else {
+    plt <- plt + coord_fixed(ratio = 1)
+  }
+  plt
 }

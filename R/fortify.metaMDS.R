@@ -11,6 +11,9 @@
 #' @param model,x an object of class `"metaMDS"`, the result of a call
 #' to [vegan::metaMDS()].
 #' @param data currently ignored.
+#' @param axes numeric; which axes to extract. By default `fortify()` returns
+#'   the first two axes and `tidy()` returns all axes.
+#' @param choices an alias for `axes` in `tidy()`.
 #' @param ... additional arguments passed to
 #' [vegan::scores.metaMDS()]. Note you can't use `display`.
 #' @return A data frame in long format containing the ordination scores.
@@ -41,38 +44,7 @@
   layers = c("sites", "species"),
   ...
 ) {
-  layers <- match.arg(
-    layers,
-    c("sites", "species"),
-    several.ok = TRUE
-  )
-  samp <- scores(model, display = "sites", choices = axes, ...)
-  spp <- tryCatch(
-    scores(model, display = "species", choices = axes, ...),
-    error = function(c) {
-      NULL
-    }
-  )
-  if (length(spp) > 0L) {
-    df <- rbind(samp, spp)
-    df <- tibble::as_tibble(as.data.frame(df))
-    df <- tibble::add_column(
-      df,
-      score = factor(rep(c("sites", "species"), c(nrow(samp), nrow(spp)))),
-      label = c(rownames(samp), rownames(spp)),
-      .before = 1L
-    )
-  } else {
-    df <- tibble(
-      score = factor(rep("sites", nrow(samp))),
-      label = rownames(samp)
-    ) |>
-      bind_cols(samp)
-  }
-  names(df) <- tolower(names(df))
-  # filter the scores we want
-  df <- vctrs::vec_slice(df, df$score %in% layers)
-  df
+  tidy.metaMDS(model, data, layers, ..., axes = axes)
 }
 
 #' @export
@@ -83,17 +55,20 @@
   x,
   data,
   layers = c("sites", "species"),
-  ...
+  ...,
+  axes = seq_len(x$ndim),
+  choices = axes
 ) {
   layers <- match.arg(
     layers,
     c("sites", "species"),
     several.ok = TRUE
   )
-  samp <- scores(x, display = "sites", ...)
-  spp <- tryCatch(scores(x, display = "species", ...), error = function(c) {
-    NULL
-  })
+  samp <- scores(x, display = "sites", choices = choices, ...)
+  spp <- tryCatch(
+    scores(x, display = "species", choices = choices, ...),
+    error = function(c) NULL
+  )
   if (length(spp) > 0L) {
     df <- rbind(samp, spp)
     df <- tibble::as_tibble(as.data.frame(df))

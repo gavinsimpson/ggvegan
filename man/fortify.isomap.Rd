@@ -14,8 +14,9 @@
 
 \item{data}{data.frame; additional data to be added to the fortified object.}
 
-\item{axes}{numeric; which axes to return. For \code{what = "network"} this must
-be of length two only.}
+\item{axes}{numeric; which axes to return. Defaults to all axes for
+\code{what = "sites"} and the first two axes for \code{what = "network"}.
+Network scores require exactly two axes.}
 
 \item{what}{character; what aspect of the results should be fortified?
 \code{"sites"} returns to ordination scores from the multidimensional scaling

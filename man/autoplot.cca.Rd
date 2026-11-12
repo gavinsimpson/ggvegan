@@ -23,7 +23,8 @@
 \item{object}{an object of class \code{"cca"}, the result of a call to
 \code{\link[vegan:cca]{vegan::cca()}} or \code{\link[vegan:dbrda]{vegan::capscale()}}.}
 
-\item{axes}{numeric; which axes to plot, given as a vector of length 2.}
+\item{axes}{numeric; one or two axes to plot. If only one selected axis is
+available, the scores are plotted along that axis.}
 
 \item{geom}{character; which geom to use for the species (variables) and
 sites (samples) layers. A vector of length 2; if a vector of length 1,

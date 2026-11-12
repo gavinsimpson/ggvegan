@@ -9,7 +9,7 @@
   model,
   data = NULL,
   axes = 1:6,
-  layers = c("wa", "lc", "bp", "reg", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 )
@@ -18,7 +18,7 @@
   x,
   data = NULL,
   axes = 1:6,
-  layers = c("wa", "lc", "bp", "reg", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 )

@@ -11,8 +11,9 @@
 #'   format using `what = "network"`.
 #' @param model,x an object of class [vegan::isomap()].
 #' @param data data.frame; additional data to be added to the fortified object.
-#' @param axes numeric; which axes to return. For `what = "network"` this must
-#'   be of length two only.
+#' @param axes numeric; which axes to return. Defaults to all axes for
+#'   `what = "sites"` and the first two axes for `what = "network"`.
+#'   Network scores require exactly two axes.
 #' @param what character; what aspect of the results should be fortified?
 #'   `"sites"` returns to ordination scores from the multidimensional scaling
 #'   part of the model. `"network"` returns the coordinates for edges joining
@@ -60,45 +61,7 @@
   what = c("sites", "network"),
   ...
 ) {
-  what <- match.arg(what)
-
-  if (isTRUE(all.equal(what, "sites"))) {
-    if (is.null(axes)) {
-      axes <- 1:6
-    }
-    df <- as.data.frame(scores(model))
-    rnams <- rownames(df)
-    colnames(df) <- tolower(colnames(df))
-    df <- df |>
-      tibble::as_tibble()
-    if (!is.null(data)) {
-      df <- bind_cols(df, data)
-    }
-    df <- tibble::add_column(df, label = rnams, .before = 1L)
-  } else {
-    if (is.null(axes)) {
-      axes <- 1:2
-    }
-    ## axes must be of length two for this to work
-    if (!isTRUE(all.equal(length(axes), 2L))) {
-      stop("'axes' must be a vector of length 2.")
-    }
-    df <- scores(model)
-    net <- model[["net"]]
-    df <- cbind(
-      xfrom = df[net[, 1], axes[1]],
-      yfrom = df[net[, 1], axes[2]],
-      xto = df[net[, 2], axes[1]],
-      yto = df[net[, 2], axes[2]]
-    )
-    df <- as.data.frame(df) |>
-      tibble::as_tibble()
-    if (!is.null(data)) {
-      df <- bind_cols(df, data)
-    }
-  }
-
-  df
+  tidy.isomap(model, data, axes, what, ...)
 }
 
 
@@ -113,11 +76,9 @@
 ) {
   what <- match.arg(what)
 
-  if (isTRUE(all.equal(what, "sites"))) {
-    if (is.null(axes)) {
-      axes <- 1:6
-    }
-    df <- as.data.frame(scores(x))
+  if (what == "sites") {
+    site_scores <- if (is.null(axes)) scores(x) else scores(x, choices = axes)
+    df <- as.data.frame(site_scores)
     rnams <- rownames(df)
     colnames(df) <- tolower(colnames(df))
     df <- df |>

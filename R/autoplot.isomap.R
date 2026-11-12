@@ -51,7 +51,6 @@
   ...
 ) {
   pts <- fortify(object, axes = axes)
-  net <- fortify(object, axes = axes, what = "network")
 
   vars <- paste0("dim", axes)
   plt <- ggplot(
@@ -63,6 +62,7 @@
   )
 
   if (isTRUE(network)) {
+    net <- fortify(object, axes = axes, what = "network")
     plt <- plt +
       geom_segment(
         data = net,

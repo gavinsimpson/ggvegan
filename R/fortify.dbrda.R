@@ -40,7 +40,7 @@
   model,
   data = NULL,
   axes = 1:6,
-  layers = c("wa", "lc", "bp", "reg", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 ) {
@@ -60,33 +60,9 @@
   x,
   data = NULL,
   axes = 1:6,
-  layers = c("wa", "lc", "bp", "reg", "cn"),
+  layers = c("sp", "wa", "lc", "bp", "reg", "cn"),
   const = NULL,
   ...
 ) {
-  # handle const because it has to be missing in scores
-  const <- rda_constant(x, const)
-  ## extract scores
-  scrs <- scores(x, choices = axes, display = layers_to_display(layers), ...)
-  ## handle case of only 1 set of scores
-  if (length(layers) == 1L) {
-    scrs <- list(scrs)
-    nam <- switch(
-      layers,
-      sp = "species",
-      species = "species",
-      wa = "sites",
-      sites = "sites",
-      lc = "constraints",
-      bp = "biplot",
-      cn = "centroids",
-      stop("Unknown value for 'layers'")
-    )
-    names(scrs) <- nam
-  }
-  miss <- vapply(scrs, function(x) all(is.na(x)), logical(1L))
-  scrs <- scrs[!miss]
-  # build the tibble
-  df <- prep_tidy_scores_tbl(scrs)
-  df
+  tidy_cca_scores(x, axes, layers, ..., const = const)
 }

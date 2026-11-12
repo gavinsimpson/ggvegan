@@ -105,5 +105,5 @@ test_that("fortify works for dbrda with 1 set of scores", {
       across(matches("^dbrda"), .fns = abs)
     )
   expect_snapshot(f_dbrda)
-  expect_snapshot(f_dbrda)
+  expect_snapshot(t_dbrda)
 })
