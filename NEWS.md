@@ -30,6 +30,10 @@
 
 ## Bug fixes
 
+* Rank-abundance plots handle unnamed species and sites with the same number
+  of species. Combined plots draw the observations once and keep fitted
+  lines separate when they share a colour.
+
 * *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
 

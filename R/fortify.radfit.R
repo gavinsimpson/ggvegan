@@ -9,7 +9,7 @@
 #'   returns all fitted models.
 #'
 #' @return A data frame or tibble which in all cases has columns
-#'   `species` (character), for species names, with `rank` and
+#'   `species` (character), for species names when available, with `rank` and
 #'   `abundance` for data, and may also have columns `site` (factor)
 #'   for site names when several sites were analysed, `fit` of
 #'   fitted abundances when evaluated, and `model` (factor) when
@@ -34,7 +34,7 @@
   abundance <- model$y
   nsp <- length(abundance)
   rank <- seq_len(nsp)
-  species <- names(abundance)
+  species <- rad_species_names(abundance)
   fv <- fitted(model)
   ## only pick wanted models
   if (!is.null(pick)) {
@@ -79,9 +79,12 @@
   allmods <- names(model[[1]]$models)
   pick <- match.arg(pick, c(allmods, "AIC", "BIC"))
   abu <- lapply(model, function(x) x$y)
-  nsp <- sapply(abu, length)
-  spe <- lapply(abu, names)
+  nsp <- lengths(abu)
+  spe <- lapply(abu, rad_species_names)
   sit <- names(model)
+  if (is.null(sit)) {
+    sit <- as.character(seq_along(model))
+  }
   fv <- lapply(model, radpicker, pick = pick)
   mod <- sapply(fv, colnames)
   ## enable re-ordering of Site panels
@@ -93,7 +96,7 @@
   data.frame(
     "site" = factor(rep(sit, nsp), levels = sit[order.by]),
     "species" = unlist(spe, use.names = FALSE),
-    "rank" = unlist(sapply(nsp, seq_len), use.names = FALSE),
+    "rank" = sequence(nsp),
     "abundance" = unlist(abu, use.names = FALSE),
     "fit" = drop(do.call(rbind, fv)),
     "model" = factor(rep(mod, nsp), levels = allmods)
@@ -127,7 +130,7 @@
   ...
 ) {
   data.frame(
-    species = names(model$y),
+    species = rad_species_names(model$y),
     rank = seq_along(model$y),
     abundance = unclass(model$y),
     fit = fitted(model)
@@ -142,7 +145,7 @@
   ...
 ) {
   data.frame(
-    species = names(model),
+    species = rad_species_names(model),
     rank = seq_along(model),
     abundance = as.vector(model)
   )
@@ -156,10 +159,20 @@
   order.by = NULL,
   ...
 ) {
+  # vegan can simplify equal-richness results to a matrix of ranks by sites.
+  if (is.matrix(model)) {
+    model <- setNames(
+      lapply(seq_len(ncol(model)), function(i) model[, i]),
+      colnames(model)
+    )
+  }
   abu <- lapply(model, as.vector)
-  nsp <- sapply(model, length)
-  spe <- lapply(model, names)
+  nsp <- lengths(model)
+  spe <- lapply(model, rad_species_names)
   sit <- names(model)
+  if (is.null(sit)) {
+    sit <- as.character(seq_along(model))
+  }
   ## enable re-ordering of Site panels
   if (is.null(order.by)) {
     order.by <- seq_along(sit)
@@ -169,9 +182,17 @@
   data.frame(
     "site" = factor(rep(sit, nsp), levels = sit[order.by]),
     "species" = unlist(spe, use.names = FALSE),
-    "rank" = unlist(sapply(nsp, seq_len), use.names = FALSE),
+    "rank" = sequence(nsp),
     "abundance" = unlist(abu, use.names = FALSE)
   )
+}
+
+rad_species_names <- function(abundance) {
+  species <- names(abundance)
+  if (is.null(species)) {
+    species <- rep(NA_character_, length(abundance))
+  }
+  species
 }
 
 ### tidy() as fortify() synonyms

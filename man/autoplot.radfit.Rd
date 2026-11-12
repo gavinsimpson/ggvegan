@@ -54,8 +54,8 @@ addition, there are functions for \code{\link[vegan:radfit]{vegan::as.rad()}}
 results which do not have dedicated graphics in\pkg{vegan}.
 }
 \examples{
-library(vegan)
-library(ggplot2)
+library("vegan")
+library("ggplot2")
 data(mite)
 m1 <- radfit(mite[1, ])
 
