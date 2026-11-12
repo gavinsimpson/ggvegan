@@ -5,7 +5,13 @@
 \alias{ggscores}
 \title{Create a ggplot Object}
 \usage{
-ordiggplot(model, axes = c(1, 2), legend.position = "right", ...)
+ordiggplot(
+  model,
+  axes = c(1, 2),
+  legend.position = "right",
+  ...,
+  arrow.mul = NULL
+)
 
 ggscores(score)
 }
@@ -22,6 +28,11 @@ details. Use \code{"none"} to not draw the legend. Some
 \item{...}{Parameters passed to \code{fortify} functions to extract
 ordination scores. You can define \code{scores} arguments such as
 \code{scaling}.}
+
+\item{arrow.mul}{Multiplier for biplot arrows. By default, their lengths
+are scaled to fit the constraint scores, or the other plotted scores
+if there are no constraint scores. If only arrows are present, their
+lengths are unchanged.}
 
 \item{score}{Ordination score to be added to the plot.}
 }

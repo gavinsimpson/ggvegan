@@ -36,6 +36,10 @@
 * `geom_ordi_arrow` did not pass weights of CCA or other weighted
   ordination methods to `StatVectorfit`.
 
+* Biplot arrows now scale to both axes and keep their original lengths when
+  there are no other scores to scale to. `ordiggplot()` again accepts
+  `arrow.mul` to set arrow lengths manually.
+
 # ggvegan 0.2.1
 
 Patch release to address issued raised by CRAN during manual inspection of the
