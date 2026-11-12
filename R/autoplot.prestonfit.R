@@ -50,8 +50,7 @@
     S0 * exp(-(x - mode)^2 / 2 / width^2)
   }
   df <- fortify(object)
-  noct <- nrow(df)
-  brks <- seq(0, nrow(df))
+  brks <- seq(0, max(df[["octave"]]) + 1)
   df[["octave_minus_one"]] <- df[["octave"]] - 0.5
   plt <- ggplot(
     df,
@@ -62,17 +61,18 @@
   ) +
     geom_bar(
       stat = "identity",
+      width = 1,
       colour = bar.col,
       fill = bar.fill
     )
-  coefs <- coef(object)
-  lineSegs <- data.frame(
-    x1 = c(coefs["mode"], coefs["mode"] - coefs["width"]),
-    y1 = c(0, coefs["S0"] * exp(-0.5)),
-    x2 = c(coefs["mode"], coefs["mode"] + coefs["width"]),
-    y2 = c(coefs["S0"], coefs["S0"] * exp(-0.5))
-  )
   if (show.fitted) {
+    coefs <- coef(object)
+    line_segs <- data.frame(
+      x1 = c(coefs["mode"], coefs["mode"] - coefs["width"]),
+      y1 = c(0, coefs["S0"] * exp(-0.5)),
+      x2 = c(coefs["mode"], coefs["mode"] + coefs["width"]),
+      y2 = c(coefs["S0"], coefs["S0"] * exp(-0.5))
+    )
     plt <- plt +
       stat_function(
         fun = pres_fun,
@@ -83,20 +83,20 @@
         ),
         colour = line.col,
         linewidth = linewidth
+      ) +
+      geom_segment(
+        data = line_segs,
+        mapping = aes(
+          x = .data[["x1"]],
+          y = .data[["y1"]],
+          xend = .data[["x2"]],
+          yend = .data[["y2"]]
+        ),
+        colour = line.col,
+        linewidth = linewidth
       )
   }
   plt <- plt +
-    geom_segment(
-      data = lineSegs,
-      mapping = aes(
-        x = .data[["x1"]],
-        y = .data[["y1"]],
-        xend = .data[["x2"]],
-        yend = .data[["y2"]]
-      ),
-      colour = line.col,
-      linewidth = linewidth
-    ) +
     scale_x_continuous(breaks = brks, labels = 2^brks) +
     labs(
       x = xlab,

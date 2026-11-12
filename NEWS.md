@@ -33,6 +33,10 @@
 * *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
 
+* Fisher and Preston plots use one-unit bars even when bins are empty.
+  Preston plots also label the full range and hide fitted annotations
+  when `show.fitted = FALSE`.
+
 * `geom_ordi_arrow` did not pass weights of CCA or other weighted
   ordination methods to `StatVectorfit`.
 

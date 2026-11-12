@@ -57,7 +57,7 @@
       y = .data[["abundance"]]
     )
   ) +
-    geom_bar(stat = 'identity', colour = bar.col, fill = bar.fill)
+    geom_bar(stat = "identity", width = 1, colour = bar.col, fill = bar.fill)
   if (show.fitted) {
     alpha <- object[['estimate']]
     k <- object[['nuisance']]
