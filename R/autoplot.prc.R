@@ -5,7 +5,9 @@
 #' objects produced by [vegan::prc()].
 #'
 #' @details
-#' TODO
+#' The right-hand axis labels species at their scores. When `select` is
+#' omitted, overlapping labels may be hidden. Use `select` to choose which
+#' species to label, or an empty numeric vector to omit species scores.
 #'
 #' @param object an object inheriting from class `"prc"`, the
 #' result of a call to [vegan::prc()].
@@ -62,22 +64,24 @@
 
   ## levels of factors - do this now before we convert things
   time_levs <- levels(fobj$time)
-  treat_levs <- levels(fobj$treatment)
-
   ## convert time to a numeric
   fobj$time <- as.numeric(as.character(fobj$time))
 
-  ## process select
-  ind <- fobj$score != "Sample"
-  if (missing(select)) {
-    select <- rep(TRUE, sum(ind))
-  } else {
-    stopifnot(isTRUE(all.equal(length(select), sum(ind))))
+  species <- fobj$score == "Species"
+  samp <- fobj[!species, ]
+  spp <- fobj[species, ]
+  if (!missing(select)) {
+    if (is.logical(select) && length(select) == nrow(spp)) {
+      spp <- spp[which(select), ]
+    } else if (is.numeric(select)) {
+      spp <- spp[seq_len(nrow(spp)) %in% select, ]
+    } else {
+      stop(
+        "'select' must be numeric indices or one logical value per species",
+        call. = FALSE
+      )
+    }
   }
-
-  ## samples and species "scores"
-  samp <- fobj[!ind, ]
-  spp <- fobj[ind, ][select, ]
 
   ## base plot
   plt <- ggplot(
@@ -92,18 +96,28 @@
   )
   ## add the control
   plt <- plt + geom_hline(yintercept = 0)
-  ## add species rug
-  plt <- plt +
-    geom_rug(
-      data = spp,
-      sides = "r",
-      mapping = aes(
-        group = NULL,
-        x = NULL,
-        colour = NULL,
-        linetype = NULL
+  ## add species scores and label them on the right
+  spp <- spp[is.finite(spp$response), ]
+  if (nrow(spp) > 0L) {
+    breaks <- unique(spp$response)
+    labels <- split(spp$label, match(spp$response, breaks))
+    labels <- vapply(labels, paste, character(1), collapse = ", ")
+    plt <- plt +
+      geom_rug(
+        data = spp,
+        mapping = aes(y = .data[["response"]]),
+        sides = "r",
+        inherit.aes = FALSE
+      ) +
+      ggplot2::scale_y_continuous(
+        sec.axis = ggplot2::dup_axis(
+          name = NULL,
+          breaks = breaks,
+          labels = unname(labels),
+          guide = ggplot2::guide_axis(check.overlap = missing(select))
+        )
       )
-    )
+  }
   ## add the coefficients
   plt <- plt +
     geom_line() +
@@ -115,7 +129,7 @@
     xlab <- "Time"
   }
   if (missing(ylab)) {
-    ylab <- "Treatment"
+    ylab <- "Effect"
   }
   plt <- plt +
     labs(
@@ -124,8 +138,8 @@
       title = title,
       subtitle = subtitle,
       caption = caption,
-      colour = ylab,
-      linetype = ylab
+      colour = "Treatment",
+      linetype = "Treatment"
     )
 
   ## return

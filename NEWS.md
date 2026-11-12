@@ -51,6 +51,10 @@
 * `tidy()` respects the selected NMDS axes. Both `fortify()` and `tidy()`
   respect axis selection for isomap site scores.
 
+* PRC plots accept numeric species selections and label their scores on the
+  right. The vertical axis describes the effect and the legend identifies
+  treatments.
+
 * Rank-abundance plots handle unnamed species and sites with the same number
   of species. Combined plots draw the observations once and keep fitted
   lines separate when they share a colour.
