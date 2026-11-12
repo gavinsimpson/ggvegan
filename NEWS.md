@@ -34,6 +34,10 @@
   there are no other scores to scale to. `ordiggplot()` again accepts
   `arrow.mul` to set arrow lengths manually.
 
+* Ordination layers now accept arguments from the calling environment and keep
+  their required coordinates when custom aesthetics are added. Surface layers
+  use their own aesthetics, and repelled labels respect the requested size.
+
 * RDA and dbRDA plots and score tables now use the requested scaling constant.
   CCA, RDA and dbRDA plots handle a single axis and draw factor centroids once.
 

@@ -42,7 +42,7 @@ over-plotting. In very congested areas, the labels are completely
 omitted.
 }
 \examples{
-library(vegan)
+library("vegan")
 data(mite, mite.env, package = "vegan")
 mod <- cca(mite)
 ordiggplot(mod) +

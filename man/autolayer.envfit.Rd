@@ -48,8 +48,8 @@ not adapt to changes in the \code{\link[=ordiggplot]{ordiggplot()}} object, for 
 \code{scaling} or \code{axes}, but it must re-fitted for a changed model.
 }
 \examples{
-library(vegan)
-library(ggplot2)
+library("vegan")
+library("ggplot2")
 data(mite, mite.env, package = "vegan")
 mod <- cca(mite)
 ## you must have same scaling in envfit() and ordiggplot()
