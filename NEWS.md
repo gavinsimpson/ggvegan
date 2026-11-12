@@ -30,6 +30,10 @@
 
 ## Bug fixes
 
+* Ordination layers now accept arguments from the calling environment and keep
+  their required coordinates when custom aesthetics are added. Surface layers
+  use their own aesthetics, and repelled labels respect the requested size.
+
 * *ggplot2* would report a warning about dropped aesthetics when
   `StatVectorfit` was run. #43 Fixed by @jarioksa in #44.
 

@@ -48,10 +48,11 @@ Surface \code{fill} is non-transparent and will paint over all previous
 layers. Filled surface should be used before other visible layers,
 or fill should be made transparent with \code{alpha} in argument
 \code{fill.params} passed to \code{\link[ggplot2:geom_tile]{ggplot2::geom_raster()}}.
+Contours and the raster use their own aesthetics by default.
 }
 \examples{
-library(vegan)
-library(ggplot2)
+library("vegan")
+library("ggplot2")
 data(mite, mite.env, package="vegan")
 mod <- cca(mite)
 surf <- ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)

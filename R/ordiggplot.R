@@ -357,7 +357,7 @@
 #' @author Jari Oksanen
 #'
 #' @examples
-#' library(vegan)
+#' library("vegan")
 #' data(varespec, varechem, package="vegan")
 #' ## PCA biplot
 #' mod <- rda(varespec)
@@ -407,36 +407,25 @@
     vars <- 3:4
     data[, vars] <- arrow.mul * data[, vars]
   }
-  ## default params & possible modification
-  arrowdefs <- list(arrow = arrow(ends = "first", length = unit(0.2, "cm")))
-  textdefs <- list(vjust = "outward", hjust = "outward")
-  arrowdefs <- modifyList(arrowdefs, arrow.params)
-  textdefs <- modifyList(textdefs, text.params)
-  dots <- match.call(expand.dots = FALSE)$...
-  if (!is.null(dots)) {
-    arrowdefs <- modifyList(arrowdefs, dots)
-    textdefs <- modifyList(textdefs, dots)
-    ## calculated stat "vectorfit" needs weight that is in .data but
-    ## not mapped by default
-    if (!is.null(dots$stat) && dots$stat == "vectorfit") {
-      arrowdefs <- modifyList(arrowdefs,
-                              list(mapping = aes(weight = .data[["weight"]])))
-      textdefs <- modifyList(textdefs,
-                             list(mapping = aes(weight = .data[["weight"]])))
-    }
-  }
-  ## graphics
-  pl <- do.call(
-    "geom_segment",
-    modifyList(list(data = data, mapping = aes(xend = 0, yend = 0)), arrowdefs)
+  dots <- list(...)
+  arrowdefs <- list(
+    data = data,
+    mapping = aes(xend = 0, yend = 0),
+    arrow = arrow(ends = "first", length = unit(0.2, "cm"))
   )
+  textdefs <- list(data = data, vjust = "outward", hjust = "outward")
+  if (identical(dots$stat, "vectorfit") || inherits(dots$stat, "StatVectorfit")) {
+    ## Only the fitting layers need the weights in the ordination data.
+    weight_mapping <- aes(weight = .data[["weight"]])
+    arrowdefs$mapping <- modifyList(arrowdefs$mapping, weight_mapping)
+    textdefs$mapping <- weight_mapping
+  }
+  arrowdefs <- modifyList(modifyList(arrowdefs, arrow.params), dots)
+  pl <- do.call(geom_segment, arrowdefs)
   if (text) {
-    if (box) {
-      p2 <- do.call("geom_label", modifyList(list(data = data), textdefs))
-    } else {
-      p2 <- do.call("geom_text", modifyList(list(data = data), textdefs))
-    }
-    pl <- list(pl, p2) ## ggprotos cannot be added (+)
+    textdefs <- modifyList(modifyList(textdefs, text.params), dots)
+    label_geom <- if (box) geom_label else geom_text
+    pl <- list(pl, do.call(label_geom, textdefs))
   }
   pl
 }
@@ -464,7 +453,7 @@
 #' @author Jari Oksanen
 #'
 #' @examples
-#' library(vegan)
+#' library("vegan")
 #' data(mite, mite.env, package = "vegan")
 #' mod <- cca(mite)
 #' ordiggplot(mod) +
@@ -492,21 +481,14 @@
   if (missing(data)) {
     data <- ggscores(score)
   }
-  dots <- match.call(expand.dots = FALSE)$...
-  layerdef <- list(data = data)
-  if (!is.null(dots)) {
-    layerdef <- modifyList(layerdef, dots)
-  }
-  pp <- pt <- NULL
+  layerdef <- modifyList(list(data = data), list(...))
+  pp <- NULL
   if (points) {
-    pp <- do.call("geom_point", modifyList(layerdef, point.params))
+    pp <- do.call(geom_point, modifyList(layerdef, point.params))
   }
-  layerdef <- modifyList(layerdef, list(size = 3))
-  if (box) {
-    pt <- do.call("geom_label_repel", modifyList(layerdef, text.params))
-  } else {
-    pt <- do.call("geom_text_repel", modifyList(layerdef, text.params))
-  }
+  textdefs <- modifyList(modifyList(list(size = 3), layerdef), text.params)
+  label_geom <- if (box) geom_label_repel else geom_text_repel
+  pt <- do.call(label_geom, textdefs)
   c(pp, pt)
 }
 
@@ -571,6 +553,7 @@
 #' layers. Filled surface should be used before other visible layers,
 #' or fill should be made transparent with `alpha` in argument
 #' `fill.params` passed to [ggplot2::geom_raster()].
+#' Contours and the raster use their own aesthetics by default.
 #'
 #' @param object [vegan::ordisurf()] result object.
 #' @param fill Use filled ordination space where raster colour match
@@ -583,8 +566,8 @@
 #'
 #' @author Jari Oksanen
 #' @examples
-#' library(vegan)
-#' library(ggplot2)
+#' library("vegan")
+#' library("ggplot2")
 #' data(mite, mite.env, package="vegan")
 #' mod <- cca(mite)
 #' surf <- ordisurf(mod ~ WatrCont, mite.env, plot = FALSE)
@@ -619,19 +602,15 @@
   df <- df[complete.cases(df),] # warns on NA outside hull
   ## geom_contour_filled returns discrete colour classes, geom_raster
   ## a smooth surface
-  dots <- match.call(expand.dots = FALSE)$...
+  common <- modifyList(list(data = df, inherit.aes = FALSE), list(...))
   contcall <- list(mapping = aes(.data[["x"]],
                                  .data[["y"]],
-                                 z = .data[["z"]]),
-                   data = df)
+                                 z = .data[["z"]]))
   fillcall <- list(mapping = aes(.data[["x"]],
                                  .data[["y"]],
-                                 fill = .data[["z"]]),
-                   data = df)
-  if (!is.null(dots)) {
-    contcall <- modifyList(contcall, dots)
-    fillcall <- modifyList(fillcall, dots)
-  }
+                                 fill = .data[["z"]]))
+  contcall <- modifyList(contcall, common)
+  fillcall <- modifyList(fillcall, common)
   if (!is.null(contour.params)) {
     contcall <- modifyList(contcall, contour.params)
   }
@@ -678,8 +657,8 @@
 #' @author Jari Oksanen
 #'
 #' @examples
-#' library(vegan)
-#' library(ggplot2)
+#' library("vegan")
+#' library("ggplot2")
 #' data(mite, mite.env, package = "vegan")
 #' mod <- cca(mite)
 #' ## you must have same scaling in envfit() and ordiggplot()
@@ -713,13 +692,6 @@
     colnames(data$factors$centroids) <-
       tolower(colnames(data$factors$centroids))
   }
-  dots <- match.call(expand.dots = FALSE)$...
-  if (!is.null(dots)) {
-    if (!is.null(arrow.params))
-      arrow.params <- modifyList(arrow.params, dots)
-    if (!is.null(text.params))
-      text.params <- modifyList(text.params, dots)
-  }
   pvec <- pfac <- NULL
   if (!is.null(data$vectors)) {
     pvec <- geom_ordi_arrow(
@@ -737,11 +709,9 @@
     if (!is.null(text.params)) {
       textcall <- modifyList(textcall, text.params)
     }
-    if (box) {
-      pfac <- do.call("geom_ordi_label", textcall)
-    } else {
-      pfac <- do.call("geom_ordi_text", textcall)
-    }
+    textcall <- modifyList(textcall, list(...))
+    label_geom <- if (box) geom_ordi_label else geom_ordi_text
+    pfac <- do.call(label_geom, textcall)
   }
   c(pvec, pfac)
 }

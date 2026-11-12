@@ -50,7 +50,7 @@ allows drawing species arrows for PCA biplots, or adding fitted
 environmental vectors of \code{\link[vegan:envfit]{vegan::envfit()}}.
 }
 \examples{
-library(vegan)
+library("vegan")
 data(varespec, varechem, package="vegan")
 ## PCA biplot
 mod <- rda(varespec)
