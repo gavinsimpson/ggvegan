@@ -1,25 +1,26 @@
-#' @title Fortify \enc{Rényi}{Renyi} accumulation curves
+#' @title Fortify \enc{Rényi}{Renyi} and Tsallis accumulation curves
 #'
 #' @description Prepares a fortified version of results from
-#'   [vegan::renyiaccum()] objects.
+#'   [vegan::renyiaccum()] and [vegan::tsallisaccum()] objects.
 #'
 #' @param model,x an object of class [vegan::renyiaccum()].
 #' @param data original data set. Currently ignored.
 #' @param ... additional arguments passed to other methods. Ignored in this
 #'   method.
 #'
-#' @return A data frame (tibble) is returned. What is returned depends on how
-#'   [vegan::renyiaccum()] was called.
-#'   If `raw = FALSE`, then a data frame with columns `site`, `scale`, `mean`,
-#'   `std_dev`, `min`, `max`, `q2.5`, and `q97.5`, containing the accumulated
-#'   sites, the \enc{Rényi}{Renyi} scale, and summary statistics of the
-#'   \enc{Rényi}{Renyi} accumulation curves. An additional column `collector`
-#'   will be present if `collector = TRUE` was used in the [vegan::renyiaccum()]
-#'   call.
-#'   If `raw = TRUE`, then a data frame with columns `site`, `permutation`,
-#'   `scale`, and `diversity`, containing the `site` and `permutation`
-#'   identifiers, \enc{Rényi}{Renyi} scale, and the \enc{Rényi}{Renyi}
-#'   diversity, respectively.
+#' @return A data frame (tibble) is returned. What is returned depends
+#'     on how [vegan::renyiaccum()] was called.  If `raw = FALSE`,
+#'     then a data frame with columns `site`, `scale`, `mean`,
+#'     `std_dev`, `min`, `max`, `q2.5`, and `q97.5`, containing the
+#'     accumulated sites, the \enc{Rényi}{Renyi} or Tsallis scale, and
+#'     summary statistics of the \enc{Rényi}{Renyi} or Tsallis
+#'     accumulation curves. An additional column `collector` will be
+#'     present if `collector = TRUE` was used in the
+#'     [vegan::renyiaccum()] or [vegan::tsallisaccum()] call.  If `raw
+#'     = TRUE`, then a data frame with columns `site`, `permutation`,
+#'     `scale`, and `diversity`, containing the `site` and
+#'     `permutation` identifiers, \enc{Rényi}{Renyi} or Tsallis scale,
+#'     and the \enc{Rényi}{Renyi} or Tsallis diversity, respectively.
 #'
 #' @export
 #'

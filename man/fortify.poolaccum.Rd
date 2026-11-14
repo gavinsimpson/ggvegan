@@ -28,7 +28,7 @@ respectively.
 }
 \description{
 Prepares a fortified version of results from
-\code{\link[vegan:specpool]{vegan::poolaccum()}} objects.
+\code{\link[vegan:specpool]{vegan::poolaccum()}} and \code{\link[vegan:specpool]{vegan::estaccumR()}} objects.
 }
 \examples{
 

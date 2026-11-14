@@ -20,7 +20,7 @@
 }
 \arguments{
 \item{object}{an object of class \code{"poolaccum"}, the result of a call to
-\code{\link[vegan:specpool]{vegan::poolaccum()}}.}
+\code{\link[vegan:specpool]{vegan::poolaccum()}} or \code{\link[vegan:specpool]{vegan::estaccumR()}}.}
 
 \item{facet}{logical; should extrapolated richness estimators be shown in
 separate facets?}
@@ -50,8 +50,10 @@ interval. Passed to the \code{alpha} aesthetic of \code{\link[ggplot2:geom_ribbo
 A ggplot object.
 }
 \description{
-Produces a multi-layer ggplot object representing the output of objects
-produced by \code{\link[vegan:specpool]{vegan::poolaccum()}}.
+Produces a multi-layer ggplot object representing the
+output of objects produced by \code{\link[vegan:specpool]{vegan::poolaccum()}} or
+\code{\link[vegan:specpool]{vegan::estaccumR()}}, both returning objects of class
+\code{"poolaccum"}.
 }
 \examples{
 

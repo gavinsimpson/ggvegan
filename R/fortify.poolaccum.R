@@ -1,7 +1,7 @@
 #' @title Fortify extrapolated species richness of a species pool
 #'
 #' @description Prepares a fortified version of results from
-#'   [vegan::poolaccum()] objects.
+#'   [vegan::poolaccum()] and [vegan::estaccumR()] objects.
 #'
 #' @param model,x an object of class [vegan::poolaccum()].
 #' @param data original data set. Currently ignored.
